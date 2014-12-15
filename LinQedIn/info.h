@@ -9,7 +9,7 @@ class Info
         std::string cognome;
         std::string data; //class Data?
         std::string nome;
-        std::string n_telefono; //class N_Telefono
+        std::string n_telefono; //class N_Telefono?
 
     public:
         Info();
