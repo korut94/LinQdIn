@@ -6,16 +6,16 @@
 class Utente
 {
     private:
-        Info info;
+        Info infoUser;
 
         std::string password; //class Password?
         std::string username;
 
     public:
+        Utente();
         Utente( const std::string &, const std::string &, const Info & );
 
-        Info & getInfo() const;
-        const Info & getInfoConst() const;
+        Info & getInfo();
 };
 
 #endif // UTENTE_H
