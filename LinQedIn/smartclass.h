@@ -1,15 +1,16 @@
 #ifndef SMARTCLASS_H
 #define SMARTCLASS_H
 
+#include <iostream>
+
 class SmartClass
 {   
-    friend class smartptr;
-
     private:
         int refCounter;
 
     public:
         SmartClass();
+        virtual ~SmartClass();
 
         class smartptr
         {
@@ -18,8 +19,17 @@ class SmartClass
 
             public:
                 smartptr( SmartClass * = NULL );
-        };
+                smartptr( const smartptr & );
+                ~smartptr();
 
+                bool operator==( const smartptr & ) const;
+                bool operator!=( const smartptr & ) const;
+
+                SmartClass & operator*() const;
+                SmartClass * operator->() const;
+
+                smartptr & operator=( const smartptr & );
+        };
 };
 
 #endif // SMARTCLASS_H
