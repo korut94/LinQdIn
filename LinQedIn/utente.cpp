@@ -13,7 +13,44 @@ Utente::Utente( const std::string & user,
 }
 
 
+Utente::~Utente()
+{
+}
+
+
+bool Utente::isActivate() const
+{
+    return activate;
+}
+
+
+bool Utente::isOnline() const
+{
+    return online;
+}
+
+
 Info & Utente::getInfo()
 {
     return infoUser;
+}
+
+
+Utente::smartptr_utente::smartptr_utente( Utente * p )
+                                          : SmartClass::smartptr( p )
+{
+}
+
+
+Utente & Utente::smartptr_utente::operator*() const
+{
+    Utente & r = dynamic_cast<Utente&>( smartptr::operator*() );
+    return r;
+}
+
+
+Utente * Utente::smartptr_utente::operator->() const
+{
+    Utente * p = dynamic_cast<Utente*>( smartptr::operator->() );
+    return p;
 }
