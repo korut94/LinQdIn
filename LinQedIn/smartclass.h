@@ -17,7 +17,7 @@ class SmartClass
                 SmartClass * ptr;
 
             public:
-                smartptr( SmartClass * = nullptr );
+                smartptr( SmartClass * = NULL );
         };
 
 };
