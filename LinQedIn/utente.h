@@ -4,6 +4,7 @@
 #include <iostream>
 
 #include "info.h"
+#include "rete.h"
 #include "smartclass.h"
 
 class Utente : public SmartClass
@@ -13,6 +14,8 @@ class Utente : public SmartClass
         bool activate;
 
         Info infoUser;
+
+        sptr_rete contacts;
 
         std::string password; //class Password?
         std::string username;
@@ -26,6 +29,13 @@ class Utente : public SmartClass
         bool isOnline() const;
 
         Info & getInfo();
+
+        Rete & getContacts();
+
+        std::string getUsername() const;
+
+        void addContact( const Utente & );
+        void removeContact( const Utente & );
 
         class smartptr_utente : public SmartClass::smartptr
         {

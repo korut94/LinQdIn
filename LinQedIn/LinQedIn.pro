@@ -16,11 +16,13 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     utente.cpp \
     info.cpp \
-    smartclass.cpp
+    smartclass.cpp \
+    rete.cpp
 
 HEADERS  += mainwindow.h \
     utente.h \
     info.h \
-    smartclass.h
+    smartclass.h \
+    rete.h
 
 FORMS    += mainwindow.ui
