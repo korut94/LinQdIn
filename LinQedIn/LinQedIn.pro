@@ -15,10 +15,12 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     utente.cpp \
-    info.cpp
+    info.cpp \
+    smartclass.cpp
 
 HEADERS  += mainwindow.h \
     utente.h \
-    info.h
+    info.h \
+    smartclass.h
 
 FORMS    += mainwindow.ui

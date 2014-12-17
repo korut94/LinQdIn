@@ -2,8 +2,9 @@
 #define UTENTE_H
 
 #include "info.h"
+#include "smartclass.h"
 
-class Utente
+class Utente : public SmartClass
 {
     private:
         Info infoUser;
