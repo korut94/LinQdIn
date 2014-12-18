@@ -25,8 +25,8 @@ class SmartClass
                 bool operator==( const smartptr & ) const;
                 bool operator!=( const smartptr & ) const;
 
-                virtual SmartClass & operator*() const;
-                virtual SmartClass * operator->() const;
+                SmartClass & operator*() const;
+                SmartClass * operator->() const;
 
                 smartptr & operator=( const smartptr & );
         };
