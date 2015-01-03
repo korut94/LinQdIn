@@ -17,6 +17,7 @@ Utente::Utente( const std::string & user,
 
 Utente::~Utente()
 {
+    delete contacts;
 }
 
 
@@ -56,7 +57,7 @@ Rete & Utente::getContacts()
 }
 
 
-void Utente::addContact( const Utente & user )
+void Utente::addContact( Utente & user )
 {
     contacts->addUser( user );
 }
@@ -74,20 +75,20 @@ std::string Utente::getUsername() const
 }
 
 
-Utente::smartptr_utente::smartptr_utente( Utente * p )
+smartptr_utente::smartptr_utente( Utente * p )
                                           : SmartClass::smartptr( p )
 {
 }
 
 
-Utente & Utente::smartptr_utente::operator*() const
+Utente & smartptr_utente::operator*() const
 {
     Utente * r = dynamic_cast<Utente*>( smartptr::operator->() );
     return *r;
 }
 
 
-Utente * Utente::smartptr_utente::operator->() const
+Utente * smartptr_utente::operator->() const
 {
     Utente * p = dynamic_cast<Utente*>( smartptr::operator->() );
     return p;

@@ -4,8 +4,10 @@
 #include <iostream>
 
 #include "info.h"
-#include "rete.h"
 #include "smartclass.h"
+#include "rete.h"
+
+class Rete;
 
 class Utente : public SmartClass
 {
@@ -15,7 +17,7 @@ class Utente : public SmartClass
 
         Info infoUser;
 
-        sptr_rete contacts;
+        Rete * contacts;
 
         std::string password; //class Password?
         std::string username;
@@ -36,19 +38,18 @@ class Utente : public SmartClass
 
         std::string getUsername() const;
 
-        void addContact( const Utente & );
+        void addContact( Utente & );
         void removeContact( const Utente & );
-
-        class smartptr_utente : public SmartClass::smartptr
-        {
-            public:
-                smartptr_utente( Utente * = NULL );
-
-                Utente & operator*() const;
-                Utente * operator->() const;
-        };
 };
 
-typedef Utente::smartptr_utente sptr_utente;
+
+class smartptr_utente : public SmartClass::smartptr
+{
+    public:
+        smartptr_utente( Utente * = NULL );
+
+        Utente & operator*() const;
+        Utente * operator->() const;
+};
 
 #endif // UTENTE_H
