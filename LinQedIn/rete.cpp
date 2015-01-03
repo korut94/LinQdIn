@@ -10,6 +10,12 @@ Rete::smartptr_rete::smartptr_rete( Rete * r ) : SmartClass::smartptr( r )
 }
 
 
+bool Rete::isPresent( const Utente & user ) const
+{
+
+}
+
+
 void Rete::addUser( const Utente & user )
 {
     users.push_back( sptr_utente( user ) );
@@ -22,11 +28,9 @@ void Rete::removeUser( const Utente & user )
 
     bool found = false;
 
-    while( itr != users.constEnd() && !false )
+    while( itr != users.constEnd() && !found )
     {
-        std::string username = (*itr)->getUsername();
-
-        found = ( user.getUsername() == username );
+        found = ( user == *itr );
 
         if( found ) users.erase( itr );
         else itr++;
