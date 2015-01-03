@@ -10,7 +10,7 @@ template <typename SortFunction, typename T>
 std::ostream & operator<< ( std::ostream &, const SortList<SortFunction,T> & );
 
 template <typename SortFunction, typename T>
-class SortList : private QList
+class SortList : private QList<T>
 {
     private:
         SortFunction sort;
