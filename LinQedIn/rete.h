@@ -3,32 +3,23 @@
 
 #include <QVector>
 
-#include "smartclass.h"
 #include "utente.h"
 
-class Rete : public SmartClass
+class Utente;
+class smartptr_utente;
+
+class Rete
 {
     private:
-        QVector<sptr_utente> users;
+        QVector<smartptr_utente> users;
 
     public:
         Rete();
 
         bool isPresent( const Utente & ) const;
 
-        void addUser( const Utente & );
+        void addUser( Utente & );
         void removeUser( const Utente & );
-
-        class smartptr_rete : public SmartClass::smartptr
-        {
-            public:
-                smartptr_rete( Rete * = NULL );
-
-                Rete & operator*() const;
-                Rete * operator->() const;
-        };
 };
-
-typedef Rete::smartptr_rete sptr_rete;
 
 #endif // RETE_H
