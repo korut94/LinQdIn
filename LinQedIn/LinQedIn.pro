@@ -5,6 +5,7 @@
 #-------------------------------------------------
 
 QT       += core gui
+CONFIG   += c++11
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -18,7 +19,8 @@ SOURCES += main.cpp\
     info.cpp \
     smartclass.cpp \
     rete.cpp \
-    database.cpp
+    database.cpp \
+    sortgrouputente.cpp
 
 HEADERS  += mainwindow.h \
     utente.h \
@@ -26,6 +28,7 @@ HEADERS  += mainwindow.h \
     smartclass.h \
     rete.h \
     sortlist.h \
-    database.h
+    database.h \
+    sortgrouputente.h
 
 FORMS    += mainwindow.ui
