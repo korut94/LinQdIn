@@ -27,6 +27,8 @@ class Utente : public SmartClass
 
         bool isActivate() const;
         bool isOnline() const;
+        bool operator==( const Utente & ) const;
+        bool operator!=( const Utente & ) const;
 
         Info & getInfo();
 

@@ -32,6 +32,18 @@ bool Utente::isOnline() const
 }
 
 
+bool Utente::operator==( const Utente & user ) const
+{
+    return ( username == user.getUsername() );
+}
+
+
+bool Utente::operator!=( const Utente & user ) const
+{
+    return ( username != user.getUsername() );
+}
+
+
 Info & Utente::getInfo()
 {
     return infoUser;
