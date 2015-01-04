@@ -36,4 +36,4 @@ HEADERS  += mainwindow.h \
 FORMS    += mainwindow.ui
 
 OTHER_FILES += \
-    LICENCE.txts
+    LICENCE.txt
