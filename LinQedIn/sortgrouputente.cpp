@@ -1,6 +1,6 @@
 #include "sortgrouputente.h"
 
-bool SortGroupUtente::AlfabeticoCrescente::operator()
+bool SortGroupUtente::AlfabeticoCre::operator()
                       ( const smartptr_utente & a, const smartptr_utente & b )
                       const
 {
@@ -11,7 +11,7 @@ bool SortGroupUtente::AlfabeticoCrescente::operator()
 }
 
 
-bool SortGroupUtente::AlfabeticoDecrescente::operator()
+bool SortGroupUtente::AlfabeticoDec::operator()
                       ( const smartptr_utente & a, const smartptr_utente & b )
                       const
 {
