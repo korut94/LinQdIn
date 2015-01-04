@@ -34,3 +34,6 @@ HEADERS  += mainwindow.h \
     smartptr_utente.h
 
 FORMS    += mainwindow.ui
+
+OTHER_FILES += \
+    LICENCE.txt
