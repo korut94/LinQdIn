@@ -18,17 +18,19 @@ SOURCES += main.cpp\
     utente.cpp \
     info.cpp \
     smartclass.cpp \
-    rete.cpp \
     database.cpp \
-    sortgrouputente.cpp
+    sortgrouputente.cpp \
+    hashgrouputente.cpp \
+    smartptr_utente.cpp
 
 HEADERS  += mainwindow.h \
     utente.h \
     info.h \
     smartclass.h \
-    rete.h \
     sortlist.h \
     database.h \
-    sortgrouputente.h
+    sortgrouputente.h \
+    hashgrouputente.h \
+    smartptr_utente.h
 
 FORMS    += mainwindow.ui
