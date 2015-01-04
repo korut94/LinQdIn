@@ -12,6 +12,21 @@ std::ostream & operator<< ( std::ostream &, const SortList<SortFunction,T> & );
 template <typename SortFunction, typename T>
 class SortList : private QList<T>
 {
+    public:
+        class iterator : public QList<T>::iterator
+        {
+            public:
+                iterator();
+                iterator( const typename QList<T>::iterator & );
+        };
+
+        class const_iterator : public QList<T>::const_iterator
+        {
+            public:
+                const_iterator();
+                const_iterator( const typename QList<T>::const_iterator & );
+        };
+
     private:
         SortFunction sort;
 
@@ -20,7 +35,13 @@ class SortList : private QList<T>
 
         bool isEmpty() const;
 
+        const_iterator constBegin() const;
+        const_iterator constEnd() const;
+
         int size() const;
+
+        iterator begin();
+        iterator end();
 
         void insert( const T & );
         void remove( const T & );
@@ -30,6 +51,31 @@ class SortList : private QList<T>
         <SortFunction,T>( std::ostream &, const SortList<SortFunction,T> & );
         */
 };
+
+template <typename SortFunction, typename T>
+SortList<SortFunction,T>::iterator::iterator(){}
+
+
+template <typename SortFunction, typename T>
+SortList<SortFunction,T>::iterator::iterator(
+                                    const typename QList<T>::iterator & itr )
+                                    : QList<T>::iterator( itr )
+{
+}
+
+
+template <typename SortFunction, typename T>
+SortList<SortFunction,T>::const_iterator::const_iterator(){}
+
+
+template <typename SortFunction, typename T>
+SortList<SortFunction,T>::const_iterator::const_iterator(
+                          const typename QList<T>::const_iterator & itr )
+                          : QList<T>::const_iterator( itr )
+{
+}
+
+
 
 
 template <typename SortFunction, typename T>
@@ -44,9 +90,40 @@ bool SortList<SortFunction,T>::isEmpty() const
 
 
 template <typename SortFunction, typename T>
+typename SortList<SortFunction,T>::const_iterator
+         SortList<SortFunction,T>::constBegin() const
+{
+    return QList<T>::begin();
+}
+
+
+template <typename SortFunction, typename T>
+typename SortList<SortFunction,T>::const_iterator
+         SortList<SortFunction,T>::constEnd() const
+{
+    return QList<T>::end();
+}
+
+
+
+template <typename SortFunction, typename T>
 int SortList<SortFunction,T>::size() const
 {
     return QList<T>::size();
+}
+
+
+template <typename SortFunction, typename T>
+typename SortList<SortFunction,T>::iterator SortList<SortFunction,T>::begin()
+{
+    return QList<T>::begin();
+}
+
+
+template <typename SortFunction, typename T>
+typename SortList<SortFunction,T>::iterator SortList<SortFunction,T>::end()
+{
+    return QList<T>::end();
 }
 
 
