@@ -25,8 +25,10 @@ class SortList : private QList<T>
         void insert( const T & );
         void remove( const T & );
 
+        /*
         friend std::ostream & operator<<
         <SortFunction,T>( std::ostream &, const SortList<SortFunction,T> & );
+        */
 };
 
 
@@ -68,7 +70,8 @@ void SortList<SortFunction,T>::remove( const T & elem )
     QList<T>::removeAll( elem );
 }
 
-
+/*
+ * Tenuta per debug
 template <typename SortFunction, typename T>
 std::ostream & operator<< ( std::ostream & os,
                             const SortList<SortFunction,T> & list )
@@ -82,4 +85,5 @@ std::ostream & operator<< ( std::ostream & os,
 
     return os;
 }
+*/
 #endif // SORTLIST_H
