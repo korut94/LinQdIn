@@ -33,6 +33,7 @@ class SortList : private QList<T>
     public:
         SortList();
 
+        static bool compare( const T &, const T & );
         bool isEmpty() const;
 
         const_iterator constBegin() const;
@@ -76,10 +77,15 @@ SortList<SortFunction,T>::const_iterator::const_iterator(
 }
 
 
+template <typename SortFunction, typename T>
+SortList<SortFunction,T>::SortList(){}
 
 
 template <typename SortFunction, typename T>
-SortList<SortFunction,T>::SortList(){}
+bool SortList<SortFunction,T>::compare( const T & a, const T & b )
+{
+    return sort( a, b );
+}
 
 
 template <typename SortFunction, typename T>
