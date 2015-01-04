@@ -33,7 +33,7 @@ class SortList : private QList<T>
     public:
         SortList();
 
-        static bool compare( const T &, const T & );
+        bool compare( const T &, const T & );
         bool isEmpty() const;
 
         const_iterator constBegin() const;
