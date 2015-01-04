@@ -12,17 +12,6 @@ class smartptr_utente;
 
 class Utente : public SmartClass
 {
-    private:
-        bool online;
-        bool activate;
-
-        Info infoUser;
-
-        Rete contacts;
-
-        std::string password; //class Password?
-        std::string username;
-
     public:
         class Rete
         {
@@ -38,6 +27,18 @@ class Utente : public SmartClass
                 void removeUser( const Utente & );
         };
 
+    private:
+        bool online;
+        bool activate;
+
+        Info infoUser;
+
+        Rete contacts;
+
+        std::string password; //class Password?
+        std::string username;
+
+    public:
         Utente();
         Utente( const std::string &, const std::string &, const Info & );
         virtual ~Utente();
