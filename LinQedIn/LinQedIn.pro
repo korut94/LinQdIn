@@ -31,7 +31,8 @@ HEADERS  += mainwindow.h \
     database.h \
     sortgrouputente.h \
     hashgrouputente.h \
-    smartptr_utente.h
+    smartptr_utente.h \
+    hashlistutente.h
 
 FORMS    += mainwindow.ui
 
