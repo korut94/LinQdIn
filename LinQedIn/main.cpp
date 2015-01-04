@@ -39,7 +39,7 @@ int main(int argc, char *argv[])
 
     utenti[0] = new Utente( "korut94", "36633663", info1 );
     utenti[1] = new Utente( "bilbo94", "36633663", info2 );
-    utenti[2] = new Utente( "giannsi94", "36633663", info3 );
+    utenti[2] = new Utente( "gianni94", "36633663", info3 );
 
 
     for( int i = 0; i < 3; i++ ) list.insert( utenti[i] );
