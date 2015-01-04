@@ -1,5 +1,39 @@
 #include "utente.h"
 
+Utente::Rete::Rete()
+{
+}
+
+
+bool Utente::Rete::isPresent( const Utente & user ) const
+{
+
+}
+
+
+void Utente::Rete::addUser( Utente & user )
+{
+    users.push_back( smartptr_utente( &user ) );
+}
+
+
+void Utente::Rete::removeUser( const Utente & user )
+{
+    QVector<smartptr_utente>::iterator itr = users.begin();
+
+    bool found = false;
+
+    while( itr != users.end() && !found )
+    {
+        found = ( user == **itr );
+
+        if( found ) users.erase( itr );
+        else itr++;
+    }
+}
+
+
+
 Utente::Utente()
 {
 }
@@ -17,7 +51,6 @@ Utente::Utente( const std::string & user,
 
 Utente::~Utente()
 {
-    delete contacts;
 }
 
 
@@ -51,21 +84,15 @@ Info & Utente::getInfo()
 }
 
 
-Rete & Utente::getContacts()
-{
-    return *contacts;
-}
-
-
 void Utente::addContact( Utente & user )
 {
-    contacts->addUser( user );
+    contacts.addUser( user );
 }
 
 
 void Utente::removeContact( const Utente & user )
 {
-    if( contacts->isPresent( user ) ) contacts->removeUser( user );
+    if( contacts.isPresent( user ) ) contacts.removeUser( user );
 }
 
 
@@ -75,21 +102,7 @@ std::string Utente::getUsername() const
 }
 
 
-smartptr_utente::smartptr_utente( Utente * p )
-                                          : SmartClass::smartptr( p )
+std::ostream & operator<<( std::ostream & os, const Utente & u )
 {
-}
-
-
-Utente & smartptr_utente::operator*() const
-{
-    Utente * r = dynamic_cast<Utente*>( smartptr::operator->() );
-    return *r;
-}
-
-
-Utente * smartptr_utente::operator->() const
-{
-    Utente * p = dynamic_cast<Utente*>( smartptr::operator->() );
-    return p;
+    return os << u.infoUser.getNome();
 }

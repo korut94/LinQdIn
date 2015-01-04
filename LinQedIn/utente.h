@@ -2,22 +2,38 @@
 #define UTENTE_H
 
 #include <iostream>
+#include <QVector>
 
 #include "info.h"
 #include "smartclass.h"
-#include "rete.h"
+#include "smartptr_utente.h"
 
-class Rete;
+class smartptr_utente;
 
 class Utente : public SmartClass
 {
     private:
+        class Rete
+        {
+            private:
+                QVector<smartptr_utente> users;
+
+            public:
+                Rete();
+
+                bool isPresent( const Utente & ) const;
+
+                void addUser( Utente & );
+                void removeUser( const Utente & );
+        };
+
+
         bool online;
         bool activate;
 
         Info infoUser;
 
-        Rete * contacts;
+        Rete contacts;
 
         std::string password; //class Password?
         std::string username;
@@ -34,22 +50,12 @@ class Utente : public SmartClass
 
         Info & getInfo();
 
-        Rete & getContacts();
-
         std::string getUsername() const;
 
         void addContact( Utente & );
         void removeContact( const Utente & );
-};
 
-
-class smartptr_utente : public SmartClass::smartptr
-{
-    public:
-        smartptr_utente( Utente * = NULL );
-
-        Utente & operator*() const;
-        Utente * operator->() const;
+        friend std::ostream & operator<<( std::ostream &, const Utente & );
 };
 
 #endif // UTENTE_H
