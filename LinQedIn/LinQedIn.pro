@@ -21,7 +21,8 @@ SOURCES += main.cpp\
     database.cpp \
     sortgrouputente.cpp \
     hashgrouputente.cpp \
-    smartptr_utente.cpp
+    smartptr_utente.cpp \
+    searchgrouputente.cpp
 
 HEADERS  += mainwindow.h \
     utente.h \
@@ -32,7 +33,8 @@ HEADERS  += mainwindow.h \
     sortgrouputente.h \
     hashgrouputente.h \
     smartptr_utente.h \
-    hashlistutente.h
+    hashlistutente.h \
+    searchgrouputente.h
 
 FORMS    += mainwindow.ui
 
