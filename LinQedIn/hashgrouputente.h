@@ -10,12 +10,12 @@ namespace HashGroupUtente
 {
     struct AlfabeticoCreUpCase
     {
-        int operator() ( const QString & );
+        int operator() ( const QString & ) const;
     };
 
     struct AlfabeticoDecUpCase
     {
-        int operator() ( const QString & );
+        int operator() ( const QString & ) const;
     };
 }
 
