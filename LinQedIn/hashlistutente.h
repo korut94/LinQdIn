@@ -3,6 +3,7 @@
 
 #include <QVector>
 
+#include "searchgrouputente.h"
 #include "smartptr_utente.h"
 #include "sortlist.h"
 #include "utente.h"
@@ -17,17 +18,26 @@ class HashListUtente : private
         HashFunction hash;
 
     public:
-
         HashListUtente();
 
         bool isEmpty() const;
         bool isPresent( const Utente & ) const;
 
-        Utente & getUser( const Utente & );
+        int size() const;
+
+        //Utente & getUser( const Utente & );
 
         void insert( Utente & );
         void remove( const Utente & );
 };
+
+
+template <typename HashFunction, typename SortFunction>
+bool HashListUtente<HashFunction,SortFunction>::isEmpty() const
+{
+    return QVector<listUser>::isEmpty();
+}
+
 
 template <typename HashFunction, typename SortFunction>
 bool HashListUtente<HashFunction,
@@ -35,17 +45,41 @@ bool HashListUtente<HashFunction,
 {
     int index = hash( user );
 
+    if( index > size() ) return false;
+    else
+    {
+        listUser & list = QVector<listUser>::operator[]( index );
+
+        return list.present( SearchGroupUtente::UgualeAdUtente( user ) );
+    }
+}
+
+
+template <typename HashFunction, typename SortFunction>
+int HashListUtente<HashFunction,SortFunction>::size() const
+{
+    return QVector<listUser>::size();
+}
+
+
+template <typename HashFunction, typename SortFunction>
+Utente & HashListUtente<HashFunction,
+                        SortFunction>::getUser( const Utente & user )
+{
+    int index = hash( user );
+
     listUser & list = QVector<listUser>::operator[]( index );
-    listUser::const_iterator itr = list.constBegin();
 
     bool found = false;
+    listUser::iterator itr = list.begin();
 
-    while( itr != list.constEnd() && !found )
+    while( itr != list.end() && !found )
     {
         found = ( **itr == user );
+        if( !found ) itr++;
     }
 
-    return found;
+    return **itr;
 }
 
 #endif // HASHLISTUTENTE_H
