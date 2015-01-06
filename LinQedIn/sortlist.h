@@ -33,6 +33,9 @@ class SortList : private QList<T>
     public:
         SortList();
 
+        bool present( const T & ) const;
+        template <typename Predicate> bool present( const Predicate & ) const;
+
         bool compare( const T &, const T & );
         bool isEmpty() const;
 
@@ -79,6 +82,39 @@ SortList<SortFunction,T>::const_iterator::const_iterator(
 
 template <typename SortFunction, typename T>
 SortList<SortFunction,T>::SortList(){}
+
+
+template <typename SortFunction, typename T>
+bool SortList<SortFunction,T>::present( const T & elem ) const
+{
+    bool found = false;
+    const_iterator itr = constBegin();
+
+    while( itr != constEnd() && !found )
+    {
+        found = ( *itr == elem );
+        itr++;
+    }
+
+    return found;
+}
+
+
+template <typename SortFunction, typename T>
+template <typename Predicate>
+bool SortList<SortFunction,T>::present( const Predicate & predicate ) const
+{
+    bool found = false;
+    const_iterator itr = constBegin();
+
+    while( itr != constEnd() && !found )
+    {
+        found = predicate( *itr );
+        itr++;
+    }
+
+    return found;
+}
 
 
 template <typename SortFunction, typename T>
