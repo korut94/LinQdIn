@@ -50,10 +50,11 @@ class SortList : private QList<T>
         void insert( const T & );
         void remove( const T & );
 
-        /*
+/*
         friend std::ostream & operator<<
         <SortFunction,T>( std::ostream &, const SortList<SortFunction,T> & );
-        */
+*/
+
 };
 
 template <typename SortFunction, typename T>
@@ -88,12 +89,15 @@ template <typename SortFunction, typename T>
 bool SortList<SortFunction,T>::present( const T & elem ) const
 {
     bool found = false;
+    bool oltreLimite = false;
     const_iterator itr = constBegin();
 
-    while( itr != constEnd() && !found )
+    while( itr != constEnd() && !oltreLimite && !found )
     {
         found = ( *itr == elem );
         itr++;
+
+        if( itr != constEnd() ) oltreLimite = !sort( *itr, elem );
     }
 
     return found;
@@ -189,8 +193,8 @@ void SortList<SortFunction,T>::remove( const T & elem )
     QList<T>::removeAll( elem );
 }
 
-/*
- * Tenuta per debug
+
+/*Tenuta per debug
 template <typename SortFunction, typename T>
 std::ostream & operator<< ( std::ostream & os,
                             const SortList<SortFunction,T> & list )
