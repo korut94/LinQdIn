@@ -6,12 +6,21 @@
 #include "hashgrouputente.h"
 #include "hashlistutente.h"
 #include "utente.h"
+#include "searchgrouputente.h"
 #include "smartptr_utente.h"
 #include "sortlist.h"
 #include "sortgrouputente.h"
 
-typedef SortList<SortGroupUtente::AlfabeticoCre,smartptr_utente>
+typedef SortList<SortGroupUtente::AlfabeticoDec,smartptr_utente>
         SortListName;
+
+struct Crescente
+{
+    bool operator()( int a, int b ) const
+    {
+        return a < b;
+    }
+};
 
 int main(int argc, char *argv[])
 {
@@ -20,13 +29,11 @@ int main(int argc, char *argv[])
     MainWindow w;
     w.show();
 
-    SortListName list;
-
     Info info1( "Andrea",
                 "Mantovani",
                 "3406936174",
                 "17/09/1994");
-    Info info2( "Zottino",
+    Info info2( "Bottino",
                 "Mantovani",
                 "3406936174",
                 "17/09/1994");
@@ -34,30 +41,34 @@ int main(int argc, char *argv[])
                 "Mantovani",
                 "3406936174",
                 "17/09/1994");
-
-    smartptr_utente utenti[3];
-
-    utenti[0] = new Utente( "korut94", "36633663", info1 );
-    utenti[1] = new Utente( "bilbo94", "36633663", info2 );
-    utenti[2] = new Utente( "gianni94", "36633663", info3 );
-
-
-    for( int i = 0; i < 3; i++ ) list.insert( utenti[i] );
-    for( SortListName::const_iterator itr = list.constBegin();
-         itr != list.end();
-         itr++ )
-    {
-        std::cout << **itr << std::endl;
-    }
-
-    HashGroupUtente::AlfabeticoDecUpCase c;
-
-    std::cout << c( "Babbo" ) << std::endl;
+    Info info4( "Ziestrella",
+                "Mantovani",
+                "3406936174",
+                "17/09/1994");
+    Info info5( "Ylenia",
+                "Mantovani",
+                "3406936174",
+                "17/09/1994");
+    Info info6( "Abari",
+                "Mantovani",
+                "3406936174",
+                "17/09/1994");
 
     HashListUtente<HashGroupUtente::AlfabeticoDecUpCase,
-                   SortGroupUtente::AlfabeticoDec> database;
+                   SortGroupUtente::AlfabeticoCre> entry;
 
+    smartptr_utente user[6];
 
+    user[0] = new Utente( "korut94", "2322322", info1 );
+    user[1] = new Utente( "korut94", "2322322", info2 );
+    user[2] = new Utente( "korut94", "2322322", info3 );
+    user[3] = new Utente( "korut94", "2322322", info4 );
+    user[4] = new Utente( "korut94", "2322322", info5 );
+    user[5] = new Utente( "korut94", "2322322", info6 );
+
+    for( int i = 0; i < 6; i++ ) entry.insert( *user[i] );
+
+    std::cout << entry << std::endl;
 
     return a.exec();
 }
