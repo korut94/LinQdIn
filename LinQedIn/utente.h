@@ -49,6 +49,7 @@ class Utente : public SmartClass
         bool operator!=( const Utente & ) const;
 
         Info & getInfo();
+        Info getInfo() const;
 
         std::string getUsername() const;
 

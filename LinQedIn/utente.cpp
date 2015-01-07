@@ -84,6 +84,12 @@ Info & Utente::getInfo()
 }
 
 
+Info Utente::getInfo() const
+{
+    return infoUser;
+}
+
+
 void Utente::addContact( Utente & user )
 {
     contacts.addUser( user );
@@ -104,5 +110,5 @@ std::string Utente::getUsername() const
 
 std::ostream & operator<<( std::ostream & os, const Utente & u )
 {
-    return os << u.infoUser.getNome();
+    return ( os << u.infoUser.getNome().toStdString() );
 }
