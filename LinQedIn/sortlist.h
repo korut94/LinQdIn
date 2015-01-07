@@ -7,7 +7,7 @@
 template <typename SortFunction, typename T> class SortList;
 
 template <typename SortFunction, typename T>
-std::ostream & operator<< ( std::ostream &, const SortList<SortFunction,T> & );
+std::ostream & operator<<( std::ostream &, const SortList<SortFunction,T> & );
 
 template <typename SortFunction, typename T>
 class SortList : private QList<T>
@@ -51,9 +51,10 @@ class SortList : private QList<T>
         void remove( const T & );
         template <typename Predicate> void removeIf( const Predicate & );
 
-
-        friend std::ostream & operator<<
-        <SortFunction,T>( std::ostream &, const SortList<SortFunction,T> & );
+        /*
+        friend std::ostream & operator<< <SortFunction,T>
+        ( std::ostream &, const SortList<SortFunction,T> & );
+        */
 };
 
 template <typename SortFunction, typename T>
@@ -206,10 +207,10 @@ void SortList<SortFunction,T>::removeIf( const Predicate & predicate )
     }
 }
 
-//Tenuta per debug
+/*Tenuta per debug
 template <typename SortFunction, typename T>
-std::ostream & operator<< ( std::ostream & os,
-                            const SortList<SortFunction,T> & list )
+std::ostream & operator<<( std::ostream & os,
+                           const SortList<SortFunction,T> & list )
 {
     for( typename QList<T>::const_iterator itr = list.constBegin();
          itr != list.constEnd();
@@ -220,5 +221,5 @@ std::ostream & operator<< ( std::ostream & os,
 
     return os;
 }
-
+*/
 #endif // SORTLIST_H
