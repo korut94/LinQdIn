@@ -5,10 +5,10 @@ Info::Info() //costruttori di default
 }
 
 
-Info::Info( const std::string & name,
-            const std::string & surname,
-            const std::string & number,
-            const std::string & data )
+Info::Info( const QString & name,
+            const QString & surname,
+            const QString & number,
+            const QString & data )
             : nome( name ),
               cognome( surname ),
               n_telefono( number ),
@@ -17,49 +17,49 @@ Info::Info( const std::string & name,
 }
 
 
-std::string Info::getCognome() const
+QString Info::getCognome() const
 {
     return cognome;
 }
 
 
-std::string Info::getData() const
+QString Info::getData() const
 {
     return data;
 }
 
 
-std::string Info::getNome() const
+QString Info::getNome() const
 {
     return nome;
 }
 
 
-std::string Info::getNumTelefono() const
+QString Info::getNumTelefono() const
 {
     return n_telefono;
 }
 
 
-void Info::setCognome( const std::string & surname )
+void Info::setCognome( const QString & surname )
 {
     cognome = surname;
 }
 
 
-void Info::setNome( const std::string & name )
+void Info::setNome( const QString & name )
 {
     nome = name;
 }
 
 
-void Info::setData( const std::string & data )
+void Info::setData( const QString & data )
 {
     this->data = data;
 }
 
 
-void Info::setNumTelefono( const std::string & number )
+void Info::setNumTelefono( const QString & number )
 {
     n_telefono = number;
 }

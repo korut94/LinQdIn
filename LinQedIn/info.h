@@ -1,33 +1,33 @@
 #ifndef INFO_H
 #define INFO_H
 
-#include <string>
+#include <QString>
 
 class Info
 {
     private:
-        std::string cognome;
-        std::string data; //class Data?
-        std::string nome;
-        std::string n_telefono; //class N_Telefono?
+        QString cognome;
+        QString data; //class Data?
+        QString nome;
+        QString n_telefono; //class N_Telefono?
 
     public:
         Info();
-        Info( const std::string &, //nome
-              const std::string &, //cognome
-              const std::string &, //n_telefono
-              const std::string &  //data
+        Info( const QString &, //nome
+              const QString &, //cognome
+              const QString &, //n_telefono
+              const QString &  //data
             );
 
-        std::string getCognome() const;
-        std::string getData() const;
-        std::string getNome() const;
-        std::string getNumTelefono() const;
+        QString getCognome() const;
+        QString getData() const;
+        QString getNome() const;
+        QString getNumTelefono() const;
 
-        void setCognome( const std::string & );
-        void setNome( const std::string & );
-        void setData( const std::string & );
-        void setNumTelefono( const std::string & );
+        void setCognome( const QString & );
+        void setNome( const QString & );
+        void setData( const QString & );
+        void setNumTelefono( const QString & );
 };
 
 #endif // INFO_H
