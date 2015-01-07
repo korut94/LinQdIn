@@ -121,6 +121,7 @@ void HashListUtente<HashFunction,SortFunction>::remove( const Utente & user )
     }
 }
 
+
 template <typename HashFunction, typename SortFunction>
 std::ostream & operator<<( std::ostream & os,
                const HashListUtente<HashFunction,SortFunction> & table )
