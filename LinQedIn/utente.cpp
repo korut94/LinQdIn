@@ -84,7 +84,7 @@ Info & Utente::getInfo()
 }
 
 
-Info Utente::getInfo() const
+const Info & Utente::getInfo() const
 {
     return infoUser;
 }
