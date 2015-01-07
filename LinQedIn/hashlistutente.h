@@ -8,6 +8,12 @@
 #include "sortlist.h"
 #include "utente.h"
 
+template <typename HashFunction, typename SortFunction> class HashListUtente;
+
+template <typename HashFunction, typename SortFunction>
+std::ostream & operator<<( std::ostream &,
+                           const HashListUtente<HashFunction,SortFunction> & );
+
 template <typename HashFunction, typename SortFunction>
 class HashListUtente : private
                        QVector< SortList<SortFunction,smartptr_utente> >
@@ -27,8 +33,11 @@ class HashListUtente : private
 
         //Utente & getUser( const Utente & );
 
-        void insert( const Utente & );
+        void insert( Utente & );
         void remove( const Utente & );
+
+        friend std::ostream & operator<< <HashFunction,SortFunction>
+        ( std::ostream &, const HashListUtente<HashFunction,SortFunction> & );
 };
 
 template <typename HashFunction, typename SortFunction>
@@ -87,7 +96,7 @@ Utente & HashListUtente<HashFunction,
 */
 
 template <typename HashFunction, typename SortFunction>
-void HashListUtente<HashFunction,SortFunction>::insert( const Utente & user )
+void HashListUtente<HashFunction,SortFunction>::insert( Utente & user )
 {
     int index = hash( user );
 
@@ -110,6 +119,18 @@ void HashListUtente<HashFunction,SortFunction>::remove( const Utente & user )
         ListUser & list = QVector<ListUser>::operator[]( index );
         list.removeIf( SearchGroupUtente::UgualeAdUtente( user ) );
     }
+}
+
+template <typename HashFunction, typename SortFunction>
+std::ostream & operator<<( std::ostream & os,
+               const HashListUtente<HashFunction,SortFunction> & table )
+{
+    for( int i = 0; i < table.size(); i++ )
+    {
+        os << i << " " << table[i] << std::endl;
+    }
+
+    return os;
 }
 
 #endif // HASHLISTUTENTE_H
