@@ -3,6 +3,7 @@
 
 #include <QLocale>
 #include <QString>
+#include <string>
 
 #include "utente.h"
 
@@ -10,12 +11,12 @@ namespace HashGroupUtente
 {
     struct AlfabeticoCreUpCase
     {
-        int operator() ( const QString & ) const;
+        int operator() ( const Utente & ) const;
     };
 
     struct AlfabeticoDecUpCase
     {
-        int operator() ( const QString & ) const;
+        int operator() ( const Utente & ) const;
     };
 }
 
