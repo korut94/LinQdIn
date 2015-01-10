@@ -9,14 +9,24 @@
 
 namespace HashGroupUtente
 {
-    struct AlfabeticoCreUpCase
+    struct NameCrescente
     {
-        int operator() ( const Utente & ) const;
+        int operator()( const Utente & ) const;
     };
 
-    struct AlfabeticoDecUpCase
+    struct NameDecrescente
     {
-        int operator() ( const Utente & ) const;
+        int operator()( const Utente & ) const;
+    };
+
+    struct UsernameCrescente
+    {
+        int operator()( const Utente & ) const;
+    };
+
+    struct UsernameDecrescente
+    {
+        int operator()( const Utente & ) const;
     };
 }
 
