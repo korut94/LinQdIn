@@ -27,17 +27,16 @@ class HashListUtente : private
         HashListUtente();
 
         bool isEmpty() const;
-        bool isPresent( const Utente & ) const;
+        bool isPresent( const smartptr_utente & ) const;
 
         int size() const;
 
-        //Utente & getUser( const Utente & );
-
-        void insert( Utente & );
-        void remove( const Utente & );
+        void insert( const smartptr_utente & );
+        void remove( const smartptr_utente & );
 
         friend std::ostream & operator<< <HashFunction,SortFunction>
         ( std::ostream &, const HashListUtente<HashFunction,SortFunction> & );
+
 };
 
 template <typename HashFunction, typename SortFunction>
@@ -52,17 +51,16 @@ bool HashListUtente<HashFunction,SortFunction>::isEmpty() const
 
 
 template <typename HashFunction, typename SortFunction>
-bool HashListUtente<HashFunction,
-                    SortFunction>::isPresent( const Utente & user ) const
+bool HashListUtente<HashFunction,SortFunction>::
+     isPresent( const smartptr_utente & user ) const
 {
-    int index = hash( user );
+    int index = hash( *user );
 
     if( index > size() - 1 ) return false;
     else
     {
-        ListUser & list = QVector<ListUser>::operator[]( index );
-
-        return list.present( SearchGroupUtente::UgualeAdUtente( user ) );
+        const ListUser & list = QVector<ListUser>::operator[]( index );
+        return list.present( user );
     }
 }
 
@@ -95,29 +93,30 @@ Utente & HashListUtente<HashFunction,
 }
 */
 
-template <typename HashFunction, typename SortFunction>
-void HashListUtente<HashFunction,SortFunction>::insert( Utente & user )
-{
-    int index = hash( user );
 
-    smartptr_utente ptr( &user );
+template <typename HashFunction, typename SortFunction>
+void HashListUtente<HashFunction,SortFunction>::
+     insert( const smartptr_utente & user )
+{
+    int index = hash( *user );
 
     if( index > size() - 1 ) QVector<ListUser>::resize( index + 1 );
     ListUser & list = QVector<ListUser>::operator[]( index );
 
-    list.insert( ptr );
+    list.insert( user);
 }
 
 
 template <typename HashFunction, typename SortFunction>
-void HashListUtente<HashFunction,SortFunction>::remove( const Utente & user )
+void HashListUtente<HashFunction,SortFunction>::
+     remove( const smartptr_utente & user )
 {
     if( isPresent( user ) )
     {
-        int index = hash( user );
+        int index = hash( *user );
 
         ListUser & list = QVector<ListUser>::operator[]( index );
-        list.removeIf( SearchGroupUtente::UgualeAdUtente( user ) );
+        list.remove( user );
     }
 }
 
