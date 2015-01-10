@@ -7,8 +7,9 @@ class Query
 {
     public:
         Query();
+        virtual ~Query();
 
-        virtual compose( Frankenstein & ) const = 0;
+        virtual void compose( Frankenstein & ) const = 0;
 };
 
 #endif // QUERY_H
