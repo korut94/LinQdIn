@@ -1,10 +1,16 @@
 #ifndef FRANKENSTEIN_H
 #define FRANKENSTEIN_H
 
-class Frankenstein
+#include "utente.h"
+
+class Frankenstein : public Entity
 {
-public:
-    Frankenstein();
+    public:
+        Utente::Rete contatti;
+
+        Frankenstein();
+        Frankenstein( const QString &, const QString &, const Info & );
+        Frankenstein( const Utente & );
 };
 
 #endif // FRANKENSTEIN_H
