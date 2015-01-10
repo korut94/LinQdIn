@@ -2,7 +2,7 @@
 #define UTENTE_H
 
 #include <iostream>
-#include <QVector>
+#include <QList>
 
 #include "info.h"
 #include "smartclass.h"
@@ -16,15 +16,15 @@ class Utente : public SmartClass
         class Rete
         {
             private:
-                QVector<smartptr_utente> users;
+                QList<smartptr_utente> users;
 
             public:
                 Rete();
 
-                bool isPresent( const Utente & ) const;
+                bool isPresent( const smartptr_utente & ) const;
 
-                void addUser( Utente & );
-                void removeUser( const Utente & );
+                void addUser( const smartptr_utente &  );
+                void removeUser( const smartptr_utente &  );
         };
 
     private:
@@ -36,11 +36,11 @@ class Utente : public SmartClass
         Rete contacts;
 
         std::string password; //class Password?
-        std::string username;
+        QString username;
 
     public:
         Utente();
-        Utente( const std::string &, const std::string &, const Info & );
+        Utente( const QString &, const std::string &, const Info & );
         virtual ~Utente();
 
         bool isActivate() const;
@@ -51,10 +51,10 @@ class Utente : public SmartClass
         Info & getInfo();
         const Info & getInfo() const;
 
-        std::string getUsername() const;
+        QString getUsername() const;
 
-        void addContact( Utente & );
-        void removeContact( const Utente & );
+        void addContact( const smartptr_utente & );
+        void removeContact( const smartptr_utente & );
 
         friend std::ostream & operator<<( std::ostream &, const Utente & );
 };

@@ -7,29 +7,19 @@ Utente::Rete::Rete()
 
 bool Utente::Rete::isPresent( const Utente & user ) const
 {
-
+    return users.contains( user );
 }
 
 
-void Utente::Rete::addUser( Utente & user )
+void Utente::Rete::addUser( const smartptr_utente & user )
 {
-    users.push_back( smartptr_utente( &user ) );
+    users.push_front( smartptr_utente( user ) );
 }
 
 
-void Utente::Rete::removeUser( const Utente & user )
+void Utente::Rete::removeUser( const smartptr_utente & user )
 {
-    QVector<smartptr_utente>::iterator itr = users.begin();
-
-    bool found = false;
-
-    while( itr != users.end() && !found )
-    {
-        found = ( user == **itr );
-
-        if( found ) users.erase( itr );
-        else itr++;
-    }
+    users.removeOne( user );
 }
 
 
@@ -39,7 +29,7 @@ Utente::Utente()
 }
 
 
-Utente::Utente( const std::string & user,
+Utente::Utente( const QString & user,
                 const std::string & pass,
                 const Info & info )
                 : username( user ),
@@ -90,19 +80,19 @@ const Info & Utente::getInfo() const
 }
 
 
-void Utente::addContact( Utente & user )
+void Utente::addContact( const smartptr_utente & user )
 {
     contacts.addUser( user );
 }
 
 
-void Utente::removeContact( const Utente & user )
+void Utente::removeContact( const smartptr_utente & user )
 {
     if( contacts.isPresent( user ) ) contacts.removeUser( user );
 }
 
 
-std::string Utente::getUsername() const
+QString Utente::getUsername() const
 {
     return username;
 }
