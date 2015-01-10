@@ -5,12 +5,12 @@
 #include <QList>
 
 #include "info.h"
-#include "smartclass.h"
+#include "entity.h"
 #include "smartptr_utente.h"
 
 class smartptr_utente;
 
-class Utente : public SmartClass
+class Utente : public Entity
 {
     public:
         class Rete
@@ -31,27 +31,18 @@ class Utente : public SmartClass
         bool online;
         bool activate;
 
-        Info infoUser;
-
         Rete contacts;
-
-        std::string password; //class Password?
-        QString username;
 
     public:
         Utente();
-        Utente( const QString &, const std::string &, const Info & );
+        Utente( const QString &, const QString &, const Info & );
         virtual ~Utente();
 
         bool isActivate() const;
         bool isOnline() const;
-        bool operator==( const Utente & ) const;
-        bool operator!=( const Utente & ) const;
 
-        Info & getInfo();
-        const Info & getInfo() const;
-
-        QString getUsername() const;
+        Rete & getContatti();
+        const Rete & getContatti() const;
 
         void addContact( const smartptr_utente & );
         void removeContact( const smartptr_utente & );

@@ -5,7 +5,7 @@ Utente::Rete::Rete()
 }
 
 
-bool Utente::Rete::isPresent( const Utente & user ) const
+bool Utente::Rete::isPresent( const smartptr_utente & user ) const
 {
     return users.contains( user );
 }
@@ -30,13 +30,9 @@ Utente::Utente()
 
 
 Utente::Utente( const QString & user,
-                const std::string & pass,
+                const QString & pass,
                 const Info & info )
-                : username( user ),
-                  password( pass ),
-                  infoUser( info )
-{
-}
+                : Entity( user, pass, info ) {}
 
 
 Utente::~Utente()
@@ -56,27 +52,15 @@ bool Utente::isOnline() const
 }
 
 
-bool Utente::operator==( const Utente & user ) const
+Utente::Rete & Utente::getContatti()
 {
-    return ( username == user.getUsername() );
+    return contacts;
 }
 
 
-bool Utente::operator!=( const Utente & user ) const
+const Utente::Rete & Utente::getContatti() const
 {
-    return ( username != user.getUsername() );
-}
-
-
-Info & Utente::getInfo()
-{
-    return infoUser;
-}
-
-
-const Info & Utente::getInfo() const
-{
-    return infoUser;
+    return contacts;
 }
 
 
@@ -92,13 +76,7 @@ void Utente::removeContact( const smartptr_utente & user )
 }
 
 
-QString Utente::getUsername() const
-{
-    return username;
-}
-
-
 std::ostream & operator<<( std::ostream & os, const Utente & u )
 {
-    return ( os << u.infoUser.getNome().toStdString() );
+    return ( os << u.getInfo().getNome().toStdString() );
 }
