@@ -24,7 +24,6 @@ SOURCES += main.cpp\
     smartptr_utente.cpp \
     searchgrouputente.cpp \
     frankenstein.cpp \
-    query.cpp \
     entity.cpp
 
 HEADERS  += mainwindow.h \
