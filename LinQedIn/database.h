@@ -3,8 +3,10 @@
 
 #include <iostream>
 
+#include "frankenstein.h"
 #include "hashgrouputente.h"
 #include "hashlistutente.h"
+#include "query.h"
 #include "searchgrouputente.h"
 #include "sortgrouputente.h"
 #include "utente.h"
@@ -24,7 +26,7 @@ class Database
 
         bool isPresent( const smartptr_utente & ) const;
 
-        smartptr_utente getUser( const QString & ) const;
+        smartptr_utente getUser( Query * ) const;
 
         void insert( const smartptr_utente & );
         void linkUser( const smartptr_utente &, const smartptr_utente & );

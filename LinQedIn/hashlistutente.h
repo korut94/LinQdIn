@@ -31,6 +31,8 @@ class HashListUtente : private
 
         int size() const;
 
+        smartptr_utente getUser( const Frankenstein & ) const;
+
         void insert( const smartptr_utente & );
         void remove( const smartptr_utente & );
 
@@ -71,27 +73,17 @@ int HashListUtente<HashFunction,SortFunction>::size() const
     return QVector<ListUser>::size();
 }
 
-/*
+
 template <typename HashFunction, typename SortFunction>
-Utente & HashListUtente<HashFunction,
-                        SortFunction>::getUser( const Utente & user )
+smartptr_utente HashListUtente<HashFunction,SortFunction>
+                ::getUser( const Frankenstein & path ) const
 {
-    int index = hash( user );
+    smartptr_utente user = NULL;
 
-    listUser & list = QVector<listUser>::operator[]( index );
+    std::cout << hash( path ) << std::endl;
 
-    bool found = false;
-    listUser::iterator itr = list.begin();
-
-    while( itr != list.end() && !found )
-    {
-        found = ( **itr == user );
-        if( !found ) itr++;
-    }
-
-    return **itr;
+    return user;
 }
-*/
 
 
 template <typename HashFunction, typename SortFunction>
