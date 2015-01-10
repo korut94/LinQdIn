@@ -5,13 +5,25 @@
 
 namespace SortGroupUtente
 {
-    struct AlfabeticoCre
+    struct NameCrescente
     {
         bool operator()( const smartptr_utente &,
                          const smartptr_utente & ) const;
     };
 
-    struct AlfabeticoDec
+    struct NameDecrescente
+    {
+        bool operator()( const smartptr_utente &,
+                         const smartptr_utente & ) const;
+    };
+
+    struct UsernameCrescente
+    {
+        bool operator()( const smartptr_utente &,
+                         const smartptr_utente & ) const;
+    };
+
+    struct UsernameDecrescente
     {
         bool operator()( const smartptr_utente &,
                          const smartptr_utente & ) const;
