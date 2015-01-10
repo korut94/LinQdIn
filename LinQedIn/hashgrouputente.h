@@ -11,22 +11,22 @@ namespace HashGroupUtente
 {
     struct NameCrescente
     {
-        int operator()( const Utente & ) const;
+        int operator()( const Entity & ) const;
     };
 
     struct NameDecrescente
     {
-        int operator()( const Utente & ) const;
+        int operator()( const Entity & ) const;
     };
 
     struct UsernameCrescente
     {
-        int operator()( const Utente & ) const;
+        int operator()( const Entity & ) const;
     };
 
     struct UsernameDecrescente
     {
-        int operator()( const Utente & ) const;
+        int operator()( const Entity & ) const;
     };
 }
 
