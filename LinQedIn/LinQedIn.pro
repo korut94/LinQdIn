@@ -22,7 +22,10 @@ SOURCES += main.cpp\
     sortgrouputente.cpp \
     hashgrouputente.cpp \
     smartptr_utente.cpp \
-    searchgrouputente.cpp
+    searchgrouputente.cpp \
+    frankenstein.cpp \
+    query.cpp \
+    entity.cpp
 
 HEADERS  += mainwindow.h \
     utente.h \
@@ -34,7 +37,10 @@ HEADERS  += mainwindow.h \
     hashgrouputente.h \
     smartptr_utente.h \
     hashlistutente.h \
-    searchgrouputente.h
+    searchgrouputente.h \
+    frankenstein.h \
+    query.h \
+    entity.h
 
 FORMS    += mainwindow.ui
 
