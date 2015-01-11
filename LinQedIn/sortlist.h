@@ -89,15 +89,12 @@ template <typename SortFunction, typename T>
 bool SortList<SortFunction,T>::present( const T & elem ) const
 {
     bool found = false;
-    bool oltreLimite = false;
     const_iterator itr = constBegin();
 
-    while( itr != constEnd() && !oltreLimite && !found )
+    while( itr != constEnd() && sort( *itr, elem ) && !found )
     {
         found = ( *itr == elem );
         itr++;
-
-        if( itr != constEnd() ) oltreLimite = !sort( *itr, elem );
     }
 
     return found;
@@ -190,15 +187,12 @@ void SortList<SortFunction,T>::insert( const T & elem )
 template <typename SortFunction, typename T>
 void SortList<SortFunction,T>::remove( const T & elem )
 {
-    bool oltreLimite = false;
     iterator itr = begin();
 
-    while( itr != end() && !oltreLimite )
+    while( itr != end() && sort( *itr, elem ) )
     {
         if( *itr == elem ) itr = QList<T>::erase( itr );
         else itr++;
-
-        if( itr != end() ) oltreLimite = !sort( *itr, elem );
     }
 }
 
