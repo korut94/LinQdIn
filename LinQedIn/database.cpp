@@ -12,7 +12,6 @@ bool Database::isPresent( const smartptr_utente & user ) const
 smartptr_utente Database::getUser( Query * query ) const
 {
     Frankenstein frankenstein;
-
     query->compose( frankenstein );
 
     return entryUsername.getUser( frankenstein );

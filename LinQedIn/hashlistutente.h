@@ -75,14 +75,28 @@ int HashListUtente<HashFunction,SortFunction>::size() const
 
 
 template <typename HashFunction, typename SortFunction>
-smartptr_utente HashListUtente<HashFunction,SortFunction>
-                ::getUser( const Frankenstein & path ) const
+smartptr_utente HashListUtente<HashFunction,SortFunction>::
+                getUser( const Frankenstein & path ) const
 {
-    smartptr_utente user = NULL;
+    int index = hash( path );
 
-    std::cout << hash( path ) << std::endl;
+    if( index > size() - 1 ) return NULL;
+    else
+    {
+        bool found = false;
 
-    return user;
+        const ListUser & list = QVector<ListUser>::operator[]( index );
+        typename ListUser::const_iterator itr = list.constBegin();
+
+        while( itr != list.constEnd() && !found )
+        {
+            if( path == **itr ) found = true;
+            else itr++;
+        }
+
+        if( found ) return *itr;
+        else return NULL;
+    }
 }
 
 
