@@ -25,7 +25,8 @@ SOURCES += main.cpp\
     searchgrouputente.cpp \
     frankenstein.cpp \
     entity.cpp \
-    query.cpp
+    query.cpp \
+    smartptr_entity.cpp
 
 HEADERS  += mainwindow.h \
     utente.h \
@@ -40,7 +41,8 @@ HEADERS  += mainwindow.h \
     searchgrouputente.h \
     frankenstein.h \
     query.h \
-    entity.h
+    entity.h \
+    smartptr_entity.h
 
 FORMS    += mainwindow.ui
 
