@@ -5,20 +5,12 @@
 
 #include "searchgrouputente.h"
 #include "smartptr_utente.h"
-#include "sortlist.h"
 #include "utente.h"
 
-template <typename HashFunction, typename SortFunction> class HashListUtente;
-
-template <typename HashFunction, typename SortFunction>
-std::ostream & operator<<( std::ostream &,
-                           const HashListUtente<HashFunction,SortFunction> & );
-
-template <typename HashFunction, typename SortFunction>
-class HashListUtente : private
-                       QVector< SortList<SortFunction,smartptr_utente> >
+template <typename HashFunction>
+class HashListUtente : private QVector< QList<smartptr_utente> >
 {
-    typedef SortList<SortFunction,smartptr_utente> ListUser;
+    typedef QList<smartptr_utente> ListUser;
 
     private:
         HashFunction hash;
@@ -35,50 +27,53 @@ class HashListUtente : private
 
         void insert( const smartptr_utente & );
         void remove( const smartptr_utente & );
-
-        friend std::ostream & operator<< <HashFunction,SortFunction>
-        ( std::ostream &, const HashListUtente<HashFunction,SortFunction> & );
-
 };
 
-template <typename HashFunction, typename SortFunction>
-HashListUtente<HashFunction,SortFunction>::HashListUtente(){}
+
+template <typename HashFunction>
+HashListUtente<HashFunction>::HashListUtente(){}
 
 
-template <typename HashFunction, typename SortFunction>
-bool HashListUtente<HashFunction,SortFunction>::isEmpty() const
+template <typename HashFunction>
+bool HashListUtente<HashFunction>::isEmpty() const
 {
     return QVector<ListUser>::isEmpty();
 }
 
 
-template <typename HashFunction, typename SortFunction>
-bool HashListUtente<HashFunction,SortFunction>::
+template <typename HashFunction>
+bool HashListUtente<HashFunction>::
      isPresent( const smartptr_utente & user ) const
 {
-    int index = hash( *user );
-
-    if( index > size() - 1 ) return false;
+    if( user == NULL ) return false;
     else
     {
-        const ListUser & list = QVector<ListUser>::operator[]( index );
-        return list.present( user );
+        int index = hash( *user );
+
+        if( index > size() - 1 ) return false;
+        else
+        {
+            const ListUser & list = QVector<ListUser>::operator[]( index );
+            return list.contains( user );
+        }
     }
 }
 
 
-template <typename HashFunction, typename SortFunction>
-int HashListUtente<HashFunction,SortFunction>::size() const
+template <typename HashFunction>
+int HashListUtente<HashFunction>::size() const
 {
     return QVector<ListUser>::size();
 }
 
 
-template <typename HashFunction, typename SortFunction>
-smartptr_utente HashListUtente<HashFunction,SortFunction>::
+template <typename HashFunction>
+smartptr_utente HashListUtente<HashFunction>::
                 getUser( const Frankenstein & path ) const
 {
     int index = hash( path );
+
+    std::cout << index << std::endl;
 
     if( index > size() - 1 ) return NULL;
     else
@@ -100,43 +95,34 @@ smartptr_utente HashListUtente<HashFunction,SortFunction>::
 }
 
 
-template <typename HashFunction, typename SortFunction>
-void HashListUtente<HashFunction,SortFunction>::
-     insert( const smartptr_utente & user )
+template <typename HashFunction>
+void HashListUtente<HashFunction>::insert( const smartptr_utente & user )
 {
-    int index = hash( *user );
-
-    if( index > size() - 1 ) QVector<ListUser>::resize( index + 1 );
-    ListUser & list = QVector<ListUser>::operator[]( index );
-
-    list.insert( user);
-}
-
-
-template <typename HashFunction, typename SortFunction>
-void HashListUtente<HashFunction,SortFunction>::
-     remove( const smartptr_utente & user )
-{
-    if( isPresent( user ) )
+    if( user != NULL )
     {
         int index = hash( *user );
 
+        if( index > size() - 1 ) QVector<ListUser>::resize( index + 1 );
         ListUser & list = QVector<ListUser>::operator[]( index );
-        list.remove( user );
+
+        list.push_front( user );
     }
 }
 
 
-template <typename HashFunction, typename SortFunction>
-std::ostream & operator<<( std::ostream & os,
-               const HashListUtente<HashFunction,SortFunction> & table )
+template <typename HashFunction>
+void HashListUtente<HashFunction>::remove( const smartptr_utente & user )
 {
-    for( int i = 0; i < table.size(); i++ )
+    if( user != NULL )
     {
-        os << i << " " << table[i] << std::endl;
-    }
+        int index = hash( *user );
 
-    return os;
+        if( index < size() )
+        {
+            ListUser & list = QVector<ListUser>::operator[]( index );
+            list.removeOne( user );
+        }
+    }
 }
 
 #endif // HASHLISTUTENTE_H
