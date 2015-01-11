@@ -11,6 +11,9 @@ class Frankenstein : public Entity
         Frankenstein();
         Frankenstein( const QString &, const QString &, const Info & );
         Frankenstein( const Utente & );
+
+        bool operator==( const Frankenstein & ) const;
+        bool operator!=( const Frankenstein & ) const;
 };
 
 #endif // FRANKENSTEIN_H
