@@ -1,12 +1,12 @@
 #ifndef SMARTPTR_UTENTE_H
 #define SMARTPTR_UTENTE_H
 
-#include "smartclass.h"
+#include "smartptr_entity.h"
 #include "utente.h"
 
 class Utente;
 
-class smartptr_utente : public SmartClass::smartptr
+class smartptr_utente : public smartptr_entity
 {
     public:
         smartptr_utente( Utente * = NULL );
