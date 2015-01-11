@@ -9,6 +9,16 @@
 
 namespace HashGroupUtente
 {
+    struct CognomeCrescente
+    {
+        int operator()( const Entity & ) const;
+    };
+
+    struct CognomeDecrescente
+    {
+        int operator()( const Entity & ) const;
+    };
+
     struct NameCrescente
     {
         int operator()( const Entity & ) const;
