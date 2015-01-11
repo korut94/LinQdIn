@@ -3,6 +3,8 @@
 
 #include <iostream>
 
+#include "database.h"
+#include "frankenstein.h"
 #include "hashgrouputente.h"
 #include "hashlistutente.h"
 #include "utente.h"
@@ -11,7 +13,7 @@
 #include "sortlist.h"
 #include "sortgrouputente.h"
 
-typedef SortList<SortGroupUtente::AlfabeticoDec,smartptr_utente>
+typedef SortList<SortGroupUtente::NameCrescente,smartptr_utente>
         SortListName;
 
 struct Crescente
@@ -54,21 +56,30 @@ int main(int argc, char *argv[])
                 "3406936174",
                 "17/09/1994");
 
-    HashListUtente<HashGroupUtente::AlfabeticoDecUpCase,
-                   SortGroupUtente::AlfabeticoCre> entry;
+    Database db;
 
     smartptr_utente user[6];
 
     user[0] = new Utente( "korut94", "2322322", info1 );
-    user[1] = new Utente( "korut94", "2322322", info2 );
-    user[2] = new Utente( "korut94", "2322322", info3 );
-    user[3] = new Utente( "korut94", "2322322", info4 );
-    user[4] = new Utente( "korut94", "2322322", info5 );
-    user[5] = new Utente( "korut94", "2322322", info6 );
+    user[1] = new Utente( "mtrut94", "2322322", info2 );
+    user[2] = new Utente( "sertit94", "2322322", info3 );
+    user[3] = new Utente( "beregont94", "2322322", info4 );
+    user[4] = new Utente( "salmict94", "2322322", info5 );
+    user[5] = new Utente( "gnat94", "2322322", info6 );
 
-    for( int i = 0; i < 6; i++ ) entry.insert( *user[i] );
+    for( int i = 0; i < 6; i++ ) db.insert( user[i] );
 
-    std::cout << entry << std::endl;
+    SearchGroupUtente::ByUsername * userFound =
+            new SearchGroupUtente::ByUsername( "gnat94" );
+
+    smartptr_utente me = db.getUser( userFound );
+
+    std::cout << me->getInfo().getNome().toStdString()
+              << " "
+              << me->getInfo().getCognome().toStdString()
+              << std::endl;
+
+    delete userFound;
 
     return a.exec();
 }
