@@ -19,10 +19,10 @@ bool Database::isPresent( const smartptr_utente & user ) const
 }
 
 
-smartptr_utente Database::getUser( Query * query ) const
+smartptr_utente Database::getUser( const Query & query ) const
 {
     Frankenstein frankenstein;
-    query->compose( frankenstein );
+    query.compose( frankenstein );
 
     switch( getCategory( frankenstein ) )
     {
@@ -36,7 +36,7 @@ smartptr_utente Database::getUser( Query * query ) const
 
             QList<smartptr_utente>::const_iterator itr = general.constBegin();
 
-            while( itr != general.constEnd() && !found )
+            while( itr != general.end() && !found )
             {
                 if( frankenstein == **itr ) found = true;
                 else itr++;
@@ -83,6 +83,8 @@ void Database::remove( const smartptr_utente & user )
 {
     if( user != NULL )
     {
+        user->setActivate( false );
+
         entryName.remove( user );
         entrySurname.remove( user );
         entryUsername.remove( user );

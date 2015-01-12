@@ -37,7 +37,7 @@ class Database
 
         bool isPresent( const smartptr_utente & ) const;
 
-        smartptr_utente getUser( Query * ) const;
+        smartptr_utente getUser( const Query & ) const;
 
         void insert( const smartptr_utente & );
         void linkUser( const smartptr_utente &, const smartptr_utente & );
