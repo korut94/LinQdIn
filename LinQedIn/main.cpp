@@ -69,17 +69,13 @@ int main(int argc, char *argv[])
 
     for( int i = 0; i < 6; i++ ) db.insert( user[i] );
 
-    SearchGroupUtente::ByUsername * userFound =
-            new SearchGroupUtente::ByUsername( "gnat94" );
-
-    smartptr_utente me = db.getUser( userFound );
+    smartptr_utente me = db.getUser(
+                            SearchGroupUtente::ByUsername( "korut94" ) );
 
     std::cout << me->getInfo().getNome().toStdString()
               << " "
               << me->getInfo().getCognome().toStdString()
               << std::endl;
-
-    delete userFound;
 
     return a.exec();
 }
