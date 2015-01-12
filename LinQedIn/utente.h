@@ -46,6 +46,8 @@ class Utente : public Entity
 
         void addContact( const smartptr_utente & );
         void removeContact( const smartptr_utente & );
+        void setActivate( bool );
+        void setOnline( bool );
 
         friend std::ostream & operator<<( std::ostream &, const Utente & );
 };

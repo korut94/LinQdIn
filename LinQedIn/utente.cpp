@@ -76,6 +76,18 @@ void Utente::removeContact( const smartptr_utente & user )
 }
 
 
+void Utente::setActivate( bool set )
+{
+    activate = set;
+}
+
+
+void Utente::setOnline( bool set )
+{
+    online = set;
+}
+
+
 std::ostream & operator<<( std::ostream & os, const Utente & u )
 {
     return ( os << u.getInfo().getNome().toStdString() );
