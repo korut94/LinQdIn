@@ -81,9 +81,9 @@ smartptr_utente HashListUtente<HashFunction>::
         bool found = false;
 
         const ListUser & list = QVector<ListUser>::operator[]( index );
-        typename ListUser::const_iterator itr = list.constBegin();
+        typename ListUser::const_iterator itr = list.begin();
 
-        while( itr != list.constEnd() && !found )
+        while( itr != list.end() && !found )
         {
             if( path == **itr ) found = true;
             else itr++;
