@@ -3,8 +3,8 @@
 
 class MainWindow_Model
 {
-public:
-    MainWindow_Model();
+    public:
+        MainWindow_Model();
 };
 
 #endif // MAINWINDOW_MODEL_H
