@@ -14,7 +14,6 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp \
     utente.cpp \
     info.cpp \
     smartclass.cpp \
@@ -26,9 +25,14 @@ SOURCES += main.cpp\
     frankenstein.cpp \
     entity.cpp \
     query.cpp \
-    smartptr_entity.cpp
+    smartptr_entity.cpp \
+    mainwindow.cpp \
+    tabcontroller.cpp \
+    mainwindow_view.cpp \
+    mainwindow_controller.cpp \
+    mainwindow_model.cpp
 
-HEADERS  += mainwindow.h \
+HEADERS  += \
     utente.h \
     info.h \
     smartclass.h \
@@ -42,7 +46,12 @@ HEADERS  += mainwindow.h \
     frankenstein.h \
     query.h \
     entity.h \
-    smartptr_entity.h
+    smartptr_entity.h \
+    mainwindow.h \
+    tabcontroller.h \
+    mainwindow_view.h \
+    mainwindow_controller.h \
+    mainwindow_model.h
 
 FORMS    += mainwindow.ui
 
