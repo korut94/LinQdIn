@@ -1,10 +1,16 @@
 #ifndef TABCONTOLLER_H
 #define TABCONTOLLER_H
 
-class TabContoller
+#include <QPushButton>
+#include <QTabWidget>
+#include <QVBoxLayout>
+#include <QWidget>
+
+class TabController : public QWidget
 {
-public:
-    TabContoller();
+    public:
+        TabController( QWidget * = NULL );
+        ~TabController();
 };
 
 #endif // TABCONTOLLER_H
