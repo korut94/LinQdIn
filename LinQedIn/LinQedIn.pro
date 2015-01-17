@@ -26,11 +26,17 @@ SOURCES += main.cpp\
     entity.cpp \
     query.cpp \
     smartptr_entity.cpp \
-    mainwindow.cpp \
     tabcontroller.cpp \
-    mainwindow_view.cpp \
+    mainwindow.cpp \
     mainwindow_controller.cpp \
-    mainwindow_model.cpp
+    mainwindow_model.cpp \
+    mainwindow_view.cpp \
+    riconoscimenti.cpp \
+    link.cpp \
+    admininterface.cpp \
+    admininterface_model.cpp \
+    admininterface_view.cpp \
+    admininterface_controller.cpp
 
 HEADERS  += \
     utente.h \
@@ -47,11 +53,17 @@ HEADERS  += \
     query.h \
     entity.h \
     smartptr_entity.h \
-    mainwindow.h \
     tabcontroller.h \
-    mainwindow_view.h \
+    mainwindow.h \
     mainwindow_controller.h \
-    mainwindow_model.h
+    mainwindow_model.h \
+    mainwindow_view.h \
+    riconoscimenti.h \
+    link.h \
+    admininterface.h \
+    admininterface_model.h \
+    admininterface_view.h \
+    admininterface_controller.h
 
 FORMS    += mainwindow.ui
 

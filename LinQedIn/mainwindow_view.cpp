@@ -13,8 +13,11 @@ MainWindow_View::MainWindow_View( QWidget * parent ) : QWidget( parent )
 
     box->setLayout( layoutBox );
 
+    Riconoscimenti * riconoscimenti = new Riconoscimenti();
+
     QVBoxLayout * layout = new QVBoxLayout;
     layout->addWidget( box );
+    layout->addWidget( riconoscimenti );
 
     setLayout( layout );
 }
