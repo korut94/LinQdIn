@@ -36,7 +36,9 @@ SOURCES += main.cpp\
     admininterface.cpp \
     admininterface_model.cpp \
     admininterface_view.cpp \
-    admininterface_controller.cpp
+    admininterface_controller.cpp \
+    useritem.cpp \
+    tableusers.cpp
 
 HEADERS  += \
     utente.h \
@@ -63,9 +65,16 @@ HEADERS  += \
     admininterface.h \
     admininterface_model.h \
     admininterface_view.h \
-    admininterface_controller.h
+    admininterface_controller.h \
+    useritem.h \
+    tableusers.h
 
 FORMS    += mainwindow.ui
 
 OTHER_FILES += \
-    LICENCE.txt
+    LICENCE.txt \
+    User.png \
+    User_40x30.png \
+    User_48x36.png \
+    User_90x80.png \
+    User_100x100.png
