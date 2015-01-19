@@ -2,11 +2,12 @@
 
 TabController::TabController( QWidget * parent ) : QWidget( parent )
 {
-    QPushButton * btm1 = new QPushButton( "Push" );
+    AdminInterface * admin = new AdminInterface();
+
     QPushButton * btm2 = new QPushButton( "Push" );
 
     QTabWidget * tabs = new QTabWidget();
-    tabs->addTab( btm1, "Administrator" );
+    tabs->addTab( admin->getView(), "Administrator" );
     tabs->addTab( btm2, "User" );
 
     QVBoxLayout * layout = new QVBoxLayout;

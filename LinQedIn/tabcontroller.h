@@ -1,10 +1,15 @@
 #ifndef TABCONTOLLER_H
 #define TABCONTOLLER_H
 
+#include <QHeaderView>
 #include <QPushButton>
 #include <QTabWidget>
 #include <QVBoxLayout>
 #include <QWidget>
+
+#include "admininterface.h"
+
+class QHeaderView;
 
 class TabController : public QWidget
 {
@@ -13,4 +18,4 @@ class TabController : public QWidget
         ~TabController();
 };
 
-#endif // TABCONTOLLER_H
+#endif //TABCONTOLLER_H
