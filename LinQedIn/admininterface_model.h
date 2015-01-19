@@ -3,8 +3,8 @@
 
 class AdminInterface_Model
 {
-public:
-    AdminInterface_Model();
+    public:
+        AdminInterface_Model();
 };
 
 #endif // ADMININTERFACE_MODEL_H
