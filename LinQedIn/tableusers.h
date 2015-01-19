@@ -9,6 +9,9 @@
 
 class TableUsers : public QWidget
 {
+    private:
+        QWidget * users;
+
     public:
         TableUsers( QWidget * = NULL );
         ~TableUsers();
