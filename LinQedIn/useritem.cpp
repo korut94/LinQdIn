@@ -2,6 +2,8 @@
 
 UserItem::UserItem( const Info & info, QWidget * parent ) : QWidget( parent )
 {
+    setFixedHeight( 70 );
+
     QPixmap pixmap( "../LinQedIn/User_48x36.png" );
     QLabel * icon = new QLabel();
 
