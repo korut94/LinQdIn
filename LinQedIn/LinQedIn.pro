@@ -38,7 +38,8 @@ SOURCES += main.cpp\
     admininterface_view.cpp \
     admininterface_controller.cpp \
     useritem.cpp \
-    tableusers.cpp
+    tableusers.cpp \
+    labeltools.cpp
 
 HEADERS  += \
     utente.h \
@@ -67,7 +68,8 @@ HEADERS  += \
     admininterface_view.h \
     admininterface_controller.h \
     useritem.h \
-    tableusers.h
+    tableusers.h \
+    labeltools.h
 
 FORMS    += mainwindow.ui
 
