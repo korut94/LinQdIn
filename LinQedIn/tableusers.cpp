@@ -4,8 +4,8 @@ TableUsers::TableUsers( QWidget * parent ) : QWidget( parent )
 {
     QScrollArea * areaTable = new QScrollArea;
     areaTable->setMaximumWidth( 200 );
-
     areaTable->setStyleSheet( "QScrollArea{ background-color: white; }" );
+    areaTable->setWidgetResizable( true );
 
     users = new QWidget();
     QVBoxLayout * layoutUsers = new QVBoxLayout;
