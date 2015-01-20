@@ -8,8 +8,10 @@ class SmartClass
     private:
         int refCounter;
 
-    public:
+    protected:
         SmartClass();
+
+    public:
         virtual ~SmartClass();
 
         class smartptr
