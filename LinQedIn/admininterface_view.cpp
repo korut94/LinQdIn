@@ -6,6 +6,7 @@ AdminInterface_View::AdminInterface_View( QWidget * parent )
     TableUsers * table = new TableUsers();
 
     QHBoxLayout * layout = new QHBoxLayout;
+    layout->setAlignment( Qt::AlignLeft );
     layout->addWidget( table );
 
     setLayout( layout );
