@@ -2,10 +2,10 @@
 
 Database::Category Database::getCategory( const Frankenstein & f ) const
 {
-    if( !f.getInfo().getNome().isEmpty() ) return Category::Name;
-    if( !f.getInfo().getCognome().isEmpty() ) return Category::Surname;
-    if( !f.getUsername().isEmpty() ) return Category::Username;
-    else return Category::General;
+    if( !f.getInfo().getNome().isEmpty() ) return Name;
+    if( !f.getInfo().getCognome().isEmpty() ) return Surname;
+    if( !f.getUsername().isEmpty() ) return Username;
+    else return General;
 }
 
 
