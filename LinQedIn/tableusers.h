@@ -1,6 +1,7 @@
 #ifndef TABLEUSERS_H
 #define TABLEUSERS_H
 
+#include <QPushButton>
 #include <QScrollArea>
 #include <QWidget>
 
@@ -9,8 +10,13 @@
 
 class TableUsers : public QWidget
 {
+    Q_OBJECT
+
     private:
         QWidget * listUsers;
+
+    private slots:
+        void addUser();
 
     public:
         TableUsers( QWidget * = NULL );
