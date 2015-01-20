@@ -3,25 +3,25 @@
 TableUsers::TableUsers( QWidget * parent ) : QWidget( parent )
 {
     QScrollArea * areaTable = new QScrollArea;
-    areaTable->setMaximumWidth( 200 );
-
+    areaTable->setMaximumWidth( 230 );
     areaTable->setStyleSheet( "QScrollArea{ background-color: white; }" );
+    areaTable->setWidgetResizable( true );
 
-    users = new QWidget();
+    listUsers = new QWidget();
     QVBoxLayout * layoutUsers = new QVBoxLayout;
 
     layoutUsers->setContentsMargins( 0, 0, 0, 0 );
 
     for( int i = 0; i < 50; i++ )
     {
-        Info info( "Andrea", "Mantovani", "36", "6" );
+        Info info( "Andrea", "Mantovani", "3406936174", "17/09/1994" );
         UserItem * item = new UserItem( info );
 
         layoutUsers->addWidget( item );
     }
 
-    users->setLayout( layoutUsers );
-    areaTable->setWidget( users );
+    listUsers->setLayout( layoutUsers );
+    areaTable->setWidget( listUsers );
 
     QVBoxLayout * layout = new QVBoxLayout;
     layout->addWidget( areaTable );
@@ -32,5 +32,5 @@ TableUsers::TableUsers( QWidget * parent ) : QWidget( parent )
 
 TableUsers::~TableUsers()
 {
-    delete users;
+    delete listUsers;
 }

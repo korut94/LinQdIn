@@ -10,7 +10,7 @@
 class TableUsers : public QWidget
 {
     private:
-        QWidget * users;
+        QWidget * listUsers;
 
     public:
         TableUsers( QWidget * = NULL );
