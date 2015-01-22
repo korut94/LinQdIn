@@ -1,10 +1,16 @@
 #ifndef LABELTOOLS_H
 #define LABELTOOLS_H
 
-#include <QLabel>
+#include <QHBoxLayout>
+#include <QPushButton>
 
-class LabelTools : public QLabel
+class LabelTools : public QWidget
 {
+    Q_OBJECT
+
+    signals:
+        void search() const;
+
     public:
         LabelTools( QWidget * = NULL );
         ~LabelTools();

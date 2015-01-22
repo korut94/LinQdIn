@@ -1,9 +1,29 @@
 #include "labeltools.h"
 
-LabelTools::LabelTools( QWidget * parent ) : QLabel( "Prova", parent )
+LabelTools::LabelTools( QWidget * parent ) : QWidget( parent )
 {
-    setFrameStyle( QFrame::StyledPanel );
-    setLineWidth( 2 );
+    QPushButton * add = new QPushButton( "Add" );
+    QPushButton * remove = new QPushButton( "Remove" );
+    QPushButton * search = new QPushButton( "Search" );
+
+    QHBoxLayout * layoutModify = new QHBoxLayout;
+    QHBoxLayout * layoutSearch = new QHBoxLayout;
+
+    layoutSearch->setAlignment( Qt::AlignLeft );
+    layoutSearch->addWidget( search );
+
+    layoutModify->setAlignment( Qt::AlignRight );
+    layoutModify->addWidget( add );
+    layoutModify->addWidget( remove );
+
+    QHBoxLayout * layout = new QHBoxLayout;
+    layout->setContentsMargins( 0, 0, 0, 0 );
+    layout->addLayout( layoutSearch );
+    layout->addLayout( layoutModify );
+
+    setLayout( layout );
+
+    connect( search, SIGNAL( clicked() ), this, SIGNAL( search() ) );
 }
 
 
