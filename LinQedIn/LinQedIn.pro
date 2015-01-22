@@ -39,7 +39,8 @@ SOURCES += main.cpp\
     admininterface_controller.cpp \
     useritem.cpp \
     tableusers.cpp \
-    labeltools.cpp
+    labeltools.cpp \
+    usersearch.cpp
 
 HEADERS  += \
     utente.h \
@@ -69,7 +70,8 @@ HEADERS  += \
     admininterface_controller.h \
     useritem.h \
     tableusers.h \
-    labeltools.h
+    labeltools.h \
+    usersearch.h
 
 FORMS    += mainwindow.ui
 
