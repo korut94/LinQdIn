@@ -10,6 +10,9 @@ class SmartClass
 
     protected:
         SmartClass();
+        SmartClass( const SmartClass & ) = default;
+
+        SmartClass & operator=( const SmartClass & ) = default;
 
     public:
         virtual ~SmartClass();
@@ -20,7 +23,7 @@ class SmartClass
                 SmartClass * ptr;
 
             public:
-                smartptr( SmartClass * = NULL );
+                smartptr( SmartClass * = nullptr );
                 smartptr( const smartptr & );
                 ~smartptr();
 

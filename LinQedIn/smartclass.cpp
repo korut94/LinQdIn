@@ -12,19 +12,19 @@ SmartClass::~SmartClass()
 
 SmartClass::smartptr::smartptr( SmartClass * p ) : ptr( p )
 {
-    if( ptr != NULL ) ptr->refCounter++;
+    if( ptr != nullptr ) ptr->refCounter++;
 }
 
 
 SmartClass::smartptr::smartptr( const smartptr & p ) : ptr( p.ptr )
 {
-    if( ptr != NULL ) ptr->refCounter++;
+    if( ptr != nullptr ) ptr->refCounter++;
 }
 
 
 SmartClass::smartptr::~smartptr()
 {
-    if( ptr != NULL )
+    if( ptr != nullptr )
     {
         ptr->refCounter--;
 
@@ -65,9 +65,9 @@ SmartClass::smartptr & SmartClass::smartptr::operator=( const smartptr & p )
 
         ptr = p.ptr;
 
-        if( ptr != NULL ) ptr->refCounter++;
+        if( ptr != nullptr ) ptr->refCounter++;
 
-        if( t != NULL )
+        if( t != nullptr )
         {
             t->refCounter--;
             if( t->refCounter == 0 ) delete t;
