@@ -9,8 +9,6 @@
 
 #include "admininterface.h"
 
-class QHeaderView;
-
 class TabController : public QWidget
 {
     public:
