@@ -1,6 +1,7 @@
 #ifndef ADMININTERFACE_VIEW_H
 #define ADMININTERFACE_VIEW_H
 
+#include <iostream>
 #include <QPushButton>
 #include <QTableWidget>
 #include <QHBoxLayout>
@@ -11,8 +12,19 @@
 
 class AdminInterface_View : public QWidget
 {
+    Q_OBJECT
+
+    private:
+        QScrollArea * utility;
+
+    signals:
+        void requestToSearchUsers() const;
+
+    public slots:
+        void setFrameUtility( QWidget * );
+
     public:
-        AdminInterface_View( QWidget * = NULL );
+        AdminInterface_View( QWidget * = nullptr );
         ~AdminInterface_View();
 };
 
