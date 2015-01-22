@@ -2,7 +2,7 @@
 
 TableUsers::TableUsers( QWidget * parent ) : QWidget( parent )
 {
-    setMaximumWidth( 230 );
+    setMaximumWidth( 300 );
 
     QScrollArea * areaTable = new QScrollArea;
     areaTable->setWidgetResizable( true );
@@ -18,6 +18,7 @@ TableUsers::TableUsers( QWidget * parent ) : QWidget( parent )
 
     QVBoxLayout * layout = new QVBoxLayout;
     layout->addWidget( areaTable );
+    layout->setContentsMargins( 0, 0, 0, 0 );
 
     setLayout( layout );
 }

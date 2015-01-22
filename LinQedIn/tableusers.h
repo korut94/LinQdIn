@@ -14,7 +14,7 @@ class TableUsers : public QWidget
     private:
         QWidget * listUsers;
 
-   public:
+    public:
         TableUsers( QWidget * = NULL );
         ~TableUsers();
 };
