@@ -1,5 +1,6 @@
 #include "checkgroupinput.h"
 
-CheckGroupInput::CheckGroupInput()
+CheckGroupInput::CheckName::check( const QString & name )
 {
+    return name.contains( "[a-zA-Z]" );
 }
