@@ -2,9 +2,9 @@
 
 LabelTools::LabelTools( QWidget * parent ) : QWidget( parent )
 {
-    QPushButton * add = new QPushButton( "Add" );
-    QPushButton * remove = new QPushButton( "Remove" );
-    QPushButton * search = new QPushButton( "Search" );
+    QPushButton * add = new QPushButton( tr( "Add" ) );
+    QPushButton * remove = new QPushButton( tr( "Remove" ) );
+    QPushButton * search = new QPushButton( tr( "Search" ) );
 
     QHBoxLayout * layoutModify = new QHBoxLayout;
     QHBoxLayout * layoutSearch = new QHBoxLayout;
