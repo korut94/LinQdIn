@@ -2,11 +2,11 @@
 #define USERSEARCH_H
 
 #include <iostream>
-#include <QApplication>
 #include <QHBoxLayout>
 #include <QLabel>
 #include <QLineEdit>
 #include <QPushButton>
+#include <QScrollArea>
 #include <QWidget>
 
 #include "info.h"
@@ -20,7 +20,7 @@ class UserSearch : public QWidget
     signals:
         void searchUser( const Info & );
 
-    public slots:
+    private slots:
         void recapInfo();
 
     public:
