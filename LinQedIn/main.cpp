@@ -1,5 +1,7 @@
 #include <iostream>
 #include <QApplication>
+#include <QWidget>
+
 
 #include "mainwindow.h"
 
