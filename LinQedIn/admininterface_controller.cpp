@@ -20,7 +20,7 @@ void AdminInterface_Controller::setSearchWindow()
     UserSearch * searchUser = new UserSearch();
 
     connect( searchUser,
-             SIGNAL( sendUnkownUswe( const Info & ) ),
+             SIGNAL( searchUser( const Info & ) ),
              this,
              SLOT( test( const Info & ) ) );
 

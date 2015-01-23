@@ -3,7 +3,9 @@
 void UserSearch::recapInfo()
 {
     Info info( editName->text(), "Mantovani", "", "" );
-    emit sendUnknownUser( info );
+    std::cout << info.getNome().toStdString() << std::endl;
+
+    emit searchUser( info );
 }
 
 
@@ -22,7 +24,7 @@ UserSearch::UserSearch( QWidget * parent ) : QWidget( parent )
 
     setLayout( layout );
 
-    connect( btm, SIGNAL( clicked() ), this, SLOT( searchUser() ) );
+    connect( btm, SIGNAL( clicked() ), this, SLOT( recapInfo() ) );
 }
 
 

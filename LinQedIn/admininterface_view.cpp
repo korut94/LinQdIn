@@ -1,6 +1,6 @@
 #include "admininterface_view.h"
 
-void AdminInterface_View::setFrameUtility( UtilityFrame * window )
+void AdminInterface_View::setFrameUtility( QWidget * window )
 {
     utility->setWidget( window );
 

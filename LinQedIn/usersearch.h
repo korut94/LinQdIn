@@ -1,6 +1,8 @@
 #ifndef USERSEARCH_H
 #define USERSEARCH_H
 
+#include <iostream>
+#include <QApplication>
 #include <QHBoxLayout>
 #include <QLabel>
 #include <QLineEdit>
@@ -11,12 +13,14 @@
 
 class UserSearch : public QWidget
 {
+    Q_OBJECT
+
     QLineEdit * editName;
 
     signals:
-        void sendUnknownUser( const Info & );
+        void searchUser( const Info & );
 
-    private slots:
+    public slots:
         void recapInfo();
 
     public:
