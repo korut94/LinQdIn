@@ -17,8 +17,22 @@ void AdminInterface_Controller::connetti() const
 
 void AdminInterface_Controller::setSearchWindow()
 {
-    emit display( new QPushButton( "Premi" ) );
+    UserSearch * searchUser = new UserSearch();
+
+    connect( searchUser,
+             SIGNAL( sendUnkownUswe( const Info & ) ),
+             this,
+             SLOT( test( const Info & ) ) );
+
+    emit display( searchUser );
 }
+
+
+void AdminInterface_Controller::test( const Info & info ) const
+{
+    std::cout << info.getNome().toStdString() << std::endl;
+}
+
 
 
 AdminInterface_Controller::AdminInterface_Controller()

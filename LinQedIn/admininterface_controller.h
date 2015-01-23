@@ -6,6 +6,8 @@
 
 #include "admininterface_model.h"
 #include "admininterface_view.h"
+#include "info.h"
+#include "usersearch.h"
 
 class AdminInterface_Controller : public QObject
 {
@@ -22,6 +24,7 @@ class AdminInterface_Controller : public QObject
 
     public slots:
         void setSearchWindow();
+        void test( const Info & ) const;
 
     public:
         AdminInterface_Controller();
