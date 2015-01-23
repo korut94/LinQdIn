@@ -22,7 +22,7 @@ class AdminInterface_View : public QWidget
         void requestToSearchUsers() const;
 
     public slots:
-        void setFrameUtility( UtilityFrame * );
+        void setFrameUtility( QWidget * );
 
     public:
         AdminInterface_View( QWidget * = nullptr );
