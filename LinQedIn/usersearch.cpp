@@ -3,7 +3,6 @@
 void UserSearch::recapInfo()
 {
     Info info( editName->text(), "Mantovani", "", "" );
-    std::cout << info.getNome().toStdString() << std::endl;
 
     emit searchUser( info );
 }
@@ -11,9 +10,9 @@ void UserSearch::recapInfo()
 
 UserSearch::UserSearch( QWidget * parent ) : QWidget( parent )
 {
-    QLabel * lblName = new QLabel( tr( "Name" ) );
-    QLineEdit * editName = new QLineEdit();
-    QPushButton * btm = new QPushButton();
+    QLabel * lblName = new QLabel( "Name" );
+    editName = new QLineEdit();
+    QPushButton * btm = new QPushButton( "Push" );
 
     QHBoxLayout * layoutName = new QHBoxLayout;
     layoutName->addWidget( lblName );
@@ -21,6 +20,7 @@ UserSearch::UserSearch( QWidget * parent ) : QWidget( parent )
     layoutName->addWidget( btm );
 
     QVBoxLayout * layout = new QVBoxLayout;
+    layout->addLayout( layoutName );
 
     setLayout( layout );
 
