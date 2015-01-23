@@ -3,8 +3,6 @@
 void AdminInterface_View::setFrameUtility( QWidget * window )
 {
     utility->setWidget( window );
-
-    //Bisogna fare downcasting??
 }
 
 

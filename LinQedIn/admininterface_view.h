@@ -9,6 +9,7 @@
 
 #include "labeltools.h"
 #include "tableusers.h"
+#include "usersearch.h"
 
 class AdminInterface_View : public QWidget
 {
@@ -18,7 +19,7 @@ class AdminInterface_View : public QWidget
         QScrollArea * utility;
 
     signals:
-        void requestToSearchUsers() const;
+        void requestToSearchUsers();
 
     public slots:
         void setFrameUtility( QWidget * );
