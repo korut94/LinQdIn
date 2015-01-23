@@ -9,6 +9,7 @@
 
 #include "labeltools.h"
 #include "tableusers.h"
+#include "utilityframe.h"
 
 class AdminInterface_View : public QWidget
 {
@@ -21,7 +22,7 @@ class AdminInterface_View : public QWidget
         void requestToSearchUsers() const;
 
     public slots:
-        void setFrameUtility( QWidget * );
+        void setFrameUtility( UtilityFrame * );
 
     public:
         AdminInterface_View( QWidget * = nullptr );

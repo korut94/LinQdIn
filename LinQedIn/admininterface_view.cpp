@@ -1,8 +1,10 @@
 #include "admininterface_view.h"
 
-void AdminInterface_View::setFrameUtility( QWidget * window )
+void AdminInterface_View::setFrameUtility( UtilityFrame * window )
 {
     utility->setWidget( window );
+
+    //Bisogna fare downcasting??
 }
 
 
