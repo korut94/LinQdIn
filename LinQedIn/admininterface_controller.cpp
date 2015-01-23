@@ -17,14 +17,14 @@ void AdminInterface_Controller::connetti() const
 
 void AdminInterface_Controller::setSearchWindow()
 {
-    UserSearch * searchUser = new UserSearch();
+    UserSearch * search = new UserSearch();
 
-    connect( searchUser,
+    connect( search,
              SIGNAL( searchUser( const Info & ) ),
              this,
              SLOT( test( const Info & ) ) );
 
-    emit display( searchUser );
+    emit display( search );
 }
 
 
@@ -32,7 +32,6 @@ void AdminInterface_Controller::test( const Info & info ) const
 {
     std::cout << info.getNome().toStdString() << std::endl;
 }
-
 
 
 AdminInterface_Controller::AdminInterface_Controller()
