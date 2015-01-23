@@ -9,7 +9,6 @@
 
 #include "labeltools.h"
 #include "tableusers.h"
-#include "utilityframe.h"
 
 class AdminInterface_View : public QWidget
 {
