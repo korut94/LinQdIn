@@ -10,6 +10,8 @@ AdminInterface_View::AdminInterface_View( QWidget * parent )
                                           : QWidget( parent ),
                                             utility( new QScrollArea() )
 {
+    utility->setWidgetResizable( true );
+
     LabelTools * tools = new LabelTools();
     TableUsers * table = new TableUsers();
 
