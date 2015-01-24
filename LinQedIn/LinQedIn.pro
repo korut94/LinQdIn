@@ -43,7 +43,9 @@ SOURCES += main.cpp\
     labeltools.cpp \
     usersearch.cpp \
     lineeditvalidate.cpp \
-    userinterface_view.cpp
+    userinterface_view.cpp \
+    userinterface_model.cpp \
+    userinterface_controller.cpp
 
 HEADERS  += \
     utente.h \
@@ -76,7 +78,9 @@ HEADERS  += \
     labeltools.h \
     usersearch.h \
     lineeditvalidate.h \
-    userinterface_view.h
+    userinterface_view.h \
+    userinterface_model.h \
+    userinterface_controller.h
 
 FORMS    += mainwindow.ui
 
