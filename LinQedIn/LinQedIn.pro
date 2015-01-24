@@ -42,8 +42,7 @@ SOURCES += main.cpp\
     tableusers.cpp \
     labeltools.cpp \
     usersearch.cpp \
-    marklineeditvalidate.cpp \
-    checkgroupinput.cpp
+    lineeditvalidate.cpp
 
 HEADERS  += \
     utente.h \
@@ -75,8 +74,7 @@ HEADERS  += \
     tableusers.h \
     labeltools.h \
     usersearch.h \
-    marklineeditvalidate.h \
-    checkgroupinput.h
+    lineeditvalidate.h
 
 FORMS    += mainwindow.ui
 
