@@ -11,7 +11,7 @@ class Link : public QWidget
 {
     public:
         Link( const QString &,
-              const QString & = "",
+              const QString & = QString(),
               QWidget * = NULL );
         ~Link();
 };
