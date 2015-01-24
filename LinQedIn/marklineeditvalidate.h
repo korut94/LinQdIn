@@ -2,23 +2,18 @@
 #define MARKLINEEDITVALIDATE_H
 
 #include <QLabel>
-#include <QLineEdit>
-#include <QValidator>
 
-#include "checkgroupinput.h"
+#include "lineeditvalidate.h"
 
-class MarkLineEditValidate : public QLabel,
-                             public QLineEdit,
-                             public QValidator
+class MarkLineEditValidate : public QWidget
 {
     public:
-        MarkLineEditValidate( const CheckGroupInput::CheckInput & );
+        MarkLineEditValidate( const QRegExp &,
+                              const QString & = QString(),
+                              const QString & = QString(),
+                              QWidget * = nullptr );
 
-        MarkLineEditValidate( const QString &,
-                              const CheckGroupInput::CheckInput & );
-
-        MarkLineEditValidate( const QString &, const QString &,
-                              const CheckGroupInput::CheckInput & );
+        ~MarkLineEditValidate();
 };
 
 #endif // MARKLINEEDITVALIDATE_H
