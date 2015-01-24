@@ -10,12 +10,19 @@
 #include <QWidget>
 
 #include "info.h"
+#include "lineeditvalidate.h"
 
 class UserSearch : public QWidget
 {
     Q_OBJECT
 
-    QLineEdit * editName;
+    LineEditValidate * editName;
+    LineEditValidate * editSurname;
+    LineEditValidate * editPrefixNumber;
+    LineEditValidate * editNumber;
+    LineEditValidate * editData_Day;
+    LineEditValidate * editData_Month;
+    LineEditValidate * editData_Year;
 
     signals:
         void searchUser( const Info & );
