@@ -2,7 +2,7 @@
 
 MainWindow_View::MainWindow_View( QWidget * parent ) : QWidget( parent )
 {
-    setMinimumSize( 800, 600 );
+    setMinimumSize( 800, 480 );
 
     QGroupBox * box = new QGroupBox( "LinQedIn Manager" );
 

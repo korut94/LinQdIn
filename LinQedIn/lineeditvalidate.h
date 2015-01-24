@@ -2,8 +2,7 @@
 #define LINEEDITVALIDATE_H
 
 #include <QLineEdit>
-
-#include "checkgroupinput.h"
+#include <QValidator>
 
 class LineEditValidate : public QLineEdit,
                          public QRegExpValidator
