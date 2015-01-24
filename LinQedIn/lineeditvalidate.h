@@ -5,8 +5,8 @@
 
 #include "checkgroupinput.h"
 
-class LineEditValidate : virtual public QLineEdit,
-                         virtual public QRegExpValidator
+class LineEditValidate : public QLineEdit,
+                         public QRegExpValidator
 {
     public:
         LineEditValidate( const QRegExp &,

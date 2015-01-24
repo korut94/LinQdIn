@@ -10,9 +10,10 @@ LineEditValidate::LineEditValidate( const QRegExp & reg,
 }
 
 
-State LineEditValidate::check() const
+QValidator::State LineEditValidate::check() const
 {
     QString input = QLineEdit::text();
+    int length = input.length();
 
-    return QRegExpValidator::validate( input, input.length()  );
+    return QRegExpValidator::validate( input, length );
 }
