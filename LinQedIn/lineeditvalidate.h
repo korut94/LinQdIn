@@ -4,15 +4,17 @@
 #include <QLineEdit>
 #include <QValidator>
 
-class LineEditValidate : public QLineEdit,
-                         public QRegExpValidator
+class LineEditValidate : public QLineEdit
 {
+    private:
+        QRegExpValidator validator;
+
     public:
         LineEditValidate( const QRegExp &,
                           const QString & = QString(),
                           QWidget * = nullptr );
 
-        State check() const;
+        QValidator::State check() const;
 };
 
 #endif // LINEEDITVALIDATE_H
