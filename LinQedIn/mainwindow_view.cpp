@@ -22,6 +22,7 @@ MainWindow_View::MainWindow_View( QWidget * parent ) : QWidget( parent )
     setLayout( layout );
 }
 
+
 MainWindow_View::~MainWindow_View()
 {
     delete tabInterface;
