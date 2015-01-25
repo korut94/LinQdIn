@@ -5,10 +5,22 @@
 #include <QVBoxLayout>
 #include <QWidget>
 
+enum LevelAccess
+{
+    I,
+    Basic,
+    Business,
+    Executive,
+    Master
+};
+
 class UserInterface_View : public QWidget
 {
+    private:
+        LevelAccess level;
+
     public:
-        UserInterface_View( QWidget * = nullptr );
+        UserInterface_View( LevelAccess = I, QWidget * = nullptr );
         ~UserInterface_View();
 };
 
