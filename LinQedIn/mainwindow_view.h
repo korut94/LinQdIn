@@ -10,9 +10,14 @@
 
 class MainWindow_View : public QWidget
 {
+    private:
+        QTabWidget * tabInterface;
+
     public:
         MainWindow_View( QWidget * = NULL );
         ~MainWindow_View();
+
+        void addInterface( QWidget *, const QString & );
 };
 
 #endif // MAINWINDOW_VIEW_H

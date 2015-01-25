@@ -6,14 +6,13 @@ MainWindow_View::MainWindow_View( QWidget * parent ) : QWidget( parent )
 
     QGroupBox * box = new QGroupBox( "LinQedIn Manager" );
 
-    AdminInterface_Controller * admin = new AdminInterface_Controller();
+    //AdminInterface_Controller * admin = new AdminInterface_Controller();
 
-    QPushButton * btm2 = new QPushButton( "Push" );
-
-    QTabWidget * tabInterface = new QTabWidget();
+    tabInterface = new QTabWidget();
+    /*
     tabInterface->addTab( admin->getView(), "Administrator" );
     tabInterface->addTab( btm2, "User" );
-
+    */
     QVBoxLayout * layoutBox = new QVBoxLayout;
     layoutBox->addWidget( tabInterface );
 
@@ -30,4 +29,12 @@ MainWindow_View::MainWindow_View( QWidget * parent ) : QWidget( parent )
 
 MainWindow_View::~MainWindow_View()
 {
+    delete tabInterface;
+}
+
+
+void MainWindow_View::addInterface( QWidget * interface,
+                                    const QString & name )
+{
+    tabInterface->addTab( interface, name );
 }
