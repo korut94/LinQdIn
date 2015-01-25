@@ -1,10 +1,28 @@
 #ifndef USERINTERFACE_CONTROLLER_H
 #define USERINTERFACE_CONTROLLER_H
 
-class UserInterface_Controller
+#include <QObject>
+
+#include "userinterface_model.h"
+#include "userinterface_view.h"
+
+class UserInterface_Controller : public QObject
 {
-public:
-    UserInterface_Controller();
+    Q_OBJECT
+
+    private:
+        UserInterface_Model * model;
+        UserInterface_View * view;
+
+    public:
+        /*
+         * Inserita keywork inline per risolvere errore di
+         * undefined reference to vtable
+         */
+        inline UserInterface_Controller();
+        inline ~UserInterface_Controller();
+
+        UserInterface_View * getView() const;
 };
 
 #endif // USERINTERFACE_CONTROLLER_H

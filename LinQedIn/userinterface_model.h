@@ -3,8 +3,8 @@
 
 class UserInterface_Model
 {
-public:
-    UserInterface_Model();
+    public:
+        UserInterface_Model();
 };
 
 #endif // USERINTERFACE_MODEL_H
