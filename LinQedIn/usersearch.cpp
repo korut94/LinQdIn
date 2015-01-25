@@ -10,21 +10,18 @@ void UserSearch::recapInfo()
 
 UserSearch::UserSearch( QWidget * parent ) : QWidget( parent )
 {
-    QLabel * lblName = new QLabel( tr( "Name" ) + ':' );
     editName = new LineEditValidate( QRegExp( "[a-zA-Z]" ) );
 
-    QLabel * lblSurname = new QLabel( tr( "Surname" ) + ':' );
     editSurname = new LineEditValidate( QRegExp( "[A-Za-z]" ) );
 
-    QLabel * lblTelephone = new QLabel( tr( "Number" ) + ':' );
     editPrefixNumber = new LineEditValidate( QRegExp( "+[0-9]{1,4}" ) );
     editPrefixNumber->setFixedWidth( 40 );
     editPrefixNumber->setMaxLength( 5 );
     editNumber = new LineEditValidate( QRegExp( "[0-9]*-[0-9]*" ) );
 
-    QLabel * lblData = new QLabel( tr( "Data" ) + ':' );
     QLabel * slash[2] = { new QLabel( QString( '/' ) ),
                           new QLabel( QString( '/' ) ) };
+
     editData_Day = new LineEditValidate( QRegExp( "[1-3]{0,1}[1-9]" ) );
     editData_Day->setAlignment( Qt::AlignRight );
     editData_Day->setMaxLength( 2 );
@@ -46,23 +43,17 @@ UserSearch::UserSearch( QWidget * parent ) : QWidget( parent )
     line->setFrameStyle( QFrame::HLine | QFrame::Plain );
     line->setLineWidth( 1 );
 
-    QVBoxLayout * layoutLabel = new QVBoxLayout;
-    layoutLabel->addWidget( lblName );
-    layoutLabel->addWidget( lblSurname );
-    layoutLabel->addWidget( lblTelephone );
-    layoutLabel->addWidget( lblData );
+    QFormLayout * layoutForm = new QFormLayout;
+    layoutForm->setHorizontalSpacing( 100 );
 
-
-    QVBoxLayout * layoutInput = new QVBoxLayout;
-    layoutInput->setAlignment( Qt::AlignLeft );
-    layoutInput->addWidget( editName );
-    layoutInput->addWidget( editSurname );
+    layoutForm->addRow( tr( "Name" ) + ':', editName );
+    layoutForm->addRow( tr( "Surname" ) + ':', editSurname );
 
     QHBoxLayout * layoutNumber = new QHBoxLayout;
     layoutNumber->addWidget( editPrefixNumber );
     layoutNumber->addWidget( editNumber );
 
-    layoutInput->addLayout( layoutNumber );
+    layoutForm->addRow( tr( "Number" ) + ':', layoutNumber );
 
     QHBoxLayout * layoutData = new QHBoxLayout;
     layoutData->addWidget( editData_Day );
@@ -71,16 +62,11 @@ UserSearch::UserSearch( QWidget * parent ) : QWidget( parent )
     layoutData->addWidget( slash[1] );
     layoutData->addWidget( editData_Year );
 
-    layoutInput->addLayout( layoutData );
-
-    QHBoxLayout * layoutForm = new QHBoxLayout;
-    layoutForm->setAlignment( Qt::AlignTop );
-    layoutForm->addLayout( layoutLabel );
-    layoutForm->addLayout( layoutInput );
+    layoutForm->addRow( tr( "Data" ) + ':', layoutData );
 
 
     QWidget * container = new QWidget();
-    container->setMaximumWidth( 400 );
+    container->setMaximumWidth( 500 );
     container->setLayout( layoutForm );
 
     areaForm->setWidget( container );

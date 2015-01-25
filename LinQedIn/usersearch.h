@@ -2,7 +2,7 @@
 #define USERSEARCH_H
 
 #include <iostream>
-#include <QHBoxLayout>
+#include <QFormLayout>
 #include <QLabel>
 #include <QLineEdit>
 #include <QPushButton>
