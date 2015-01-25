@@ -7,6 +7,13 @@ MainWindow_Model::MainWindow_Model()
 }
 
 
+MainWindow_Model::~MainWindow_Model()
+{
+    delete admin;
+    delete user;
+}
+
+
 AdminInterface_View * MainWindow_Model::getViewAdmin() const
 {
     return admin->getView();
