@@ -27,6 +27,11 @@ AdminInterface_View::AdminInterface_View( QWidget * parent )
     setLayout( layout );
 
     connect( tools,
+             SIGNAL( add() ),
+             this,
+             SIGNAL( requestToAddUser() ) );
+
+    connect( tools,
              SIGNAL( search() ),
              this,
              SIGNAL( requestToSearchUsers() ) );

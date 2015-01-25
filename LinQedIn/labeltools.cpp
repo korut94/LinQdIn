@@ -23,6 +23,7 @@ LabelTools::LabelTools( QWidget * parent ) : QWidget( parent )
 
     setLayout( layout );
 
+    connect( add, SIGNAL( clicked() ), this, SIGNAL( add() ) );
     connect( search, SIGNAL( clicked() ), this, SIGNAL( search() ) );
 }
 

@@ -8,10 +8,23 @@ void AdminInterface_Controller::connetti() const
                       this,
                       SLOT( setSearchWindow() ) );
 
+    QObject::connect( view,
+                      SIGNAL( requestToAddUser() ),
+                      this,
+                      SLOT( setInsertWindow() ) );
+
     QObject::connect( this,
                       SIGNAL( display( QWidget * ) ),
                       view,
                       SLOT( setFrameUtility( QWidget * ) ) );
+}
+
+
+void AdminInterface_Controller::setInsertWindow()
+{
+    UserInterface_View * insert = new UserInterface_View();
+
+    emit display( insert );
 }
 
 
@@ -31,15 +44,6 @@ void AdminInterface_Controller::setSearchWindow()
 void AdminInterface_Controller::test( const Info & info ) const
 {
     std::cout << info.getNome().toStdString() << std::endl;
-}
-
-
-AdminInterface_Controller::AdminInterface_Controller()
-{
-    model = new AdminInterface_Model();
-    view = new AdminInterface_View();
-
-    connetti();
 }
 
 

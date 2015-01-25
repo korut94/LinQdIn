@@ -7,6 +7,7 @@
 #include "admininterface_model.h"
 #include "admininterface_view.h"
 #include "info.h"
+#include "userinterface_view.h"
 #include "usersearch.h"
 
 class AdminInterface_Controller : public QObject
@@ -23,13 +24,15 @@ class AdminInterface_Controller : public QObject
         void display( QWidget * );
 
     public slots:
+        void setInsertWindow();
         void setSearchWindow();
         void test( const Info & ) const;
 
     public:
-        AdminInterface_Controller();
-        AdminInterface_Controller( AdminInterface_Model *,
-                                   AdminInterface_View * );
+        AdminInterface_Controller( AdminInterface_Model * =
+                                        new AdminInterface_Model,
+                                   AdminInterface_View * =
+                                        new AdminInterface_View );
         ~AdminInterface_Controller();
 
         AdminInterface_View * getView() const;

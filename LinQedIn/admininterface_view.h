@@ -20,6 +20,7 @@ class AdminInterface_View : public QWidget
 
     signals:
         void requestToSearchUsers();
+        void requestToAddUser();
 
     public slots:
         void setFrameUtility( QWidget * );
