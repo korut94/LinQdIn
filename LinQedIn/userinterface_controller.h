@@ -15,12 +15,8 @@ class UserInterface_Controller : public QObject
         UserInterface_View * view;
 
     public:
-        /*
-         * Inserita keywork inline per risolvere errore di
-         * undefined reference to vtable
-         */
-        inline UserInterface_Controller();
-        inline ~UserInterface_Controller();
+        UserInterface_Controller();
+        ~UserInterface_Controller();
 
         UserInterface_View * getView() const;
 };
