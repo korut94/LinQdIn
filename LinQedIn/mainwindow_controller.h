@@ -11,7 +11,8 @@ class MainWindow_Controller
         MainWindow_View * view;
 
     public:
-        MainWindow_Controller( MainWindow_Model *, MainWindow_View * );
+        MainWindow_Controller( MainWindow_Model * = new MainWindow_Model,
+                               MainWindow_View * = new MainWindow_View );
         ~MainWindow_Controller();
 };
 

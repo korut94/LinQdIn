@@ -2,8 +2,7 @@
 
 MainWindow::MainWindow()
 {
-    controller = new MainWindow_Controller( new MainWindow_Model(),
-                                            new MainWindow_View() );
+    controller = new MainWindow_Controller();
 }
 
 
