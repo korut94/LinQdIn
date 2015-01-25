@@ -2,11 +2,11 @@
 #define MAINWINDOW_VIEW_H
 
 #include <QGroupBox>
+#include <QTabWidget>
 #include <QVBoxLayout>
 #include <QWidget>
 
 #include "riconoscimenti.h"
-#include "tabcontroller.h"
 
 class MainWindow_View : public QWidget
 {
