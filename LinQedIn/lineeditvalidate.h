@@ -4,6 +4,10 @@
 #include <QLineEdit>
 #include <QValidator>
 
+/*
+ * Non e' possibile usare l'ereditarieta multipla con QLineEdit e
+ * QRegExpValidator perchè QObject non la supporta
+ */
 class LineEditValidate : public QLineEdit
 {
     private:
