@@ -6,13 +6,8 @@ MainWindow_View::MainWindow_View( QWidget * parent ) : QWidget( parent )
 
     QGroupBox * box = new QGroupBox( "LinQedIn Manager" );
 
-    //AdminInterface_Controller * admin = new AdminInterface_Controller();
-
     tabInterface = new QTabWidget();
-    /*
-    tabInterface->addTab( admin->getView(), "Administrator" );
-    tabInterface->addTab( btm2, "User" );
-    */
+
     QVBoxLayout * layoutBox = new QVBoxLayout;
     layoutBox->addWidget( tabInterface );
 
