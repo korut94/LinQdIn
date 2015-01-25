@@ -12,6 +12,9 @@ class MainWindow_Model
 
     public:
         MainWindow_Model();
+
+        AdminInterface_View * getViewAdmin() const;
+        UserInterface_View * getViewUser() const;
 };
 
 #endif // MAINWINDOW_MODEL_H

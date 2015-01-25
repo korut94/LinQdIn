@@ -5,6 +5,9 @@ MainWindow_Controller::MainWindow_Controller( MainWindow_Model * m,
                                               : model( m ),
                                                 view( v )
 {
+    view->addInterface( model->getViewAdmin(), "Administrator" );
+    view->addInterface( model->getViewUser(), "User" );
+
     view->show();
 }
 
