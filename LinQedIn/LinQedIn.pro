@@ -86,4 +86,5 @@ OTHER_FILES += \
     User_40x30.png \
     User_48x36.png \
     User_90x80.png \
-    User_100x100.png
+    User_100x100.png \
+    User_150x114.png
