@@ -2,6 +2,7 @@
 #define USERINTERFACE_VIEW_H
 
 #include <iostream>
+#include <QComboBox>
 #include <QFormLayout>
 #include <QLabel>
 #include <QLineEdit>
@@ -10,6 +11,8 @@
 #include <QScrollArea>
 #include <QVBoxLayout>
 #include <QWidget>
+
+#include "listaqualifiche.h"
 
 enum LevelAccess
 {
@@ -24,36 +27,29 @@ enum LevelAccess
 class UserInterface_View : public QWidget
 {
     private:
-        class ViewExperience : public QWidget
+        class BoardFriends : public QWidget
         {
-            private:
-
-            public:
 
         };
 
-        class ID: public QWidget
+        class ID : public QWidget
         {
-            private:
-                QStackedWidget * name;
-                QStackedWidget * surname;
-                QStackedWidget * telephone;
-                QStackedWidget * data;
-                QStackedWidget * job;
-
             public:
-                ID( LevelAccess, QWidget * = nullptr );
+                ID( const LevelAccess &, QWidget * = nullptr );
                 ~ID();
+        };
+
+        class ViewExperience : public QWidget
+        {
+            public:
+                ViewExperience( const LevelAccess &, QWidget * = nullptr );
+                ~ViewExperience();
         };
 
         class Top : public QWidget
         {
-            private:
-                QStackedWidget * username;
-                QStackedWidget * typeAccount;
-
             public:
-                Top( LevelAccess, QWidget * = nullptr );
+                Top( const LevelAccess &, QWidget * = nullptr );
                 ~Top();
         };
 

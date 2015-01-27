@@ -1,43 +1,26 @@
 #include "userinterface_view.h"
 
-UserInterface_View::ID::ID( LevelAccess level, QWidget * parent )
-                            : QWidget( parent ),
-                              name( new QStackedWidget ),
-                              surname( new QStackedWidget ),
-                              telephone( new QStackedWidget ),
-                              data( new QStackedWidget ),
-                              job( new QStackedWidget )
+UserInterface_View::ID::ID( const LevelAccess & level, QWidget * parent )
+                            : QWidget( parent )
 {
     QPixmap image( "../LinQedIn/User_150x114.png" );
 
     QLabel * lblImage = new QLabel();
     lblImage->setPixmap( image );
 
-    name->addWidget( new QLabel( "Andrea" ) );
-    name->addWidget( new QLineEdit( "Andrea" ) );
-    surname->addWidget( new QLabel( "Mantovani" ) );
-    surname->addWidget( new QLineEdit( "Mantovani" ) );
-    telephone->addWidget( new QLabel( "3406936174" ) );
-    telephone->addWidget( new QLineEdit( "3406936174" ) );
-    data->addWidget( new QLabel( "17/09/1994" ) );
-    data->addWidget( new QLineEdit( "17/09/1994" ) );
-    job->addWidget( new QLabel( "Student" ) );
-    job->addWidget( new QLineEdit( "Student" ) );
+    QLabel * lblFullname = new QLabel( "Andrea Mantovani" );
+    QLabel * lblTelephone = new QLabel( tr( "Telephone" ) +
+                                        ':' +
+                                        "3406936174" );
+    QLabel * lblData = new QLabel( tr( "Data" ) + ':' + "17/09/1994" );
+    QLabel * lblJob = new QLabel( tr( "Job" ) + ':' + "Student" );
 
-    QHBoxLayout * layoutFullName = new QHBoxLayout;
-    layoutFullName->addWidget( name );
-    layoutFullName->addWidget( surname );
-
-    telephone->setCurrentIndex( 1 );
-
-    QFormLayout * layoutInfo = new QFormLayout;
-    layoutInfo->addRow( tr( "Telephone" ) + ':', telephone );
-    layoutInfo->addRow( tr( "Data" ) + ':', data );
-    layoutInfo->addRow( tr( "Job" ) + ':', job );
 
     QVBoxLayout * layoutDati = new QVBoxLayout;
-    layoutDati->addLayout( layoutFullName );
-    layoutDati->addLayout( layoutInfo );
+    layoutDati->addWidget( lblFullname );
+    layoutDati->addWidget( lblTelephone );
+    layoutDati->addWidget( lblData );
+    layoutDati->addWidget( lblJob );
 
     QHBoxLayout * layout = new QHBoxLayout;
     layout->addWidget( lblImage );
@@ -49,45 +32,60 @@ UserInterface_View::ID::ID( LevelAccess level, QWidget * parent )
 
 UserInterface_View::ID::~ID()
 {
-    delete name;
-    delete surname;
-    delete telephone;
-    delete data;
-    delete job;
 }
 
 
-UserInterface_View::Top::Top( LevelAccess level, QWidget * parent )
-                              : QWidget( parent ),
-                                username( new QStackedWidget ),
-                                typeAccount( new QStackedWidget )
-
+UserInterface_View::ViewExperience::ViewExperience( const LevelAccess & level,
+                                                    QWidget * parent )
+                                                    : QWidget( parent )
 {
-    QLabel * lblUser = new QLabel( tr( "Username" ) + ':' );
-    username->addWidget( new QLabel( "Username" ) );
-    username->addWidget( new QLineEdit( "Username" ) );
+    QLabel * lblExperience = new QLabel( tr( "Experience" ) );
+    QLabel * lblSkills = new QLabel( tr( "Skills" ) );
+    QLabel * lblEducation = new QLabel( tr( "Education" ) );
 
-    QLabel * lblAccount = new QLabel( tr( "Account" ) + ':' );
-    typeAccount->addWidget( new QLabel( "Type account" ) );
-    typeAccount->addWidget( new QLabel( "Type account" ) );
+    QLabel * line = new QLabel();
+    line->setFrameStyle( QFrame::HLine | QFrame::Plain );
+    line->setLineWidth( 1 );
 
-    QPushButton * btmFriend = new QPushButton( tr( "Add coworker" ) );
-
-    QHBoxLayout * layout = new QHBoxLayout;
-    layout->addWidget( lblUser );
-    layout->addWidget( username );
-    layout->addWidget( lblAccount );
-    layout->addWidget( typeAccount );
-    layout->addWidget( btmFriend );
+    QVBoxLayout * layout = new QVBoxLayout;
+    layout->addWidget( lblExperience );
+    //ciclo for
+    layout->addWidget( line );
+    layout->addWidget( lblSkills );
+    //ciclo for
+    layout->addWidget( new QLabel( line ) );
+    layout->addWidget( lblEducation );
+    //ciclo for
 
     setLayout( layout );
 }
 
 
+UserInterface_View::ViewExperience::~ViewExperience()
+{
+}
+
+
+UserInterface_View::Top::Top( const LevelAccess & level, QWidget * parent )
+                              : QWidget( parent )
+
+{
+    QLabel * lblUser = new QLabel( tr( "Username" ) + ": korut94" );
+    QLabel * lblAccount = new QLabel( tr( "Account" ) + ": Mega master" );
+
+    QPushButton * btmFriend = new QPushButton( tr( "Add coworker" ) );
+
+    QHBoxLayout * layout = new QHBoxLayout;
+    layout->addWidget( lblUser );
+    layout->addWidget( lblAccount );
+    layout->addWidget( btmFriend );
+
+    setLayout( layout );    
+}
+
+
 UserInterface_View::Top::~Top()
 {
-    delete username;
-    delete typeAccount;
 }
 
 
@@ -99,11 +97,13 @@ UserInterface_View::UserInterface_View( LevelAccess l, QWidget * parent )
 
     Top * top = new Top( l );
     ID * id = new ID( l );
+    ViewExperience * exp = new ViewExperience( l );
 
     QVBoxLayout * layoutUserData = new QVBoxLayout;
     layoutUserData->setAlignment( Qt::AlignTop );
     layoutUserData->addWidget( top );
     layoutUserData->addWidget( id );
+    layoutUserData->addWidget( exp );
 
     QHBoxLayout * layoutInterface = new QHBoxLayout;
     layoutInterface->addLayout( layoutUserData );
@@ -111,7 +111,6 @@ UserInterface_View::UserInterface_View( LevelAccess l, QWidget * parent )
     area->setLayout( layoutInterface );
 
     QVBoxLayout * layout = new QVBoxLayout;
-    area->setWidgetResizable( true );
     layout->addWidget( area );
 
     setLayout( layout );
