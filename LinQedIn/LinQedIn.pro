@@ -36,14 +36,14 @@ SOURCES += main.cpp\
     admininterface_model.cpp \
     admininterface_view.cpp \
     admininterface_controller.cpp \
-    useritem.cpp \
     tableusers.cpp \
     labeltools.cpp \
     usersearch.cpp \
     lineeditvalidate.cpp \
     userinterface_view.cpp \
     userinterface_model.cpp \
-    userinterface_controller.cpp
+    userinterface_controller.cpp \
+    listaqualifiche.cpp
 
 HEADERS  += \
     utente.h \
@@ -69,14 +69,14 @@ HEADERS  += \
     admininterface_model.h \
     admininterface_view.h \
     admininterface_controller.h \
-    useritem.h \
     tableusers.h \
     labeltools.h \
     usersearch.h \
     lineeditvalidate.h \
     userinterface_view.h \
     userinterface_model.h \
-    userinterface_controller.h
+    userinterface_controller.h \
+    listaqualifiche.h
 
 FORMS    += mainwindow.ui
 
