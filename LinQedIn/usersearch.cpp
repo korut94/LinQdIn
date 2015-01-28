@@ -19,7 +19,8 @@ UserSearch::UserSearch( QWidget * parent ) : QWidget( parent )
     editPrefixNumber->setMaxLength( 5 );
     editNumber = new LineEditValidate( QRegExp( "[0-9]*-[0-9]*" ) );
 
-    QLabel * slash = new QLabel( "/" );
+    QLabel * slash[2] = { new QLabel( QString( '/' ) ),
+                          new QLabel( QString( '/' ) ) };
 
     editData_Day = new LineEditValidate( QRegExp( "[1-3]{0,1}[1-9]" ) );
     editData_Day->setAlignment( Qt::AlignRight );
@@ -56,9 +57,9 @@ UserSearch::UserSearch( QWidget * parent ) : QWidget( parent )
 
     QHBoxLayout * layoutData = new QHBoxLayout;
     layoutData->addWidget( editData_Day );
-    layoutData->addWidget( slash );
+    layoutData->addWidget( slash[0] );
     layoutData->addWidget( editData_Month );
-    layoutData->addWidget( new QLabel( slash ) );
+    layoutData->addWidget( slash[1] );
     layoutData->addWidget( editData_Year );
 
     layoutForm->addRow( tr( "Data" ) + ':', layoutData );
