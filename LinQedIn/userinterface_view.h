@@ -12,7 +12,8 @@
 #include <QVBoxLayout>
 #include <QWidget>
 
-#include "listaqualifiche.h"
+#include "info.h"
+#include "tableusers.h"
 
 enum LevelAccess
 {
@@ -29,7 +30,12 @@ class UserInterface_View : public QWidget
     private:
         class BoardFriends : public QWidget
         {
+            signals:
+                modify();
 
+            public:
+                BoardFriends( const LevelAccess &, QWidget * = nullptr );
+                ~BoardFriends();
         };
 
         class ID : public QWidget
@@ -55,6 +61,9 @@ class UserInterface_View : public QWidget
 
     private:
         LevelAccess level;
+
+    signals:
+        void requestModify();
 
     public:
         UserInterface_View( LevelAccess = I, QWidget * = nullptr );

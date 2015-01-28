@@ -1,5 +1,34 @@
 #include "userinterface_view.h"
 
+UserInterface_View::BoardFriends::BoardFriends( const LevelAccess & level,
+                                                QWidget * parent )
+                                                : QWidget( parent )
+{
+    setSizePolicy( QSizePolicy::Maximum, QSizePolicy::Minimum );
+
+    TableUsers * me = new TableUsers( tr( "Me" ) );
+    me->setFixedHeight( 110 );
+    me->addItem( Info( "Andrea", "Mantovani", "3406936174", "17/09/1994" ) );
+
+    QPushButton * btmModify = new QPushButton( tr( "Modified" ) );
+    TableUsers * friends = new TableUsers( tr( "My cowork" ) );
+
+    QVBoxLayout * layout = new QVBoxLayout();
+    layout->addWidget( me );
+    layout->addWidget( btmModify );
+    layout->addWidget( friends );
+
+    setLayout( layout );
+
+    connect( btmModify, SIGNAL( clicked() ), this, SIGNAL( modify() ) );
+}
+
+
+UserInterface_View::BoardFriends::~BoardFriends()
+{
+}
+
+
 UserInterface_View::ID::ID( const LevelAccess & level, QWidget * parent )
                             : QWidget( parent )
 {
@@ -9,22 +38,27 @@ UserInterface_View::ID::ID( const LevelAccess & level, QWidget * parent )
     lblImage->setPixmap( image );
 
     QLabel * lblFullname = new QLabel( "Andrea Mantovani" );
-    QLabel * lblTelephone = new QLabel( tr( "Telephone" ) +
-                                        ':' +
-                                        "3406936174" );
-    QLabel * lblData = new QLabel( tr( "Data" ) + ':' + "17/09/1994" );
-    QLabel * lblJob = new QLabel( tr( "Job" ) + ':' + "Student" );
+    QLabel * lblTelephone = new QLabel( tr( "Telephone" ) + ':' );
+    QLabel * valTelephone = new QLabel( "3406936174" );
+    QLabel * lblData = new QLabel( tr( "Data" ) + ':' );
+    QLabel * valData = new QLabel( "17/09/1994" );
+    QLabel * lblJob = new QLabel( tr( "Job" ) + ':' );
+    QLabel * valJob = new QLabel( "Student" );
 
+    QFormLayout * layoutExtra = new QFormLayout;
+    layoutExtra->setHorizontalSpacing( 25 );
+    layoutExtra->addRow( lblTelephone, valTelephone );
+    layoutExtra->addRow( lblData, valData );
+    layoutExtra->addRow( lblJob, valJob );
 
-    QVBoxLayout * layoutDati = new QVBoxLayout;
-    layoutDati->addWidget( lblFullname );
-    layoutDati->addWidget( lblTelephone );
-    layoutDati->addWidget( lblData );
-    layoutDati->addWidget( lblJob );
+    QVBoxLayout * layoutInfo = new QVBoxLayout;
+    layoutInfo->addWidget( lblFullname );
+    layoutInfo->addLayout( layoutExtra );
 
     QHBoxLayout * layout = new QHBoxLayout;
+    layout->setAlignment( Qt::AlignLeft );
     layout->addWidget( lblImage );
-    layout->addLayout( layoutDati );
+    layout->addLayout( layoutInfo );
 
     setLayout( layout );
 }
@@ -43,17 +77,21 @@ UserInterface_View::ViewExperience::ViewExperience( const LevelAccess & level,
     QLabel * lblSkills = new QLabel( tr( "Skills" ) );
     QLabel * lblEducation = new QLabel( tr( "Education" ) );
 
-    QLabel * line = new QLabel();
-    line->setFrameStyle( QFrame::HLine | QFrame::Plain );
-    line->setLineWidth( 1 );
+    QLabel * lineExp = new QLabel();
+    lineExp->setFrameStyle( QFrame::HLine | QFrame::Plain );
+    lineExp->setLineWidth( 1 );
+
+    QLabel * lineSki = new QLabel();
+    lineSki->setFrameStyle( QFrame::HLine | QFrame::Plain );
+    lineSki->setLineWidth( 1 );
 
     QVBoxLayout * layout = new QVBoxLayout;
     layout->addWidget( lblExperience );
     //ciclo for
-    layout->addWidget( line );
+    layout->addWidget( lineExp );
     layout->addWidget( lblSkills );
     //ciclo for
-    layout->addWidget( new QLabel( line ) );
+    layout->addWidget( lineSki );
     layout->addWidget( lblEducation );
     //ciclo for
 
@@ -74,6 +112,7 @@ UserInterface_View::Top::Top( const LevelAccess & level, QWidget * parent )
     QLabel * lblAccount = new QLabel( tr( "Account" ) + ": Mega master" );
 
     QPushButton * btmFriend = new QPushButton( tr( "Add coworker" ) );
+    btmFriend->setSizePolicy( QSizePolicy::Fixed, QSizePolicy::Maximum );
 
     QHBoxLayout * layout = new QHBoxLayout;
     layout->addWidget( lblUser );
@@ -98,6 +137,7 @@ UserInterface_View::UserInterface_View( LevelAccess l, QWidget * parent )
     Top * top = new Top( l );
     ID * id = new ID( l );
     ViewExperience * exp = new ViewExperience( l );
+    BoardFriends * boardFriends = new BoardFriends( l );
 
     QVBoxLayout * layoutUserData = new QVBoxLayout;
     layoutUserData->setAlignment( Qt::AlignTop );
@@ -107,6 +147,7 @@ UserInterface_View::UserInterface_View( LevelAccess l, QWidget * parent )
 
     QHBoxLayout * layoutInterface = new QHBoxLayout;
     layoutInterface->addLayout( layoutUserData );
+    layoutInterface->addWidget( boardFriends );
 
     area->setLayout( layoutInterface );
 
@@ -114,6 +155,11 @@ UserInterface_View::UserInterface_View( LevelAccess l, QWidget * parent )
     layout->addWidget( area );
 
     setLayout( layout );
+
+    connect( boardFriend,
+             SIGNAL( modify() ),
+             this,
+             SIGNAL( requestModify() ) );
 }
 
 
