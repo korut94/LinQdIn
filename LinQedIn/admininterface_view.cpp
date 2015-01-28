@@ -13,7 +13,7 @@ AdminInterface_View::AdminInterface_View( QWidget * parent )
     utility->setWidgetResizable( true );
 
     LabelTools * tools = new LabelTools();
-    TableUsers * table = new TableUsers();
+    TableUsers * table = new TableUsers( tr( "Users" ) );
 
     QHBoxLayout * layoutAdmin = new QHBoxLayout;
     layoutAdmin->setAlignment( Qt::AlignLeft );

@@ -22,10 +22,13 @@ class TableUsers : public QWidget
         };
 
     private:
-        QWidget * listUsers;
+        QLayout * listUsers;
 
     public:
-        TableUsers( QWidget * = NULL );
+        TableUsers( const QString & = QString(), QWidget * = NULL );
+
+        void addItem( const Info & );
+
         ~TableUsers();
 };
 

@@ -39,27 +39,38 @@ TableUsers::UserItem::~UserItem()
 }
 
 
-TableUsers::TableUsers( QWidget * parent ) : QWidget( parent )
+TableUsers::TableUsers( const QString & title, QWidget * parent )
+                        : QWidget( parent )
 {
+    setSizePolicy( QSizePolicy::Minimum, QSizePolicy::Minimum );
     setMaximumWidth( 300 );
 
     QScrollArea * areaTable = new QScrollArea;
     areaTable->setWidgetResizable( true );
 
-    QVBoxLayout * layoutUsers = new QVBoxLayout;
+    listUsers = new QVBoxLayout;
     //Aggiunta degli utenti dall'alto verso il basso
-    layoutUsers->setAlignment( Qt::AlignTop );
-    layoutUsers->setContentsMargins( 0, 0, 0, 0 );
+    listUsers->setAlignment( Qt::AlignTop );
+    listUsers->setContentsMargins( 0, 0, 0, 0 );
 
-    listUsers = new QWidget();
-    listUsers->setLayout( layoutUsers );
-    areaTable->setWidget( listUsers );
+    QLabel * lblTitle = new QLabel( title );
+    lblTitle->setAlignment( Qt::AlignCenter );
+    lblTitle->setFrameStyle( QFrame::StyledPanel | QFrame::Plain );
+
+    listUsers->addWidget( lblTitle );
+    areaTable->setLayout( listUsers );
 
     QVBoxLayout * layout = new QVBoxLayout;
     layout->addWidget( areaTable );
     layout->setContentsMargins( 0, 0, 0, 0 );
 
     setLayout( layout );
+}
+
+
+void TableUsers::addItem( const Info & info )
+{
+    listUsers->addWidget( new UserItem( info ) );
 }
 
 
