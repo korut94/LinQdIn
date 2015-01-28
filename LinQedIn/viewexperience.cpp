@@ -8,21 +8,13 @@ ViewExperience::ViewExperience( const LevelAccess::Type & level,
     QLabel * lblSkills = new QLabel( tr( "Skills" ) );
     QLabel * lblEducation = new QLabel( tr( "Education" ) );
 
-    QLabel * lineExp = new QLabel();
-    lineExp->setFrameStyle( QFrame::HLine | QFrame::Plain );
-    lineExp->setLineWidth( 1 );
-
-    QLabel * lineSki = new QLabel();
-    lineSki->setFrameStyle( QFrame::HLine | QFrame::Plain );
-    lineSki->setLineWidth( 1 );
-
     QVBoxLayout * layout = new QVBoxLayout;
     layout->addWidget( lblExperience );
     //ciclo for
-    layout->addWidget( lineExp );
+    layout->addWidget( new Line() );
     layout->addWidget( lblSkills );
     //ciclo for
-    layout->addWidget( lineSki );
+    layout->addWidget( new Line() );
     layout->addWidget( lblEducation );
     //ciclo for
 

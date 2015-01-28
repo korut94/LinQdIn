@@ -9,6 +9,7 @@
 #include "boardfriends.h"
 #include "info.h"
 #include "levelaccess.h"
+#include "line.h"
 #include "tableusers.h"
 #include "top.h"
 #include "usereditpage.h"
