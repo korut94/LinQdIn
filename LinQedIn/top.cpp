@@ -21,5 +21,4 @@ Top::Top( const LevelAccess::Type & level, QWidget * parent )
 
 Top::~Top()
 {
-    std::cout << "Eliminato" << std::endl;
 }
