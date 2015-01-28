@@ -47,7 +47,8 @@ SOURCES += main.cpp\
     boardfriends.cpp \
     top.cpp \
     viewexperience.cpp \
-    id.cpp
+    id.cpp \
+    line.cpp
 
 HEADERS  += \
     utente.h \
@@ -85,7 +86,8 @@ HEADERS  += \
     levelaccess.h \
     top.h \
     viewexperience.h \
-    id.h
+    id.h \
+    line.h
 
 FORMS    += mainwindow.ui
 
