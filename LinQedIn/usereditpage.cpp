@@ -1,5 +1,45 @@
 #include "usereditpage.h"
 
+UserEditPage::ModuleExperience::
+ModuleQualifica::ModuleQualifica( QWidget * parent ) : QWidget( parent )
+{
+    editExp = new LineEditValidate( QRegExp( "[A-Za-z]*" ) );
+    editCompany = new QLineEdit();
+    editDurata = new QLineEdit();
+    editDescrizione = new QTextEdit();
+
+    QVBoxLayout * layout = new QVBoxLayout;
+    layout->addWidget( editExp );
+    layout->addWidget( editCompany );
+    layout->addWidget( editDurata );
+    layout->addWidget( editDescrizione );
+
+    setLayout( layout );
+}
+
+
+UserEditPage::ModuleExperience::ModuleQualifica::~ModuleQualifica()
+{
+    delete editExp;
+    delete editCompany;
+    delete editDurata;
+    delete editDescrizione;
+}
+
+
+UserEditPage::ModuleExperience::ModuleExperience( QWidget * parent )
+                                                  : QWidget( parent ),
+                                                    layout( new QVBoxLayout )
+{
+}
+
+
+UserEditPage::ModuleExperience::~ModuleExperience()
+{
+
+}
+
+
 UserEditPage::ModuleID::ModuleID( QWidget * parent ) : QWidget( parent )
 {
     editName = new LineEditValidate( QRegExp( "[a-zA-Z]" ) );
@@ -61,11 +101,24 @@ UserEditPage::ModuleID::~ModuleID()
 }
 
 
+UserEditPage::ModuleSkills::ModuleSkills( QWidget * parent )
+                                          : QWidget( parent ),
+                                            layout( new QVBoxLayout )
+{
+}
+
+
+UserEditPage::ModuleSkills::~ModuleSkills()
+{
+    delete layout;
+}
+
+
 UserEditPage::UserEditPage( QWidget * parent ) : QWidget( parent )
 {
 
-    QPushButton * btmReset = new QPushButton( tr( "Reset" ) );
-    QPushButton * btmSearch = new QPushButton( tr( "Search" ) );
+    QPushButton * btnReset = new QPushButton( tr( "Reset" ) );
+    QPushButton * btnSearch = new QPushButton( tr( "Search" ) );
 
     QScrollArea * areaForm = new QScrollArea();
     areaForm->setFrameShape( QFrame::NoFrame );
@@ -76,16 +129,39 @@ UserEditPage::UserEditPage( QWidget * parent ) : QWidget( parent )
     line->setLineWidth( 1 );
 
     ModuleID * id = new ModuleID();
+    ModuleExperience * experience = new ModuleExperience();
+    ModuleSkills * skills = new ModuleSkills();
+
+    QLabel * lblId = new QLabel( tr( "Your info" ) );
+
+    QLabel * lblExperience = new QLabel( tr( "Experience" ) );
+    QPushButton * btnExperience = new QPushButton( tr( "Add experience" ) );
+
+    QLabel * lblSkills = new QLabel( tr( "Skills" ) );
+    QPushButton * btnSkills = new QPushButton( tr( "Add Skill" ) );
+
+    QHBoxLayout * layoutExperience = new QHBoxLayout();
+    layoutExperience->addWidget( lblExperience );
+    layoutExperience->addWidget( btnExperience );
+
+    QHBoxLayout * layoutSkills = new QHBoxLayout();
+    layoutSkills->addWidget( lblSkills );
+    layoutSkills->addWidget( btnSkills );
 
     QVBoxLayout * layoutArea = new QVBoxLayout;
+    layoutArea->addWidget( lblId );
     layoutArea->addWidget( id );
+    layoutArea->addLayout( layoutExperience );
+    layoutArea->addWidget( experience );
+    layoutArea->addLayout( layoutSkills );
+    layoutArea->addWidget( skills );
 
     areaForm->setLayout( layoutArea );
 
     QHBoxLayout * layoutButton = new QHBoxLayout;
     layoutButton->setAlignment( Qt::AlignRight );
-    layoutButton->addWidget( btmSearch );
-    layoutButton->addWidget( btmReset );
+    layoutButton->addWidget( btnSearch );
+    layoutButton->addWidget( btnReset );
 
 
     QVBoxLayout * layoutTop = new QVBoxLayout;
@@ -105,7 +181,7 @@ UserEditPage::UserEditPage( QWidget * parent ) : QWidget( parent )
 
     setLayout( layout );
 
-    connect( btmSearch, SIGNAL( clicked() ), this, SLOT( recapInfo() ) );
+    connect( btnSearch, SIGNAL( clicked() ), this, SLOT( recapInfo() ) );
 }
 
 

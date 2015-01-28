@@ -7,6 +7,7 @@
 #include <QLineEdit>
 #include <QPushButton>
 #include <QScrollArea>
+#include <QTextEdit>
 #include <QWidget>
 
 #include "info.h"
@@ -19,6 +20,23 @@ class UserEditPage : public QWidget
     private:
         class ModuleExperience : public QWidget
         {
+            private:
+                class ModuleQualifica : public QWidget
+                {
+                    private:
+                        LineEditValidate * editExp;
+                        QLineEdit * editCompany;
+                        QLineEdit * editDurata;
+                        QTextEdit * editDescrizione;
+
+                    public:
+                        ModuleQualifica( QWidget * = nullptr );
+                        ~ModuleQualifica();
+                };
+
+            private:
+                QVBoxLayout * layout;
+
             public:
                 ModuleExperience( QWidget * = nullptr );
                 ~ModuleExperience();
@@ -41,8 +59,15 @@ class UserEditPage : public QWidget
                 ~ModuleID();
         };
 
-    private:
+        class ModuleSkills : public QWidget
+        {
+            private:
+                QVBoxLayout * layout;
 
+            public:
+                ModuleSkills( QWidget * = nullptr );
+                ~ModuleSkills();
+        };
 
     public:
         UserEditPage( QWidget * = nullptr );
