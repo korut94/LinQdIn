@@ -43,8 +43,11 @@ SOURCES += main.cpp\
     userinterface_view.cpp \
     userinterface_model.cpp \
     userinterface_controller.cpp \
-    listaqualifiche.cpp \
-    usereditpage.cpp
+    usereditpage.cpp \
+    boardfriends.cpp \
+    top.cpp \
+    viewexperience.cpp \
+    id.cpp
 
 HEADERS  += \
     utente.h \
@@ -77,8 +80,12 @@ HEADERS  += \
     userinterface_view.h \
     userinterface_model.h \
     userinterface_controller.h \
-    listaqualifiche.h \
-    usereditpage.h
+    usereditpage.h \
+    boardfriends.h \
+    levelaccess.h \
+    top.h \
+    viewexperience.h \
+    id.h
 
 FORMS    += mainwindow.ui
 

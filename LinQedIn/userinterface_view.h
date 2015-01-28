@@ -7,75 +7,37 @@
 #include <QLabel>
 #include <QLineEdit>
 #include <QPushButton>
-#include <QStackedWidget>
 #include <QScrollArea>
 #include <QVBoxLayout>
 #include <QWidget>
 
+#include "boardfriends.h"
+#include "id.h"
 #include "info.h"
+#include "levelaccess.h"
 #include "tableusers.h"
-#include "usereditpage.h"
-
-enum LevelAccess
-{
-    I,
-    Basic,
-    Business,
-    Executive,
-    Modify,
-    Master
-};
+#include "top.h"
+#include "viewexperience.h"
 
 class UserInterface_View : public QWidget
 {
-    private:
-        class BoardFriends : public QWidget
-        {
-            signals:
-                void modify();
-
-            public:
-                BoardFriends( const LevelAccess &, QWidget * = nullptr );
-                ~BoardFriends();
-        };
-
-        class ID : public QWidget
-        {
-            public:
-                ID( const LevelAccess &, QWidget * = nullptr );
-                ~ID();
-        };
-
-        class ViewExperience : public QWidget
-        {
-            public:
-                ViewExperience( const LevelAccess &, QWidget * = nullptr );
-                ~ViewExperience();
-        };
-
-        class Top : public QWidget
-        {
-            public:
-                Top( const LevelAccess &, QWidget * = nullptr );
-                ~Top();
-        };
+    Q_OBJECT
 
     private:
-        LevelAccess level;
+        LevelAccess::Type level;
 
-        QLayout * layoutUserData;
-
-        void deleteItems();
+        QScrollArea * userUtility;
 
     signals:
         void requestModify();
 
     public slots:
-        void loadUserData();
-        void loadUserModify();
+        void loadMainPage();
+        void setFrameUtility( QWidget * );
 
     public:
-        UserInterface_View( LevelAccess = I, QWidget * = nullptr );
+        UserInterface_View( LevelAccess::Type = LevelAccess::I,
+                            QWidget * = nullptr );
         ~UserInterface_View();
 };
 
