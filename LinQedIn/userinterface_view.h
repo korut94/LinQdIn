@@ -14,6 +14,7 @@
 
 #include "info.h"
 #include "tableusers.h"
+#include "usereditpage.h"
 
 enum LevelAccess
 {
@@ -31,7 +32,7 @@ class UserInterface_View : public QWidget
         class BoardFriends : public QWidget
         {
             signals:
-                modify();
+                void modify();
 
             public:
                 BoardFriends( const LevelAccess &, QWidget * = nullptr );
@@ -62,8 +63,16 @@ class UserInterface_View : public QWidget
     private:
         LevelAccess level;
 
+        QLayout * layoutUserData;
+
+        void deleteItems();
+
     signals:
         void requestModify();
+
+    public slots:
+        void loadUserData();
+        void loadUserModify();
 
     public:
         UserInterface_View( LevelAccess = I, QWidget * = nullptr );

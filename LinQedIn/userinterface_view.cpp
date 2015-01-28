@@ -10,17 +10,17 @@ UserInterface_View::BoardFriends::BoardFriends( const LevelAccess & level,
     me->setFixedHeight( 110 );
     me->addItem( Info( "Andrea", "Mantovani", "3406936174", "17/09/1994" ) );
 
-    QPushButton * btmModify = new QPushButton( tr( "Modified" ) );
+    QPushButton * btnModify = new QPushButton( tr( "Modified" ) );
     TableUsers * friends = new TableUsers( tr( "My cowork" ) );
 
     QVBoxLayout * layout = new QVBoxLayout();
     layout->addWidget( me );
-    layout->addWidget( btmModify );
+    layout->addWidget( btnModify );
     layout->addWidget( friends );
 
     setLayout( layout );
 
-    connect( btmModify, SIGNAL( clicked() ), this, SIGNAL( modify() ) );
+    connect( btnModify, SIGNAL( clicked() ), this, SIGNAL( modify() ) );
 }
 
 
@@ -128,22 +128,47 @@ UserInterface_View::Top::~Top()
 }
 
 
+void UserInterface_View::deleteItems()
+{
+    QLayoutItem * child;
+
+    while( ( child = layoutUserData->takeAt( 0 ) ) != nullptr ) delete child;
+}
+
+
+void UserInterface_View::loadUserData()
+{
+    if( layoutUserData->count() > 0 ) deleteItems();
+
+    Top * top = new Top( level );
+    ID * id = new ID( level );
+    ViewExperience * exp = new ViewExperience( level );
+
+    layoutUserData->setAlignment( Qt::AlignTop );
+    layoutUserData->addWidget( top );
+    layoutUserData->addWidget( id );
+    layoutUserData->addWidget( exp );
+}
+
+
+void UserInterface_View::loadUserModify()
+{
+    if( layoutUserData->count() > 0 ) deleteItems();
+    layoutUserData->addWidget( new UserEditPage() );
+}
+
+
 UserInterface_View::UserInterface_View( LevelAccess l, QWidget * parent )
                                         : level( l ),
                                           QWidget( parent )
 {
     QScrollArea * area = new QScrollArea;
 
-    Top * top = new Top( l );
-    ID * id = new ID( l );
-    ViewExperience * exp = new ViewExperience( l );
-    BoardFriends * boardFriends = new BoardFriends( l );
+    layoutUserData = new QVBoxLayout;
 
-    QVBoxLayout * layoutUserData = new QVBoxLayout;
-    layoutUserData->setAlignment( Qt::AlignTop );
-    layoutUserData->addWidget( top );
-    layoutUserData->addWidget( id );
-    layoutUserData->addWidget( exp );
+    loadUserData();
+
+    BoardFriends * boardFriends = new BoardFriends( level );
 
     QHBoxLayout * layoutInterface = new QHBoxLayout;
     layoutInterface->addLayout( layoutUserData );
@@ -156,7 +181,7 @@ UserInterface_View::UserInterface_View( LevelAccess l, QWidget * parent )
 
     setLayout( layout );
 
-    connect( boardFriend,
+    connect( boardFriends,
              SIGNAL( modify() ),
              this,
              SIGNAL( requestModify() ) );

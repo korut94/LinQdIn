@@ -14,6 +14,12 @@ class UserInterface_Controller : public QObject
         UserInterface_Model * model;
         UserInterface_View * view;
 
+        void connetti() const;
+
+    public slots:
+        void loadModifyPage();
+        void loadUserPage();
+
     public:
         UserInterface_Controller();
         ~UserInterface_Controller();
