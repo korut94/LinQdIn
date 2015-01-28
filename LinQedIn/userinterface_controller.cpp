@@ -12,7 +12,33 @@ void UserInterface_Controller::connetti() const
 
 void UserInterface_Controller::setUserModify()
 {
-    emit display( new UserEditPage() );
+    UserEditPage * modify = new UserEditPage();
+
+    QPushButton * btnReset = new QPushButton( tr( "Reset" ) );
+    QPushButton * btnSearch = new QPushButton( tr( "Search" ) );
+
+    QLabel * line = new QLabel();
+    line->setFrameStyle( QFrame::HLine | QFrame::Plain );
+    line->setLineWidth( 1 );
+
+    QHBoxLayout * layoutButton = new QHBoxLayout;
+    layoutButton->setAlignment( Qt::AlignRight );
+    layoutButton->addWidget( btnSearch );
+    layoutButton->addWidget( btnReset );
+
+    QVBoxLayout * layoutBottom = new QVBoxLayout;
+    layoutBottom->setAlignment( Qt::AlignBottom );
+    layoutBottom->addWidget( line );
+    layoutBottom->addLayout( layoutButton );
+
+    QVBoxLayout * layout = new QVBoxLayout;
+    layout->addWidget( modify );
+    layout->addLayout( layoutBottom );
+
+    QWidget * modifyPage = new QWidget();
+    modifyPage->setLayout( layout );
+
+    emit display( modifyPage );
 }
 
 

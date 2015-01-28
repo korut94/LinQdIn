@@ -11,6 +11,7 @@
 #include <QWidget>
 
 #include "info.h"
+#include "line.h"
 #include "lineeditvalidate.h"
 
 class UserEditPage : public QWidget
