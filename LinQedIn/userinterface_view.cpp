@@ -17,7 +17,10 @@ void UserInterface_View::loadMainPage()
     layoutInterface->addLayout( layoutUserData );
     layoutInterface->addWidget( boardFriends );
 
-    userUtility->setLayout( layoutInterface );
+    QWidget * container = new QWidget();
+    container->setLayout( layoutInterface );
+
+    userUtility->setWidget( container );
 
     connect( boardFriends,
              SIGNAL( modify() ),
@@ -37,6 +40,7 @@ UserInterface_View::UserInterface_View( LevelAccess::Type l, QWidget * parent )
                                           QWidget( parent )
 {
     userUtility = new QScrollArea;
+    userUtility->setWidgetResizable( true );
 
     loadMainPage();
 
