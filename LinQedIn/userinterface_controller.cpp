@@ -2,19 +2,17 @@
 
 void UserInterface_Controller::connetti() const
 {
-    connect( view, SIGNAL( requestModify() ), this, SLOT( loadModifyPage() ) );
+    connect( view, SIGNAL( requestModify() ), this, SLOT( setUserModify() ) );
+    connect( this,
+             SIGNAL( display( QWidget * ) ),
+             view,
+             SLOT( setFrameUtility( QWidget * ) ) );
 }
 
 
-void UserInterface_Controller::loadModifyPage()
+void UserInterface_Controller::setUserModify()
 {
-    std::cout << "Prova" << std::endl;
-}
-
-
-void UserInterface_Controller::loadUserPage()
-{
-
+    emit display( new UserEditPage() );
 }
 
 

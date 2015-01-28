@@ -3,6 +3,7 @@
 
 #include <QObject>
 
+#include "usereditpage.h"
 #include "userinterface_model.h"
 #include "userinterface_view.h"
 
@@ -16,9 +17,11 @@ class UserInterface_Controller : public QObject
 
         void connetti() const;
 
+    signals:
+        void display( QWidget * );
+
     public slots:
-        void loadModifyPage();
-        void loadUserPage();
+        void setUserModify();
 
     public:
         UserInterface_Controller();
