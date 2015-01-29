@@ -1,6 +1,7 @@
 #ifndef USEREDITPAGE_H
 #define USEREDITPAGE_H
 
+#include <algorithm>
 #include <iostream>
 #include <QFormLayout>
 #include <QLabel>
@@ -10,9 +11,11 @@
 #include <QTextEdit>
 #include <QWidget>
 
+#include "experience.h"
 #include "info.h"
 #include "line.h"
 #include "lineeditvalidate.h"
+#include "skill.h"
 
 class UserEditPage : public QWidget
 {
@@ -33,13 +36,18 @@ class UserEditPage : public QWidget
                     public:
                         ModuleQualifica( QWidget * = nullptr );
                         ~ModuleQualifica();
+
+                        Experience getExperience() const;
                 };
 
             private:
-                QVBoxLayout * layout;
+                QVector<ModuleQualifica*> listaQualifica;
 
             public:
                 ModuleExperience( QWidget * = nullptr );
+
+                QVector<Experience> getExperiences() const;
+
                 ~ModuleExperience();
         };
 
@@ -63,11 +71,13 @@ class UserEditPage : public QWidget
         class ModuleSkills : public QWidget
         {
             private:
-                QVBoxLayout * layout;
+                QVector<QLineEdit*> listaSkills;
 
             public:
                 ModuleSkills( QWidget * = nullptr );
                 ~ModuleSkills();
+
+                QVector<Skill> getSkills() const;
         };
 
     public:

@@ -27,10 +27,20 @@ UserEditPage::ModuleExperience::ModuleQualifica::~ModuleQualifica()
 }
 
 
-UserEditPage::ModuleExperience::ModuleExperience( QWidget * parent )
-                                                  : QWidget( parent ),
-                                                    layout( new QVBoxLayout )
+Experience UserEditPage::ModuleExperience::
+           ModuleQualifica::getExperience() const
 {
+    return Experience( editExp->text(),
+                       editCompany->text(),
+                       editDurata->text(),
+                       editDescrizione->toPlainText() );
+}
+
+
+UserEditPage::ModuleExperience::ModuleExperience( QWidget * parent )
+                                                  : QWidget( parent )
+{
+    setLayout( new QVBoxLayout );
 }
 
 
@@ -38,6 +48,23 @@ UserEditPage::ModuleExperience::~ModuleExperience()
 {
 
 }
+
+
+QVector<Experience> UserEditPage::ModuleExperience::getExperiences() const
+{
+    QVector<Experience> experiences;
+
+    std::transform( listaQualifica.begin(),
+                    listaQualifica.end(),
+                    experiences.begin(),
+                    [] ( ModuleQualifica * p ) -> Experience
+                    {
+                        return p->getExperience();
+                    } );
+
+    return experiences;
+}
+
 
 
 UserEditPage::ModuleID::ModuleID( QWidget * parent ) : QWidget( parent )
@@ -109,15 +136,30 @@ UserEditPage::ModuleID::~ModuleID()
 
 
 UserEditPage::ModuleSkills::ModuleSkills( QWidget * parent )
-                                          : QWidget( parent ),
-                                            layout( new QVBoxLayout )
+                                          : QWidget( parent )
 {
+    setLayout( new QVBoxLayout );
 }
 
 
 UserEditPage::ModuleSkills::~ModuleSkills()
 {
-    delete layout;
+}
+
+
+QVector<QString> UserEditPage::ModuleSkills::getSkills() const
+{
+    QVector<QString> skills;
+
+    std::transform( listaSkills.begin(),
+                    listaSkills.end(),
+                    skills.begin(),
+                    [] ( QLineEdit * p ) -> Skill
+                    {
+                        return p->text();
+                    } );
+
+    return skills;
 }
 
 
