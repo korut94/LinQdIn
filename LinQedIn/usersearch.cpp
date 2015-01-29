@@ -2,15 +2,15 @@
 
 UserSearch::UserSearch( QWidget * parent ) : QWidget( parent )
 {
-    QPushButton * btmReset = new QPushButton( tr( "Reset" ) );
-    QPushButton * btmSearch = new QPushButton( tr( "Search" ) );
+    QPushButton * btnReset = new QPushButton( tr( "Reset" ) );
+    QPushButton * btnSearch = new QPushButton( tr( "Search" ) );
 
     UserEditPage * editPage = new UserEditPage();
 
     QHBoxLayout * layoutButton = new QHBoxLayout;
     layoutButton->setAlignment( Qt::AlignRight );
-    layoutButton->addWidget( btmSearch );
-    layoutButton->addWidget( btmReset );
+    layoutButton->addWidget( btnSearch );
+    layoutButton->addWidget( btnReset );
 
 
     QVBoxLayout * layoutBottom = new QVBoxLayout;
