@@ -48,7 +48,10 @@ UserEditPage::UserEditPage( QWidget * parent ) : QWidget( parent )
     layoutArea->addLayout( layoutSkills );
     layoutArea->addWidget( skills );
 
-    areaForm->setLayout( layoutArea );
+    QWidget * content = new QWidget();
+    content->setLayout( layoutArea );
+
+    areaForm->setWidget( content );
 
     QVBoxLayout * layoutTop = new QVBoxLayout;
     layoutTop->setAlignment( Qt::AlignTop );
