@@ -1,33 +1,36 @@
 #ifndef INFO_H
 #define INFO_H
 
+#include <QDate>
 #include <QString>
+#include <QVector>
+
+#include "experience.h"
+#include "personal.h"
+#include "skill.h"
 
 class Info
 {
     private:
-        QString cognome;
-        QString data; //class Data?
-        QString nome;
-        QString n_telefono; //class N_Telefono?
+        Personal dataPersonal;
+        QVector<Skill> skills;
+        QVector<Experience> experiences;
 
     public:
-        Info();
-        Info( const QString &, //nome
-              const QString &, //cognome
-              const QString &, //n_telefono
-              const QString &  //data
-            );
+        Info( const Personal &,
+              const QVector<Skill> & = QVector<Skill>(),
+              const QVector<Experience> & = QVector<Experience>() );
 
-        QString getCognome() const;
-        QString getData() const;
-        QString getNome() const;
-        QString getNumTelefono() const;
+        QVector<Experience> getExperiences() const;
+        QVector<Skill> getSkills() const;
 
-        void setCognome( const QString & );
-        void setNome( const QString & );
-        void setData( const QString & );
-        void setNumTelefono( const QString & );
+        Personal & getPersonal() const;
+        const Personal & getPersonal() const;
+
+        void addExperience( const Experience & );
+        void addSkill( const Skill & );
+        void removeExperience( const Experience & );
+        void removeSkill( const Skill & );
 };
 
 #endif // INFO_H

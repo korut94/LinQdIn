@@ -48,7 +48,10 @@ SOURCES += main.cpp\
     top.cpp \
     viewexperience.cpp \
     id.cpp \
-    line.cpp
+    line.cpp \
+    experience.cpp \
+    personal.cpp \
+    skill.cpp
 
 HEADERS  += \
     utente.h \
@@ -87,7 +90,10 @@ HEADERS  += \
     top.h \
     viewexperience.h \
     id.h \
-    line.h
+    line.h \
+    experience.h \
+    personal.h \
+    skill.h
 
 FORMS    += mainwindow.ui
 

@@ -1,65 +1,46 @@
 #include "info.h"
 
-Info::Info() //costruttori di default
+Info::Info( const Personal & data,
+            const QVector<Skill> & sks,
+            const QVector<Experience> & exp )
+            : dataPersonal( data ), skills( sks ), experiences( exp ) {}
+
+
+QVector<Experience> Info::getExperiences() const { return experiences; }
+
+
+QVector<Skill> Info::getSkills() const { return skills; }
+
+
+Personal & Info::getPersonal() const { return dataPersonal; }
+
+
+const Personal & Info::getPersonal() const { return dataPersonal; }
+
+
+void Info::addExperience( const Experience & e )
 {
+    experiences.push_back( e );
 }
 
 
-Info::Info( const QString & name,
-            const QString & surname,
-            const QString & number,
-            const QString & data )
-            : nome( name ),
-              cognome( surname ),
-              n_telefono( number ),
-              data( data )
+void Info::addSkill( const Skill & sk )
 {
+    skills.push_back( sk );
 }
 
 
-QString Info::getCognome() const
+void Info::removeExperience( const Experience & e )
 {
-    return cognome;
+    int posExp = experiences.indexOf( e );
+
+    if( posExp != -1 ) experiences.remove( posExp );
 }
 
 
-QString Info::getData() const
+void Info::removeSkill( const Skill & sk )
 {
-    return data;
-}
+    int posSk = skills.indexOf( sk );
 
-
-QString Info::getNome() const
-{
-    return nome;
-}
-
-
-QString Info::getNumTelefono() const
-{
-    return n_telefono;
-}
-
-
-void Info::setCognome( const QString & surname )
-{
-    cognome = surname;
-}
-
-
-void Info::setNome( const QString & name )
-{
-    nome = name;
-}
-
-
-void Info::setData( const QString & data )
-{
-    this->data = data;
-}
-
-
-void Info::setNumTelefono( const QString & number )
-{
-    n_telefono = number;
+    if( posSk != -1 ) skills.remove( posSk );
 }
