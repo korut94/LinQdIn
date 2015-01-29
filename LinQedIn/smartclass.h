@@ -11,7 +11,6 @@ class SmartClass
     protected:
         SmartClass();
         SmartClass( const SmartClass & ) = default;
-
         SmartClass & operator=( const SmartClass & ) = default;
 
     public:

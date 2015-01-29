@@ -8,7 +8,7 @@ BoardFriends::BoardFriends( const LevelAccess::Type & level,
 
     TableUsers * me = new TableUsers( tr( "Me" ) );
     me->setFixedHeight( 110 );
-    me->addItem( Info( "Andrea", "Mantovani", "3406936174", "17/09/1994" ) );
+    //me->addItem( Info( "Andrea", "Mantovani", "3406936174", "17/09/1994" ) );
 
     QPushButton * btnModify = new QPushButton( tr( "Modified" ) );
     TableUsers * friends = new TableUsers( tr( "My cowork" ) );

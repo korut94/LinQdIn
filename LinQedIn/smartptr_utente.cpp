@@ -8,14 +8,14 @@ smartptr_utente::smartptr_utente( Utente * p )
 
 Utente & smartptr_utente::operator*() const
 {
-    Utente * r = dynamic_cast<Utente*>( smartptr_entity::operator->() );
+    Utente * r = static_cast<Utente*>( smartptr_entity::operator->() );
     return *r;
 }
 
 
 Utente * smartptr_utente::operator->() const
 {
-    Utente * p = dynamic_cast<Utente*>( smartptr_entity::operator->() );
+    Utente * p = static_cast<Utente*>( smartptr_entity::operator->() );
     return p;
 }
 

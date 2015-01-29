@@ -17,13 +17,16 @@ class Experience
                     const QString & = QString(),
                     const QString & = QString() );
 
+        bool operator==( const Experience & ) const;
+        bool operator!=( const Experience & ) const;
+
         QString getCompany() const;
         QString getDescription() const;
         QString getPeriod() const;
         QString getWork() const;
 
         void setCompany( const QString & );
-        void setDescroption( const QString & );
+        void setDescription( const QString & );
         void setPeriod( const QString & );
         void setWork( const QString & );
 };

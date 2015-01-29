@@ -2,21 +2,21 @@
 
 int HashGroupUtente::NameCrescente::operator()( const Entity & user ) const
 {
-    QString name = user.getInfo().getNome();
+    QString name = user.getInfo().getPersonal().getNome();
     return name[0].toLatin1() - static_cast<int>( 'A' );
 }
 
 
 int HashGroupUtente::NameDecrescente::operator()( const Entity & user ) const
 {
-    QString name = user.getInfo().getNome();
+    QString name = user.getInfo().getPersonal().getNome();
     return static_cast<int>( 'Z' ) - name[0].toLatin1();
 }
 
 
 int HashGroupUtente::CognomeCrescente::operator()( const Entity & user ) const
 {
-    QString cognome = user.getInfo().getCognome();
+    QString cognome = user.getInfo().getPersonal().getCognome();
     return cognome[0].toLatin1() - static_cast<int>( 'A' );
 }
 
@@ -24,7 +24,7 @@ int HashGroupUtente::CognomeCrescente::operator()( const Entity & user ) const
 int HashGroupUtente::CognomeDecrescente::operator()( const Entity & user )
                                                    const
 {
-    QString cognome = user.getInfo().getCognome();
+    QString cognome = user.getInfo().getPersonal().getCognome();
     return static_cast<int>( 'Z' ) - cognome[0].toLatin1();
 }
 

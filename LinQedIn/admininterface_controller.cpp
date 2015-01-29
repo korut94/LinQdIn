@@ -43,7 +43,7 @@ void AdminInterface_Controller::setSearchWindow()
 
 void AdminInterface_Controller::test( const Info & info ) const
 {
-    std::cout << info.getNome().toStdString() << std::endl;
+    std::cout << info.getPersonal().getNome().toStdString() << std::endl;
 }
 
 

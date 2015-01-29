@@ -30,9 +30,8 @@ Utente::Utente()
 
 
 Utente::Utente( const QString & user,
-                const QString & pass,
                 const Info & info )
-                : Entity( user, pass, info ) {}
+                : Entity( user, info ) {}
 
 
 Utente::~Utente()
@@ -90,5 +89,5 @@ void Utente::setOnline( bool set )
 
 std::ostream & operator<<( std::ostream & os, const Utente & u )
 {
-    return ( os << u.getInfo().getNome().toStdString() );
+    return ( os << u.getInfo().getPersonal().getNome().toStdString() );
 }

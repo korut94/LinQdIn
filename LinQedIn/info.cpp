@@ -12,7 +12,7 @@ QVector<Experience> Info::getExperiences() const { return experiences; }
 QVector<Skill> Info::getSkills() const { return skills; }
 
 
-Personal & Info::getPersonal() const { return dataPersonal; }
+Personal & Info::getPersonal() { return dataPersonal; }
 
 
 const Personal & Info::getPersonal() const { return dataPersonal; }

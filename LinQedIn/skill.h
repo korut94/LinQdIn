@@ -11,6 +11,9 @@ class Skill
     public:
         Skill( const QString & = QString() );
 
+        bool operator==( const Skill & ) const;
+        bool operator!=( const Skill & ) const;
+
         QString getSkill() const;
 
         void setSkill( const QString & );

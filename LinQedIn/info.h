@@ -24,7 +24,7 @@ class Info
         QVector<Experience> getExperiences() const;
         QVector<Skill> getSkills() const;
 
-        Personal & getPersonal() const;
+        Personal & getPersonal();
         const Personal & getPersonal() const;
 
         void addExperience( const Experience & );

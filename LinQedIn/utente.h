@@ -35,7 +35,7 @@ class Utente : public Entity
 
     public:
         Utente();
-        Utente( const QString &, const QString &, const Info & );
+        Utente( const QString &, const Info & );
         virtual ~Utente();
 
         bool isActivate() const;

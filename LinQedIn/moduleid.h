@@ -7,6 +7,7 @@
 #include <QVBoxLayout>
 
 #include "lineeditvalidate.h"
+#include "personal.h"
 
 class ModuleID : public QWidget
 {
@@ -25,6 +26,8 @@ class ModuleID : public QWidget
     public:
         ModuleID( QWidget * = nullptr );
         ~ModuleID();
+
+        Personal getDataPersonal() const;
 };
 
 #endif // MODULEID_H

@@ -3,7 +3,7 @@
 
 #include <QObject>
 
-#include "usereditpage.h"
+#include "usersearch.h"
 #include "userinterface_model.h"
 #include "userinterface_view.h"
 

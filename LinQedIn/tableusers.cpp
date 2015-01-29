@@ -11,14 +11,16 @@ TableUsers::UserItem::UserItem( const Info & info, QWidget * parent )
     icon->setPixmap( pixmap );
     icon->setMaximumWidth( 50 );
 
-    QLabel * fullname = new QLabel( "<b>" + info.getNome() +
-                                    " " + info.getCognome() + "</b>" );
+    Personal personal = info.getPersonal();
+
+    QLabel * fullname = new QLabel( "<b>" + personal.getNome() +
+                                    " " + personal.getCognome() + "</b>" );
     fullname->setStyleSheet( "QLabel{ font: 10pt; }" );
 
-    QLabel * telephone = new QLabel( "Tel: " + info.getNumTelefono() );
+    QLabel * telephone = new QLabel( "Tel: " + personal.getNumTelefono() );
     telephone->setStyleSheet( "QLabel{ font: 8pt; }" );
 
-    QLabel * data = new QLabel( "Data: " + info.getData() );
+    QLabel * data = new QLabel( "Data: " + personal.getDate().toString( "dMyy" ) );
     data->setStyleSheet( "QLabel{ font: 8pt; }" );
 
     QVBoxLayout * layoutInfo = new QVBoxLayout;

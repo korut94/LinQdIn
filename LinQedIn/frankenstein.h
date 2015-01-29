@@ -9,7 +9,7 @@ class Frankenstein : public Entity
         Utente::Rete contatti;
 
         Frankenstein();
-        Frankenstein( const QString &, const QString &, const Info & );
+        Frankenstein( const QString &, const Info & );
         Frankenstein( const Utente & );
 
         bool operator==( const Frankenstein & ) const;

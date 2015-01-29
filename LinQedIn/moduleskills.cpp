@@ -12,9 +12,9 @@ ModuleSkills::~ModuleSkills()
 }
 
 
-QVector<QString> ModuleSkills::getSkills() const
+QVector<Skill> ModuleSkills::getSkills() const
 {
-    QVector<QString> skills;
+    QVector<Skill> skills;
 
     std::transform( listaSkills.begin(),
                     listaSkills.end(),

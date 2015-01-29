@@ -3,7 +3,7 @@
 Personal::Personal( const QString & name,
                     const QString & surname,
                     const QString & number,
-                    const QString & data )
+                    const QDate & data )
                     : nome( name ),
                       cognome( surname ),
                       n_telefono( number ),
@@ -18,7 +18,7 @@ QString Personal::getCognome() const
 }
 
 
-QString Personal::getData() const
+QDate Personal::getDate() const
 {
     return data;
 }
@@ -48,7 +48,7 @@ void Personal::setNome( const QString & name )
 }
 
 
-void Personal::setData( const QString & data )
+void Personal::setDate( const QDate & data )
 {
     this->data = data;
 }

@@ -19,6 +19,14 @@ class UserEditPage : public QWidget
 {
     Q_OBJECT
 
+    private:
+        ModuleExperience * exp;
+        ModuleID * id;
+        ModuleSkills * sks;
+
+    public slots:
+        Info recapInfo() const;
+
     public:
         UserEditPage( QWidget * = nullptr );
         ~UserEditPage();

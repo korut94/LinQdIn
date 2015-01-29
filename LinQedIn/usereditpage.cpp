@@ -1,5 +1,13 @@
 #include "usereditpage.h"
 
+Info UserEditPage::recapInfo() const
+{
+    return Info( id->getDataPersonal(),
+                 sks->getSkills(),
+                 exp->getExperiences() );
+}
+
+
 UserEditPage::UserEditPage( QWidget * parent ) : QWidget( parent )
 {
     QScrollArea * areaForm = new QScrollArea();

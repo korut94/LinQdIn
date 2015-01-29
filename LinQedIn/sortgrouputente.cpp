@@ -7,7 +7,10 @@ bool SortGroupUtente::NameCrescente::operator()
     Info & info_a = a->getInfo();
     Info & info_b = b->getInfo();
 
-    return ( info_a.getNome().compare( info_b.getNome() ) <= 0 );
+    QString nameA = info_a.getPersonal().getNome();
+    QString nameB = info_b.getPersonal().getNome();
+
+    return ( nameA.compare( nameB ) <= 0 );
 }
 
 
@@ -18,7 +21,10 @@ bool SortGroupUtente::NameDecrescente::operator()
     Info & info_a = a->getInfo();
     Info & info_b = b->getInfo();
 
-    return ( info_a.getNome().compare( info_b.getNome() ) >= 0 );
+    QString nameA = info_a.getPersonal().getNome();
+    QString nameB = info_b.getPersonal().getNome();
+
+    return ( nameA.compare( nameB ) >= 0 );
 }
 
 

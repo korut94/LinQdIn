@@ -67,3 +67,12 @@ ModuleID::~ModuleID()
     delete editData_Year;
 }
 
+
+Personal ModuleID::getDataPersonal() const
+{
+    QString fullNumber = editPrefixNumber->text() + '-' + editNumber->text();
+
+    return Personal( editName->text(), editSurname->text(), fullNumber );
+}
+
+
