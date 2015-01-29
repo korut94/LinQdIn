@@ -88,7 +88,6 @@ ModuleID::ModuleID( QWidget * parent ) : QWidget( parent )
     layoutForm->addRow( tr( "Data" ) + ':', layoutData );
 
     QWidget * container = new QWidget();
-    container->setMinimumHeight( 300 );
     container->setMaximumWidth( 400 );
     container->setLayout( layoutForm );
 
