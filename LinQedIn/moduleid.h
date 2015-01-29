@@ -1,9 +1,11 @@
 #ifndef MODULEID_H
 #define MODULEID_H
 
+#include <QComboBox>
 #include <QFormLayout>
 #include <QHBoxLayout>
 #include <QLabel>
+#include <QListView>
 #include <QVBoxLayout>
 
 #include "lineeditvalidate.h"
@@ -19,9 +21,13 @@ class ModuleID : public QWidget
         LineEditValidate * editSurname;
         LineEditValidate * editPrefixNumber;
         LineEditValidate * editNumber;
-        LineEditValidate * editData_Day;
-        LineEditValidate * editData_Month;
-        LineEditValidate * editData_Year;
+        QComboBox * editData_Day;
+        QComboBox * editData_Month;
+        QComboBox * editData_Year;
+
+        static QStringList insertNumDay();
+        static QStringList insertNameMonth();
+        static QStringList insertNumYear();
 
     public:
         ModuleID( QWidget * = nullptr );

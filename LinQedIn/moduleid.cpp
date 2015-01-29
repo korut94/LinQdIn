@@ -1,5 +1,52 @@
 #include "moduleid.h"
 
+QStringList ModuleID::insertNumDay()
+{
+    QStringList list;
+
+    for( int day = 1; day < 32; day ++ )
+    {
+        list.push_back( QString::number( day ) );
+    }
+
+    return list;
+}
+
+
+QStringList ModuleID::insertNameMonth()
+{
+    QStringList list;
+
+    list.push_back( tr( "January" ) );
+    list.push_back( tr( "February" ) );
+    list.push_back( tr( "March" ) );
+    list.push_back( tr( "April" ) );
+    list.push_back( tr( "May" ) );
+    list.push_back( tr( "June" ) );
+    list.push_back( tr( "July" ) );
+    list.push_back( tr( "August" ) );
+    list.push_back( tr( "September" ) );
+    list.push_back( tr( "October" ) );
+    list.push_back( tr( "November" ) );
+    list.push_back( tr( "December" ) );
+
+    return list;
+}
+
+
+QStringList ModuleID::insertNumYear()
+{
+    QStringList list;
+
+    for( int year = 1910; year < QDate::currentDate().year() + 1; year++ )
+    {
+        list.push_back( QString::number( year ) );
+    }
+
+    return list;
+}
+
+
 ModuleID::ModuleID( QWidget * parent ) : QWidget( parent )
 {
     editName = new LineEditValidate( QRegExp( "[a-zA-Z]" ) );
@@ -11,18 +58,15 @@ ModuleID::ModuleID( QWidget * parent ) : QWidget( parent )
     editPrefixNumber->setMaxLength( 5 );
     editNumber = new LineEditValidate( QRegExp( "[0-9]*-[0-9]*" ) );
 
-    QLabel * slash[2] = { new QLabel( QString( '/' ) ),
-                          new QLabel( QString( '/' ) ) };
-
-    editData_Day = new LineEditValidate( QRegExp( "[1-3]{0,1}[1-9]" ) );
-    editData_Day->setAlignment( Qt::AlignRight );
-    editData_Day->setMaxLength( 2 );
-    editData_Month = new LineEditValidate( QRegExp( "[0-1][1-9]" ) );
-    editData_Month->setAlignment( Qt::AlignRight );
-    editData_Month->setMaxLength( 2 );
-    editData_Year = new LineEditValidate( QRegExp( "[1-9][0-9]{3}" ) );
-    editData_Year->setAlignment( Qt::AlignRight );
-    editData_Year->setMaxLength( 4 );
+    editData_Day = new QComboBox();
+    editData_Day->setStyleSheet( "combobox-popup: 0;" );
+    editData_Day->addItems( insertNumDay() );
+    editData_Month = new QComboBox();
+    editData_Month->setStyleSheet( "combobox-popup: 0;" );
+    editData_Month->addItems( insertNameMonth() );
+    editData_Year = new QComboBox();
+    editData_Year->setStyleSheet( "combobox-popup: 0;" );
+    editData_Year->addItems( insertNumYear() );
 
     QFormLayout * layoutForm = new QFormLayout;
     layoutForm->setHorizontalSpacing( 50 );
@@ -38,9 +82,7 @@ ModuleID::ModuleID( QWidget * parent ) : QWidget( parent )
 
     QHBoxLayout * layoutData = new QHBoxLayout;
     layoutData->addWidget( editData_Day );
-    layoutData->addWidget( slash[0] );
     layoutData->addWidget( editData_Month );
-    layoutData->addWidget( slash[1] );
     layoutData->addWidget( editData_Year );
 
     layoutForm->addRow( tr( "Data" ) + ':', layoutData );
