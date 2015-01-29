@@ -4,7 +4,7 @@ LabelTools::LabelTools( QWidget * parent ) : QWidget( parent )
 {
     QPushButton * add = new QPushButton( tr( "Add" ) );
     QPushButton * remove = new QPushButton( tr( "Remove" ) );
-    QPushButton * search = new QPushButton( tr( "Query" ) );
+    QPushButton * search = new QPushButton( tr( "Search User" ) );
 
     QHBoxLayout * layoutModify = new QHBoxLayout;
     QHBoxLayout * layoutSearch = new QHBoxLayout;
