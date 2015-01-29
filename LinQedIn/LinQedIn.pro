@@ -55,7 +55,8 @@ SOURCES += main.cpp\
     moduleid.cpp \
     moduleskills.cpp \
     moduleexperience.cpp \
-    usermodified.cpp
+    usermodified.cpp \
+    userinsert.cpp
 
 HEADERS  += \
     utente.h \
@@ -101,7 +102,8 @@ HEADERS  += \
     moduleid.h \
     moduleskills.h \
     moduleexperience.h \
-    usermodified.h
+    usermodified.h \
+    userinsert.h
 
 FORMS    += mainwindow.ui
 
