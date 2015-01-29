@@ -51,7 +51,10 @@ SOURCES += main.cpp\
     line.cpp \
     experience.cpp \
     personal.cpp \
-    skill.cpp
+    skill.cpp \
+    moduleid.cpp \
+    moduleskills.cpp \
+    moduleexperience.cpp
 
 HEADERS  += \
     utente.h \
@@ -93,7 +96,10 @@ HEADERS  += \
     line.h \
     experience.h \
     personal.h \
-    skill.h
+    skill.h \
+    moduleid.h \
+    moduleskills.h \
+    moduleexperience.h
 
 FORMS    += mainwindow.ui
 
