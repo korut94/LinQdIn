@@ -12,7 +12,7 @@ void UserInterface_Controller::connetti() const
 
 void UserInterface_Controller::setUserModify()
 {
-    UserSearch * search = new UserSearch();
+    UserModified * search = new UserModified();
 
     emit display( search );
 }

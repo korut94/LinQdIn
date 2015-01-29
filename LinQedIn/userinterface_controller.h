@@ -3,6 +3,7 @@
 
 #include <QObject>
 
+#include "usermodified.h"
 #include "usersearch.h"
 #include "userinterface_model.h"
 #include "userinterface_view.h"
