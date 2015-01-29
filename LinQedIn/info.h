@@ -17,7 +17,7 @@ class Info
         QVector<Experience> experiences;
 
     public:
-        Info( const Personal &,
+        Info( const Personal & = Personal(),
               const QVector<Skill> & = QVector<Skill>(),
               const QVector<Experience> & = QVector<Experience>() );
 

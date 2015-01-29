@@ -13,10 +13,10 @@ class Personal
         QString n_telefono; //class N_Telefono?
 
     public:
-        Personal( const QString &, //nome
-                  const QString &, //cognome
-                  const QString &, //n_telefono
-                  const QDate &  //data
+        Personal( const QString & = QString(), //nome
+                  const QString & = QString(), //cognome
+                  const QString & = QString(), //n_telefono
+                  const QDate & = QDate()  //data
                 );
 
         QString getCognome() const;
