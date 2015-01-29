@@ -9,12 +9,11 @@ class Entity : public SmartClass
     private:
         Info info;
 
-        QString password; //class Password?
         QString username;
 
     public:
         Entity();
-        Entity( const QString &, const QString &, const Info & );
+        Entity( const QString &, const Info & );
 
         bool operator==( const Entity & ) const;
         bool operator!=( const Entity & ) const;
@@ -22,10 +21,8 @@ class Entity : public SmartClass
         Info & getInfo();
         const Info & getInfo() const;
 
-        QString getPassword() const;
         QString getUsername() const;
 
-        void setPassword( const QString & );
         void setUsername( const QString & );
 };
 

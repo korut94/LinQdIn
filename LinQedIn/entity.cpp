@@ -2,10 +2,8 @@
 
 Entity::Entity() {}
 
-Entity::Entity( const QString & user,
-                const QString & pass,
-                const Info & i )
-                : username( user ), password( pass ), info( i ){}
+Entity::Entity( const QString & user, const Info & i )
+                : username( user ), info( i ){}
 
 
 bool Entity::operator==( const Entity & user ) const
@@ -32,21 +30,9 @@ const Info & Entity::getInfo() const
 }
 
 
-QString Entity::getPassword() const
-{
-    return password;
-}
-
-
 QString Entity::getUsername() const
 {
     return username;
-}
-
-
-void Entity::setPassword( const QString & pass )
-{
-    password = pass;
 }
 
 
