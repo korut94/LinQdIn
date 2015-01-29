@@ -22,7 +22,7 @@ void AdminInterface_Controller::connetti() const
 
 void AdminInterface_Controller::setInsertWindow()
 {
-    UserInterface_View * insert = new UserInterface_View();
+    UserInsert * insert = new UserInsert();
 
     emit display( insert );
 }

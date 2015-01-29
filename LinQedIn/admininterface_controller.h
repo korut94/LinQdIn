@@ -7,6 +7,7 @@
 #include "admininterface_model.h"
 #include "admininterface_view.h"
 #include "info.h"
+#include "userinsert.h"
 #include "userinterface_view.h"
 #include "usersearch.h"
 
