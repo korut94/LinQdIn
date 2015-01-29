@@ -14,22 +14,27 @@ class Info
     private:
         Personal dataPersonal;
         QVector<Skill> skills;
-        QVector<Experience> experiences;
+        QVector<Experience> schoolExperience;
+        QVector<Experience> workExperience;
 
     public:
         Info( const Personal & = Personal(),
               const QVector<Skill> & = QVector<Skill>(),
+              const QVector<Experience> & = QVector<Experience>(),
               const QVector<Experience> & = QVector<Experience>() );
 
-        QVector<Experience> getExperiences() const;
+        QVector<Experience> getSchoolExperiences() const;
+        QVector<Experience> getWorkExperiences() const;
         QVector<Skill> getSkills() const;
 
         Personal & getPersonal();
         const Personal & getPersonal() const;
 
-        void addExperience( const Experience & );
+        void addSchoolExperience( const Experience & );
+        void addWorkExperience( const Experience & );
         void addSkill( const Skill & );
-        void removeExperience( const Experience & );
+        void removeSchoolExperience( const Experience & );
+        void removeWorkExperience( const Experience & );
         void removeSkill( const Skill & );
 };
 
