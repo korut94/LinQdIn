@@ -14,6 +14,8 @@ AdminInterface_View::AdminInterface_View( QWidget * parent )
 
     LabelTools * tools = new LabelTools();
     TableUsers * table = new TableUsers( tr( "Users" ) );
+    table->setSizePolicy( QSizePolicy::Maximum, QSizePolicy::Minimum );
+
 
     QHBoxLayout * layoutAdmin = new QHBoxLayout;
     layoutAdmin->setAlignment( Qt::AlignLeft );
