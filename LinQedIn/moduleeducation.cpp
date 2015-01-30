@@ -20,6 +20,13 @@ ModuleEducation::ModuleStudio::ModuleStudio( QWidget * parent )
 }
 
 
+bool ModuleEducation::ModuleStudio::checkError() const
+{
+    return ( editSchool->text().isEmpty() ||
+             editSchool->check() == QValidator::Acceptable );
+}
+
+
 ModuleEducation::ModuleStudio::~ModuleStudio()
 {
     delete editSchool;
@@ -59,6 +66,21 @@ ModuleEducation::ModuleEducation( QWidget * parent ) : QWidget( parent )
 ModuleEducation::~ModuleEducation()
 {
 
+}
+
+
+bool ModuleEducation::checkError() const
+{
+    QVector<ModuleStudio *>::const_iterator itr = listaStudio.begin();
+    bool check = true;
+
+    while( itr != listaStudio.end() && check )
+    {
+        check = (*itr)->checkError();
+        itr++;
+    }
+
+    return check;
 }
 
 

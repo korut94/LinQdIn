@@ -33,6 +33,8 @@ class ModuleID : public QWidget
         ModuleID( QWidget * = nullptr );
         ~ModuleID();
 
+        bool checkError() const;
+
         Personal getDataPersonal() const;
 
         void reset();

@@ -29,6 +29,8 @@ class UserEditPage : public QWidget
         ModuleSkills * skills;
         ModuleEducation * education;
 
+        QLabel * msgError;
+
         QVBoxLayout * layoutArea;
 
     signals:
@@ -37,11 +39,14 @@ class UserEditPage : public QWidget
         void requestAddSkill();
 
     public slots:
+        bool checkErrorForm() const;
+
         Info recapInfo() const;
 
         void addEducation();
         void addExperience();
         void addSkill();
+        void error( const QString & );
         void reset();
 
     public:

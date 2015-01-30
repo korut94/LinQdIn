@@ -31,6 +31,8 @@ class ModuleExperience : public QWidget
 
                 Experience getExperience() const;
 
+                bool checkError() const;
+
                 void reset();
         };
 
@@ -40,6 +42,8 @@ class ModuleExperience : public QWidget
     public:
         ModuleExperience( QWidget * = nullptr );
         ~ModuleExperience();
+
+        bool checkError() const;
 
         QVector<Experience> getExperiences() const;
 

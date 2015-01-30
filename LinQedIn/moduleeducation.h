@@ -29,6 +29,8 @@ class ModuleEducation : public QWidget
                 ModuleStudio( QWidget * = nullptr );
                 ~ModuleStudio();
 
+                bool checkError() const;
+
                 Experience getEducation() const;
 
                 void reset();
@@ -40,6 +42,8 @@ class ModuleEducation : public QWidget
     public:
         ModuleEducation( QWidget * = nullptr );
         ~ModuleEducation();
+
+        bool checkError() const;
 
         QVector<Experience> getEducations() const;
 

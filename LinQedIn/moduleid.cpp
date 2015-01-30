@@ -49,14 +49,15 @@ QStringList ModuleID::insertNumYear()
 
 ModuleID::ModuleID( QWidget * parent ) : QWidget( parent )
 {
-    editName = new LineEditValidate( QRegExp( "[a-zA-Z]" ) );
+    editName = new LineEditValidate( QRegExp( "[A-Z][a-z]*" ) );
 
-    editSurname = new LineEditValidate( QRegExp( "[A-Za-z]" ) );
+    editSurname = new LineEditValidate(
+                                QRegExp( "[A-Z][a-z]*" ) );
 
-    editPrefixNumber = new LineEditValidate( QRegExp( "+[0-9]{1,4}" ) );
+    editPrefixNumber = new LineEditValidate( QRegExp( "[0-9]*" ) );
     editPrefixNumber->setFixedWidth( 40 );
-    editPrefixNumber->setMaxLength( 5 );
-    editNumber = new LineEditValidate( QRegExp( "[0-9]*-[0-9]*" ) );
+    editPrefixNumber->setMaxLength( 3 );
+    editNumber = new LineEditValidate( QRegExp( "[0-9]*" ) );
 
     editData_Day = new QComboBox();
     editData_Day->setStyleSheet( "combobox-popup: 0;" );
@@ -75,6 +76,7 @@ ModuleID::ModuleID( QWidget * parent ) : QWidget( parent )
     layoutForm->addRow( tr( "Surname" ) + ':', editSurname );
 
     QHBoxLayout * layoutNumber = new QHBoxLayout;
+    layoutNumber->addWidget( new QLabel( "+" ) );
     layoutNumber->addWidget( editPrefixNumber );
     layoutNumber->addWidget( editNumber );
 
@@ -110,11 +112,37 @@ ModuleID::~ModuleID()
 }
 
 
+bool ModuleID::checkError() const
+{
+    return(
+                ( editName->text().isEmpty() ||
+                  editName->check() == QValidator::Acceptable ) &&
+                ( editSurname->text().isEmpty() ||
+                  editSurname->check() == QValidator::Acceptable ) &&
+                ( editPrefixNumber->text().isEmpty() ||
+                  editPrefixNumber->check() == QValidator::Acceptable ) &&
+                ( editNumber->text().isEmpty() ||
+                  editNumber->check() == QValidator::Acceptable )
+           );
+}
+
+
 Personal ModuleID::getDataPersonal() const
 {
+    Personal risult;
+
+    risult.setNome( editName->text() );
+    risult.setCognome( editSurname->text() );
+
     QString fullNumber = editPrefixNumber->text() + '-' + editNumber->text();
 
-    return Personal( editName->text(), editSurname->text(), fullNumber );
+    risult.setNumTelefono( fullNumber );
+
+    risult.setDate( QDate( editData_Day->currentIndex() + 1,
+                           editData_Month->currentIndex() + 1,
+                           editData_Year->currentIndex() + 1 ) );
+
+    return risult;
 }
 
 

@@ -3,7 +3,7 @@
 ModuleExperience::ModuleQualifica::ModuleQualifica( QWidget * parent )
                                                     : QWidget( parent )
 {
-    editExp = new LineEditValidate( QRegExp( "[A-Za-z]*" ) );
+    editExp = new LineEditValidate( QRegExp( "(?![0-9])" ) );
     editCompany = new QLineEdit();
     editDurata = new QLineEdit();
     editDescrizione = new QTextEdit();
@@ -26,6 +26,13 @@ ModuleExperience::ModuleQualifica::~ModuleQualifica()
     delete editCompany;
     delete editDurata;
     delete editDescrizione;
+}
+
+
+bool ModuleExperience::ModuleQualifica::checkError() const
+{
+    return ( editExp->text().isEmpty() ||
+             editExp->check() == QValidator::Acceptable );
 }
 
 
@@ -59,6 +66,21 @@ ModuleExperience::ModuleExperience( QWidget * parent ) : QWidget( parent )
 ModuleExperience::~ModuleExperience()
 {
 
+}
+
+
+bool ModuleExperience::checkError() const
+{
+    QVector<ModuleQualifica *>::const_iterator itr = listaQualifica.begin();
+    bool check = true;
+
+    while( itr != listaQualifica.end() && check )
+    {
+        check = (*itr)->checkError();
+        itr++;
+    }
+
+    return check;
 }
 
 
