@@ -9,13 +9,27 @@
 #include "line.h"
 #include "usereditpage.h"
 
-class UserInsert : public QWidget
+class UserInsert : public QObject
 {
     Q_OBJECT
+
+    private:
+        UserEditPage * editPage;
+
+    signals:
+        void error();
+        void errorMessage( const QString & );
+        void insert( const Info & );
+
+    public slots:
+        void checkToSanityInsert();
+        void setErrorMessage( const QString & );
 
     public:
         UserInsert();
         ~UserInsert();
+
+        QWidget * getView() const;
 };
 
 #endif // USERINSERT_H

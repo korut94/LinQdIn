@@ -1,11 +1,39 @@
 #include "userinsert.h"
 
-UserInsert::UserInsert()
+void UserInsert::checkToSanityInsert()
 {
+    bool check = editPage->checkErrorForm();
+
+    if( check ) {}
+    else emit error();
+}
+
+
+void UserInsert::setErrorMessage( const QString & msg )
+{
+    /*tr( "There are incorrect values" )*/
+    emit errorMessage( msg );
+}
+
+
+UserInsert::UserInsert() : editPage( new UserEditPage() )
+{
+}
+
+
+UserInsert::~UserInsert()
+{
+    delete editPage;
+}
+
+
+QWidget * UserInsert::getView() const
+{
+    QWidget * view = new QWidget();
+
     QPushButton * btnReset = new QPushButton( tr( "Reset" ) );
     QPushButton * btnInsert = new QPushButton( tr( "Insert" ) );
 
-    UserEditPage * editPage = new UserEditPage();
     editPage->loadModuleId();
     editPage->loadModuleAccount();
     editPage->loadModuleExperience();
@@ -17,7 +45,6 @@ UserInsert::UserInsert()
     layoutButton->addWidget( btnInsert );
     layoutButton->addWidget( btnReset );
 
-
     QVBoxLayout * layoutBottom = new QVBoxLayout;
     layoutBottom->setAlignment( Qt::AlignBottom );
     layoutBottom->addWidget( new Line() );
@@ -27,7 +54,7 @@ UserInsert::UserInsert()
     layout->addWidget( editPage );
     layout->addLayout( layoutBottom );
 
-    setLayout( layout );
+    view->setLayout( layout );
 
     connect( editPage,
              SIGNAL( requestAddEducation() ),
@@ -48,10 +75,16 @@ UserInsert::UserInsert()
              SIGNAL( clicked() ),
              editPage,
              SLOT( reset() ) );
-}
 
+    connect( btnInsert,
+             SIGNAL( clicked() ),
+             this,
+             SLOT( checkToSanityInsert() ) );
 
-UserInsert::~UserInsert()
-{
+    connect( this,
+             SIGNAL( errorMessage( const QString & ) ),
+             editPage,
+             SLOT( error( const QString &) ) );
 
+    return view;
 }
