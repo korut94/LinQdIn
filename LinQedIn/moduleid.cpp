@@ -134,7 +134,10 @@ Personal ModuleID::getDataPersonal() const
     risult.setNome( editName->text() );
     risult.setCognome( editSurname->text() );
 
-    QString fullNumber = editPrefixNumber->text() + '-' + editNumber->text();
+    QString fullNumber = '+' +
+                         editPrefixNumber->text() +
+                         '-' +
+                         editNumber->text();
 
     risult.setNumTelefono( fullNumber );
 
