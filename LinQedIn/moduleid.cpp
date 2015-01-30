@@ -118,3 +118,15 @@ Personal ModuleID::getDataPersonal() const
 }
 
 
+void ModuleID::reset()
+{
+    editData_Day->setCurrentIndex( 0 );
+    editData_Month->setCurrentIndex( 0 );
+    editData_Year->setCurrentIndex( 0 );
+    editName->clear();
+    editNumber->clear();
+    editPrefixNumber->clear();
+    editSurname->clear();
+}
+
+

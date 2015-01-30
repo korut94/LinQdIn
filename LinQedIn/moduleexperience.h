@@ -3,6 +3,7 @@
 
 #include <algorithm>
 #include <iostream>
+#include <QFormLayout>
 #include <QLineEdit>
 #include <QTextEdit>
 #include <QVBoxLayout>
@@ -29,6 +30,8 @@ class ModuleExperience : public QWidget
                 ~ModuleQualifica();
 
                 Experience getExperience() const;
+
+                void reset();
         };
 
     private:
@@ -36,10 +39,12 @@ class ModuleExperience : public QWidget
 
     public:
         ModuleExperience( QWidget * = nullptr );
+        ~ModuleExperience();
 
         QVector<Experience> getExperiences() const;
 
-        ~ModuleExperience();
+        void addExperience();
+        void reset();
 };
 
 #endif // MODULEEXPERIENCE_H

@@ -20,6 +20,9 @@ class ModuleSkills : public QWidget
         ~ModuleSkills();
 
         QVector<Skill> getSkills() const;
+
+        void addSkill();
+        void reset();
 };
 
 #endif // MODULESKILLS_H

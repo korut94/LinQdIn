@@ -3,62 +3,156 @@
 Info UserEditPage::recapInfo() const
 {
     return Info( id->getDataPersonal(),
-                 sks->getSkills(),
-                 exp->getExperiences() );
+                 skills->getSkills(),
+                 experience->getExperiences() );
 }
 
 
-UserEditPage::UserEditPage( QWidget * parent ) : QWidget( parent )
+void UserEditPage::addEducation()
 {
-    QScrollArea * areaForm = new QScrollArea();
-    areaForm->setFrameShape( QFrame::NoFrame );
-    areaForm->setWidgetResizable( true );
+    education->addEducation();
+}
 
-    ModuleID * id = new ModuleID();
 
-    ModuleExperience * experience = new ModuleExperience();
-    ModuleSkills * skills = new ModuleSkills();
+void UserEditPage::addExperience()
+{
+    experience->addExperience();
+}
 
-    QLabel * lblId = new QLabel( tr( "Info" ) );
+
+void UserEditPage::addSkill()
+{
+    skills->addSkill();
+}
+
+
+
+void UserEditPage::reset()
+{
+    if( account != nullptr ) account->reset();
+    if( experience != nullptr ) experience->reset();
+    if( id != nullptr ) id->reset();
+    if( skills != nullptr ) skills->reset();
+    if( education != nullptr ) education->reset();
+}
+
+
+void UserEditPage::loadModuleAccount()
+{
+    account = new ModuleAccout();
+    layoutArea->addWidget( account );
+}
+
+
+void UserEditPage::loadModuleEducation()
+{
+    education = new ModuleEducation();
+
+    QLabel * lblEducation = new QLabel( tr( "Education" ) );
+    lblEducation->setFont( QFont( "Helvetica", 12, QFont::Bold ) );
+    QPushButton * btnEducation = new QPushButton( tr( "Add Education" ) );
+    btnEducation->setSizePolicy( QSizePolicy::Fixed, QSizePolicy::Maximum );
+
+    QHBoxLayout * layoutEducation = new QHBoxLayout();
+    layoutEducation->addWidget( lblEducation );
+    layoutEducation->addWidget( btnEducation );
+
+    layoutArea->addWidget( new Line() );
+    layoutArea->addLayout( layoutEducation );
+    layoutArea->addWidget( education );
+
+    connect( btnEducation,
+             SIGNAL( clicked() ),
+             this,
+             SIGNAL( requestAddEducation() ) );
+}
+
+
+void UserEditPage::loadModuleExperience()
+{
+    experience = new ModuleExperience();
+
     QLabel * lblExperience = new QLabel( tr( "Experience" ) );
-
+    lblExperience->setFont( QFont( "Helvetica", 12, QFont::Bold ) );
     QPushButton * btnExperience = new QPushButton( tr( "Add Experience" ) );
     btnExperience->setSizePolicy( QSizePolicy::Fixed, QSizePolicy::Maximum );
-
-    QLabel * lblSkills = new QLabel( tr( "Skills" ) );
-    QPushButton * btnSkills = new QPushButton( tr( "Add Skill" ) );
-    btnSkills->setSizePolicy( QSizePolicy::Fixed, QSizePolicy::Maximum );
 
     QHBoxLayout * layoutExperience = new QHBoxLayout();
     layoutExperience->addWidget( lblExperience );
     layoutExperience->addWidget( btnExperience );
 
+    layoutArea->addWidget( new Line() );
+    layoutArea->addLayout( layoutExperience );
+    layoutArea->addWidget( experience );
+
+    connect( btnExperience,
+             SIGNAL( clicked() ),
+             this,
+             SIGNAL( requestAddExperience() ) );
+}
+
+
+void UserEditPage::loadModuleId()
+{
+    id = new ModuleID();
+
+    QLabel * lblId = new QLabel( tr( "Info" ) );
+    lblId->setFont( QFont( "Helvetica", 12, QFont::Bold ) );
+
+    layoutArea->addWidget( lblId );
+    layoutArea->addWidget( id );
+}
+
+
+void UserEditPage::loadModuleSkill()
+{
+    skills = new ModuleSkills();
+
+    QLabel * lblSkills = new QLabel( tr( "Skills" ) );
+    lblSkills->setFont( QFont( "Helvetica", 12, QFont::Bold ) );
+    QPushButton * btnSkills = new QPushButton( tr( "Add Skill" ) );
+    btnSkills->setSizePolicy( QSizePolicy::Fixed, QSizePolicy::Maximum );
+
     QHBoxLayout * layoutSkills = new QHBoxLayout();
     layoutSkills->addWidget( lblSkills );
     layoutSkills->addWidget( btnSkills );
 
-    QVBoxLayout * layoutArea = new QVBoxLayout;
-    layoutArea->setAlignment( Qt::AlignTop );
-    layoutArea->addWidget( lblId );
-    layoutArea->addWidget( id );
-    layoutArea->addWidget( new Line() );
-    layoutArea->addLayout( layoutExperience );
-    layoutArea->addWidget( experience );
     layoutArea->addWidget( new Line() );
     layoutArea->addLayout( layoutSkills );
     layoutArea->addWidget( skills );
+
+    connect( btnSkills,
+             SIGNAL( clicked() ),
+             this,
+             SIGNAL( requestAddSkill() ) );
+}
+
+
+
+UserEditPage::UserEditPage( QWidget * parent ) :
+                            account( nullptr ),
+                            experience( nullptr ),
+                            id( nullptr ),
+                            skills( nullptr ),
+                            education( nullptr ),
+                            QWidget( parent )
+{
+    QScrollArea * areaForm = new QScrollArea();
+    areaForm->setFrameShape( QFrame::NoFrame );
+    areaForm->setWidgetResizable( true );
+
+
+    layoutArea = new QVBoxLayout;
+    layoutArea->setAlignment( Qt::AlignTop );
 
     QWidget * content = new QWidget();
     content->setLayout( layoutArea );
 
     areaForm->setWidget( content );
 
-    QVBoxLayout * layoutTop = new QVBoxLayout;
-    layoutTop->setAlignment( Qt::AlignTop );
-    layoutTop->addWidget( areaForm );
-
     QVBoxLayout * layout = new QVBoxLayout;
-    layout->addLayout( layoutTop );
+    layout->setAlignment( Qt::AlignTop );
+    layout->addWidget( areaForm );
 
     setLayout( layout );
 }

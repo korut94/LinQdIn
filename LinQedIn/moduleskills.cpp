@@ -3,7 +3,10 @@
 ModuleSkills::ModuleSkills( QWidget * parent )
                             : QWidget( parent )
 {
-    setLayout( new QVBoxLayout );
+    QVBoxLayout * layout = new QVBoxLayout;
+    layout->setAlignment( Qt::AlignBottom );
+
+    setLayout( layout );
 }
 
 
@@ -25,4 +28,24 @@ QVector<Skill> ModuleSkills::getSkills() const
                     } );
 
     return skills;
+}
+
+
+void ModuleSkills::addSkill()
+{
+    QLineEdit * skill = new QLineEdit();
+
+    listaSkills.push_back( skill );
+    layout()->addWidget( skill );
+}
+
+
+void ModuleSkills::reset()
+{
+    for( QVector<QLineEdit*>::const_iterator itr = listaSkills.begin();
+         itr != listaSkills.end();
+         itr++ )
+    {
+        (*itr)->clear();
+    }
 }

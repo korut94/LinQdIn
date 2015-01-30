@@ -6,6 +6,11 @@ UserInsert::UserInsert()
     QPushButton * btnInsert = new QPushButton( tr( "Insert" ) );
 
     UserEditPage * editPage = new UserEditPage();
+    editPage->loadModuleId();
+    editPage->loadModuleAccount();
+    editPage->loadModuleExperience();
+    editPage->loadModuleSkill();
+    editPage->loadModuleEducation();
 
     QHBoxLayout * layoutButton = new QHBoxLayout;
     layoutButton->setAlignment( Qt::AlignRight );
@@ -23,6 +28,26 @@ UserInsert::UserInsert()
     layout->addLayout( layoutBottom );
 
     setLayout( layout );
+
+    connect( editPage,
+             SIGNAL( requestAddEducation() ),
+             editPage,
+             SLOT( addEducation() ) );
+
+    connect( editPage,
+             SIGNAL( requestAddExperience() ),
+             editPage,
+             SLOT( addExperience() ) );
+
+    connect( editPage,
+             SIGNAL( requestAddSkill() ),
+             editPage,
+             SLOT( addSkill() ) );
+
+    connect( btnReset,
+             SIGNAL( clicked() ),
+             editPage,
+             SLOT( reset() ) );
 }
 
 

@@ -1,6 +1,7 @@
 #ifndef MODULEID_H
 #define MODULEID_H
 
+#include <iostream>
 #include <QComboBox>
 #include <QFormLayout>
 #include <QHBoxLayout>
@@ -16,7 +17,6 @@ class ModuleID : public QWidget
     Q_OBJECT
 
     private:
-        LineEditValidate * editUsername;
         LineEditValidate * editName;
         LineEditValidate * editSurname;
         LineEditValidate * editPrefixNumber;
@@ -34,6 +34,8 @@ class ModuleID : public QWidget
         ~ModuleID();
 
         Personal getDataPersonal() const;
+
+        void reset();
 };
 
 #endif // MODULEID_H

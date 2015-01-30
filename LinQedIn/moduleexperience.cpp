@@ -1,18 +1,20 @@
 #include "moduleexperience.h"
 
-ModuleExperience::ModuleQualifica::
-                  ModuleQualifica( QWidget * parent ) : QWidget( parent )
+ModuleExperience::ModuleQualifica::ModuleQualifica( QWidget * parent )
+                                                    : QWidget( parent )
 {
     editExp = new LineEditValidate( QRegExp( "[A-Za-z]*" ) );
     editCompany = new QLineEdit();
     editDurata = new QLineEdit();
     editDescrizione = new QTextEdit();
 
-    QVBoxLayout * layout = new QVBoxLayout;
-    layout->addWidget( editExp );
-    layout->addWidget( editCompany );
-    layout->addWidget( editDurata );
-    layout->addWidget( editDescrizione );
+    QFormLayout * layout = new QFormLayout;
+    layout->setAlignment( Qt::AlignTop );
+    layout->setHorizontalSpacing( 30 );
+    layout->addRow( tr( "Work" ) + ':', editExp );
+    layout->addRow( tr( "Company" ) + ':', editCompany );
+    layout->addRow( tr( "Time Period" ) + ':', editDurata );
+    layout->addRow( tr( "Description" ) + ':', editDescrizione );
 
     setLayout( layout );
 }
@@ -36,9 +38,21 @@ Experience ModuleExperience::ModuleQualifica::getExperience() const
 }
 
 
+void ModuleExperience::ModuleQualifica::reset()
+{
+    editCompany->clear();
+    editDescrizione->clear();
+    editDurata->clear();
+    editExp->clear();
+}
+
+
 ModuleExperience::ModuleExperience( QWidget * parent ) : QWidget( parent )
 {
-    setLayout( new QVBoxLayout );
+    QVBoxLayout * layout = new QVBoxLayout;
+    layout->setAlignment( Qt::AlignBottom );
+
+    setLayout( layout );
 }
 
 
@@ -62,3 +76,26 @@ QVector<Experience> ModuleExperience::getExperiences() const
 
     return experiences;
 }
+
+
+void ModuleExperience::addExperience()
+{
+    ModuleQualifica * qualifica = new ModuleQualifica();
+
+    listaQualifica.push_back( qualifica );
+    layout()->addWidget( qualifica );
+}
+
+
+void ModuleExperience::reset()
+{
+    for( QVector<ModuleQualifica*>::const_iterator itr
+                                    = listaQualifica.begin();
+         itr != listaQualifica.end();
+         itr++ )
+    {
+        (*itr)->reset();
+    }
+}
+
+
