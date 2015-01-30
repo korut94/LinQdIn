@@ -11,7 +11,6 @@ void UserInsert::checkToSanityInsert()
 
 void UserInsert::setErrorMessage( const QString & msg )
 {
-    /*tr( "There are incorrect values" )*/
     emit errorMessage( msg );
 }
 
