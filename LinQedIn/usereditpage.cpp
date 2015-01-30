@@ -43,6 +43,7 @@ void UserEditPage::reset()
     if( id != nullptr ) id->reset();
     if( skills != nullptr ) skills->reset();
     if( education != nullptr ) education->reset();
+    if( msgError != nullptr ) msgError->setVisible( false );
 }
 
 
