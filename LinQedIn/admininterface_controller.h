@@ -19,12 +19,15 @@ class AdminInterface_Controller : public QObject
         AdminInterface_Model * model;
         AdminInterface_View * view;
 
+        UserInsert * insert;
+
         void connetti() const;
 
     signals:
         void display( QWidget * );
 
     public slots:
+        void catchError();
         void setInsertWindow();
         void setSearchWindow();
         void test( const Info & ) const;

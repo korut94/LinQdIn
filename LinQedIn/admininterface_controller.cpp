@@ -20,11 +20,24 @@ void AdminInterface_Controller::connetti() const
 }
 
 
+void AdminInterface_Controller::catchError()
+{
+    insert->setErrorMessage( tr( "There are incorrect values" ) );
+}
+
+
 void AdminInterface_Controller::setInsertWindow()
 {
-    UserInsert * insert = new UserInsert();
+    if( insert == nullptr )
+    {
+        insert = new UserInsert();
+        connect( insert,
+                 SIGNAL( error() ),
+                 this,
+                 SLOT( catchError() ) );
+    }
 
-    emit display( insert );
+    emit display( insert->getView() );
 }
 
 
@@ -49,7 +62,7 @@ void AdminInterface_Controller::test( const Info & info ) const
 
 AdminInterface_Controller::
 AdminInterface_Controller( AdminInterface_Model * m, AdminInterface_View * v )
-                           : model( m ), view( v )
+                           : model( m ), view( v ), insert( nullptr )
 {
     connetti();
 }
@@ -59,6 +72,7 @@ AdminInterface_Controller::~AdminInterface_Controller()
 {
     delete model;
     delete view;
+    delete insert;
 }
 
 
