@@ -107,7 +107,8 @@ HEADERS  += \
     usermodified.h \
     userinsert.h \
     moduleeducation.h \
-    moduleaccout.h
+    moduleaccout.h \
+    errorstate.h
 
 FORMS    += mainwindow.ui
 
