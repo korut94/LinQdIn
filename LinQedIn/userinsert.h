@@ -18,12 +18,14 @@ class UserInsert : public QObject
         UserEditPage * editPage;
 
     signals:
-        void error( ErrorState::Type );
-        void errorMessage( const QString & );
-        void insert( const Info & );
+        void error( ErrorState::Type ) const ;
+        void errorMessage( const QString & ) const;
+        void insert( const Info & ) const;
 
     public slots:
-        void checkToSanityInsert();
+        LevelAccess::Type getAccoutTypeSet() const;
+
+        void checkToSanityInsert() const;
         void manageLocalError( ErrorState::Type );
         void setErrorMessage( const QString & );
 

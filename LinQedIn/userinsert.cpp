@@ -1,6 +1,16 @@
 #include "userinsert.h"
 
-void UserInsert::checkToSanityInsert()
+LevelAccess::Type UserInsert::getAccoutTypeSet() const
+{
+    try
+    {
+        return editPage->getTypeUser();
+    }
+    catch( const std::runtime_error & error ){}
+}
+
+
+void UserInsert::checkToSanityInsert() const
 {
     if( editPage->checkErrorForm() == ErrorState::None )
     {
