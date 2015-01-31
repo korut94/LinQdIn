@@ -10,6 +10,9 @@ class AdminInterface_Model
 
     public:
         AdminInterface_Model();
+        ~AdminInterface_Model();
+
+        Database * getDatabase() const;
 };
 
 #endif // ADMININTERFACE_MODEL_H
