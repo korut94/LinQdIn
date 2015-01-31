@@ -87,7 +87,7 @@ ModuleID::ModuleID( QWidget * parent ) : QWidget( parent )
     layoutData->addWidget( editData_Month );
     layoutData->addWidget( editData_Year );
 
-    layoutForm->addRow( tr( "Data" ) + ':', layoutData );
+    layoutForm->addRow( tr( "Date of birth" ) + ':', layoutData );
 
     QWidget * container = new QWidget();
     container->setMaximumWidth( 400 );
