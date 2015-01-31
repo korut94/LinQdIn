@@ -9,6 +9,7 @@
 #include <QVBoxLayout>
 #include <QWidget>
 
+#include "errorstate.h"
 #include "info.h"
 #include "levelaccess.h"
 #include "line.h"
@@ -39,9 +40,11 @@ class UserEditPage : public QWidget
         void requestAddSkill();
 
     public slots:
-        bool checkErrorForm() const;
+        ErrorState::Type checkErrorForm() const;
 
         Info recapInfo() const;
+
+        LevelAccess::Type getTypeUser() const;
 
         void addEducation();
         void addExperience();

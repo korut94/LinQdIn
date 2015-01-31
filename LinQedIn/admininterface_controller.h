@@ -27,7 +27,7 @@ class AdminInterface_Controller : public QObject
         void display( QWidget * );
 
     public slots:
-        void catchError();
+        void catchError( ErrorState::Type );
         void setInsertWindow();
         void setSearchWindow();
         void test( const Info & ) const;

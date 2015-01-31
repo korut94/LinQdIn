@@ -20,9 +20,9 @@ void AdminInterface_Controller::connetti() const
 }
 
 
-void AdminInterface_Controller::catchError()
+void AdminInterface_Controller::catchError( ErrorState::Type type )
 {
-    insert->setErrorMessage( tr( "There are incorrect values" ) );
+
 }
 
 
@@ -32,9 +32,9 @@ void AdminInterface_Controller::setInsertWindow()
     {
         insert = new UserInsert();
         connect( insert,
-                 SIGNAL( error() ),
-                 this,
-                 SLOT( catchError() ) );
+                 SIGNAL( error( ErrorState::Type ) ),
+                 insert,
+                 SLOT( managerLocalError( ErrorState::Type ) ) );
     }
 
     emit display( insert->getView() );

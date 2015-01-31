@@ -1,19 +1,42 @@
 #include "usereditpage.h"
 
-bool UserEditPage::checkErrorForm() const
+ErrorState::Type UserEditPage::checkErrorForm() const
 {
     bool check = experience->checkError() &&
                  id->checkError() && education->checkError();
 
-    return check;
+    if( check ) return ErrorState::None;
+    else return ErrorState::InvalidValue;
 }
 
 
 Info UserEditPage::recapInfo() const
 {
-    return Info( id->getDataPersonal(),
-                 skills->getSkills(),
-                 experience->getExperiences() );
+    Info result;
+
+    if( id != nullptr ) result.setPersonal( id->getDataPersonal() );
+    if( skills != nullptr ) result.setSkills( skills->getSkills() );
+    if( experience != nullptr )
+    {
+        result.setWorkExperiences( experience->getExperiences() );
+    }
+    if( education != nullptr )
+    {
+        result.setSchoolExperiences( education->getEducations() );
+    }
+
+    return result;
+}
+
+
+LevelAccess::Type UserEditPage::getTypeUser() const
+{
+    if( account != nullptr ) account->getTypeAccount();
+    else
+    {
+        throw std::runtime_error(
+                    "Non hai i permessi per accedere a questa risorsa" );
+    }
 }
 
 
