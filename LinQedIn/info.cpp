@@ -67,3 +67,25 @@ void Info::removeSkill( const Skill & sk )
 
     if( posSk != -1 ) skills.remove( posSk );
 }
+
+
+void Info::setPersonal( const Personal & p ) { dataPersonal = p; }
+
+
+void Info::setSchoolExperiences( const QVector<Experience> & sch )
+{
+    schoolExperience = sch;
+}
+
+
+void Info::setSkills( const QVector<Skill> & sks )
+{
+    skills = sks;
+}
+
+
+void Info::setWorkExperiences( const QVector<Experience> & wrk )
+{
+    workExperience = wrk;
+}
+

@@ -36,6 +36,10 @@ class Info
         void removeSchoolExperience( const Experience & );
         void removeWorkExperience( const Experience & );
         void removeSkill( const Skill & );
+        void setPersonal( const Personal & );
+        void setSchoolExperiences( const QVector<Experience> & );
+        void setSkills( const QVector<Skill> & );
+        void setWorkExperiences( const QVector<Experience> & );
 };
 
 #endif // INFO_H
