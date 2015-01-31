@@ -10,7 +10,7 @@ BoardFriends::BoardFriends( const LevelAccess::Type & level,
     me->setFixedHeight( 110 );
 
     QPushButton * btnModify = new QPushButton( tr( "Modified" ) );
-    QPushButton * btnSearch = new QPushButton( tr( "Search cowork" ) );
+    QPushButton * btnSearch = new QPushButton( tr( "Search co-worker" ) );
     TableUsers * friends = new TableUsers( tr( "My colleagues" ) );
 
     QVBoxLayout * layout = new QVBoxLayout();
