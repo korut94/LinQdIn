@@ -17,6 +17,18 @@ namespace SearchGroupUtente
 
             void compose( Frankenstein & ) const;
     };
+
+    class ByNameAndSurname : public Query
+    {
+        private:
+            QString name;
+            QString surname;
+
+        public:
+            ByNameAndSurname( const QString &, const QString & );
+
+            void compose( Frankenstein & ) const;
+    };
 }
 
 #endif // SEARCHGROUPUTENTE_H
