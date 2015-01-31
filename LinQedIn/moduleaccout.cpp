@@ -22,6 +22,19 @@ ModuleAccout::~ModuleAccout()
 }
 
 
+LevelAccess::Type ModuleAccout::getTypeAccount() const
+{
+    switch( account->currentIndex() )
+    {
+        case 0: return LevelAccess::Basic;
+        case 1: return LevelAccess::Business;
+        case 2: return LevelAccess::Executive;
+
+        default: return LevelAccess::Basic;
+    }
+}
+
+
 void ModuleAccout::reset()
 {
     account->setCurrentIndex( 0 );

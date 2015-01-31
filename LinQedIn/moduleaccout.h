@@ -6,6 +6,8 @@
 #include <QLabel>
 #include <QWidget>
 
+#include "levelaccess.h"
+
 class ModuleAccout : public QWidget
 {
     Q_OBJECT
@@ -16,6 +18,8 @@ class ModuleAccout : public QWidget
     public:
         ModuleAccout( QWidget * = nullptr );
         ~ModuleAccout();
+
+        LevelAccess::Type getTypeAccount() const;
 
         void reset();
 };
