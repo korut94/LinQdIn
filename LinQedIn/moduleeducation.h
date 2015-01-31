@@ -30,6 +30,7 @@ class ModuleEducation : public QWidget
                 ~ModuleStudio();
 
                 bool checkError() const;
+                bool complete() const;
 
                 Experience getEducation() const;
 
@@ -44,6 +45,7 @@ class ModuleEducation : public QWidget
         ~ModuleEducation();
 
         bool checkError() const;
+        bool complete() const;
 
         QVector<Experience> getEducations() const;
 

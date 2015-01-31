@@ -36,6 +36,15 @@ bool ModuleExperience::ModuleQualifica::checkError() const
 }
 
 
+bool ModuleExperience::ModuleQualifica::complete() const
+{
+    return ( !editCompany->text().isEmpty() &&
+             !editDescrizione->toPlainText().isEmpty() &&
+             !editDurata->text().isEmpty() &&
+             !editExp->text().isEmpty() );
+}
+
+
 Experience ModuleExperience::ModuleQualifica::getExperience() const
 {
     return Experience( editExp->text(),
@@ -81,6 +90,26 @@ bool ModuleExperience::checkError() const
     }
 
     return check;
+}
+
+
+bool ModuleExperience::complete() const
+{
+    if( listaQualifica.size() == 0 ) return true;
+    else
+    {
+        QVector<ModuleQualifica *>::const_iterator
+                                    itr = listaQualifica.begin();
+        bool complete = true;
+
+        while( itr != listaQualifica.end() && complete )
+        {
+            complete = (*itr)->complete();
+            itr++;
+        }
+
+        return complete;
+    }
 }
 
 

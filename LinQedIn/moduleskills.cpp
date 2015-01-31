@@ -31,6 +31,25 @@ QVector<Skill> ModuleSkills::getSkills() const
 }
 
 
+bool ModuleSkills::complete() const
+{
+    if( listaSkills.size() == 0 ) return true;
+    else
+    {
+        QVector<QLineEdit *>::const_iterator itr = listaSkills.begin();
+        bool complete = true;
+
+        while( itr != listaSkills.end() && complete )
+        {
+            complete = !( (*itr)->text().isEmpty() );
+            itr++;
+        }
+
+        return complete;
+    }
+}
+
+
 void ModuleSkills::addSkill()
 {
     QLineEdit * skill = new QLineEdit();

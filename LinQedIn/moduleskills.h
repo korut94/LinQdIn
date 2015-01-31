@@ -21,6 +21,8 @@ class ModuleSkills : public QWidget
 
         QVector<Skill> getSkills() const;
 
+        bool complete() const;
+
         void addSkill();
         void reset();
 };

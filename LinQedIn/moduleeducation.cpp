@@ -27,6 +27,15 @@ bool ModuleEducation::ModuleStudio::checkError() const
 }
 
 
+bool ModuleEducation::ModuleStudio::complete() const
+{
+    return ( !editDescrizione->toPlainText().isEmpty() &&
+             !editDurata->text().isEmpty() &&
+             !editSchool->text().isEmpty() &&
+             !editTitle->text().isEmpty() );
+}
+
+
 ModuleEducation::ModuleStudio::~ModuleStudio()
 {
     delete editSchool;
@@ -81,6 +90,25 @@ bool ModuleEducation::checkError() const
     }
 
     return check;
+}
+
+
+bool ModuleEducation::complete() const
+{
+    if( listaStudio.size() == 0 ) return true;
+    else
+    {
+        QVector<ModuleStudio *>::const_iterator itr = listaStudio.begin();
+        bool complete = true;
+
+        while( itr != listaStudio.end() && complete )
+        {
+            complete = (*itr)->complete();
+            itr++;
+        }
+
+        return complete;
+    }
 }
 
 

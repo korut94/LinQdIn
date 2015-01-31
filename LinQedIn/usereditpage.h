@@ -40,6 +40,8 @@ class UserEditPage : public QWidget
         void requestAddSkill();
 
     public slots:
+        bool completeForm() const;
+
         ErrorState::Type checkErrorForm() const;
 
         Info recapInfo() const;

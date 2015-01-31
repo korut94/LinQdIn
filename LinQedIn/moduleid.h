@@ -17,13 +17,15 @@ class ModuleID : public QWidget
     Q_OBJECT
 
     private:
+        static const int startYear;
+
         LineEditValidate * editName;
         LineEditValidate * editSurname;
         LineEditValidate * editPrefixNumber;
         LineEditValidate * editNumber;
-        QComboBox * editData_Day;
-        QComboBox * editData_Month;
-        QComboBox * editData_Year;
+        QComboBox * editDate_Day;
+        QComboBox * editDate_Month;
+        QComboBox * editDate_Year;
 
         static QStringList insertNumDay();
         static QStringList insertNameMonth();
@@ -34,8 +36,9 @@ class ModuleID : public QWidget
         ~ModuleID();
 
         bool checkError() const;
+        bool complete() const;
 
-        Personal getDataPersonal() const;
+        Personal getDatePersonal() const;
 
         void reset();
 };

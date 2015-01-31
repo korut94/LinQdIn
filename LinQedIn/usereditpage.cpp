@@ -1,5 +1,18 @@
 #include "usereditpage.h"
 
+bool UserEditPage::completeForm() const
+{
+    bool complete = true;
+
+    if( education != nullptr ) complete = education->complete();
+    if( experience != nullptr && complete ) complete = experience->complete();
+    if( id != nullptr && complete ) complete = id->complete();
+    if( skills != nullptr && complete ) complete = skills->complete();
+
+    return complete;
+}
+
+
 ErrorState::Type UserEditPage::checkErrorForm() const
 {
     bool check = experience->checkError() &&
@@ -14,7 +27,7 @@ Info UserEditPage::recapInfo() const
 {
     Info result;
 
-    if( id != nullptr ) result.setPersonal( id->getDataPersonal() );
+    if( id != nullptr ) result.setPersonal( id->getDatePersonal() );
     if( skills != nullptr ) result.setSkills( skills->getSkills() );
     if( experience != nullptr )
     {

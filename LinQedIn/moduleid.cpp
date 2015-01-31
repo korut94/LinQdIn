@@ -1,5 +1,7 @@
 #include "moduleid.h"
 
+const int ModuleID::startYear = 1910;
+
 QStringList ModuleID::insertNumDay()
 {
     QStringList list;
@@ -38,7 +40,7 @@ QStringList ModuleID::insertNumYear()
 {
     QStringList list;
 
-    for( int year = 1910; year < QDate::currentDate().year() + 1; year++ )
+    for( int year = startYear; year < QDate::currentDate().year() + 1; year++ )
     {
         list.push_back( QString::number( year ) );
     }
@@ -59,15 +61,15 @@ ModuleID::ModuleID( QWidget * parent ) : QWidget( parent )
     editPrefixNumber->setMaxLength( 3 );
     editNumber = new LineEditValidate( QRegExp( "[0-9]*" ) );
 
-    editData_Day = new QComboBox();
-    editData_Day->setStyleSheet( "combobox-popup: 0;" );
-    editData_Day->addItems( insertNumDay() );
-    editData_Month = new QComboBox();
-    editData_Month->setStyleSheet( "combobox-popup: 0;" );
-    editData_Month->addItems( insertNameMonth() );
-    editData_Year = new QComboBox();
-    editData_Year->setStyleSheet( "combobox-popup: 0;" );
-    editData_Year->addItems( insertNumYear() );
+    editDate_Day = new QComboBox();
+    editDate_Day->setStyleSheet( "combobox-popup: 0;" );
+    editDate_Day->addItems( insertNumDay() );
+    editDate_Month = new QComboBox();
+    editDate_Month->setStyleSheet( "combobox-popup: 0;" );
+    editDate_Month->addItems( insertNameMonth() );
+    editDate_Year = new QComboBox();
+    editDate_Year->setStyleSheet( "combobox-popup: 0;" );
+    editDate_Year->addItems( insertNumYear() );
 
     QFormLayout * layoutForm = new QFormLayout;
     layoutForm->setHorizontalSpacing( 50 );
@@ -82,12 +84,12 @@ ModuleID::ModuleID( QWidget * parent ) : QWidget( parent )
 
     layoutForm->addRow( tr( "Number" ) + ':', layoutNumber );
 
-    QHBoxLayout * layoutData = new QHBoxLayout;
-    layoutData->addWidget( editData_Day );
-    layoutData->addWidget( editData_Month );
-    layoutData->addWidget( editData_Year );
+    QHBoxLayout * layoutDate = new QHBoxLayout;
+    layoutDate->addWidget( editDate_Day );
+    layoutDate->addWidget( editDate_Month );
+    layoutDate->addWidget( editDate_Year );
 
-    layoutForm->addRow( tr( "Date of birth" ) + ':', layoutData );
+    layoutForm->addRow( tr( "Date of birth" ) + ':', layoutDate );
 
     QWidget * container = new QWidget();
     container->setMaximumWidth( 400 );
@@ -106,9 +108,9 @@ ModuleID::~ModuleID()
     delete editSurname;
     delete editPrefixNumber;
     delete editNumber;
-    delete editData_Day;
-    delete editData_Month;
-    delete editData_Year;
+    delete editDate_Day;
+    delete editDate_Month;
+    delete editDate_Year;
 }
 
 
@@ -122,12 +124,24 @@ bool ModuleID::checkError() const
                 ( editPrefixNumber->text().isEmpty() ||
                   editPrefixNumber->check() == QValidator::Acceptable ) &&
                 ( editNumber->text().isEmpty() ||
-                  editNumber->check() == QValidator::Acceptable )
+                  editNumber->check() == QValidator::Acceptable ) &&
+                ( QDate::isValid( startYear + editDate_Year->currentIndex(),
+                                  editDate_Month->currentIndex() + 1,
+                                  editDate_Day->currentIndex() + 1 )  )
            );
 }
 
 
-Personal ModuleID::getDataPersonal() const
+bool ModuleID::complete() const
+{
+    return ( !editName->text().isEmpty() &&
+             !editNumber->text().isEmpty() &&
+             !editPrefixNumber->text().isEmpty() &&
+             !editSurname->text().isEmpty() );
+}
+
+
+Personal ModuleID::getDatePersonal() const
 {
     Personal risult;
 
@@ -141,9 +155,9 @@ Personal ModuleID::getDataPersonal() const
 
     risult.setNumTelefono( fullNumber );
 
-    risult.setDate( QDate( editData_Day->currentIndex() + 1,
-                           editData_Month->currentIndex() + 1,
-                           editData_Year->currentIndex() + 1 ) );
+    risult.setDate( QDate( editDate_Day->currentIndex(),
+                           editDate_Month->currentIndex(),
+                           startYear + editDate_Year->currentIndex() ) );
 
     return risult;
 }
@@ -151,9 +165,9 @@ Personal ModuleID::getDataPersonal() const
 
 void ModuleID::reset()
 {
-    editData_Day->setCurrentIndex( 0 );
-    editData_Month->setCurrentIndex( 0 );
-    editData_Year->setCurrentIndex( 0 );
+    editDate_Day->setCurrentIndex( 0 );
+    editDate_Month->setCurrentIndex( 0 );
+    editDate_Year->setCurrentIndex( 0 );
     editName->clear();
     editNumber->clear();
     editPrefixNumber->clear();

@@ -2,10 +2,13 @@
 
 void UserInsert::checkToSanityInsert()
 {
-    ErrorState::Type check = editPage->checkErrorForm();
+    if( editPage->checkErrorForm() == ErrorState::None )
+    {
+        if( editPage->completeForm() ) emit insert( editPage->recapInfo() );
+        else emit error( ErrorState::EmptyValue );
+    }
 
-    if( check == ErrorState::None ) emit insert( editPage->recapInfo() );
-    else emit error( check );
+    else emit error( ErrorState::InvalidValue );
 }
 
 
