@@ -7,9 +7,13 @@
 #include "admininterface_model.h"
 #include "admininterface_view.h"
 #include "info.h"
+#include "searchgrouputente.h"
 #include "userinsert.h"
 #include "userinterface_view.h"
 #include "usersearch.h"
+#include "utentebasic.h"
+#include "utentebusiness.h"
+#include "utenteexecutive.h"
 
 class AdminInterface_Controller : public QObject
 {
@@ -27,6 +31,7 @@ class AdminInterface_Controller : public QObject
         void display( QWidget * );
 
     public slots:
+        void addUser( const Info & );
         void catchError( ErrorState::Type );
         void setInsertWindow();
         void setSearchWindow();

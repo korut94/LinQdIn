@@ -20,6 +20,53 @@ void AdminInterface_Controller::connetti() const
 }
 
 
+void AdminInterface_Controller::addUser( const Info & info )
+{
+    smartptr_utente utente;
+
+    Database * db = model->getDatabase();
+
+    int i = 0;
+
+    QString path = info.getPersonal().getNome() +
+                   '.' +
+                   info.getPersonal().getCognome() +
+                   '.';
+
+    QString username = path + QString::number( i );
+
+    smartptr_utente ris =
+                    db->getUser( SearchGroupUtente::ByUsername( username ) );
+
+    while( ris != nullptr )
+    {
+        i++;
+
+        //tolgo ultimo carattere, vale anche se il numero alla fine
+        //ha più cifre
+        username.replace( 0, username.length(), path + QString::number( i ) );
+        ris = db->getUser( SearchGroupUtente::ByUsername( username )  );
+    }
+
+
+    switch( insert->getAccoutTypeSet() )
+    {
+        case LevelAccess::Basic : utente = new UtenteBasic( username, info );
+                                  break;
+        case LevelAccess::Business : utente = new UtenteBusiness( username,
+                                                                  info );
+                                     break;
+        case LevelAccess::Executive : utente = new UtenteExecutive( username,
+                                                                    info );
+                                      break;
+    }
+
+    db->insert( utente );
+
+    std::cout << db->getUser( SearchGroupUtente::ByUsername( username ) )->getUsername().toStdString() << std::endl;
+}
+
+
 void AdminInterface_Controller::catchError( ErrorState::Type type )
 {
 
@@ -34,7 +81,12 @@ void AdminInterface_Controller::setInsertWindow()
         connect( insert,
                  SIGNAL( error( ErrorState::Type ) ),
                  insert,
-                 SLOT( managerLocalError( ErrorState::Type ) ) );
+                 SLOT( manageLocalError( ErrorState::Type ) ) );
+
+        connect( insert,
+                 SIGNAL( insert( const Info &) ),
+                 this,
+                 SLOT( addUser( const Info & ) ) );
     }
 
     emit display( insert->getView() );
