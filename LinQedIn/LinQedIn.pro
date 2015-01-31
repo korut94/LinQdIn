@@ -58,7 +58,10 @@ SOURCES += main.cpp\
     usermodified.cpp \
     userinsert.cpp \
     moduleeducation.cpp \
-    moduleaccout.cpp
+    moduleaccout.cpp \
+    utentebasic.cpp \
+    utentebusiness.cpp \
+    utenteexecutive.cpp
 
 HEADERS  += \
     utente.h \
@@ -108,7 +111,10 @@ HEADERS  += \
     userinsert.h \
     moduleeducation.h \
     moduleaccout.h \
-    errorstate.h
+    errorstate.h \
+    utentebasic.h \
+    utentebusiness.h \
+    utenteexecutive.h
 
 FORMS    += mainwindow.ui
 
