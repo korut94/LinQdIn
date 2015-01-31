@@ -102,7 +102,8 @@ void UserEditPage::loadModuleEducation()
         QLabel * lblEducation = new QLabel( tr( "Education" ) );
         lblEducation->setFont( QFont( "Helvetica", 12, QFont::Bold ) );
         QPushButton * btnEducation = new QPushButton( tr( "Add Education" ) );
-        btnEducation->setSizePolicy( QSizePolicy::Fixed, QSizePolicy::Maximum );
+        btnEducation->setSizePolicy( QSizePolicy::Fixed,
+                                     QSizePolicy::Maximum );
 
         QHBoxLayout * layoutEducation = new QHBoxLayout();
         layoutEducation->addWidget( lblEducation );
@@ -128,8 +129,10 @@ void UserEditPage::loadModuleExperience()
 
         QLabel * lblExperience = new QLabel( tr( "Experience" ) );
         lblExperience->setFont( QFont( "Helvetica", 12, QFont::Bold ) );
-        QPushButton * btnExperience = new QPushButton( tr( "Add Experience" ) );
-        btnExperience->setSizePolicy( QSizePolicy::Fixed, QSizePolicy::Maximum );
+        QPushButton * btnExperience =
+                      new QPushButton( tr( "Add Experience" ) );
+        btnExperience->setSizePolicy( QSizePolicy::Fixed,
+                                      QSizePolicy::Maximum );
 
         QHBoxLayout * layoutExperience = new QHBoxLayout();
         layoutExperience->addWidget( lblExperience );
@@ -230,7 +233,6 @@ UserEditPage::UserEditPage( QWidget * parent ) :
 
 UserEditPage::~UserEditPage()
 {
-
 }
 
 
