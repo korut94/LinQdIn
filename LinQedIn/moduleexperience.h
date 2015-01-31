@@ -20,7 +20,7 @@ class ModuleExperience : public QWidget
         class ModuleQualifica : public QWidget
         {
             private:
-                LineEditValidate * editExp;
+                QLineEdit * editExp;
                 QLineEdit * editCompany;
                 QLineEdit * editDurata;
                 QTextEdit * editDescrizione;

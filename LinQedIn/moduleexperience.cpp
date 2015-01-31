@@ -3,7 +3,7 @@
 ModuleExperience::ModuleQualifica::ModuleQualifica( QWidget * parent )
                                                     : QWidget( parent )
 {
-    editExp = new LineEditValidate( QRegExp( "(?![0-9])" ) );
+    editExp = new QLineEdit();
     editCompany = new QLineEdit();
     editDurata = new QLineEdit();
     editDescrizione = new QTextEdit();
@@ -31,8 +31,7 @@ ModuleExperience::ModuleQualifica::~ModuleQualifica()
 
 bool ModuleExperience::ModuleQualifica::checkError() const
 {
-    return ( editExp->text().isEmpty() ||
-             editExp->check() == QValidator::Acceptable );
+    return true;
 }
 
 
