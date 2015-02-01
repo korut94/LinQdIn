@@ -42,5 +42,4 @@ AdminInterface_View::AdminInterface_View( QWidget * parent )
 
 AdminInterface_View::~AdminInterface_View()
 {
-
 }
