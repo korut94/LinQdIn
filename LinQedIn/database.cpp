@@ -14,7 +14,7 @@ Database::Database() : modified( false ) {}
 
 bool Database::isPresent( const smartptr_utente & user ) const
 {
-    if( user == NULL ) return false;
+    if( user == nullptr ) return false;
     else return entryUsername.isPresent( user );
 }
 
@@ -43,7 +43,7 @@ smartptr_utente Database::getUser( const Query & query ) const
             }
 
             if( found ) return *itr;
-            else return NULL;
+            else return nullptr;
         }
     }
 }
@@ -61,13 +61,13 @@ void Database::insert( const smartptr_utente & user )
 
 void Database::linkUser( const smartptr_utente & a, const smartptr_utente & b )
 {
-    if( a != NULL && b != NULL ) a->getContatti().addUser( b );
+    if( a != nullptr && b != nullptr ) a->getContatti().addUser( b );
 }
 
 
 void Database::modify( const smartptr_utente & user, const Info & infoMod )
 {
-    if( user != NULL )
+    if( user != nullptr )
     {
         //L'utente non verra cancellato dalla memoria perchè è puntato almeno
         //dallo smartptr_utente passato come parametro
@@ -81,7 +81,7 @@ void Database::modify( const smartptr_utente & user, const Info & infoMod )
 
 void Database::remove( const smartptr_utente & user )
 {
-    if( user != NULL )
+    if( user != nullptr )
     {
         user->setActivate( false );
 

@@ -45,7 +45,7 @@ template <typename HashFunction>
 bool HashListUtente<HashFunction>::
      isPresent( const smartptr_utente & user ) const
 {
-    if( user == NULL ) return false;
+    if( user == nullptr ) return false;
     else
     {
         int index = hash( *user );
@@ -73,9 +73,7 @@ smartptr_utente HashListUtente<HashFunction>::
 {
     int index = hash( path );
 
-    std::cout << index << std::endl;
-
-    if( index > size() - 1 ) return NULL;
+    if( index > size() - 1 ) return nullptr;
     else
     {
         bool found = false;
@@ -90,7 +88,7 @@ smartptr_utente HashListUtente<HashFunction>::
         }
 
         if( found ) return *itr;
-        else return NULL;
+        else return nullptr;
     }
 }
 
@@ -98,7 +96,7 @@ smartptr_utente HashListUtente<HashFunction>::
 template <typename HashFunction>
 void HashListUtente<HashFunction>::insert( const smartptr_utente & user )
 {
-    if( user != NULL )
+    if( user != nullptr )
     {
         int index = hash( *user );
 
@@ -113,7 +111,7 @@ void HashListUtente<HashFunction>::insert( const smartptr_utente & user )
 template <typename HashFunction>
 void HashListUtente<HashFunction>::remove( const smartptr_utente & user )
 {
-    if( user != NULL )
+    if( user != nullptr )
     {
         int index = hash( *user );
 
