@@ -1,6 +1,7 @@
 #ifndef TABLEUSERS_H
 #define TABLEUSERS_H
 
+#include <iostream>
 #include <QHBoxLayout>
 #include <QLabel>
 #include <QScrollArea>
@@ -22,13 +23,13 @@ class TableUsers : public QWidget
         };
 
     private:
-        QLayout * listUsers;
+        QScrollArea * areaTable;
+
+    public slots:
+        void setItems( const QVector<Info> & );
 
     public:
         TableUsers( const QString & = QString(), QWidget * = NULL );
-
-        void addItem( const Info & );
-
         ~TableUsers();
 };
 

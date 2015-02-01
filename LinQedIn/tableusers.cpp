@@ -3,7 +3,7 @@
 TableUsers::UserItem::UserItem( const Info & info, QWidget * parent )
                                 : QWidget( parent )
 {
-    setFixedHeight( 70 );
+    setFixedHeight( 80 );
 
     QPixmap pixmap( "../LinQedIn/User_48x36.png" );
     QLabel * icon = new QLabel();
@@ -20,7 +20,8 @@ TableUsers::UserItem::UserItem( const Info & info, QWidget * parent )
     QLabel * telephone = new QLabel( "Tel: " + personal.getNumTelefono() );
     telephone->setStyleSheet( "QLabel{ font: 8pt; }" );
 
-    QLabel * data = new QLabel( "Data: " + personal.getDate().toString( "dMyy" ) );
+    QLabel * data = new QLabel( "Data: " +
+                                personal.getDate().toString( "dd MMMM yyyy" ) );
     data->setStyleSheet( "QLabel{ font: 8pt; }" );
 
     QVBoxLayout * layoutInfo = new QVBoxLayout;
@@ -41,28 +42,37 @@ TableUsers::UserItem::~UserItem()
 }
 
 
+void TableUsers::setItems( const QVector<Info> & users )
+{
+    QWidget * listUsers = new QWidget();
+    QVBoxLayout * layoutList = new QVBoxLayout();
+    layoutList->setAlignment( Qt::AlignTop );
+
+    for( QVector<Info>::const_iterator itr = users.begin();
+         itr != users.end();
+         itr++ )
+    layoutList->addWidget( new UserItem( *itr ) );
+
+    listUsers->setLayout( layoutList );
+    areaTable->setWidget( listUsers );
+}
+
+
 TableUsers::TableUsers( const QString & title, QWidget * parent )
                         : QWidget( parent )
 {
     setSizePolicy( QSizePolicy::Minimum, QSizePolicy::Minimum );
     setMaximumWidth( 300 );
 
-    QScrollArea * areaTable = new QScrollArea;
+    areaTable = new QScrollArea;
     areaTable->setWidgetResizable( true );
-
-    listUsers = new QVBoxLayout;
-    //Aggiunta degli utenti dall'alto verso il basso
-    listUsers->setAlignment( Qt::AlignTop );
-    listUsers->setContentsMargins( 0, 0, 0, 0 );
 
     QLabel * lblTitle = new QLabel( title );
     lblTitle->setAlignment( Qt::AlignCenter );
     lblTitle->setFrameStyle( QFrame::StyledPanel | QFrame::Plain );
 
-    listUsers->addWidget( lblTitle );
-    areaTable->setLayout( listUsers );
-
     QVBoxLayout * layout = new QVBoxLayout;
+    layout->addWidget( lblTitle );
     layout->addWidget( areaTable );
     layout->setContentsMargins( 0, 0, 0, 0 );
 
@@ -70,13 +80,6 @@ TableUsers::TableUsers( const QString & title, QWidget * parent )
 }
 
 
-void TableUsers::addItem( const Info & info )
-{
-    listUsers->addWidget( new UserItem( info ) );
-}
-
-
 TableUsers::~TableUsers()
 {
-    delete listUsers;
 }
