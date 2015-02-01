@@ -9,16 +9,19 @@ Info::Info( const Personal & data,
               workExperience( wrk ),
               schoolExperience( sch ){}
 
-QVector<Experience> Info::getSchoolExperiences() const
+const QVector<Experience> & Info::getSchoolExperiences() const
 {
     return schoolExperience;
 }
 
 
-QVector<Experience> Info::getWorkExperiences() const { return workExperience; }
+const QVector<Experience> & Info::getWorkExperiences() const
+{
+    return workExperience;
+}
 
 
-QVector<Skill> Info::getSkills() const { return skills; }
+const QVector<Skill> & Info::getSkills() const { return skills; }
 
 
 Personal & Info::getPersonal() { return dataPersonal; }

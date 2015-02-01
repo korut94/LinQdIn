@@ -23,9 +23,9 @@ class Info
               const QVector<Experience> & = QVector<Experience>(),
               const QVector<Experience> & = QVector<Experience>() );
 
-        QVector<Experience> getSchoolExperiences() const;
-        QVector<Experience> getWorkExperiences() const;
-        QVector<Skill> getSkills() const;
+        const QVector<Experience> & getSchoolExperiences() const;
+        const QVector<Experience> & getWorkExperiences() const;
+        const QVector<Skill> & getSkills() const;
 
         Personal & getPersonal();
         const Personal & getPersonal() const;
