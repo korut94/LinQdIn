@@ -1,5 +1,11 @@
 #include "searchgrouputente.h"
 
+void SearchGroupUtente::All::compose( Frankenstein & path ) const
+{
+
+}
+
+
 SearchGroupUtente::ByUsername::ByUsername( const QString & u ) : username( u )
 {}
 

@@ -7,6 +7,12 @@
 
 namespace SearchGroupUtente
 {
+    class All : public Query
+    {
+        public:
+            void compose( Frankenstein & ) const;
+    };
+
     class ByUsername : public Query
     {
         private:
