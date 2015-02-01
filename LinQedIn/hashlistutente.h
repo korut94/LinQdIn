@@ -23,7 +23,7 @@ class HashListUtente : private QVector< QList<smartptr_utente> >
 
         int size() const;
 
-        smartptr_utente getUser( const Frankenstein & ) const;
+        QVector<smartptr_utente> getUser( const Frankenstein & ) const;
 
         void insert( const smartptr_utente & );
         void remove( const smartptr_utente & );
@@ -68,27 +68,26 @@ int HashListUtente<HashFunction>::size() const
 
 
 template <typename HashFunction>
-smartptr_utente HashListUtente<HashFunction>::
+QVector<smartptr_utente> HashListUtente<HashFunction>::
                 getUser( const Frankenstein & path ) const
 {
     int index = hash( path );
 
-    if( index > size() - 1 ) return nullptr;
+    QVector<smartptr_utente> risp;
+
+    if( index > size() - 1 ) return risp;
     else
     {
-        bool found = false;
-
         const ListUser & list = QVector<ListUser>::operator[]( index );
         typename ListUser::const_iterator itr = list.begin();
 
-        while( itr != list.end() && !found )
+        while( itr != list.end() )
         {
-            if( path == **itr ) found = true;
-            else itr++;
+            if( path == **itr ) risp.push_back( *itr );
+            itr++;
         }
 
-        if( found ) return *itr;
-        else return nullptr;
+        return risp;
     }
 }
 
