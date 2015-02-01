@@ -123,7 +123,7 @@ bool Frankenstein::operator==( const Frankenstein & f ) const
     const Info & myInfo = getInfo();
     const Info & hisInfo = f.getInfo();
 
-    return ( getUsername() == f.getUsername() &&
+    return ( ( getUsername().isEmpty() || getUsername() == f.getUsername() ) &&
 
              partialMatch( myInfo.getPersonal(), hisInfo.getPersonal() ) &&
 
