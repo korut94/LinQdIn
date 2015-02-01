@@ -120,14 +120,12 @@ Frankenstein::Frankenstein( const Utente & utente )
 
 bool Frankenstein::operator==( const Frankenstein & f ) const
 {
-    bool equal = true;
-
-    QString myUser = getUsername();
-
     const Info & myInfo = getInfo();
     const Info & hisInfo = f.getInfo();
 
-    return ( partialMatch( myInfo.getPersonal(), hisInfo.getPersonal() ) &&
+    return ( getUsername() == f.getUsername() &&
+
+             partialMatch( myInfo.getPersonal(), hisInfo.getPersonal() ) &&
 
              matchExperiences( myInfo.getWorkExperiences(),
                                hisInfo.getWorkExperiences() ) &&
