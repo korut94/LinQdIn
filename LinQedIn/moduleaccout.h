@@ -1,6 +1,7 @@
 #ifndef MODULEACCOUT_H
 #define MODULEACCOUT_H
 
+#include <iostream>
 #include <QComboBox>
 #include <QFormLayout>
 #include <QLabel>

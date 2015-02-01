@@ -4,9 +4,12 @@ LevelAccess::Type UserInsert::getAccoutTypeSet() const
 {
     try
     {
+        //Errore ritorno valore sulla release
         return editPage->getTypeUser();
     }
-    catch( const std::runtime_error & error ){}
+    catch( const std::runtime_error & error )
+    {
+    }
 }
 
 

@@ -33,13 +33,10 @@ QVector<smartptr_utente> Database::getUser( const Query & query ) const
         case General :
         {
             QVector<smartptr_utente> risp;
-
             QList<smartptr_utente>::const_iterator itr = general.constBegin();
 
             while( itr != general.end() )
             {
-                bool r = frankenstein == **itr;
-
                 if( frankenstein == **itr ) risp.push_back( *itr );
                 itr++;
             }
