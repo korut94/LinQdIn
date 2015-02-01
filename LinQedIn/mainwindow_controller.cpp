@@ -14,6 +14,6 @@ MainWindow_Controller::MainWindow_Controller( MainWindow_Model * m,
 
 MainWindow_Controller::~MainWindow_Controller()
 {
-    delete view;
     delete model;
+    delete view;
 }
