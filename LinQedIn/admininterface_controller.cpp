@@ -42,9 +42,8 @@ void AdminInterface_Controller::addUser( const Info & info )
     {
         i++;
 
-        //tolgo ultimo carattere, vale anche se il numero alla fine
-        //ha più cifre
         username.replace( 0, username.length(), path + QString::number( i ) );
+
         ris = db->getUser( SearchGroupUtente::ByUsername( username )  );
     }
 
@@ -63,7 +62,9 @@ void AdminInterface_Controller::addUser( const Info & info )
 
     db->insert( utente );
 
-    std::cout << db->getUser( SearchGroupUtente::ByUsername( username ) )->getUsername().toStdString() << std::endl;
+    delete insert;
+
+    setUserWindow( info );
 }
 
 
@@ -106,6 +107,14 @@ void AdminInterface_Controller::setSearchWindow()
 }
 
 
+void AdminInterface_Controller::setUserWindow( const Info & info )
+{
+    UserInterface_View * user = new UserInterface_View();
+
+    emit display( user );
+}
+
+
 void AdminInterface_Controller::test( const Info & info ) const
 {
     std::cout << info.getPersonal().getNome().toStdString() << std::endl;
@@ -122,9 +131,9 @@ AdminInterface_Controller( AdminInterface_Model * m, AdminInterface_View * v )
 
 AdminInterface_Controller::~AdminInterface_Controller()
 {
-    delete model;
-    delete view;
     delete insert;
+    delete view;
+    delete model;
 }
 
 
