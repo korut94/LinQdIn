@@ -42,6 +42,11 @@ AdminInterface_View::AdminInterface_View( QWidget * parent )
              SIGNAL( updateListUsers( const QVector<Info> &) ),
              table,
              SLOT( setItems( const QVector<Info> & ) ) );
+
+    connect( tools,
+             SIGNAL( viewAllUsers() ),
+             this,
+             SIGNAL( requestToViewUsers() ) );
 }
 
 

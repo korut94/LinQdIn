@@ -12,6 +12,11 @@ void AdminInterface_Controller::connetti() const
                       SIGNAL( requestToAddUser() ),
                       this,
                       SLOT( setInsertWindow() ) );
+
+    QObject::connect( view,
+                      SIGNAL( requestToViewUsers() ),
+                      this,
+                      SLOT( viewUsers() ) );
 }
 
 
@@ -61,18 +66,7 @@ void AdminInterface_Controller::addUser( const Info & info )
     delete insert;
     insert = nullptr;
 
-    QVector<smartptr_utente> all = db->getUser( SearchGroupUtente::All() );
-
-    QVector<Info> infoAll;
-
-    for( QVector<smartptr_utente>::const_iterator itr = all.begin();
-         itr != all.end();
-         itr++ )
-    {
-        infoAll.push_back( (*itr)->getInfo() );
-    }
-
-    view->updateListUsers( infoAll );
+    viewUsers();
     setUserWindow( utente );
 }
 
@@ -105,14 +99,17 @@ void AdminInterface_Controller::setInsertWindow()
 
 void AdminInterface_Controller::setSearchWindow()
 {
-    UserSearch * search = new UserSearch();
+    if( search == nullptr )
+    {
+        search = new UserSearch();
 
-    connect( search,
-             SIGNAL( searchUser( const Info & ) ),
-             this,
-             SLOT( test( const Info & ) ) );
+        connect( search,
+                 SIGNAL( search( const Info & ) ),
+                 this,
+                 SLOT( searchUser( const Info & ) ) );
+    }
 
-    view->setFrameUtility( search );
+    view->setFrameUtility( search->getView() );
 }
 
 
@@ -124,15 +121,49 @@ void AdminInterface_Controller::setUserWindow( const smartptr_utente & user )
 }
 
 
-void AdminInterface_Controller::test( const Info & info ) const
+void AdminInterface_Controller::searchUser( const Info & info ) const
 {
-    std::cout << info.getPersonal().getNome().toStdString() << std::endl;
+    Database * db = model->getDatabase();
+
+    QString name = info.getPersonal().getNome();
+    QString surname = info.getPersonal().getCognome();
+
+    QVector<smartptr_utente> utente = db->getUser( SearchGroupUtente::
+                                          ByNameAndSurname( name, surname ) );
+
+    QVector<Info> user;
+
+    if( utente.size() != 0 ) user.push_back( utente[0]->getInfo() );
+
+    view->updateListUsers( user );
+}
+
+
+void AdminInterface_Controller::viewUsers()
+{
+    Database * db = model->getDatabase();
+
+    QVector<smartptr_utente> all = db->getUser( SearchGroupUtente::All() );
+
+    QVector<Info> infoAll;
+
+    for( QVector<smartptr_utente>::const_iterator itr = all.begin();
+         itr != all.end();
+         itr++ )
+    {
+        infoAll.push_back( (*itr)->getInfo() );
+    }
+
+    view->updateListUsers( infoAll );
 }
 
 
 AdminInterface_Controller::
 AdminInterface_Controller( AdminInterface_Model * m, AdminInterface_View * v )
-                           : model( m ), view( v ), insert( nullptr )
+                           : model( m ),
+                             view( v ),
+                             insert( nullptr ),
+                             search( nullptr )
 {
     connetti();
 }
@@ -141,6 +172,7 @@ AdminInterface_Controller( AdminInterface_Model * m, AdminInterface_View * v )
 AdminInterface_Controller::~AdminInterface_Controller()
 {
     delete insert;
+    delete search;
     delete view;
     delete model;
 }

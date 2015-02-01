@@ -1,34 +1,23 @@
 #include "usersearch.h"
 
-void UserSearch::manageLocalError( ErrorState::Type type )
+void UserSearch::composeInfo() const
 {
-    switch( type )
-    {
-        case ErrorState::InvalidValue :
-             emit errorMessage( tr( "Incorrect values" ) );
-             break;
-
-        case ErrorState::EmptyValue :
-             emit errorMessage( tr( "Empty values" ) );
-             break;
-    }
+    Personal personal( editName->text(), editSurname->text() );
+    emit search( Info( personal ) );
 }
 
 
-void UserSearch::checkToSanityInsert() const
+void UserSearch::reset()
 {
-    if( editPage->checkErrorForm() == ErrorState::None )
-    {
-        if( editPage->completeForm() ) emit search( editPage->recapInfo() );
-        else emit error( ErrorState::EmptyValue );
-    }
-
-    else emit error( ErrorState::InvalidValue );
+    editName->clear();
+    editSurname->clear();
 }
 
 
-UserSearch::UserSearch( LevelAccess::Type l, QWidget * parent )
-                        : QWidget( parent ), level( l )
+UserSearch::UserSearch( QWidget * parent )
+                        : editName( new QLineEdit ),
+                          editSurname( new QLineEdit ),
+                          QWidget( parent )
 {
 
 }
@@ -46,11 +35,6 @@ QWidget * UserSearch::getView() const
     QPushButton * btnReset = new QPushButton( tr( "Reset" ) );
     QPushButton * btnSearch = new QPushButton( tr( "Search" ) );
 
-    editPage->loadModuleId();
-    editPage->loadModuleExperience();
-    editPage->loadModuleSkill();
-    editPage->loadModuleEducation();
-
     QHBoxLayout * layoutButton = new QHBoxLayout;
     layoutButton->setAlignment( Qt::AlignRight );
     layoutButton->addWidget( btnSearch );
@@ -61,41 +45,25 @@ QWidget * UserSearch::getView() const
     layoutBottom->addWidget( new Line() );
     layoutBottom->addLayout( layoutButton );
 
+    QFormLayout * layoutForm = new QFormLayout();
+    layoutForm->addRow( tr( "Name" ) + ':', editName );
+    layoutForm->addRow( tr( "Surname" ) + ':', editSurname );
+
     QVBoxLayout * layout = new QVBoxLayout;
-    layout->addWidget( editPage );
+    layout->addLayout( layoutForm );
     layout->addLayout( layoutBottom );
 
     view->setLayout( layout );
 
-    connect( editPage,
-             SIGNAL( requestAddEducation() ),
-             editPage,
-             SLOT( addEducation() ) );
-
-    connect( editPage,
-             SIGNAL( requestAddExperience() ),
-             editPage,
-             SLOT( addExperience() ) );
-
-    connect( editPage,
-             SIGNAL( requestAddSkill() ),
-             editPage,
-             SLOT( addSkill() ) );
-
     connect( btnReset,
              SIGNAL( clicked() ),
-             editPage,
+             this,
              SLOT( reset() ) );
 
     connect( btnSearch,
              SIGNAL( clicked() ),
              this,
-             SLOT( checkToSanityInsert() ) );
-
-    connect( this,
-             SIGNAL( errorMessage( const QString & ) ),
-             editPage,
-             SLOT( error( const QString &) ) );
+             SLOT( composeInfo() ) );
 
     return view;
 }

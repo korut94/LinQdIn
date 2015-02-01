@@ -9,8 +9,9 @@ class LabelTools : public QWidget
     Q_OBJECT
 
     signals:
-        void search();
-        void add();
+        void search() const;
+        void add() const;
+        void viewAllUsers() const;
 
     public:
         LabelTools( QWidget * = NULL );

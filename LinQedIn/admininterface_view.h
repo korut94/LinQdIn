@@ -21,6 +21,7 @@ class AdminInterface_View : public QWidget
     signals:
         void requestToSearchUsers() const;
         void requestToAddUser() const;
+        void requestToViewUsers() const;
         void updateListUsers( const QVector<Info> & ) const;
 
     public slots:

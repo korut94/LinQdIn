@@ -24,8 +24,10 @@ class AdminInterface_Controller : public QObject
         AdminInterface_View * view;
 
         UserInsert * insert;
+        UserSearch * search;
 
         void connetti() const;
+        void viewAll();
 
     public slots:
         void addUser( const Info & );
@@ -33,7 +35,8 @@ class AdminInterface_Controller : public QObject
         void setInsertWindow();
         void setSearchWindow();
         void setUserWindow( const smartptr_utente & );
-        void test( const Info & ) const;
+        void searchUser( const Info & ) const;
+        void viewUsers();
 
     public:
         AdminInterface_Controller( AdminInterface_Model * =
