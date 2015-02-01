@@ -13,18 +13,13 @@ class smartptr_utente;
 class Utente : public Entity
 {
     public:
-        class Rete
+        class Rete : public QList<smartptr_utente>
         {
-            private:
-                QList<smartptr_utente> users;
-
             public:
                 Rete();
 
-                bool isPresent( const smartptr_utente & ) const;
-
-                void addUser( const smartptr_utente &  );
-                void removeUser( const smartptr_utente &  );
+                bool contains( const smartptr_utente & t ) const;
+                bool removeOne( const smartptr_utente & t );
         };
 
     private:

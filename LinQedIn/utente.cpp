@@ -5,23 +5,36 @@ Utente::Rete::Rete()
 }
 
 
-bool Utente::Rete::isPresent( const smartptr_utente & user ) const
+bool Utente::Rete::contains( const smartptr_utente & t ) const
 {
-    return users.contains( user );
+    bool found = false;
+
+    QList<smartptr_utente>::const_iterator itr = begin();
+
+    while( itr != end() && !found )
+    {
+        found = ( **itr == *t );
+        itr++;
+    }
+
+    return found;
 }
 
 
-void Utente::Rete::addUser( const smartptr_utente & user )
+bool Utente::Rete::removeOne( const smartptr_utente & t )
 {
-    users.push_front( smartptr_utente( user ) );
+    bool found = false;
+
+    QList<smartptr_utente>::iterator itr = begin();
+
+    while( itr != end() && !found )
+    {
+        if( ( found = ( **itr == *t ) ) ) erase( itr );
+        else itr++;
+    }
+
+    return found;
 }
-
-
-void Utente::Rete::removeUser( const smartptr_utente & user )
-{
-    users.removeOne( user );
-}
-
 
 
 Utente::Utente()
@@ -65,13 +78,13 @@ const Utente::Rete & Utente::getContatti() const
 
 void Utente::addContact( const smartptr_utente & user )
 {
-    contacts.addUser( user );
+    if( user != nullptr ) contacts.push_front( user );
 }
 
 
 void Utente::removeContact( const smartptr_utente & user )
 {
-    if( contacts.isPresent( user ) ) contacts.removeUser( user );
+    contacts.removeOne( user );
 }
 
 
