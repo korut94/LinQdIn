@@ -59,7 +59,11 @@ void Database::insert( const smartptr_utente & user )
 
 void Database::linkUser( const smartptr_utente & a, const smartptr_utente & b )
 {
-    if( a != nullptr && b != nullptr ) a->getContatti().addUser( b );
+    if( a != nullptr && b != nullptr )
+    {
+        a->getContatti().push_front( b );
+        b->getContatti().push_front( a );
+    }
 }
 
 
