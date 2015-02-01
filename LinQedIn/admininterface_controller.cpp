@@ -42,7 +42,6 @@ void AdminInterface_Controller::addUser( const Info & info )
         ris = db->getUser( SearchGroupUtente::ByUsername( username )  );
     }
 
-
     switch( insert->getAccoutTypeSet() )
     {
         case LevelAccess::Basic : utente = new UtenteBasic( username, info );
@@ -53,6 +52,8 @@ void AdminInterface_Controller::addUser( const Info & info )
         case LevelAccess::Executive : utente = new UtenteExecutive( username,
                                                                     info );
                                       break;
+
+        default : utente = new UtenteBusiness( username, info );
     }
 
     db->insert( utente );
