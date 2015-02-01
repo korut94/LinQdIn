@@ -53,8 +53,7 @@ ModuleID::ModuleID( QWidget * parent ) : QWidget( parent )
 {
     editName = new LineEditValidate( QRegExp( "[A-Z][a-z]*" ) );
 
-    editSurname = new LineEditValidate(
-                                QRegExp( "[A-Z][a-z]*" ) );
+    editSurname = new LineEditValidate( QRegExp( "[A-Z][a-z]*" ) );
 
     editPrefixNumber = new LineEditValidate( QRegExp( "[0-9]*" ) );
     editPrefixNumber->setFixedWidth( 40 );
@@ -70,6 +69,8 @@ ModuleID::ModuleID( QWidget * parent ) : QWidget( parent )
     editDate_Year = new QComboBox();
     editDate_Year->setStyleSheet( "combobox-popup: 0;" );
     editDate_Year->addItems( insertNumYear() );
+
+    editActualWork = new QLineEdit();
 
     QFormLayout * layoutForm = new QFormLayout;
     layoutForm->setHorizontalSpacing( 50 );
@@ -90,6 +91,7 @@ ModuleID::ModuleID( QWidget * parent ) : QWidget( parent )
     layoutDate->addWidget( editDate_Year );
 
     layoutForm->addRow( tr( "Date of birth" ) + ':', layoutDate );
+    layoutForm->addRow( tr( "Actual work" ) + ':', editActualWork );
 
     QWidget * container = new QWidget();
     container->setMaximumWidth( 400 );
@@ -104,13 +106,6 @@ ModuleID::ModuleID( QWidget * parent ) : QWidget( parent )
 
 ModuleID::~ModuleID()
 {
-    delete editName;
-    delete editSurname;
-    delete editPrefixNumber;
-    delete editNumber;
-    delete editDate_Day;
-    delete editDate_Month;
-    delete editDate_Year;
 }
 
 
@@ -137,7 +132,8 @@ bool ModuleID::complete() const
     return ( !editName->text().isEmpty() &&
              !editNumber->text().isEmpty() &&
              !editPrefixNumber->text().isEmpty() &&
-             !editSurname->text().isEmpty() );
+             !editSurname->text().isEmpty() &&
+             !editActualWork->text().isEmpty() );
 }
 
 
@@ -158,6 +154,8 @@ Personal ModuleID::getDatePersonal() const
     risult.setDate( QDate( startYear + editDate_Year->currentIndex(),
                            editDate_Month->currentIndex() + 1,
                            editDate_Day->currentIndex() + 1 ) );
+
+    risult.setActualWork( editActualWork->text() );
 
     return risult;
 }

@@ -3,13 +3,18 @@
 Personal::Personal( const QString & name,
                     const QString & surname,
                     const QString & number,
-                    const QDate & data )
+                    const QDate & data,
+                    const QString & work )
                     : nome( name ),
                       cognome( surname ),
                       n_telefono( number ),
-                      data( data )
+                      data( data ),
+                      actualWork( work )
 {
 }
+
+
+QString Personal::getActualWork() const { return actualWork; }
 
 
 QString Personal::getCognome() const
@@ -33,6 +38,12 @@ QString Personal::getNome() const
 QString Personal::getNumTelefono() const
 {
     return n_telefono;
+}
+
+
+void Personal::setActualWork( const QString & work )
+{
+    actualWork = work;
 }
 
 

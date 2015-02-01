@@ -26,6 +26,7 @@ class ModuleID : public QWidget
         QComboBox * editDate_Day;
         QComboBox * editDate_Month;
         QComboBox * editDate_Year;
+        QLineEdit * editActualWork;
 
         static QStringList insertNumDay();
         static QStringList insertNameMonth();

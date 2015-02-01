@@ -92,6 +92,9 @@ bool Frankenstein::partialMatch( const Personal & my,
     if( !my.getNumTelefono().isEmpty() &&
         my.getNumTelefono() != his.getNumTelefono() ) return false;
 
+    if( !my.getActualWork().isEmpty() &&
+        my.getActualWork() != his.getActualWork() ) return false;
+
     return true;
 }
 
