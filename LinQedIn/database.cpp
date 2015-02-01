@@ -19,7 +19,7 @@ bool Database::isPresent( const smartptr_utente & user ) const
 }
 
 
-smartptr_utente Database::getUser( const Query & query ) const
+QVector<smartptr_utente> Database::getUser( const Query & query ) const
 {
     Frankenstein frankenstein;
     query.compose( frankenstein );
@@ -32,18 +32,19 @@ smartptr_utente Database::getUser( const Query & query ) const
 
         case General :
         {
-            bool found = false;
+            QVector<smartptr_utente> risp;
 
             QList<smartptr_utente>::const_iterator itr = general.constBegin();
 
-            while( itr != general.end() && !found )
+            while( itr != general.end() )
             {
-                if( frankenstein == **itr ) found = true;
-                else itr++;
+                bool r = frankenstein == **itr;
+
+                if( frankenstein == **itr ) risp.push_back( *itr );
+                itr++;
             }
 
-            if( found ) return *itr;
-            else return nullptr;
+            return risp;
         }
     }
 }
