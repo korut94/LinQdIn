@@ -1,11 +1,12 @@
 #include "userinterface_view.h"
 
-void UserInterface_View::loadMainPage()
+void UserInterface_View::loadMainPage( const smartptr_utente & user,
+                                       LevelAccess::Type level )
 {
-    Top * top = new Top( level );
-    ID * id = new ID( level );
-    ViewExperience * experience = new ViewExperience( level );
-    BoardFriends * boardFriends = new BoardFriends( level );
+    Top * top = new Top( user, level );
+    ID * id = new ID( user->getInfo().getPersonal() );
+    ViewExperience * experience = new ViewExperience( user->getInfo() );
+    BoardFriends * boardFriends = new BoardFriends( user );
 
     QVBoxLayout * layoutUserData = new QVBoxLayout;
     layoutUserData->setAlignment( Qt::AlignTop );
@@ -35,14 +36,15 @@ void UserInterface_View::setFrameUtility( QWidget * window )
 }
 
 
-UserInterface_View::UserInterface_View( LevelAccess::Type l, QWidget * parent )
-                                        : level( l ),
-                                          QWidget( parent )
+UserInterface_View::UserInterface_View( const smartptr_utente & user,
+                                        LevelAccess::Type l,
+                                        QWidget * parent )
+                                        : QWidget( parent )
 {
     userUtility = new QScrollArea;
     userUtility->setWidgetResizable( true );
 
-    loadMainPage();
+    loadMainPage( user, l );
 
     QVBoxLayout * layout = new QVBoxLayout;
     layout->addWidget( userUtility );

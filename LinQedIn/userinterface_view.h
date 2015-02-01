@@ -15,6 +15,7 @@
 #include "id.h"
 #include "info.h"
 #include "levelaccess.h"
+#include "smartptr_utente.h"
 #include "tableusers.h"
 #include "top.h"
 #include "viewexperience.h"
@@ -24,19 +25,18 @@ class UserInterface_View : public QWidget
     Q_OBJECT
 
     private:
-        LevelAccess::Type level;
-
         QScrollArea * userUtility;
 
     signals:
         void requestModify();
 
     public slots:
-        void loadMainPage();
+        void loadMainPage( const smartptr_utente &, LevelAccess::Type );
         void setFrameUtility( QWidget * );
 
     public:
-        UserInterface_View( LevelAccess::Type = LevelAccess::I,
+        UserInterface_View( const smartptr_utente &,
+                            LevelAccess::Type = LevelAccess::I,
                             QWidget * = nullptr );
         ~UserInterface_View();
 };

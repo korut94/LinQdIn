@@ -15,8 +15,7 @@ bool UserEditPage::completeForm() const
 
 ErrorState::Type UserEditPage::checkErrorForm() const
 {
-    bool check = experience->checkError() &&
-                 id->checkError() && education->checkError();
+    bool check = id->checkError();
 
     if( check ) return ErrorState::None;
     else return ErrorState::InvalidValue;

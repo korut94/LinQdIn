@@ -73,7 +73,7 @@ void AdminInterface_Controller::addUser( const Info & info )
     }
 
     view->updateListUsers( infoAll );
-    setUserWindow( info );
+    setUserWindow( utente );
 }
 
 
@@ -116,11 +116,11 @@ void AdminInterface_Controller::setSearchWindow()
 }
 
 
-void AdminInterface_Controller::setUserWindow( const Info & info )
+void AdminInterface_Controller::setUserWindow( const smartptr_utente & user )
 {
-    UserInterface_View * user = new UserInterface_View();
+    UserInterface_View * viewUser = new UserInterface_View( user );
 
-    view->setFrameUtility( user );
+    view->setFrameUtility( viewUser );
 }
 
 

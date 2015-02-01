@@ -1,12 +1,13 @@
 #include "moduleeducation.h"
 
-ModuleEducation::ModuleStudio::ModuleStudio( QWidget * parent )
+ModuleEducation::ModuleStudio::ModuleStudio( const Experience & exp,
+                                             QWidget * parent )
                                              : QWidget( parent )
 {
-    editSchool = new LineEditValidate( QRegExp( "[A-Za-z]*" ) );
-    editTitle = new QLineEdit();
-    editDurata = new QLineEdit();
-    editDescrizione = new QTextEdit();
+    editSchool = new LineEditValidate( QRegExp( "[A-Za-z]*" ), exp.getWork() );
+    editTitle = new QLineEdit( exp.getCompany() );
+    editDurata = new QLineEdit( exp.getPeriod() );
+    editDescrizione = new QTextEdit( exp.getDescription() );
 
     QFormLayout * layout = new QFormLayout;
     layout->setAlignment( Qt::AlignTop );
@@ -63,12 +64,22 @@ void ModuleEducation::ModuleStudio::reset()
 }
 
 
-ModuleEducation::ModuleEducation( QWidget * parent ) : QWidget( parent )
+ModuleEducation::ModuleEducation( const Info & info,
+                                  QWidget * parent ) : QWidget( parent )
 {
     QVBoxLayout * layout = new QVBoxLayout;
     layout->setAlignment( Qt::AlignBottom );
 
     setLayout( layout );
+
+    const QVector<Experience> & esp = info.getSchoolExperiences();
+
+    for( QVector<Experience>::const_iterator itr = esp.begin();
+         itr != esp.end();
+         itr++ )
+    {
+        addEducation( *itr );
+    }
 }
 
 
@@ -116,21 +127,20 @@ QVector<Experience> ModuleEducation::getEducations() const
 {
     QVector<Experience> educations;
 
-    std::transform( listaStudio.begin(),
-                    listaStudio.end(),
-                    educations.begin(),
-                    [] ( ModuleStudio * p ) -> Experience
-                    {
-                        return p->getEducation();
-                    } );
+    for( QVector<ModuleStudio *>::const_iterator itr = listaStudio.begin();
+         itr != listaStudio.end();
+         itr++ )
+    {
+        educations.push_back( (*itr)->getEducation() );
+    }
 
     return educations;
 }
 
 
-void ModuleEducation::addEducation()
+void ModuleEducation::addEducation( const Experience & exp )
 {
-    ModuleStudio * studio = new ModuleStudio();
+    ModuleStudio * studio = new ModuleStudio( exp );
 
     listaStudio.push_back( studio );
     layout()->addWidget( studio );

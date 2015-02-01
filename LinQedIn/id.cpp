@@ -1,20 +1,22 @@
 #include "id.h"
 
-ID::ID( const LevelAccess::Type & level, QWidget * parent )
-                            : QWidget( parent )
+ID::ID( const Personal & personal, QWidget * parent ) : QWidget( parent )
 {
     QPixmap image( "../LinQedIn/User_150x114.png" );
 
     QLabel * lblImage = new QLabel();
     lblImage->setPixmap( image );
 
-    QLabel * lblFullname = new QLabel( "Andrea Mantovani" );
+    QLabel * lblFullname = new QLabel( personal.getNome() +
+                                       " " +
+                                       personal.getCognome() );
     QLabel * lblTelephone = new QLabel( tr( "Telephone" ) + ':' );
-    QLabel * valTelephone = new QLabel( "3406936174" );
+    QLabel * valTelephone = new QLabel( personal.getNumTelefono() );
     QLabel * lblData = new QLabel( tr( "Data" ) + ':' );
-    QLabel * valData = new QLabel( "17/09/1994" );
+    QLabel * valData = new QLabel( personal.getDate().
+                                   toString( "dd MMMM yyyy" ) );
     QLabel * lblJob = new QLabel( tr( "Job" ) + ':' );
-    QLabel * valJob = new QLabel( "Student" );
+    QLabel * valJob = new QLabel( personal.getActualWork() );
 
     QFormLayout * layoutExtra = new QFormLayout;
     layoutExtra->setHorizontalSpacing( 25 );

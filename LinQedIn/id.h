@@ -7,7 +7,7 @@
 #include <QVBoxLayout>
 #include <QWidget>
 
-#include "info.h"
+#include "personal.h"
 #include "levelaccess.h"
 
 class ID : public QWidget
@@ -15,7 +15,7 @@ class ID : public QWidget
     Q_OBJECT
 
     public:
-        ID( const LevelAccess::Type &, QWidget * = nullptr );
+        ID( const Personal &, QWidget * = nullptr );
         ~ID();
 };
 

@@ -22,16 +22,6 @@ ModuleExperience::ModuleQualifica::ModuleQualifica( QWidget * parent )
 
 ModuleExperience::ModuleQualifica::~ModuleQualifica()
 {
-    delete editExp;
-    delete editCompany;
-    delete editDurata;
-    delete editDescrizione;
-}
-
-
-bool ModuleExperience::ModuleQualifica::checkError() const
-{
-    return true;
 }
 
 
@@ -77,21 +67,6 @@ ModuleExperience::~ModuleExperience()
 }
 
 
-bool ModuleExperience::checkError() const
-{
-    QVector<ModuleQualifica *>::const_iterator itr = listaQualifica.begin();
-    bool check = true;
-
-    while( itr != listaQualifica.end() && check )
-    {
-        check = (*itr)->checkError();
-        itr++;
-    }
-
-    return check;
-}
-
-
 bool ModuleExperience::complete() const
 {
     if( listaQualifica.size() == 0 ) return true;
@@ -116,13 +91,13 @@ QVector<Experience> ModuleExperience::getExperiences() const
 {
     QVector<Experience> experiences;
 
-    std::transform( listaQualifica.begin(),
-                    listaQualifica.end(),
-                    experiences.begin(),
-                    [] ( ModuleQualifica * p ) -> Experience
-                    {
-                        return p->getExperience();
-                    } );
+    for( QVector<ModuleQualifica *>::const_iterator itr =
+                                                    listaQualifica.begin();
+         itr != listaQualifica.end();
+         itr++ )
+    {
+        experiences.push_back( (*itr)->getExperience() );
+    }
 
     return experiences;
 }

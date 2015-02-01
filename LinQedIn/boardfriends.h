@@ -1,6 +1,7 @@
 #ifndef BOARDFRIENDS_H
 #define BOARDFRIENDS_H
 
+#include <algorithm>
 #include <iostream>
 #include <QLabel>
 #include <QPushButton>
@@ -10,6 +11,7 @@
 
 #include "info.h"
 #include "levelaccess.h"
+#include "smartptr_utente.h"
 #include "tableusers.h"
 #include "usereditpage.h"
 
@@ -21,7 +23,7 @@ class BoardFriends : public QWidget
         void modify();
 
     public:
-        BoardFriends( const LevelAccess::Type &, QWidget * = nullptr );
+        BoardFriends( const smartptr_utente &, QWidget * = nullptr );
         ~BoardFriends();
 };
 

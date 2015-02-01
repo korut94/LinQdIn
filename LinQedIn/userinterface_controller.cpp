@@ -19,9 +19,11 @@ void UserInterface_Controller::setUserModify()
 
 
 UserInterface_Controller::UserInterface_Controller()
-                          : view( new UserInterface_View ),
+                          : view( new UserInterface_View( new Utente() ) ),
                             model( new UserInterface_Model )
 {
+
+
     connetti();
 }
 

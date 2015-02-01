@@ -19,7 +19,7 @@ class ViewExperience : public QWidget
     Q_OBJECT
 
     public:
-        ViewExperience( const LevelAccess::Type &, QWidget * = nullptr );
+        ViewExperience( const Info &, QWidget * = nullptr );
         ~ViewExperience();
 };
 

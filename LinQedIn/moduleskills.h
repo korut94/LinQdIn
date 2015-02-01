@@ -2,6 +2,7 @@
 #define MODULESKILLS_H
 
 #include <algorithm>
+#include <iostream>
 #include <QLabel>
 #include <QLineEdit>
 #include <QVBoxLayout>

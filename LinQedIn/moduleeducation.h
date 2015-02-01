@@ -10,6 +10,7 @@
 #include <QWidget>
 
 #include "experience.h"
+#include "info.h"
 #include "lineeditvalidate.h"
 
 class ModuleEducation : public QWidget
@@ -26,7 +27,8 @@ class ModuleEducation : public QWidget
                 QTextEdit * editDescrizione;
 
             public:
-                ModuleStudio( QWidget * = nullptr );
+                ModuleStudio( const Experience & = Experience(),
+                              QWidget * = nullptr );
                 ~ModuleStudio();
 
                 bool checkError() const;
@@ -41,7 +43,7 @@ class ModuleEducation : public QWidget
         QVector<ModuleStudio*> listaStudio;
 
     public:
-        ModuleEducation( QWidget * = nullptr );
+        ModuleEducation( const Info & = Info(), QWidget * = nullptr );
         ~ModuleEducation();
 
         bool checkError() const;
@@ -49,7 +51,7 @@ class ModuleEducation : public QWidget
 
         QVector<Experience> getEducations() const;
 
-        void addEducation();
+        void addEducation( const Experience & = Experience() );
         void reset();
 };
 

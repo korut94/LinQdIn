@@ -1,11 +1,29 @@
 #include "top.h"
 
-Top::Top( const LevelAccess::Type & level, QWidget * parent )
+Top::Top( const smartptr_utente & user,
+          const LevelAccess::Type & level,
+          QWidget * parent )
           : QWidget( parent )
 
 {
-    QLabel * lblUser = new QLabel( tr( "Username" ) + ": korut94" );
-    QLabel * lblAccount = new QLabel( tr( "Account" ) + ": Mega master" );
+    QLabel * lblUser = new QLabel( tr( "Username" ) +
+                                   ": " +
+                                   user->getUsername() );
+
+    QString l;
+
+    switch( level )
+    {
+        case LevelAccess::Basic : l = "Basic";
+                                  break;
+        case LevelAccess::Business : l = "Business";
+                                     break;
+        case LevelAccess::Executive : l = "Executive";
+                                      break;
+        default : l = "Basic";
+    }
+
+    QLabel * lblAccount = new QLabel( tr( "Account" ) + ": " + l );
 
     QPushButton * btmFriend = new QPushButton( tr( "Add co-worker" ) );
     btmFriend->setSizePolicy( QSizePolicy::Fixed, QSizePolicy::Maximum );

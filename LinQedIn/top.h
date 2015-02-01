@@ -9,13 +9,16 @@
 #include <QWidget>
 
 #include "levelaccess.h"
+#include "smartptr_utente.h"
 
 class Top : public QWidget
 {
     Q_OBJECT
 
     public:
-        Top( const LevelAccess::Type &, QWidget * = nullptr );
+        Top( const smartptr_utente &,
+             const LevelAccess::Type &,
+             QWidget * = nullptr );
         ~Top();
 };
 

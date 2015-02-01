@@ -19,13 +19,12 @@ QVector<Skill> ModuleSkills::getSkills() const
 {
     QVector<Skill> skills;
 
-    std::transform( listaSkills.begin(),
-                    listaSkills.end(),
-                    skills.begin(),
-                    [] ( QLineEdit * p ) -> Skill
-                    {
-                        return p->text();
-                    } );
+    for( QVector<QLineEdit*>::const_iterator itr = listaSkills.begin();
+         itr != listaSkills.end();
+         itr++ )
+    {
+        skills.push_back( (*itr)->text() );
+    }
 
     return skills;
 }
