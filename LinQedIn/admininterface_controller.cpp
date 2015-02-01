@@ -12,11 +12,6 @@ void AdminInterface_Controller::connetti() const
                       SIGNAL( requestToAddUser() ),
                       this,
                       SLOT( setInsertWindow() ) );
-
-    QObject::connect( this,
-                      SIGNAL( display( QWidget * ) ),
-                      view,
-                      SLOT( setFrameUtility( QWidget * ) ) );
 }
 
 
@@ -35,10 +30,10 @@ void AdminInterface_Controller::addUser( const Info & info )
 
     QString username = path + QString::number( i );
 
-    smartptr_utente ris =
+    QVector<smartptr_utente> ris =
                     db->getUser( SearchGroupUtente::ByUsername( username ) );
 
-    while( ris != nullptr )
+    while( !ris.isEmpty() )
     {
         i++;
 
@@ -65,6 +60,18 @@ void AdminInterface_Controller::addUser( const Info & info )
     delete insert;
     insert = nullptr;
 
+    QVector<smartptr_utente> all = db->getUser( SearchGroupUtente::All() );
+
+    QVector<Info> infoAll;
+
+    for( QVector<smartptr_utente>::const_iterator itr = all.begin();
+         itr != all.end();
+         itr++ )
+    {
+        infoAll.push_back( (*itr)->getInfo() );
+    }
+
+    view->updateListUsers( infoAll );
     setUserWindow( info );
 }
 
@@ -91,7 +98,7 @@ void AdminInterface_Controller::setInsertWindow()
                  SLOT( addUser( const Info & ) ) );
     }
 
-    emit display( insert->getView() );
+    view->setFrameUtility( insert->getView() );
 }
 
 
@@ -104,7 +111,7 @@ void AdminInterface_Controller::setSearchWindow()
              this,
              SLOT( test( const Info & ) ) );
 
-    emit display( search );
+    view->setFrameUtility( search );
 }
 
 
@@ -112,7 +119,7 @@ void AdminInterface_Controller::setUserWindow( const Info & info )
 {
     UserInterface_View * user = new UserInterface_View();
 
-    emit display( user );
+    view->setFrameUtility( user );
 }
 
 

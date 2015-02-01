@@ -27,9 +27,6 @@ class AdminInterface_Controller : public QObject
 
         void connetti() const;
 
-    signals:
-        void display( QWidget * );
-
     public slots:
         void addUser( const Info & );
         void catchError( ErrorState::Type );
