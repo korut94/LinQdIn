@@ -155,9 +155,9 @@ Personal ModuleID::getDatePersonal() const
 
     risult.setNumTelefono( fullNumber );
 
-    risult.setDate( QDate( editDate_Day->currentIndex(),
-                           editDate_Month->currentIndex(),
-                           startYear + editDate_Year->currentIndex() ) );
+    risult.setDate( QDate( startYear + editDate_Year->currentIndex(),
+                           editDate_Month->currentIndex() + 1,
+                           editDate_Day->currentIndex() + 1 ) );
 
     return risult;
 }
