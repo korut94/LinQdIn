@@ -9,18 +9,11 @@
 #include <QWidget>
 
 #include "info.h"
+#include "useritem.h"
 
 class TableUsers : public QWidget
 {
     Q_OBJECT
-
-    private:
-        class UserItem : public QWidget
-        {
-            public:
-                UserItem( const Info &, QWidget * = NULL );
-                ~UserItem();
-        };
 
     private:
         QScrollArea * areaTable;

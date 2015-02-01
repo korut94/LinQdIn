@@ -61,7 +61,8 @@ SOURCES += main.cpp\
     moduleaccout.cpp \
     utentebasic.cpp \
     utentebusiness.cpp \
-    utenteexecutive.cpp
+    utenteexecutive.cpp \
+    useritem.cpp
 
 HEADERS  += \
     utente.h \
@@ -114,7 +115,8 @@ HEADERS  += \
     errorstate.h \
     utentebasic.h \
     utentebusiness.h \
-    utenteexecutive.h
+    utenteexecutive.h \
+    useritem.h
 
 FORMS    += mainwindow.ui
 
