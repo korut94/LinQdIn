@@ -30,19 +30,13 @@ void UserInsert::manageLocalError( ErrorState::Type type )
     switch( type )
     {
         case ErrorState::InvalidValue :
-             setErrorMessage( tr( "Incorrect values" ) );
+             emit errorMessage( tr( "Incorrect values" ) );
              break;
 
         case ErrorState::EmptyValue :
-             setErrorMessage( tr( "Empty values" ) );
+             emit errorMessage( tr( "Empty values" ) );
              break;
     }
-}
-
-
-void UserInsert::setErrorMessage( const QString & msg )
-{
-    emit errorMessage( msg );
 }
 
 

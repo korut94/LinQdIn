@@ -27,7 +27,6 @@ class UserInsert : public QObject
 
         void checkToSanityInsert() const;
         void manageLocalError( ErrorState::Type );
-        void setErrorMessage( const QString & );
 
     public:
         UserInsert();
