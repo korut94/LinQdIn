@@ -19,8 +19,9 @@ class AdminInterface_View : public QWidget
         QScrollArea * utility;
 
     signals:
-        void requestToSearchUsers();
-        void requestToAddUser();
+        void requestToSearchUsers() const;
+        void requestToAddUser() const;
+        void updateListUsers( const QVector<Info> & ) const;
 
     public slots:
         void setFrameUtility( QWidget * );
