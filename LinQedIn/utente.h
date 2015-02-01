@@ -6,6 +6,7 @@
 
 #include "info.h"
 #include "entity.h"
+#include "levelaccess.h"
 #include "smartptr_utente.h"
 
 class smartptr_utente;

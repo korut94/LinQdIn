@@ -2,6 +2,7 @@
 #define ENTITY_H
 
 #include "info.h"
+#include "levelaccess.h"
 #include "smartclass.h"
 
 class Entity : public SmartClass
