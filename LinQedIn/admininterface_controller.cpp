@@ -63,6 +63,7 @@ void AdminInterface_Controller::addUser( const Info & info )
     db->insert( utente );
 
     delete insert;
+    insert = nullptr;
 
     setUserWindow( info );
 }
