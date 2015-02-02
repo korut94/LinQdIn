@@ -36,6 +36,7 @@ class AdminInterface_Controller : public QObject
         void setUserWindow( const smartptr_utente & );
         void searchUser( const Info & ) const;
         void viewUsers();
+        void test( const QString & ) const;
 
     public:
         AdminInterface_Controller( AdminInterface_Model * =

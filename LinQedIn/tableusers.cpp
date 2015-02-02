@@ -9,7 +9,17 @@ void TableUsers::setItems( const QVector<smartptr_utente> & users )
     for( QVector<smartptr_utente>::const_iterator itr = users.begin();
          itr != users.end();
          itr++ )
-    layoutList->addWidget( new UserItem( *itr ) );
+    {
+        UserItem * itm = new UserItem( *itr );
+
+        connect( itm,
+                 SIGNAL( selectThis( const QString &) ),
+                 this,
+                 SIGNAL( selectUser( const QString &) ) );
+
+        layoutList->addWidget( itm );
+    }
+
 
     listUsers->setLayout( layoutList );
     areaTable->setWidget( listUsers );
@@ -20,7 +30,6 @@ TableUsers::TableUsers( const QString & title, QWidget * parent )
                         : QWidget( parent )
 {
     setSizePolicy( QSizePolicy::Minimum, QSizePolicy::Minimum );
-    setMaximumWidth( 300 );
 
     areaTable = new QScrollArea;
     areaTable->setWidgetResizable( true );

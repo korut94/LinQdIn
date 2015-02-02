@@ -21,6 +21,7 @@ class AdminInterface_View : public QWidget
     signals:
         void requestToSearchUsers() const;
         void requestToAddUser() const;
+        void requestToViewUser( const QString & ) const;
         void requestToViewUsers() const;
         void updateListUsers( const QVector<smartptr_utente> & ) const;
 

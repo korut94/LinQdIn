@@ -17,6 +17,17 @@ void AdminInterface_Controller::connetti() const
                       SIGNAL( requestToViewUsers() ),
                       this,
                       SLOT( viewUsers() ) );
+
+    QObject::connect( view,
+                      SIGNAL( requestToViewUser( const QString &) ),
+                      this,
+                      SLOT( test( const QString & ) ) );
+}
+
+
+void AdminInterface_Controller::test( const QString & username ) const
+{
+    std::cout << "Prova: " << username.toStdString() << std::endl;
 }
 
 

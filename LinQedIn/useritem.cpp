@@ -2,7 +2,7 @@
 
 void UserItem::mousePressEvent( QMouseEvent * event )
 {
-    std::cout << "Ckicl" << std::endl;
+    emit selectThis( username );
 }
 
 
@@ -20,8 +20,10 @@ UserItem::UserItem( const smartptr_utente & user, QWidget * parent )
 
     Personal personal = user->getInfo().getPersonal();
 
+
     QLabel * fullname = new QLabel( "<b>" + personal.getNome() +
                                     " " + personal.getCognome() + "</b>" );
+
     fullname->setStyleSheet( "QLabel{ font: 10pt; }" );
 
     QLabel * telephone = new QLabel( "Tel: " + personal.getNumTelefono() );

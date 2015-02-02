@@ -47,6 +47,11 @@ AdminInterface_View::AdminInterface_View( QWidget * parent )
              SIGNAL( viewAllUsers() ),
              this,
              SIGNAL( requestToViewUsers() ) );
+
+    connect( table,
+             SIGNAL( selectUser( const QString &) ),
+             this,
+             SIGNAL( requestToViewUser(const QString & ) ) );
 }
 
 
