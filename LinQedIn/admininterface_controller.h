@@ -23,8 +23,6 @@ class AdminInterface_Controller : public QObject
         AdminInterface_Model * model;
         AdminInterface_View * view;
 
-        smartptr_utente userSelected;
-
         UserInsert * insert;
 
         void connetti() const;

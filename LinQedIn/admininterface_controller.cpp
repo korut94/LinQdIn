@@ -88,7 +88,7 @@ void AdminInterface_Controller::addUser( const Info & info )
 
     setUserWindow( utente );
 
-    userSelected = utente;
+    model->actualUser() = utente;
 
 	emit updateListUsers( all );
 }
@@ -96,8 +96,8 @@ void AdminInterface_Controller::addUser( const Info & info )
 
 void AdminInterface_Controller::removeUserSelected()
 {
-    model->getDatabase()->remove( userSelected );
-    userSelected = nullptr;
+    model->getDatabase()->remove( model->actualUser() );
+    model->actualUser() = nullptr;
 
     viewUsers();
 }
@@ -105,7 +105,7 @@ void AdminInterface_Controller::removeUserSelected()
 
 void AdminInterface_Controller::setInsertWindow()
 {
-    userSelected = nullptr;
+    model->actualUser() = nullptr;
 
     insert = new UserInsert();
 
@@ -125,7 +125,7 @@ void AdminInterface_Controller::setInsertWindow()
 
 void AdminInterface_Controller::setSearchWindow()
 {
-    userSelected = nullptr;
+    model->actualUser() = nullptr;
 
     UserSearch * search = new UserSearch();
 
@@ -155,7 +155,7 @@ void AdminInterface_Controller::setUserWindow( const smartptr_utente & user )
 
     view->setFrameUtility( viewUser );
 
-    userSelected = user;
+    model->actualUser() = user;
 }
 
 
@@ -187,8 +187,7 @@ AdminInterface_Controller::
 AdminInterface_Controller( AdminInterface_Model * m, AdminInterface_View * v )
                            : model( m ),
                              view( v ),
-                             insert( nullptr ),
-                             userSelected( nullptr )
+                             insert( nullptr )
 {
     connetti();
 }
