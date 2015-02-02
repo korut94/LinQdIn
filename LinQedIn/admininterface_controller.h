@@ -36,6 +36,7 @@ class AdminInterface_Controller : public QObject
         void catchError( ErrorState::Type );
         void setInsertWindow();
         void setSearchWindow();
+        void setUserWindow( const QString & );
         void setUserWindow( const smartptr_utente & );
         void searchUser( const Info & );
         void viewUsers();

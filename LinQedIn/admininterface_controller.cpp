@@ -21,7 +21,7 @@ void AdminInterface_Controller::connetti() const
     QObject::connect( view,
                       SIGNAL( requestToViewUser( const QString &) ),
                       this,
-                      SLOT( test( const QString & ) ) );
+                      SLOT( setUserWindow( const QString & ) ) );
 
 	QObject::connect( this,
 					  SIGNAL(
@@ -54,7 +54,7 @@ void AdminInterface_Controller::addUser( const Info & info )
     QString username = path + QString::number( i );
 
     QVector<smartptr_utente> ris =
-                    db->getUser( SearchGroupUtente::ByUsername( username ) );
+                    db->getUsers( SearchGroupUtente::ByUsername( username ) );
 
     while( !ris.isEmpty() )
     {
@@ -62,7 +62,7 @@ void AdminInterface_Controller::addUser( const Info & info )
 
         username.replace( 0, username.length(), path + QString::number( i ) );
 
-        ris = db->getUser( SearchGroupUtente::ByUsername( username )  );
+        ris = db->getUsers( SearchGroupUtente::ByUsername( username )  );
     }
 
     switch( insert->getAccoutTypeSet() )
@@ -84,7 +84,7 @@ void AdminInterface_Controller::addUser( const Info & info )
     delete insert;
     insert = nullptr;
 
-    QVector<smartptr_utente> all = db->getUser( SearchGroupUtente::All() );
+    QVector<smartptr_utente> all = db->getUsers( SearchGroupUtente::All() );
 
     setUserWindow( utente );
 	emit updateListUsers( all );
@@ -133,6 +133,17 @@ void AdminInterface_Controller::setSearchWindow()
 }
 
 
+void AdminInterface_Controller::setUserWindow( const QString & username )
+{
+    Database * db = model->getDatabase();
+
+    QVector<smartptr_utente> user = db->getUsers(
+                                SearchGroupUtente::ByUsername( username ) );
+
+    if( user.size() > 0 ) setUserWindow( user[0] );
+}
+
+
 void AdminInterface_Controller::setUserWindow( const smartptr_utente & user )
 {
     UserInterface_View * viewUser = new UserInterface_View( user );
@@ -148,7 +159,7 @@ void AdminInterface_Controller::searchUser( const Info & info )
     QString name = info.getPersonal().getNome();
     QString surname = info.getPersonal().getCognome();
 
-    QVector<smartptr_utente> utente = db->getUser( SearchGroupUtente::
+    QVector<smartptr_utente> utente = db->getUsers( SearchGroupUtente::
                                           ByNameAndSurname( name, surname ) );
 
     emit updateListUsers( utente );
@@ -159,7 +170,7 @@ void AdminInterface_Controller::viewUsers()
 {
     Database * db = model->getDatabase();
 
-    QVector<smartptr_utente> all = db->getUser( SearchGroupUtente::All() );
+    QVector<smartptr_utente> all = db->getUsers( SearchGroupUtente::All() );
 
     emit updateListUsers( all );
 }
