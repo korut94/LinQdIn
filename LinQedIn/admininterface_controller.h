@@ -28,6 +28,9 @@ class AdminInterface_Controller : public QObject
 
         void connetti() const;
 
+	signals:
+		void updateListUsers( const QVector<smartptr_utente> & );
+
     public slots:
         void addUser( const Info & );
         void catchError( ErrorState::Type );

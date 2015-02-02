@@ -22,6 +22,13 @@ void AdminInterface_Controller::connetti() const
                       SIGNAL( requestToViewUser( const QString &) ),
                       this,
                       SLOT( test( const QString & ) ) );
+
+	QObject::connect( this,
+					  SIGNAL(
+						 updateListUsers( const QVector<smartptr_utente & ) ),
+					  view,
+					  SIGNAL( updateTable( const QVector<smartptr_utente & ) ) 
+					);
 }
 
 
@@ -79,8 +86,8 @@ void AdminInterface_Controller::addUser( const Info & info )
 
     QVector<smartptr_utente> all = db->getUser( SearchGroupUtente::All() );
 
-    view->updateListUsers( all );
     setUserWindow( utente );
+	emit updateListUsers( all );
 }
 
 
