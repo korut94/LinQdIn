@@ -52,6 +52,11 @@ AdminInterface_View::AdminInterface_View( QWidget * parent )
              SIGNAL( selectUser( const QString &) ),
              this,
              SIGNAL( requestToViewUser(const QString & ) ) );
+
+    connect( tools,
+             SIGNAL( remove() ),
+             this,
+             SIGNAL( requestToRemoveUser() ) );
 }
 
 

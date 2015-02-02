@@ -3,32 +3,35 @@
 
 void AdminInterface_Controller::connetti() const
 {
-    QObject::connect( view,
-                      SIGNAL( requestToSearchUsers() ),
-                      this,
-                      SLOT( setSearchWindow() ) );
+    connect( view,
+             SIGNAL( requestToSearchUsers() ),
+             this,
+             SLOT( setSearchWindow() ) );
 
-    QObject::connect( view,
-                      SIGNAL( requestToAddUser() ),
-                      this,
-                      SLOT( setInsertWindow() ) );
+    connect( view,
+             SIGNAL( requestToAddUser() ),
+             this,
+             SLOT( setInsertWindow() ) );
 
-    QObject::connect( view,
-                      SIGNAL( requestToViewUsers() ),
-                      this,
-                      SLOT( viewUsers() ) );
+    connect( view,
+             SIGNAL( requestToViewUsers() ),
+             this,
+             SLOT( viewUsers() ) );
 
-    QObject::connect( view,
-                      SIGNAL( requestToViewUser( const QString &) ),
-                      this,
-                      SLOT( setUserWindow( const QString & ) ) );
+    connect( view,
+             SIGNAL( requestToViewUser( const QString &) ),
+             this,
+             SLOT( setUserWindow( const QString & ) ) );
 
-	QObject::connect( this,
-					  SIGNAL(
-						 updateListUsers( const QVector<smartptr_utente> & ) ),
-					  view,
-					  SIGNAL( updateTable( const QVector<smartptr_utente> & ) ) 
-                    );
+    connect( this,
+             SIGNAL( updateListUsers( const QVector<smartptr_utente> & ) ),
+             view,
+             SIGNAL( updateTable( const QVector<smartptr_utente> & ) ) );
+
+    connect( view,
+             SIGNAL( requestToRemoveUser() ),
+             this,
+             SLOT( removeUserSelected() ) );
 }
 
 
@@ -81,24 +84,29 @@ void AdminInterface_Controller::addUser( const Info & info )
 
     db->insert( utente );
 
-    delete insert;
-    insert = nullptr;
-
     QVector<smartptr_utente> all = db->getUsers( SearchGroupUtente::All() );
 
     setUserWindow( utente );
+
+    userSelected = utente;
+
 	emit updateListUsers( all );
 }
 
 
-void AdminInterface_Controller::catchError( ErrorState::Type type )
+void AdminInterface_Controller::removeUserSelected()
 {
+    model->getDatabase()->remove( userSelected );
+    userSelected = nullptr;
 
+    viewUsers();
 }
 
 
 void AdminInterface_Controller::setInsertWindow()
 {
+    userSelected = nullptr;
+
     insert = new UserInsert();
 
     connect( insert,
@@ -117,6 +125,8 @@ void AdminInterface_Controller::setInsertWindow()
 
 void AdminInterface_Controller::setSearchWindow()
 {
+    userSelected = nullptr;
+
     UserSearch * search = new UserSearch();
 
     connect( search,
@@ -144,6 +154,8 @@ void AdminInterface_Controller::setUserWindow( const smartptr_utente & user )
     UserInterface_View * viewUser = new UserInterface_View( user );
 
     view->setFrameUtility( viewUser );
+
+    userSelected = user;
 }
 
 
@@ -175,7 +187,8 @@ AdminInterface_Controller::
 AdminInterface_Controller( AdminInterface_Model * m, AdminInterface_View * v )
                            : model( m ),
                              view( v ),
-                             insert( nullptr )
+                             insert( nullptr ),
+                             userSelected( nullptr )
 {
     connetti();
 }

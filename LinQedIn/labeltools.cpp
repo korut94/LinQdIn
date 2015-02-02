@@ -28,6 +28,7 @@ LabelTools::LabelTools( QWidget * parent ) : QWidget( parent )
     connect( add, SIGNAL( clicked() ), this, SIGNAL( add() ) );
     connect( search, SIGNAL( clicked() ), this, SIGNAL( search() ) );
     connect( all, SIGNAL( clicked() ), this, SIGNAL( viewAllUsers() ) );
+    connect( remove, SIGNAL( clicked() ), this, SIGNAL( remove() ) );
 }
 
 

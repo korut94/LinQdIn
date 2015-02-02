@@ -11,6 +11,7 @@ class LabelTools : public QWidget
     signals:
         void search() const;
         void add() const;
+        void remove() const;
         void viewAllUsers() const;
 
     public:

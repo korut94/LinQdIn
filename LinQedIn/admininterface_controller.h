@@ -23,6 +23,8 @@ class AdminInterface_Controller : public QObject
         AdminInterface_Model * model;
         AdminInterface_View * view;
 
+        smartptr_utente userSelected;
+
         UserInsert * insert;
 
         void connetti() const;
@@ -32,7 +34,7 @@ class AdminInterface_Controller : public QObject
 
     public slots:
         void addUser( const Info & );
-        void catchError( ErrorState::Type );
+        void removeUserSelected();
         void setInsertWindow();
         void setSearchWindow();
         void setUserWindow( const QString & );
