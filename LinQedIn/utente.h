@@ -37,6 +37,8 @@ class Utente : public Entity
         bool isActivate() const;
         bool isOnline() const;
 
+		virtual LevelAccess::Type typeAccount() const = 0;
+
         Rete & getContatti();
         const Rete & getContatti() const;
 
