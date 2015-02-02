@@ -100,6 +100,7 @@ void AdminInterface_Controller::removeUserSelected()
     model->actualUser() = nullptr;
 
     viewUsers();
+    view->setFrameUtility( new QWidget() ); //schermata vuota
 }
 
 
