@@ -40,21 +40,8 @@ void UserInsert::manageLocalError( ErrorState::Type type )
 }
 
 
-UserInsert::UserInsert() : editPage( nullptr )
+UserInsert::UserInsert()
 {
-}
-
-
-UserInsert::~UserInsert()
-{
-    delete editPage;
-}
-
-
-QWidget * UserInsert::getView()
-{
-    QWidget * view = new QWidget();
-
     QPushButton * btnReset = new QPushButton( tr( "Reset" ) );
     QPushButton * btnInsert = new QPushButton( tr( "Insert" ) );
 
@@ -80,7 +67,7 @@ QWidget * UserInsert::getView()
     layout->addWidget( editPage );
     layout->addLayout( layoutBottom );
 
-    view->setLayout( layout );
+    setLayout( layout );
 
     connect( editPage,
              SIGNAL( requestAddEducation() ),
@@ -111,6 +98,9 @@ QWidget * UserInsert::getView()
              SIGNAL( errorMessage( const QString & ) ),
              editPage,
              SLOT( error( const QString &) ) );
+}
 
-    return view;
+
+UserInsert::~UserInsert()
+{
 }

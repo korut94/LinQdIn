@@ -32,8 +32,6 @@ class UserSearch : public QWidget
     public:
         UserSearch( QWidget * = nullptr );
         ~UserSearch();
-
-        QWidget * getView();
 };
 
 #endif // USERSEARCH_H

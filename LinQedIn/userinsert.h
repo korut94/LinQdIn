@@ -10,7 +10,7 @@
 #include "line.h"
 #include "usereditpage.h"
 
-class UserInsert : public QObject
+class UserInsert : public QWidget
 {
     Q_OBJECT
 
@@ -31,8 +31,6 @@ class UserInsert : public QObject
     public:
         UserInsert();
         ~UserInsert();
-
-        QWidget * getView();
 };
 
 #endif // USERINSERT_H

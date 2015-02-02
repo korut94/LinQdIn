@@ -19,18 +19,6 @@ UserSearch::UserSearch( QWidget * parent )
                           editSurname( nullptr ),
                           QWidget( parent )
 {
-}
-
-
-UserSearch::~UserSearch()
-{
-}
-
-
-QWidget * UserSearch::getView()
-{
-    QWidget * view = new QWidget();
-
     QPushButton * btnReset = new QPushButton( tr( "Reset" ) );
     QPushButton * btnSearch = new QPushButton( tr( "Search" ) );
 
@@ -55,7 +43,7 @@ QWidget * UserSearch::getView()
     layout->addLayout( layoutForm );
     layout->addLayout( layoutBottom );
 
-    view->setLayout( layout );
+    setLayout( layout );
 
     connect( btnReset,
              SIGNAL( clicked() ),
@@ -66,6 +54,9 @@ QWidget * UserSearch::getView()
              SIGNAL( clicked() ),
              this,
              SLOT( composeInfo() ) );
+}
 
-    return view;
+
+UserSearch::~UserSearch()
+{
 }
