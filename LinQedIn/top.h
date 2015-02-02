@@ -16,9 +16,7 @@ class Top : public QWidget
     Q_OBJECT
 
     public:
-        Top( const smartptr_utente &,
-             const LevelAccess::Type &,
-             QWidget * = nullptr );
+        Top( const smartptr_utente &, QWidget * = nullptr );
         ~Top();
 };
 

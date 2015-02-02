@@ -3,7 +3,7 @@
 void UserInterface_View::loadMainPage( const smartptr_utente & user,
                                        LevelAccess::Type level )
 {
-    Top * top = new Top( user, level );
+    Top * top = new Top( user );
     ID * id = new ID( user->getInfo().getPersonal() );
     ViewExperience * experience = new ViewExperience( user->getInfo() );
     BoardFriends * boardFriends = new BoardFriends( user );

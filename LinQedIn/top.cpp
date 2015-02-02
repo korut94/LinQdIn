@@ -1,9 +1,6 @@
 #include "top.h"
 
-Top::Top( const smartptr_utente & user,
-          const LevelAccess::Type & level,
-          QWidget * parent )
-          : QWidget( parent )
+Top::Top( const smartptr_utente & user, QWidget * parent ) : QWidget( parent )
 
 {
     QLabel * lblUser = new QLabel( tr( "Username" ) +
@@ -12,7 +9,7 @@ Top::Top( const smartptr_utente & user,
 
     QString l;
 
-    switch( level )
+    switch( user->typeAccount() )
     {
         case LevelAccess::Basic : l = "Basic";
                                   break;
