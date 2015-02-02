@@ -15,11 +15,10 @@ void UserSearch::reset()
 
 
 UserSearch::UserSearch( QWidget * parent )
-                        : editName( new QLineEdit ),
-                          editSurname( new QLineEdit ),
+                        : editName( nullptr ),
+                          editSurname( nullptr ),
                           QWidget( parent )
 {
-
 }
 
 
@@ -28,7 +27,7 @@ UserSearch::~UserSearch()
 }
 
 
-QWidget * UserSearch::getView() const
+QWidget * UserSearch::getView()
 {
     QWidget * view = new QWidget();
 
@@ -44,6 +43,9 @@ QWidget * UserSearch::getView() const
     layoutBottom->setAlignment( Qt::AlignBottom );
     layoutBottom->addWidget( new Line() );
     layoutBottom->addLayout( layoutButton );
+
+    editName = new QLineEdit();
+    editSurname = new QLineEdit();
 
     QFormLayout * layoutForm = new QFormLayout();
     layoutForm->addRow( tr( "Name" ) + ':', editName );

@@ -32,7 +32,7 @@ class UserInsert : public QObject
         UserInsert();
         ~UserInsert();
 
-        QWidget * getView() const;
+        QWidget * getView();
 };
 
 #endif // USERINSERT_H

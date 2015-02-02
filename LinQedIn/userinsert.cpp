@@ -40,7 +40,7 @@ void UserInsert::manageLocalError( ErrorState::Type type )
 }
 
 
-UserInsert::UserInsert() : editPage( new UserEditPage() )
+UserInsert::UserInsert() : editPage( nullptr )
 {
 }
 
@@ -51,12 +51,14 @@ UserInsert::~UserInsert()
 }
 
 
-QWidget * UserInsert::getView() const
+QWidget * UserInsert::getView()
 {
     QWidget * view = new QWidget();
 
     QPushButton * btnReset = new QPushButton( tr( "Reset" ) );
     QPushButton * btnInsert = new QPushButton( tr( "Insert" ) );
+
+    editPage = new UserEditPage();
 
     editPage->loadModuleId();
     editPage->loadModuleAccount();
