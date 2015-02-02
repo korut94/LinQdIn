@@ -19,16 +19,16 @@ bool Database::isPresent( const smartptr_utente & user ) const
 }
 
 
-QVector<smartptr_utente> Database::getUser( const Query & query ) const
+QVector<smartptr_utente> Database::getUsers( const Query & query ) const
 {
     Frankenstein frankenstein;
     query.compose( frankenstein );
 
     switch( getCategory( frankenstein ) )
     {
-        case Name : return entryName.getUser( frankenstein );
-        case Surname : return entrySurname.getUser( frankenstein );
-        case Username : return entryUsername.getUser( frankenstein );
+        case Name : return entryName.getUsers( frankenstein );
+        case Surname : return entrySurname.getUsers( frankenstein );
+        case Username : return entryUsername.getUsers( frankenstein );
 
         case General :
         {
