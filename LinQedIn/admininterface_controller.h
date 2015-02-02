@@ -24,7 +24,6 @@ class AdminInterface_Controller : public QObject
         AdminInterface_View * view;
 
         UserInsert * insert;
-        UserSearch * search;
 
         void connetti() const;
 

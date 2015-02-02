@@ -28,7 +28,7 @@ void AdminInterface_Controller::connetti() const
 						 updateListUsers( const QVector<smartptr_utente> & ) ),
 					  view,
 					  SIGNAL( updateTable( const QVector<smartptr_utente> & ) ) 
-					);
+                    );
 }
 
 
@@ -99,37 +99,32 @@ void AdminInterface_Controller::catchError( ErrorState::Type type )
 
 void AdminInterface_Controller::setInsertWindow()
 {
-    if( insert == nullptr )
-    {
-        insert = new UserInsert();
-        connect( insert,
-                 SIGNAL( error( ErrorState::Type ) ),
-                 insert,
-                 SLOT( manageLocalError( ErrorState::Type ) ) );
+    insert = new UserInsert();
 
-        connect( insert,
-                 SIGNAL( insert( const Info &) ),
-                 this,
-                 SLOT( addUser( const Info & ) ) );
-    }
+    connect( insert,
+             SIGNAL( error( ErrorState::Type ) ),
+             insert,
+             SLOT( manageLocalError( ErrorState::Type ) ) );
 
-    view->setFrameUtility( insert->getView() );
+    connect( insert,
+             SIGNAL( insert( const Info &) ),
+             this,
+             SLOT( addUser( const Info & ) ) );
+
+    view->setFrameUtility( insert );
 }
 
 
 void AdminInterface_Controller::setSearchWindow()
 {
-    if( search == nullptr )
-    {
-        search = new UserSearch();
+    UserSearch * search = new UserSearch();
 
-        connect( search,
-                 SIGNAL( search( const Info & ) ),
-                 this,
-                 SLOT( searchUser( const Info & ) ) );
-    }
+    connect( search,
+             SIGNAL( search( const Info & ) ),
+             this,
+             SLOT( searchUser( const Info & ) ) );
 
-    view->setFrameUtility( search->getView() );
+    view->setFrameUtility( search );
 }
 
 
@@ -180,8 +175,7 @@ AdminInterface_Controller::
 AdminInterface_Controller( AdminInterface_Model * m, AdminInterface_View * v )
                            : model( m ),
                              view( v ),
-                             insert( nullptr ),
-                             search( nullptr )
+                             insert( nullptr )
 {
     connetti();
 }
@@ -189,8 +183,6 @@ AdminInterface_Controller( AdminInterface_Model * m, AdminInterface_View * v )
 
 AdminInterface_Controller::~AdminInterface_Controller()
 {
-    delete insert;
-    delete search;
     delete view;
     delete model;
 }
