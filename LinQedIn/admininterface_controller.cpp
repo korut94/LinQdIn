@@ -25,9 +25,9 @@ void AdminInterface_Controller::connetti() const
 
 	QObject::connect( this,
 					  SIGNAL(
-						 updateListUsers( const QVector<smartptr_utente & ) ),
+						 updateListUsers( const QVector<smartptr_utente> & ) ),
 					  view,
-					  SIGNAL( updateTable( const QVector<smartptr_utente & ) ) 
+					  SIGNAL( updateTable( const QVector<smartptr_utente> & ) ) 
 					);
 }
 
@@ -141,7 +141,7 @@ void AdminInterface_Controller::setUserWindow( const smartptr_utente & user )
 }
 
 
-void AdminInterface_Controller::searchUser( const Info & info ) const
+void AdminInterface_Controller::searchUser( const Info & info )
 {
     Database * db = model->getDatabase();
 
@@ -151,7 +151,7 @@ void AdminInterface_Controller::searchUser( const Info & info ) const
     QVector<smartptr_utente> utente = db->getUser( SearchGroupUtente::
                                           ByNameAndSurname( name, surname ) );
 
-    view->updateListUsers( utente );
+    emit updateListUsers( utente );
 }
 
 
@@ -161,7 +161,7 @@ void AdminInterface_Controller::viewUsers()
 
     QVector<smartptr_utente> all = db->getUser( SearchGroupUtente::All() );
 
-    view->updateListUsers( all );
+    emit updateListUsers( all );
 }
 
 
