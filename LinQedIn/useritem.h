@@ -26,7 +26,7 @@ class UserItem : public QWidget
        void mousePressEvent( QMouseEvent * );
 
     public:
-        UserItem( const Info &, QWidget * = NULL );
+        UserItem( const smartptr_utente &, QWidget * = NULL );
         ~UserItem();
 };
 

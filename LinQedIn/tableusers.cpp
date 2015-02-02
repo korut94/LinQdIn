@@ -1,12 +1,12 @@
 #include "tableusers.h"
 
-void TableUsers::setItems( const QVector<Info> & users )
+void TableUsers::setItems( const QVector<smartptr_utente> & users )
 {
     QWidget * listUsers = new QWidget();
     QVBoxLayout * layoutList = new QVBoxLayout();
     layoutList->setAlignment( Qt::AlignTop );
 
-    for( QVector<Info>::const_iterator itr = users.begin();
+    for( QVector<smartptr_utente>::const_iterator itr = users.begin();
          itr != users.end();
          itr++ )
     layoutList->addWidget( new UserItem( *itr ) );

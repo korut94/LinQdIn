@@ -19,7 +19,7 @@ class TableUsers : public QWidget
         QScrollArea * areaTable;
 
     public slots:
-        void setItems( const QVector<Info> & );
+        void setItems( const QVector<smartptr_utente> & );
 
     public:
         TableUsers( const QString & = QString(), QWidget * = NULL );

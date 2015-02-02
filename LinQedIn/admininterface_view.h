@@ -22,7 +22,7 @@ class AdminInterface_View : public QWidget
         void requestToSearchUsers() const;
         void requestToAddUser() const;
         void requestToViewUsers() const;
-        void updateListUsers( const QVector<Info> & ) const;
+        void updateListUsers( const QVector<smartptr_utente> & ) const;
 
     public slots:
         void setFrameUtility( QWidget * );

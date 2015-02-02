@@ -6,7 +6,7 @@ void UserItem::mousePressEvent( QMouseEvent * event )
 }
 
 
-UserItem::UserItem( const Info & info, QWidget * parent )
+UserItem::UserItem( const smartptr_utente & user, QWidget * parent )
                     : username( user->getUsername() ),
                       QWidget( parent )
 {
@@ -18,7 +18,7 @@ UserItem::UserItem( const Info & info, QWidget * parent )
     icon->setPixmap( pixmap );
     icon->setMaximumWidth( 50 );
 
-    Personal personal = info.getPersonal();
+    Personal personal = user->getInfo().getPersonal();
 
     QLabel * fullname = new QLabel( "<b>" + personal.getNome() +
                                     " " + personal.getCognome() + "</b>" );
@@ -41,11 +41,6 @@ UserItem::UserItem( const Info & info, QWidget * parent )
     layout->addLayout( layoutInfo );
 
     setLayout( layout );
-
-    connect( this,
-             SIGNAL( clicked() ),
-             this,
-             SLOT( click() ) );
 }
 
 

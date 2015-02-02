@@ -27,7 +27,6 @@ class AdminInterface_Controller : public QObject
         UserSearch * search;
 
         void connetti() const;
-        void viewAll();
 
     public slots:
         void addUser( const Info & );

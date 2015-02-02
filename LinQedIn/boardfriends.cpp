@@ -7,7 +7,7 @@ BoardFriends::BoardFriends( const smartptr_utente & user,
     setSizePolicy( QSizePolicy::Maximum, QSizePolicy::Minimum );
 
     TableUsers * me = new TableUsers( tr( "Me" ) );
-    me->setItems( QVector<Info>( 1, user->getInfo() ) );
+    me->setItems( QVector<smartptr_utente>( 1, user ) );
     me->setSizePolicy( QSizePolicy::Maximum, QSizePolicy::Maximum );
 
     QPushButton * btnModify = new QPushButton( tr( "Modified" ) );
@@ -15,17 +15,7 @@ BoardFriends::BoardFriends( const smartptr_utente & user,
     TableUsers * friends = new TableUsers( tr( "My colleagues" ) );
 
     const Utente::Rete & contatti = user->getContatti();
-    QVector<Info> infoContatti;
-
-    std::transform( contatti.begin(),
-                    contatti.end(),
-                    infoContatti.begin(),
-                    [] ( const smartptr_utente & s ) -> Info
-                    {
-                        return s->getInfo();
-                    } );
-
-    friends->setItems( infoContatti );
+    friends->setItems( contatti.toVector() );
 
     QVBoxLayout * layout = new QVBoxLayout();
     layout->addWidget( me );
