@@ -39,7 +39,7 @@ AdminInterface_View::AdminInterface_View( QWidget * parent )
              SIGNAL( requestToSearchUsers() ) );
 
     connect( this,
-             SIGNAL( updateListUsers( const QVector<smartptr_utente> &) ),
+             SIGNAL( updateTable( const QVector<smartptr_utente> &) ),
              table,
              SLOT( setItems( const QVector<smartptr_utente> & ) ) );
 
