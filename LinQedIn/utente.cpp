@@ -44,7 +44,9 @@ Utente::Utente()
 
 Utente::Utente( const QString & user,
                 const Info & info )
-                : Entity( user, info ) {}
+                : online( false ), activate( false ), Entity( user, info )
+{
+}
 
 
 Utente::~Utente()
