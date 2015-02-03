@@ -44,11 +44,7 @@ Info UserEditPage::recapInfo() const
 LevelAccess::Type UserEditPage::getTypeUser() const
 {
     if( account != nullptr ) account->getTypeAccount();
-    else
-    {
-        throw std::runtime_error(
-                    "Non hai i permessi per accedere a questa risorsa" );
-    }
+    else return LevelAccess::None;
 }
 
 
@@ -82,21 +78,23 @@ void UserEditPage::reset()
 }
 
 
-void UserEditPage::loadModuleAccount()
+void UserEditPage::loadModuleAccount( const smartptr_utente & user )
 {
     if( account == nullptr )
     {
-        account = new ModuleAccout();
+        account = new ModuleAccout( user );
         layoutArea->addWidget( account );
     }
 }
 
 
-void UserEditPage::loadModuleEducation()
+void UserEditPage::loadModuleEducation( const smartptr_utente & user )
 {
     if( education == nullptr )
     {
         education = new ModuleEducation();
+        if( user != nullptr )
+            education->setContent( user->getInfo().getSchoolExperiences() );
 
         QLabel * lblEducation = new QLabel( tr( "Education" ) );
         lblEducation->setFont( QFont( "Helvetica", 12, QFont::Bold ) );
@@ -120,11 +118,13 @@ void UserEditPage::loadModuleEducation()
 }
 
 
-void UserEditPage::loadModuleExperience()
+void UserEditPage::loadModuleExperience( const smartptr_utente & user )
 {
     if( experience == nullptr )
     {
         experience = new ModuleExperience();
+        if( user != nullptr )
+            experience->setContent( user->getInfo().getWorkExperiences() );
 
         QLabel * lblExperience = new QLabel( tr( "Experience" ) );
         lblExperience->setFont( QFont( "Helvetica", 12, QFont::Bold ) );
@@ -149,11 +149,12 @@ void UserEditPage::loadModuleExperience()
 }
 
 
-void UserEditPage::loadModuleId()
+void UserEditPage::loadModuleId( const smartptr_utente & user )
 {
     if( id == nullptr )
     {
         id = new ModuleID();
+        if( user != nullptr ) id->setContent( user->getInfo().getPersonal() );
 
         QLabel * lblId = new QLabel( tr( "Info" ) );
         lblId->setFont( QFont( "Helvetica", 12, QFont::Bold ) );
@@ -164,11 +165,13 @@ void UserEditPage::loadModuleId()
 }
 
 
-void UserEditPage::loadModuleSkill()
+void UserEditPage::loadModuleSkill( const smartptr_utente & user )
 {
     if( skills == nullptr )
     {
         skills = new ModuleSkills();
+        if( user != nullptr )
+            skills->setContent( user->getInfo().getSkills() );
 
         QLabel * lblSkills = new QLabel( tr( "Skills" ) );
         lblSkills->setFont( QFont( "Helvetica", 12, QFont::Bold ) );

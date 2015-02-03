@@ -43,7 +43,7 @@ class ModuleEducation : public QWidget
         QVector<ModuleStudio*> listaStudio;
 
     public:
-        ModuleEducation( const Info & = Info(), QWidget * = nullptr );
+        ModuleEducation( QWidget * = nullptr );
         ~ModuleEducation();
 
         bool checkError() const;
@@ -53,6 +53,7 @@ class ModuleEducation : public QWidget
 
         void addEducation( const Experience & = Experience() );
         void reset();
+        void setContent( const QVector<Experience> & );
 };
 
 #endif // MODULEEDUCATION_H

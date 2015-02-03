@@ -18,6 +18,7 @@
 #include "moduleexperience.h"
 #include "moduleid.h"
 #include "moduleskills.h"
+#include "smartptr_utente.h"
 
 class UserEditPage : public QWidget
 {
@@ -58,11 +59,11 @@ class UserEditPage : public QWidget
         UserEditPage( QWidget * = nullptr );
         ~UserEditPage();
 
-        void loadModuleAccount();
-        void loadModuleEducation();
-        void loadModuleExperience();
-        void loadModuleId();
-        void loadModuleSkill();
+        void loadModuleAccount( const smartptr_utente & = nullptr );
+        void loadModuleEducation( const smartptr_utente & = nullptr );
+        void loadModuleExperience( const smartptr_utente & = nullptr );
+        void loadModuleId( const smartptr_utente & = nullptr );
+        void loadModuleSkill( const smartptr_utente & = nullptr );
 };
 
 #endif // USEREDITPAGE_H

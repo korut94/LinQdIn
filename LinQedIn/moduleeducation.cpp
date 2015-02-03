@@ -64,22 +64,14 @@ void ModuleEducation::ModuleStudio::reset()
 }
 
 
-ModuleEducation::ModuleEducation( const Info & info,
-                                  QWidget * parent ) : QWidget( parent )
+ModuleEducation::ModuleEducation( QWidget * parent ) : QWidget( parent )
 {
     QVBoxLayout * layout = new QVBoxLayout;
     layout->setAlignment( Qt::AlignBottom );
 
     setLayout( layout );
 
-    const QVector<Experience> & esp = info.getSchoolExperiences();
 
-    for( QVector<Experience>::const_iterator itr = esp.begin();
-         itr != esp.end();
-         itr++ )
-    {
-        addEducation( *itr );
-    }
 }
 
 
@@ -157,4 +149,14 @@ void ModuleEducation::reset()
     }
 }
 
+
+void ModuleEducation::setContent( const QVector<Experience> & edu )
+{
+    for( QVector<Experience>::const_iterator itr = edu.begin();
+         itr != edu.end();
+         itr++ )
+    {
+        addEducation( *itr );
+    }
+}
 

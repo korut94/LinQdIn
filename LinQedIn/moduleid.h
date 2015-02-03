@@ -42,6 +42,7 @@ class ModuleID : public QWidget
         Personal getDatePersonal() const;
 
         void reset();
+        void setContent( const Personal & );
 };
 
 #endif // MODULEID_H

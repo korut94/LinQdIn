@@ -10,6 +10,7 @@
 #include <QWidget>
 
 #include "experience.h"
+#include "info.h"
 #include "lineeditvalidate.h"
 
 class ModuleExperience : public QWidget
@@ -26,7 +27,8 @@ class ModuleExperience : public QWidget
                 QTextEdit * editDescrizione;
 
             public:
-                ModuleQualifica( QWidget * = nullptr );
+                ModuleQualifica( const Experience & = Experience(),
+                                 QWidget * = nullptr );
                 ~ModuleQualifica();
 
                 Experience getExperience() const;
@@ -47,8 +49,9 @@ class ModuleExperience : public QWidget
 
         QVector<Experience> getExperiences() const;
 
-        void addExperience();
+        void addExperience( const Experience & = Experience() );
         void reset();
+        void setContent( const QVector<Experience> & );
 };
 
 #endif // MODULEEXPERIENCE_H

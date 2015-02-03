@@ -59,7 +59,6 @@ ModuleID::ModuleID( QWidget * parent ) : QWidget( parent )
     editPrefixNumber->setFixedWidth( 40 );
     editPrefixNumber->setMaxLength( 3 );
     editNumber = new LineEditValidate( QRegExp( "[0-9]*" ) );
-
     editDate_Day = new QComboBox();
     editDate_Day->setStyleSheet( "combobox-popup: 0;" );
     editDate_Day->addItems( insertNumDay() );
@@ -69,7 +68,6 @@ ModuleID::ModuleID( QWidget * parent ) : QWidget( parent )
     editDate_Year = new QComboBox();
     editDate_Year->setStyleSheet( "combobox-popup: 0;" );
     editDate_Year->addItems( insertNumYear() );
-
     editActualWork = new QLineEdit();
 
     QFormLayout * layoutForm = new QFormLayout;
@@ -172,4 +170,23 @@ void ModuleID::reset()
     editSurname->clear();
 }
 
+
+void ModuleID::setContent( const Personal & per )
+{
+    editName->setText( per.getNome() );
+    editSurname->setText( per.getCognome() );
+
+    QStringList fullnumber = per.getNumTelefono().split( "-" );
+
+    //Elimino il segno + sul prefisso nazionale
+    editPrefixNumber->setText( fullnumber[0].remove( 0, 1 ) );
+    editNumber->setText( fullnumber.at( 1 ) );
+
+    QDate date = per.getDate();
+
+    editDate_Day->setCurrentIndex( date.day() - 1 );
+    editDate_Month->setCurrentIndex( date.month() - 1 );
+    editDate_Year->setCurrentIndex( date.year() - startYear );
+    editActualWork->setText( per.getActualWork() );
+}
 

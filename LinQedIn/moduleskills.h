@@ -7,6 +7,7 @@
 #include <QLineEdit>
 #include <QVBoxLayout>
 
+#include "info.h"
 #include "skill.h"
 
 class ModuleSkills : public QWidget
@@ -24,8 +25,9 @@ class ModuleSkills : public QWidget
 
         bool complete() const;
 
-        void addSkill();
+        void addSkill( const Skill & = Skill() );
         void reset();
+        void setContent( const QVector<Skill> & );
 };
 
 #endif // MODULESKILLS_H

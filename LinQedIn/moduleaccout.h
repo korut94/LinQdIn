@@ -8,6 +8,7 @@
 #include <QWidget>
 
 #include "levelaccess.h"
+#include "smartptr_utente.h"
 
 class ModuleAccout : public QWidget
 {
@@ -17,7 +18,7 @@ class ModuleAccout : public QWidget
         QComboBox * account;
 
     public:
-        ModuleAccout( QWidget * = nullptr );
+        ModuleAccout( const smartptr_utente & = nullptr, QWidget * = nullptr );
         ~ModuleAccout();
 
         LevelAccess::Type getTypeAccount() const;

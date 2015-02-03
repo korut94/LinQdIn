@@ -1,7 +1,6 @@
 #include "moduleskills.h"
 
-ModuleSkills::ModuleSkills( QWidget * parent )
-                            : QWidget( parent )
+ModuleSkills::ModuleSkills( QWidget * parent ) : QWidget( parent )
 {
     QVBoxLayout * layout = new QVBoxLayout;
     layout->setAlignment( Qt::AlignBottom );
@@ -49,12 +48,12 @@ bool ModuleSkills::complete() const
 }
 
 
-void ModuleSkills::addSkill()
+void ModuleSkills::addSkill( const Skill & skill )
 {
-    QLineEdit * skill = new QLineEdit();
+    QLineEdit * editSkill = new QLineEdit( skill.getSkill() );
 
-    listaSkills.push_back( skill );
-    layout()->addWidget( skill );
+    listaSkills.push_back( editSkill );
+    layout()->addWidget( editSkill );
 }
 
 
@@ -65,5 +64,16 @@ void ModuleSkills::reset()
          itr++ )
     {
         (*itr)->clear();
+    }
+}
+
+
+void ModuleSkills::setContent( const QVector<Skill> & skills )
+{
+    for( QVector<Skill>::const_iterator itr = skills.begin();
+         itr != skills.end();
+         itr++ )
+    {
+        addSkill( *itr );
     }
 }

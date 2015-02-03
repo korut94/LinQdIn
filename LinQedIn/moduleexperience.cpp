@@ -1,12 +1,13 @@
 #include "moduleexperience.h"
 
-ModuleExperience::ModuleQualifica::ModuleQualifica( QWidget * parent )
+ModuleExperience::ModuleQualifica::ModuleQualifica( const Experience & exp,
+                                                    QWidget * parent )
                                                     : QWidget( parent )
 {
-    editExp = new QLineEdit();
-    editCompany = new QLineEdit();
-    editDurata = new QLineEdit();
-    editDescrizione = new QTextEdit();
+    editExp = new QLineEdit( exp.getWork() );
+    editCompany = new QLineEdit( exp.getCompany() );
+    editDurata = new QLineEdit( exp.getPeriod() );
+    editDescrizione = new QTextEdit( exp.getDescription() );
 
     QFormLayout * layout = new QFormLayout;
     layout->setAlignment( Qt::AlignTop );
@@ -58,6 +59,8 @@ ModuleExperience::ModuleExperience( QWidget * parent ) : QWidget( parent )
     layout->setAlignment( Qt::AlignBottom );
 
     setLayout( layout );
+
+
 }
 
 
@@ -103,9 +106,9 @@ QVector<Experience> ModuleExperience::getExperiences() const
 }
 
 
-void ModuleExperience::addExperience()
+void ModuleExperience::addExperience( const Experience & exp )
 {
-    ModuleQualifica * qualifica = new ModuleQualifica();
+    ModuleQualifica * qualifica = new ModuleQualifica( exp );
 
     listaQualifica.push_back( qualifica );
     layout()->addWidget( qualifica );
@@ -123,4 +126,14 @@ void ModuleExperience::reset()
     }
 }
 
+
+void ModuleExperience::setContent( const QVector<Experience> & exp )
+{
+    for( QVector<Experience>::const_iterator itr = exp.begin();
+         itr != exp.end();
+         itr++ )
+    {
+        addExperience( *itr );
+    }
+}
 
