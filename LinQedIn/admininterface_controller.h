@@ -10,6 +10,7 @@
 #include "searchgrouputente.h"
 #include "userinsert.h"
 #include "userinterface_view.h"
+#include "usermodified.h"
 #include "usersearch.h"
 #include "utentebasic.h"
 #include "utentebusiness.h"
@@ -25,15 +26,24 @@ class AdminInterface_Controller : public QObject
 
         UserInsert * insert;
 
+        smartptr_utente createUser( const QString &,
+                                    const Info &,
+                                    LevelAccess::Type ) const;
+        smartptr_utente createUser( const smartptr_utente &,
+                                    LevelAccess::Type );
+
         void connetti() const;
+
 
 	signals:
 		void updateListUsers( const QVector<smartptr_utente> & );
 
     public slots:
         void addUser( const Info & );
+        void modifyUser( const Info &, LevelAccess::Type );
         void removeUserSelected();
         void setInsertWindow();
+        void setModifyWindow();
         void setSearchWindow();
         void setUserWindow( const QString & );
         void setUserWindow( const smartptr_utente & );

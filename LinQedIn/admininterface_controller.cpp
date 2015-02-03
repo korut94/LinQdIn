@@ -41,6 +41,39 @@ void AdminInterface_Controller::test( const QString & username ) const
 }
 
 
+smartptr_utente AdminInterface_Controller::
+                createUser( const QString & username,
+                            const Info & info,
+                            LevelAccess::Type level ) const
+{
+    switch( level )
+    {
+        case LevelAccess::Basic : return new UtenteBasic( username, info );
+        case LevelAccess::Business : return new UtenteBusiness( username,
+                                                                info );
+        case LevelAccess::Executive : return new UtenteExecutive( username,
+                                                                  info );
+
+        default : return new UtenteBusiness( username, info );
+    }
+}
+
+
+smartptr_utente AdminInterface_Controller::
+                createUser( const smartptr_utente & user,
+                            LevelAccess::Type level )
+{
+    switch( level )
+    {
+        case LevelAccess::Basic : return new UtenteBasic( *user );
+        case LevelAccess::Business : return new UtenteBusiness( *user );
+        case LevelAccess::Executive : return new UtenteExecutive( *user );
+
+        default : return new UtenteBusiness( *user );
+    }
+}
+
+
 void AdminInterface_Controller::addUser( const Info & info )
 {
     smartptr_utente utente;
@@ -68,29 +101,36 @@ void AdminInterface_Controller::addUser( const Info & info )
         ris = db->getUsers( SearchGroupUtente::ByUsername( username )  );
     }
 
-    switch( insert->getAccoutTypeSet() )
-    {
-        case LevelAccess::Basic : utente = new UtenteBasic( username, info );
-                                  break;
-        case LevelAccess::Business : utente = new UtenteBusiness( username,
-                                                                  info );
-                                     break;
-        case LevelAccess::Executive : utente = new UtenteExecutive( username,
-                                                                    info );
-                                      break;
-
-        default : utente = new UtenteBusiness( username, info );
-    }
-
+    utente = createUser( username, info, insert->getAccoutTypeSet() );
     db->insert( utente );
-
-    QVector<smartptr_utente> all = db->getUsers( SearchGroupUtente::All() );
-
     setUserWindow( utente );
 
     model->actualUser() = utente;
 
-	emit updateListUsers( all );
+    viewUsers();
+}
+
+
+void AdminInterface_Controller::modifyUser( const Info & info,
+                                            LevelAccess::Type level )
+{
+    Database * db = model->getDatabase();
+    smartptr_utente & user = model->actualUser();
+
+    //Cambiati i permessi
+    if( user->typeAccount() != level  )
+    {
+        db->remove( user );
+
+        user->getInfo() = info; //modifica fuori dal database
+        user = createUser( user, level );
+
+        db->insert( user );
+    }
+    else db->modify( user, info );
+
+    setUserWindow( user );
+    viewUsers();
 }
 
 
@@ -124,6 +164,25 @@ void AdminInterface_Controller::setInsertWindow()
 }
 
 
+void AdminInterface_Controller::setModifyWindow()
+{
+    UserModified * modify = new UserModified( model->actualUser(),
+                                              LevelAccess::Master );
+
+    connect( modify,
+             SIGNAL( modify( const Info &, LevelAccess::Type ) ),
+             this,
+             SLOT( modifyUser( const Info &, LevelAccess::Type ) ) );
+
+    connect( modify,
+             SIGNAL( error( ErrorState::Type ) ),
+             modify,
+             SLOT( manageLocalError( ErrorState::Type ) ) );
+
+    view->setFrameUtility( modify );
+}
+
+
 void AdminInterface_Controller::setSearchWindow()
 {
     model->actualUser() = nullptr;
@@ -153,6 +212,11 @@ void AdminInterface_Controller::setUserWindow( const QString & username )
 void AdminInterface_Controller::setUserWindow( const smartptr_utente & user )
 {
     UserInterface_View * viewUser = new UserInterface_View( user );
+
+    connect( viewUser,
+             SIGNAL( requestModify() ),
+             this,
+             SLOT( setModifyWindow() ) );
 
     view->setFrameUtility( viewUser );
 
