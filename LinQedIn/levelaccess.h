@@ -9,7 +9,8 @@ namespace LevelAccess
         Basic,
         Business,
         Executive,
-        Master
+        Master,
+        None
     };
 }
 
