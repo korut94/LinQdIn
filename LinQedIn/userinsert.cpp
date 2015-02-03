@@ -2,14 +2,7 @@
 
 LevelAccess::Type UserInsert::getAccoutTypeSet() const
 {
-    try
-    {
-        //Errore ritorno valore sulla release
-        return editPage->getTypeUser();
-    }
-    catch( const std::runtime_error & error )
-    {
-    }
+    return editPage->getTypeUser();
 }
 
 
@@ -97,7 +90,7 @@ UserInsert::UserInsert()
     connect( this,
              SIGNAL( errorMessage( const QString & ) ),
              editPage,
-             SLOT( error( const QString &) ) );
+             SLOT( error( const QString & ) ) );
 }
 
 
