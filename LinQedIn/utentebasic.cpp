@@ -9,6 +9,9 @@ UtenteBasic::UtenteBasic( const QString & username, const Info & info )
                           : Utente( username, info ) {}
 
 
+UtenteBasic::UtenteBasic( const Utente & utente ) : Utente( utente ) {}
+
+
 LevelAccess::Type UtenteBasic::typeAccount() const
 {
 	return LevelAccess::Basic;

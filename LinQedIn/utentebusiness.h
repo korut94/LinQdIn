@@ -8,6 +8,7 @@ class UtenteBusiness : public UtenteBasic
     public:
         UtenteBusiness();
         UtenteBusiness( const QString &, const Info & );
+        UtenteBusiness( const Utente & );
 
 		LevelAccess::Type typeAccount() const;
 };

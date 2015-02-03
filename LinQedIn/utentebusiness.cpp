@@ -9,6 +9,11 @@ UtenteBusiness::UtenteBusiness( const QString & username, const Info & info )
                                 : UtenteBasic( username, info ) {}
 
 
+UtenteBusiness::UtenteBusiness( const Utente & utente ) : UtenteBasic( utente )
+{
+}
+
+
 LevelAccess::Type UtenteBusiness::typeAccount() const
 {
 	return LevelAccess::Business;
