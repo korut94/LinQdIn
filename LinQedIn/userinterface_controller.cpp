@@ -12,9 +12,9 @@ void UserInterface_Controller::connetti() const
 
 void UserInterface_Controller::setUserModify()
 {
-    UserModified * search = new UserModified();
+    UserModified * modified = new UserModified( new UtenteBusiness(), LevelAccess::Basic );
 
-    emit display( search );
+    emit display( modified );
 }
 
 
