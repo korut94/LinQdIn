@@ -62,7 +62,8 @@ SOURCES += main.cpp\
     utentebasic.cpp \
     utentebusiness.cpp \
     utenteexecutive.cpp \
-    useritem.cpp
+    useritem.cpp \
+    login.cpp
 
 HEADERS  += \
     utente.h \
@@ -116,7 +117,8 @@ HEADERS  += \
     utentebasic.h \
     utentebusiness.h \
     utenteexecutive.h \
-    useritem.h
+    useritem.h \
+    login.h
 
 FORMS    += mainwindow.ui
 
