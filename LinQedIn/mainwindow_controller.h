@@ -14,6 +14,9 @@ class MainWindow_Controller : public QObject
         MainWindow_Model * model;
         MainWindow_View * view;
 
+    public slots:
+        void reset( int );
+
     public:
         MainWindow_Controller( MainWindow_Model * = new MainWindow_Model,
                                MainWindow_View * = new MainWindow_View );

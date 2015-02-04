@@ -20,6 +20,11 @@ MainWindow_View::MainWindow_View( QWidget * parent ) : QWidget( parent )
     layout->addWidget( riconoscimenti );
 
     setLayout( layout );
+
+    connect( tabInterface,
+             SIGNAL( currentChanged( int ) ),
+             this,
+             SIGNAL( currentInterface( int ) ) );
 }
 
 

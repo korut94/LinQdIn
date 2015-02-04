@@ -14,8 +14,8 @@ class MainWindow_Model
         MainWindow_Model();
         ~MainWindow_Model();
 
-        AdminInterface_View * getViewAdmin() const;
-        UserInterface_View * getViewUser() const;
+        AdminInterface_Controller * getControllerAdmin() const;
+        UserInterface_Controller * getControllerUser() const;
 };
 
 #endif // MAINWINDOW_MODEL_H

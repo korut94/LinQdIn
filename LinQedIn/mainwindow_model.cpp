@@ -14,13 +14,13 @@ MainWindow_Model::~MainWindow_Model()
 }
 
 
-AdminInterface_View * MainWindow_Model::getViewAdmin() const
+AdminInterface_Controller * MainWindow_Model::getControllerAdmin() const
 {
-    return admin->getView();
+    return admin;
 }
 
 
-UserInterface_View * MainWindow_Model::getViewUser() const
+UserInterface_Controller * MainWindow_Model::getControllerUser() const
 {
-    return user->getView();
+    return user;
 }

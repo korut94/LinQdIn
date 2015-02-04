@@ -10,8 +10,13 @@
 
 class MainWindow_View : public QWidget
 {
+    Q_OBJECT
+
     private:
         QTabWidget * tabInterface;
+
+    signals:
+        void currentInterface( int ) const;
 
     public:
         MainWindow_View( QWidget * = NULL );
