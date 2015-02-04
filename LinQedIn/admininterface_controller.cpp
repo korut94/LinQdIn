@@ -74,7 +74,8 @@ smartptr_utente AdminInterface_Controller::
 }
 
 
-void AdminInterface_Controller::addUser( const Info & info )
+void AdminInterface_Controller::addUser( const Info & info,
+                                         LevelAccess::Type level )
 {
     smartptr_utente utente;
 
@@ -101,7 +102,7 @@ void AdminInterface_Controller::addUser( const Info & info )
         ris = db->getUsers( SearchGroupUtente::ByUsername( username )  );
     }
 
-    utente = createUser( username, info, insert->getAccoutTypeSet() );
+    utente = createUser( username, info, level );
     db->insert( utente );
     setUserWindow( utente );
 
@@ -148,7 +149,7 @@ void AdminInterface_Controller::setInsertWindow()
 {
     model->actualUser() = nullptr;
 
-    insert = new UserInsert();
+    UserInsert * insert = new UserInsert();
 
     connect( insert,
              SIGNAL( error( ErrorState::Type ) ),
@@ -156,9 +157,9 @@ void AdminInterface_Controller::setInsertWindow()
              SLOT( manageLocalError( ErrorState::Type ) ) );
 
     connect( insert,
-             SIGNAL( insert( const Info &) ),
+             SIGNAL( insert( const Info &, LevelAccess::Type ) ),
              this,
-             SLOT( addUser( const Info & ) ) );
+             SLOT( addUser( const Info &, LevelAccess::Type ) ) );
 
     view->setFrameUtility( insert );
 }
@@ -211,7 +212,8 @@ void AdminInterface_Controller::setUserWindow( const QString & username )
 
 void AdminInterface_Controller::setUserWindow( const smartptr_utente & user )
 {
-    UserInterface_View * viewUser = new UserInterface_View( user );
+    UserInterface_View * viewUser = new UserInterface_View();
+    viewUser->loadMainPage( user, LevelAccess::I );
 
     connect( viewUser,
              SIGNAL( requestModify() ),
@@ -251,8 +253,7 @@ void AdminInterface_Controller::viewUsers()
 AdminInterface_Controller::
 AdminInterface_Controller( AdminInterface_Model * m, AdminInterface_View * v )
                            : model( m ),
-                             view( v ),
-                             insert( nullptr )
+                             view( v )
 {
     connetti();
 }

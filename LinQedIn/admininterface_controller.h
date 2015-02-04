@@ -24,8 +24,6 @@ class AdminInterface_Controller : public QObject
         AdminInterface_Model * model;
         AdminInterface_View * view;
 
-        UserInsert * insert;
-
         smartptr_utente createUser( const QString &,
                                     const Info &,
                                     LevelAccess::Type ) const;
@@ -39,7 +37,7 @@ class AdminInterface_Controller : public QObject
 		void updateListUsers( const QVector<smartptr_utente> & );
 
     public slots:
-        void addUser( const Info & );
+        void addUser( const Info &, LevelAccess::Type );
         void modifyUser( const Info &, LevelAccess::Type );
         void removeUserSelected();
         void setInsertWindow();
