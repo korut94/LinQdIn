@@ -40,10 +40,31 @@ void UserInterface_Controller::manageError( ErrorState::Type error )
 }
 
 
+void UserInterface_Controller::modifyUser( const Info & info )
+{
+    Database * db = model->getDatabase();
+    smartptr_utente & user = model->getUser();
+
+    db->modify( user, info );
+
+    setUserPage( user->getUsername() );
+}
+
+
 void UserInterface_Controller::setUserModify()
 {
-    UserModified * modified = new UserModified( new UtenteBusiness(),
-                                                LevelAccess::Basic );
+    UserModified * modified = new UserModified( model->getUser(),
+                                                LevelAccess::I );
+
+    connect( modified,
+             SIGNAL( error( ErrorState::Type ) ),
+             modified,
+             SLOT( manageLocalError( ErrorState::Type ) ) );
+
+    connect( modified,
+             SIGNAL( modify( const Info &, LevelAccess::Type ) ),
+             this,
+             SLOT( modifyUser( const Info & ) ) );
 
     emit display( modified );
 }

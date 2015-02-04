@@ -23,6 +23,7 @@ class UserInterface_Controller : public QObject
 
     public slots:
         void manageError( ErrorState::Type );
+        void modifyUser( const Info & );
         void setUserModify();
         void setUserPage( const QString & );
 
