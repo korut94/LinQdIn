@@ -40,6 +40,7 @@ class AdminInterface_Controller : public QObject
         void addUser( const Info &, LevelAccess::Type );
         void modifyUser( const Info &, LevelAccess::Type );
         void removeUserSelected();
+        void reset();
         void setInsertWindow();
         void setModifyWindow();
         void setSearchWindow();

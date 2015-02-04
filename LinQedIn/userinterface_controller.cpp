@@ -51,6 +51,26 @@ void UserInterface_Controller::modifyUser( const Info & info )
 }
 
 
+void UserInterface_Controller::reset()
+{
+    smartptr_utente & user = model->getUser();
+
+    if( user != nullptr )
+    {
+        Database * db = model->getDatabase();
+
+        QVector<smartptr_utente> risp =
+        db->getUsers( SearchGroupUtente::ByUsername( user->getUsername() ) );
+
+        if( risp.size() > 0 )
+        {
+            user = risp[0];
+            view->loadMainPage( user, LevelAccess::I );
+        }
+    }
+}
+
+
 void UserInterface_Controller::setUserModify()
 {
     UserModified * modified = new UserModified( model->getUser(),

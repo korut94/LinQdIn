@@ -145,6 +145,13 @@ void AdminInterface_Controller::removeUserSelected()
 }
 
 
+void AdminInterface_Controller::reset()
+{
+    viewUsers();
+    if( model->actualUser() != nullptr ) setUserWindow( model->actualUser() );
+}
+
+
 void AdminInterface_Controller::setInsertWindow()
 {
     model->actualUser() = nullptr;
