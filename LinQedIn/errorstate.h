@@ -7,7 +7,10 @@ namespace ErrorState
     {
         EmptyValue,
         InvalidValue,
-        None
+        LoginEmpty,
+        LoginInvalid,
+        None,
+        NotFoundUser
     };
 }
 
