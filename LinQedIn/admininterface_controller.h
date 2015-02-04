@@ -9,7 +9,7 @@
 #include "info.h"
 #include "searchgrouputente.h"
 #include "userinsert.h"
-#include "userinterface_view.h"
+#include "userinterface_controller.h"
 #include "usermodified.h"
 #include "usersearch.h"
 #include "utentebasic.h"
@@ -50,7 +50,8 @@ class AdminInterface_Controller : public QObject
         void test( const QString & ) const;
 
     public:
-        AdminInterface_Controller( AdminInterface_Model * =
+        AdminInterface_Controller( UserInterface_Controller *,
+                                   AdminInterface_Model * =
                                         new AdminInterface_Model,
                                    AdminInterface_View * =
                                         new AdminInterface_View );

@@ -251,10 +251,15 @@ void AdminInterface_Controller::viewUsers()
 
 
 AdminInterface_Controller::
-AdminInterface_Controller( AdminInterface_Model * m, AdminInterface_View * v )
+AdminInterface_Controller( UserInterface_Controller * ctrlUser,
+                           AdminInterface_Model * m,
+                           AdminInterface_View * v )
                            : model( m ),
                              view( v )
 {
+
+    ctrlUser->linkDatatabase( model->getDatabase() );
+
     connetti();
 }
 
