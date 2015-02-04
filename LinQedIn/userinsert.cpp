@@ -1,16 +1,11 @@
 #include "userinsert.h"
 
-LevelAccess::Type UserInsert::getAccoutTypeSet() const
-{
-    return editPage->getTypeUser();
-}
-
-
 void UserInsert::checkToSanityInsert() const
 {
     if( editPage->checkErrorForm() == ErrorState::None )
     {
-        if( editPage->completeForm() ) emit insert( editPage->recapInfo() );
+        if( editPage->completeForm() ) emit insert( editPage->recapInfo(),
+                                                    editPage->getTypeUser() );
         else emit error( ErrorState::EmptyValue );
     }
 

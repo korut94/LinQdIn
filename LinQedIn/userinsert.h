@@ -20,11 +20,9 @@ class UserInsert : public QWidget
     signals:
         void error( ErrorState::Type ) const ;
         void errorMessage( const QString & ) const;
-        void insert( const Info & ) const;
+        void insert( const Info &, LevelAccess::Type ) const;
 
     public slots:
-        LevelAccess::Type getAccoutTypeSet() const;
-
         void checkToSanityInsert() const;
         void manageLocalError( ErrorState::Type );
 
