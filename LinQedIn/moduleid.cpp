@@ -168,6 +168,7 @@ void ModuleID::reset()
     editNumber->clear();
     editPrefixNumber->clear();
     editSurname->clear();
+    editActualWork->clear();
 }
 
 
