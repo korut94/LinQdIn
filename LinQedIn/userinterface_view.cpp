@@ -2,6 +2,7 @@
 
 void UserInterface_View::errorLoginMessage( const QString & msgErr )
 {
+    errorLogin->setVisible( true );
     errorLogin->setText( msgErr );
 }
 
@@ -28,6 +29,7 @@ void UserInterface_View::loadLoginPage()
 
     QVBoxLayout * layoutBox = new QVBoxLayout;
     layoutBox->setAlignment( Qt::AlignTop );
+    layoutBox->addWidget( errorLogin );
     layoutBox->addLayout( formLogin );
     layoutBox->addLayout( layoutBtn );
 
@@ -106,9 +108,6 @@ UserInterface_View::UserInterface_View( QWidget * parent )
 {
     userUtility = new QScrollArea;
     userUtility->setWidgetResizable( true );
-
-    //loadLoginPage();
-    //loadMainPage( user, l );
 
     QVBoxLayout * layout = new QVBoxLayout;
     layout->setMargin( 0 );

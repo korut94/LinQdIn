@@ -22,13 +22,17 @@ class UserInterface_Controller : public QObject
         void display( QWidget * );
 
     public slots:
+        void manageError( ErrorState::Type );
         void setUserModify();
+        void setUserPage( const QString & );
 
     public:
         UserInterface_Controller();
         ~UserInterface_Controller();
 
         UserInterface_View * getView() const;
+
+        void linkDatatabase( Database * );
 };
 
 #endif // USERINTERFACE_CONTROLLER_H
