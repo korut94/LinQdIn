@@ -12,6 +12,9 @@ class UserInterface_Model
 
     public:
         UserInterface_Model();
+
+        Database * getDatabase() const;
+        smartptr_utente & getUser();
 };
 
 #endif // USERINTERFACE_MODEL_H
