@@ -20,6 +20,7 @@ class BoardFriends : public QWidget
     Q_OBJECT
 
     signals:
+        void logout();
         void modify();
 
     public:

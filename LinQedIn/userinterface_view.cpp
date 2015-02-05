@@ -78,6 +78,12 @@ void UserInterface_View::loadMainPage( const smartptr_utente & user,
              SIGNAL( modify() ),
              this,
              SIGNAL( requestModify() ) );
+
+    connect( boardFriends,
+             SIGNAL( logout() ),
+             this,
+             SIGNAL( requestLogout() ) );
+
 }
 
 

@@ -18,6 +18,18 @@ void UserInterface_Controller::connetti() const
              SIGNAL( requestLogin( const QString &) ),
              this,
              SLOT( setUserPage( const QString & ) ) );
+
+    connect( view,
+             SIGNAL( requestLogout() ),
+             this,
+             SLOT( logoutUser() ) );
+}
+
+
+void UserInterface_Controller::logoutUser()
+{
+    model->getUser() = nullptr;
+    view->loadLoginPage();
 }
 
 

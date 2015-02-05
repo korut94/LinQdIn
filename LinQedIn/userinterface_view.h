@@ -36,6 +36,7 @@ class UserInterface_View : public QWidget
     signals:
         void error( ErrorState::Type ) const;
         void requestLogin( const QString & ) const;
+        void requestLogout() const;
         void requestModify() const;
 
     public slots:

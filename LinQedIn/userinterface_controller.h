@@ -22,6 +22,7 @@ class UserInterface_Controller : public QObject
         void display( QWidget * );
 
     public slots:
+        void logoutUser();
         void manageError( ErrorState::Type );
         void modifyUser( const Info & );
         void reset();
