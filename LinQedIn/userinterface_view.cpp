@@ -94,7 +94,7 @@ void UserInterface_View::loadMainPage( const smartptr_utente & user,
              this,
              SIGNAL( requestHome() ) );
 
-    connect( top,
+    connect( boardFriends,
              SIGNAL( search() ),
              this,
              SIGNAL( requestSearch() ) );
