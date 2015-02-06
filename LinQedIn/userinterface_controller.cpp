@@ -23,12 +23,38 @@ void UserInterface_Controller::connetti() const
              SIGNAL( requestLogout() ),
              this,
              SLOT( logoutUser() ) );
+
+    connect( view,
+             SIGNAL( requestFriend() ),
+             this,
+             SLOT( addFriend() ) );
+
+    connect( view,
+             SIGNAL( requestHome() ),
+             this,
+             SLOT( returnHome() ) );
+
+    connect( view,
+             SIGNAL( requestSearch() ),
+             this,
+             SLOT( setUserSearch() ) );
+}
+
+
+void UserInterface_Controller::addFriend()
+{
+    std::cout << "Ciao" << std::endl;
+
+    model->getDatabase()->linkUser( model->getActualUser(),
+                                    model->getRegisterUser() );
+
+    reset();
 }
 
 
 void UserInterface_Controller::logoutUser()
 {
-    model->getUser() = nullptr;
+    model->getRegisterUser() = nullptr;
     view->loadLoginPage();
 }
 
@@ -55,7 +81,7 @@ void UserInterface_Controller::manageError( ErrorState::Type error )
 void UserInterface_Controller::modifyUser( const Info & info )
 {
     Database * db = model->getDatabase();
-    smartptr_utente & user = model->getUser();
+    smartptr_utente & user = model->getRegisterUser();
 
     db->modify( user, info );
 
@@ -65,7 +91,7 @@ void UserInterface_Controller::modifyUser( const Info & info )
 
 void UserInterface_Controller::reset()
 {
-    smartptr_utente & user = model->getUser();
+    smartptr_utente & user = model->getActualUser();
 
     if( user != nullptr )
     {
@@ -77,15 +103,39 @@ void UserInterface_Controller::reset()
         if( risp.size() > 0 )
         {
             user = risp[0];
-            view->loadMainPage( user, LevelAccess::I );
+
+            LevelAccess::Type level = ( user == model->getRegisterUser() ) ?
+                                      LevelAccess::I : user->typeAccount();
+
+            view->loadMainPage( user, level );
         }
     }
 }
 
 
+void UserInterface_Controller::returnHome()
+{
+    setUserPage( model->getRegisterUser() );
+}
+
+
+void UserInterface_Controller::searchUser( const Info & info )
+{
+    Database * db = model->getDatabase();
+
+    QString name = info.getPersonal().getNome();
+    QString surname = info.getPersonal().getCognome();
+
+    QVector<smartptr_utente> utente = db->getUsers( SearchGroupUtente::
+                                          ByNameAndSurname( name, surname ) );
+
+
+}
+
+
 void UserInterface_Controller::setUserModify()
 {
-    UserModified * modified = new UserModified( model->getUser(),
+    UserModified * modified = new UserModified( model->getRegisterUser(),
                                                 LevelAccess::I );
 
     connect( modified,
@@ -109,13 +159,38 @@ void UserInterface_Controller::setUserPage( const QString & username )
     QVector<smartptr_utente> ris =
                 db->getUsers( SearchGroupUtente::ByUsername( username ) );
 
-    if( !ris.isEmpty() )
-    {
-        model->getUser() = ris[0];
-        view->loadMainPage( model->getUser(), LevelAccess::I );
-    }
-
+    if( !ris.isEmpty() ) setUserPage( ris[0] );
     else manageError( ErrorState::NotFoundUser );
+}
+
+
+void UserInterface_Controller::setUserPage( const smartptr_utente & user )
+{
+    if( user != nullptr )
+    {
+        model->getRegisterUser() = user;
+        model->getActualUser() = user;
+
+        view->loadMainPage( user, LevelAccess::I );
+    }
+}
+
+
+void UserInterface_Controller::setUserSearch()
+{
+    UserSearch * schUser = new UserSearch();
+
+    connect( schUser,
+             SIGNAL( search( const Info & ) ),
+             this,
+             SIGNAL( searchUser( const Info & ) ) );
+
+    connect( schUser,
+             SIGNAL( error( ErrorState::Type ) ),
+             schUser,
+             SLOT( manageLocalError( ErrorState::Type ) ) );
+
+    view->setFrameUtility( schUser );
 }
 
 

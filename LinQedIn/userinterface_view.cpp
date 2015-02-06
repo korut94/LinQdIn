@@ -54,7 +54,7 @@ void UserInterface_View::loadLoginPage()
 void UserInterface_View::loadMainPage( const smartptr_utente & user,
                                        LevelAccess::Type level )
 {
-    Top * top = new Top( user );
+    Top * top = new Top( user, level );
     ID * id = new ID( user->getInfo().getPersonal() );
     ViewExperience * experience = new ViewExperience( user->getInfo() );
     BoardFriends * boardFriends = new BoardFriends( user );
@@ -84,6 +84,20 @@ void UserInterface_View::loadMainPage( const smartptr_utente & user,
              this,
              SIGNAL( requestLogout() ) );
 
+    connect( top,
+             SIGNAL(amici() ),
+             this,
+             SIGNAL( requestFriend() ) );
+
+    connect( top,
+             SIGNAL( home() ),
+             this,
+             SIGNAL( requestHome() ) );
+
+    connect( top,
+             SIGNAL( search() ),
+             this,
+             SIGNAL( requestSearch() ) );
 }
 
 

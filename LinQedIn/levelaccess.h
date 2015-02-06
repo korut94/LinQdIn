@@ -5,12 +5,12 @@ namespace LevelAccess
 {
     enum Type
     {
+        Master,
+        None,
         I,
         Basic,
         Business,
-        Executive,
-        Master,
-        None
+        Executive
     };
 }
 

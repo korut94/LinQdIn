@@ -22,12 +22,17 @@ class UserInterface_Controller : public QObject
         void display( QWidget * );
 
     public slots:
+        void addFriend();
         void logoutUser();
         void manageError( ErrorState::Type );
         void modifyUser( const Info & );
         void reset();
+        void returnHome();
+        void searchUser( const Info & );
         void setUserModify();
         void setUserPage( const QString & );
+        void setUserPage( const smartptr_utente & );
+        void setUserSearch();
 
     public:
         UserInterface_Controller();

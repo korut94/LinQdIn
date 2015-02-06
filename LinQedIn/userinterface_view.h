@@ -35,9 +35,12 @@ class UserInterface_View : public QWidget
 
     signals:
         void error( ErrorState::Type ) const;
+        void requestFriend() const;
+        void requestHome() const;
         void requestLogin( const QString & ) const;
         void requestLogout() const;
         void requestModify() const;
+        void requestSearch() const;
 
     public slots:
         void errorLoginMessage( const QString & );
