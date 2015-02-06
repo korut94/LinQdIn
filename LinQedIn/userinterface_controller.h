@@ -28,7 +28,7 @@ class UserInterface_Controller : public QObject
         void modifyUser( const Info & );
         void reset();
         void returnHome();
-        void searchUser( const Info & );
+        void searchUser( const QVector<smartptr_utente> & );
         void setUserModify();
         void setUserPage( const QString & );
         void setUserPage( const smartptr_utente & );

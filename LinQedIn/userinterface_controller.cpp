@@ -119,17 +119,10 @@ void UserInterface_Controller::returnHome()
 }
 
 
-void UserInterface_Controller::searchUser( const Info & info )
+void UserInterface_Controller::
+     searchUser( const QVector<smartptr_utente> & users )
 {
-    Database * db = model->getDatabase();
-
-    QString name = info.getPersonal().getNome();
-    QString surname = info.getPersonal().getCognome();
-
-    QVector<smartptr_utente> utente = db->getUsers( SearchGroupUtente::
-                                          ByNameAndSurname( name, surname ) );
-
-
+    setUserPage( users[0] );
 }
 
 
@@ -168,22 +161,32 @@ void UserInterface_Controller::setUserPage( const smartptr_utente & user )
 {
     if( user != nullptr )
     {
-        model->getRegisterUser() = user;
+        LevelAccess::Type level;
+
+        if( model->getRegisterUser() == nullptr )
+        {
+            level = LevelAccess::I;
+            model->getRegisterUser() = user;
+        }
+
+        else level = ( user == model->getRegisterUser() ) ?
+                        LevelAccess::I : user->typeAccount();
+
         model->getActualUser() = user;
 
-        view->loadMainPage( user, LevelAccess::I );
+        view->loadMainPage( user, level );
     }
 }
 
 
 void UserInterface_Controller::setUserSearch()
 {
-    UserSearch * schUser = new UserSearch();
+    UserSearch * schUser = new UserSearch( model->getDatabase() );
 
     connect( schUser,
-             SIGNAL( search( const Info & ) ),
+             SIGNAL( search( const QVector<smartptr_utente> & ) ),
              this,
-             SIGNAL( searchUser( const Info & ) ) );
+             SLOT( searchUser( const QVector<smartptr_utente> & ) ) );
 
     connect( schUser,
              SIGNAL( error( ErrorState::Type ) ),
