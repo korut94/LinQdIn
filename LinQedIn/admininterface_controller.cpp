@@ -195,12 +195,12 @@ void AdminInterface_Controller::setSearchWindow()
 {
     model->actualUser() = nullptr;
 
-    UserSearch * search = new UserSearch();
+    UserSearch * search = new UserSearch( model->getDatabase() );
 
     connect( search,
-             SIGNAL( search( const Info & ) ),
+             SIGNAL( search( const QVector<smartptr_utente> & ) ),
              this,
-             SLOT( searchUser( const Info & ) ) );
+             SIGNAL( updateListUsers( const QVector<smartptr_utente> & ) ) );
 
     view->setFrameUtility( search );
 }
@@ -230,20 +230,6 @@ void AdminInterface_Controller::setUserWindow( const smartptr_utente & user )
     view->setFrameUtility( viewUser );
 
     model->actualUser() = user;
-}
-
-
-void AdminInterface_Controller::searchUser( const Info & info )
-{
-    Database * db = model->getDatabase();
-
-    QString name = info.getPersonal().getNome();
-    QString surname = info.getPersonal().getCognome();
-
-    QVector<smartptr_utente> utente = db->getUsers( SearchGroupUtente::
-                                          ByNameAndSurname( name, surname ) );
-
-    emit updateListUsers( utente );
 }
 
 

@@ -2,8 +2,13 @@
 
 void UserSearch::composeInfo() const
 {
-    Personal personal( editName->text(), editSurname->text() );
-    emit search( Info( personal ) );
+    QVector<smartptr_utente> risp =
+            database->getUsers(
+                SearchGroupUtente::ByNameAndSurname( editName->text(),
+                                                     editSurname->text() ) );
+
+    if( risp.isEmpty() ) emit error( ErrorState::NotFoundUser );
+    else emit search( risp );
 }
 
 
@@ -14,11 +19,34 @@ void UserSearch::reset()
 }
 
 
-UserSearch::UserSearch( QWidget * parent )
-                        : editName( nullptr ),
+void UserSearch::manageLocalError( ErrorState::Type type )
+{
+    switch( type )
+    {
+        case ErrorState::InvalidValue :
+             emit errorMessage( tr( "Incorrect values" ) );
+             break;
+
+        case ErrorState::EmptyValue :
+             emit errorMessage( tr( "Empty values" ) );
+             break;
+
+        case ErrorState::NotFoundUser :
+             emit errorMessage( tr( "User not found" ) );
+             break;
+    }
+}
+
+
+UserSearch::UserSearch( Database * db, QWidget * parent )
+                        : error( new QLabel() ),
+                          editName( nullptr ),
                           editSurname( nullptr ),
+                          database( db ),
                           QWidget( parent )
 {
+    error->setVisible( false; );
+
     QPushButton * btnReset = new QPushButton( tr( "Reset" ) );
     QPushButton * btnSearch = new QPushButton( tr( "Search" ) );
 
@@ -40,6 +68,7 @@ UserSearch::UserSearch( QWidget * parent )
     layoutForm->addRow( tr( "Surname" ) + ':', editSurname );
 
     QVBoxLayout * layout = new QVBoxLayout;
+    layout->addWidget( error );
     layout->addLayout( layoutForm );
     layout->addLayout( layoutBottom );
 

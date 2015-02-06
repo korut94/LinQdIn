@@ -9,6 +9,7 @@
 #include <QVBoxLayout>
 #include <QWidget>
 
+#include "database.h"
 #include "errorstate.h"
 #include "info.h"
 #include "levelaccess.h"
@@ -19,18 +20,21 @@ class UserSearch : public QWidget
     Q_OBJECT
 
     private:
+        QLabel * error;
         QLineEdit * editName;
         QLineEdit * editSurname;
+        Database * database;
 
     signals:
-        void search( const Info & ) const;
+        void search( const QVector<smartptr_utente> & ) const;
 
     public slots:
         void composeInfo() const;
         void reset();
+        void manageLocalError( ErrorState::Type );
 
     public:
-        UserSearch( QWidget * = nullptr );
+        UserSearch( Database *, QWidget * = nullptr );
         ~UserSearch();
 };
 
