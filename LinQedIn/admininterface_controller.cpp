@@ -202,6 +202,11 @@ void AdminInterface_Controller::setSearchWindow()
              this,
              SIGNAL( updateListUsers( const QVector<smartptr_utente> & ) ) );
 
+    connect( search,
+             SIGNAL( error( ErrorState::Type ) ),
+             search,
+             SIGNAL( manageLocalError( ErrorState::Type ) ) );
+
     view->setFrameUtility( search );
 }
 

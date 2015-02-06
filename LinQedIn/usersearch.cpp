@@ -24,15 +24,15 @@ void UserSearch::manageLocalError( ErrorState::Type type )
     switch( type )
     {
         case ErrorState::InvalidValue :
-             emit errorMessage( tr( "Incorrect values" ) );
+             error->setText( tr( "Incorrect values" ) );
              break;
 
         case ErrorState::EmptyValue :
-             emit errorMessage( tr( "Empty values" ) );
+             error->setText( tr( "Empty values" ) );
              break;
 
         case ErrorState::NotFoundUser :
-             emit errorMessage( tr( "User not found" ) );
+             error->setText( tr( "User not found" ) );
              break;
     }
 }
