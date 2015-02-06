@@ -20,8 +20,9 @@ class BoardFriends : public QWidget
     Q_OBJECT
 
     signals:
-        void logout();
-        void modify();
+        void logout() const;
+        void modify() const;
+        void search() const;
 
     public:
         BoardFriends( const smartptr_utente &, QWidget * = nullptr );

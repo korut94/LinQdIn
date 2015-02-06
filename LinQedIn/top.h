@@ -15,8 +15,12 @@ class Top : public QWidget
 {
     Q_OBJECT
 
+    signals:
+        void amici();
+        void home();
+
     public:
-        Top( const smartptr_utente &, QWidget * = nullptr );
+        Top( const smartptr_utente &, LevelAccess::Type, QWidget * = nullptr );
         ~Top();
 };
 

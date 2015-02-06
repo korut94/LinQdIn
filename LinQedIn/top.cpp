@@ -1,6 +1,8 @@
 #include "top.h"
 
-Top::Top( const smartptr_utente & user, QWidget * parent ) : QWidget( parent )
+Top::Top( const smartptr_utente & user,
+          LevelAccess::Type level,
+          QWidget * parent ) : QWidget( parent )
 
 {
     QLabel * lblUser = new QLabel( tr( "Username" ) +
@@ -22,15 +24,33 @@ Top::Top( const smartptr_utente & user, QWidget * parent ) : QWidget( parent )
 
     QLabel * lblAccount = new QLabel( tr( "Account" ) + ": " + l );
 
-    QPushButton * btmFriend = new QPushButton( tr( "Add co-worker" ) );
-    btmFriend->setSizePolicy( QSizePolicy::Fixed, QSizePolicy::Maximum );
+    QPushButton * btnHome = new QPushButton( tr( "Home" ) );
+    btnHome->setSizePolicy( QSizePolicy::Fixed, QSizePolicy::Maximum );
 
     QHBoxLayout * layout = new QHBoxLayout;
+    layout->addWidget( btnHome );
     layout->addWidget( lblUser );
     layout->addWidget( lblAccount );
-    layout->addWidget( btmFriend );
+
+    if( level > LevelAccess::I )
+    {
+        QPushButton * btnFriend = new QPushButton( tr( "Add co-worker" ) );
+        btnFriend->setSizePolicy( QSizePolicy::Fixed, QSizePolicy::Maximum );
+
+        layout->addWidget( btnFriend );
+
+        connect( btnFriend,
+                 SIGNAL( clicked() ),
+                 this,
+                 SIGNAL( amici() ) );
+    }
 
     setLayout( layout );
+
+    connect( btnHome,
+             SIGNAL( clicked() ),
+             this,
+             SIGNAL( home() ) );
 }
 
 
