@@ -20,12 +20,13 @@ class UserSearch : public QWidget
     Q_OBJECT
 
     private:
-        QLabel * error;
+        QLabel * lblError;
         QLineEdit * editName;
         QLineEdit * editSurname;
         Database * database;
 
     signals:
+        void error( ErrorState::Type ) const;
         void search( const QVector<smartptr_utente> & ) const;
 
     public slots:

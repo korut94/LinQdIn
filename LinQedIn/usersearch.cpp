@@ -24,28 +24,28 @@ void UserSearch::manageLocalError( ErrorState::Type type )
     switch( type )
     {
         case ErrorState::InvalidValue :
-             error->setText( tr( "Incorrect values" ) );
+             lblError->setText( tr( "Incorrect values" ) );
              break;
 
         case ErrorState::EmptyValue :
-             error->setText( tr( "Empty values" ) );
+             lblError->setText( tr( "Empty values" ) );
              break;
 
         case ErrorState::NotFoundUser :
-             error->setText( tr( "User not found" ) );
+             lblError->setText( tr( "User not found" ) );
              break;
     }
 }
 
 
 UserSearch::UserSearch( Database * db, QWidget * parent )
-                        : error( new QLabel() ),
+                        : lblError( new QLabel() ),
                           editName( nullptr ),
                           editSurname( nullptr ),
                           database( db ),
                           QWidget( parent )
 {
-    error->setVisible( false; );
+    lblError->setVisible( false );
 
     QPushButton * btnReset = new QPushButton( tr( "Reset" ) );
     QPushButton * btnSearch = new QPushButton( tr( "Search" ) );
@@ -68,7 +68,7 @@ UserSearch::UserSearch( Database * db, QWidget * parent )
     layoutForm->addRow( tr( "Surname" ) + ':', editSurname );
 
     QVBoxLayout * layout = new QVBoxLayout;
-    layout->addWidget( error );
+    layout->addWidget( lblError );
     layout->addLayout( layoutForm );
     layout->addLayout( layoutBottom );
 
