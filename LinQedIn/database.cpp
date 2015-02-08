@@ -61,8 +61,8 @@ void Database::linkUser( const smartptr_utente & a, const smartptr_utente & b )
 {
     if( a != nullptr && b != nullptr )
     {
-        a->getContatti().push_front( b );
-        b->getContatti().push_front( a );
+        a->addContact( b );
+        b->addContact( a );
     }
 }
 
@@ -92,5 +92,16 @@ void Database::remove( const smartptr_utente & user )
         entryUsername.remove( user );
 
         general.removeOne( user );
+    }
+}
+
+
+void Database::unlinkUser( const smartptr_utente & a,
+                           const smartptr_utente & b )
+{
+    if( a != nullptr && b != nullptr )
+    {
+        a->removeContact( b );
+        b->removeContact( a );
     }
 }

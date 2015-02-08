@@ -43,6 +43,7 @@ class Database
         void linkUser( const smartptr_utente &, const smartptr_utente & );
         void modify( const smartptr_utente &, const Info & );
         void remove( const smartptr_utente & );
+        void unlinkUser( const smartptr_utente &, const smartptr_utente & );
 };
 
 #endif // DATABASE_H
