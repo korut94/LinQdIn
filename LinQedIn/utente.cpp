@@ -5,13 +5,14 @@ Utente::Rete::Rete()
 }
 
 
-bool Utente::Rete::contains( const smartptr_utente & t ) const
+bool Utente::Rete::isPresent( const smartptr_utente & t ) const
 {
     bool found = false;
 
-    QList<smartptr_utente>::const_iterator itr = begin();
+    QList<smartptr_utente>::const_iterator itr =
+                                           QList<smartptr_utente>::begin();
 
-    while( itr != end() && !found )
+    while( itr != QList<smartptr_utente>::end() && !found )
     {
         found = ( **itr == *t );
         itr++;
@@ -21,19 +22,33 @@ bool Utente::Rete::contains( const smartptr_utente & t ) const
 }
 
 
-bool Utente::Rete::removeOne( const smartptr_utente & t )
+QVector<smartptr_utente> Utente::Rete::toVector() const
+{
+    return QList<smartptr_utente>::toVector();
+}
+
+
+void Utente::Rete::add( const smartptr_utente & t )
+{
+    if( !isPresent( t ) ) QList<smartptr_utente>::push_front( t );
+}
+
+
+void Utente::Rete::remove( const smartptr_utente & t )
 {
     bool found = false;
 
-    QList<smartptr_utente>::iterator itr = begin();
+    QList<smartptr_utente>::iterator itr = QList<smartptr_utente>::begin();
 
-    while( itr != end() && !found )
+    while( itr != QList<smartptr_utente>::end() && !found )
     {
-        if( ( found = ( **itr == *t ) ) ) erase( itr );
+        if( **itr == *t )
+        {
+            QList<smartptr_utente>::erase( itr );
+            found = true;
+        }
         else itr++;
     }
-
-    return found;
 }
 
 
@@ -65,12 +80,12 @@ bool Utente::isOnline() const
     return online;
 }
 
-
+/*
 Utente::Rete & Utente::getContatti()
 {
     return contacts;
 }
-
+*/
 
 const Utente::Rete & Utente::getContatti() const
 {
@@ -80,13 +95,13 @@ const Utente::Rete & Utente::getContatti() const
 
 void Utente::addContact( const smartptr_utente & user )
 {
-    if( user != nullptr ) contacts.push_front( user );
+    if( user != nullptr ) contacts.add( user );
 }
 
 
 void Utente::removeContact( const smartptr_utente & user )
 {
-    contacts.removeOne( user );
+    contacts.remove( user );
 }
 
 

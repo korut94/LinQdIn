@@ -14,13 +14,17 @@ class smartptr_utente;
 class Utente : public Entity
 {
     public:
-        class Rete : public QList<smartptr_utente>
+        class Rete : private QList<smartptr_utente>
         {
             public:
                 Rete();
 
-                bool contains( const smartptr_utente & t ) const;
-                bool removeOne( const smartptr_utente & t );
+                bool isPresent( const smartptr_utente & t ) const;
+
+                QVector<smartptr_utente> toVector() const;
+
+                void add( const smartptr_utente & t );
+                void remove( const smartptr_utente & t );
         };
 
     private:
@@ -39,7 +43,7 @@ class Utente : public Entity
 
 		virtual LevelAccess::Type typeAccount() const = 0;
 
-        Rete & getContatti();
+        //Rete & getContatti();
         const Rete & getContatti() const;
 
         void addContact( const smartptr_utente & );
