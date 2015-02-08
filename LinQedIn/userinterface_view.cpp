@@ -85,9 +85,14 @@ void UserInterface_View::loadMainPage( const smartptr_utente & user,
              SIGNAL( requestLogout() ) );
 
     connect( top,
-             SIGNAL(amici() ),
+             SIGNAL( amici() ),
              this,
-             SIGNAL( requestFriend() ) );
+             SIGNAL( requestAddFriend() ) );
+
+    connect( top,
+             SIGNAL( nonAmici() ),
+             this,
+             SIGNAL( requestRemoveFriend() ) );
 
     connect( top,
              SIGNAL( home() ),
@@ -98,6 +103,11 @@ void UserInterface_View::loadMainPage( const smartptr_utente & user,
              SIGNAL( search() ),
              this,
              SIGNAL( requestSearch() ) );
+
+    connect( this,
+             SIGNAL( viewListFriends( const Utente::Rete & ) ),
+             boardFriends,
+             SLOT( viewFriends( const Utente::Rete & ) ) );
 }
 
 

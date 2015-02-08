@@ -25,7 +25,7 @@ void UserInterface_Controller::connetti() const
              SLOT( logoutUser() ) );
 
     connect( view,
-             SIGNAL( requestFriend() ),
+             SIGNAL( requestAddFriend() ),
              this,
              SLOT( addFriend() ) );
 
@@ -38,17 +38,25 @@ void UserInterface_Controller::connetti() const
              SIGNAL( requestSearch() ),
              this,
              SLOT( setUserSearch() ) );
+
+    connect( view,
+             SIGNAL( requestRemoveFriend() ),
+             this,
+             SLOT( removeFriend() ) );
+
+    connect( this,
+             SIGNAL( updateListFriends( const Utente::Rete & ) ),
+             view,
+             SIGNAL( viewListFriends( const Utente::Rete & ) ) );
 }
 
 
 void UserInterface_Controller::addFriend()
 {
-    std::cout << "Ciao" << std::endl;
-
     model->getDatabase()->linkUser( model->getActualUser(),
                                     model->getRegisterUser() );
 
-    reset();
+    emit updateListFriends( model->getActualUser()->getContatti() );
 }
 
 
@@ -86,6 +94,15 @@ void UserInterface_Controller::modifyUser( const Info & info )
     db->modify( user, info );
 
     setUserPage( user->getUsername() );
+}
+
+
+void UserInterface_Controller::removeFriend()
+{
+    model->getDatabase()->unlinkUser( model->getActualUser(),
+                                      model->getRegisterUser() );
+
+    emit updateListFriends( model->getActualUser()->getContatti() );
 }
 
 

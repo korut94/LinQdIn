@@ -35,12 +35,14 @@ class UserInterface_View : public QWidget
 
     signals:
         void error( ErrorState::Type ) const;
-        void requestFriend() const;
+        void requestAddFriend() const;
         void requestHome() const;
         void requestLogin( const QString & ) const;
         void requestLogout() const;
         void requestModify() const;
+        void requestRemoveFriend() const;
         void requestSearch() const;
+        void viewListFriends( const Utente::Rete & ) const;
 
     public slots:
         void errorLoginMessage( const QString & );

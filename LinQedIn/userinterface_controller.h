@@ -19,13 +19,15 @@ class UserInterface_Controller : public QObject
         void connetti() const;
 
     signals:
-        void display( QWidget * );
+        void display( QWidget * ) const;
+        void updateListFriends( const Utente::Rete & ) const;
 
     public slots:
         void addFriend();
         void logoutUser();
         void manageError( ErrorState::Type );
         void modifyUser( const Info & );
+        void removeFriend();
         void reset();
         void returnHome();
         void searchUser( const QVector<smartptr_utente> & );
