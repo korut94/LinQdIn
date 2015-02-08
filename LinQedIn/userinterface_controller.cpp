@@ -108,7 +108,7 @@ void UserInterface_Controller::removeFriend()
 
 void UserInterface_Controller::reset()
 {
-    smartptr_utente & user = model->getActualUser();
+    smartptr_utente & user = model->getRegisterUser();
 
     if( user != nullptr )
     {
