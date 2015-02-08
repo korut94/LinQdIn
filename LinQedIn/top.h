@@ -15,9 +15,17 @@ class Top : public QWidget
 {
     Q_OBJECT
 
+    private:
+        QPushButton * btnFriend;
+
     signals:
-        void amici();
-        void home();
+        void amici() const;
+        void home() const;
+        void nonAmici() const;
+
+    private slots:
+        void setAddFriend();
+        void setRemoveFriend();
 
     public:
         Top( const smartptr_utente &, LevelAccess::Type, QWidget * = nullptr );

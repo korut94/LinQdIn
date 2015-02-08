@@ -1,8 +1,34 @@
 #include "top.h"
 
+void Top::setAddFriend()
+{
+    btnFriend->setText( tr( "Remove co-worker" ) );
+
+    connect( btnFriend,
+             SIGNAL( clicked() ),
+             this,
+             SLOT( setRemoveFriend() ) );
+
+    emit amici();
+}
+
+
+void Top::setRemoveFriend()
+{
+    btnFriend->setText( tr( "Add co-worker" ) );
+
+    connect( btnFriend,
+             SIGNAL( clicked() ),
+             this,
+             SLOT( setAddFriend() ) );
+
+    emit nonAmici();
+}
+
+
 Top::Top( const smartptr_utente & user,
           LevelAccess::Type level,
-          QWidget * parent ) : QWidget( parent )
+          QWidget * parent ) : btnFriend( nullptr ), QWidget( parent )
 
 {
     QLabel * lblUser = new QLabel( tr( "Username" ) +
@@ -34,7 +60,7 @@ Top::Top( const smartptr_utente & user,
 
     if( level > LevelAccess::I )
     {
-        QPushButton * btnFriend = new QPushButton( tr( "Add co-worker" ) );
+        btnFriend = new QPushButton( tr( "Add co-worker" ) );
         btnFriend->setSizePolicy( QSizePolicy::Fixed, QSizePolicy::Maximum );
 
         layout->addWidget( btnFriend );
@@ -42,7 +68,7 @@ Top::Top( const smartptr_utente & user,
         connect( btnFriend,
                  SIGNAL( clicked() ),
                  this,
-                 SIGNAL( amici() ) );
+                 SLOT( setAddFriend() ) );
     }
 
     setLayout( layout );
