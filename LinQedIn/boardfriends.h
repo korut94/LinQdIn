@@ -19,10 +19,16 @@ class BoardFriends : public QWidget
 {
     Q_OBJECT
 
+    private:
+        TableUsers * friends;
+
     signals:
         void logout() const;
         void modify() const;
         void search() const;
+
+    public slots:
+        void viewFriends( const Utente::Rete & );
 
     public:
         BoardFriends( const smartptr_utente &, QWidget * = nullptr );

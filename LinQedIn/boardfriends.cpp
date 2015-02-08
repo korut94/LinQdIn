@@ -1,5 +1,11 @@
 #include "boardfriends.h"
 
+void BoardFriends::viewFriends( const Utente::Rete & contatti )
+{
+    friends->setItems( contatti.toVector() );
+}
+
+
 BoardFriends::BoardFriends( const smartptr_utente & user,
                             QWidget * parent )
                             : QWidget( parent )
@@ -10,7 +16,7 @@ BoardFriends::BoardFriends( const smartptr_utente & user,
 
     QPushButton * btnModify = new QPushButton( tr( "Modified" ) );
     QPushButton * btnSearch = new QPushButton( tr( "Search co-worker" ) );
-    TableUsers * friends = new TableUsers( tr( "My colleagues" ) );
+    friends = new TableUsers( tr( "My colleagues" ) );
 
     const Utente::Rete & contatti = user->getContatti();
     friends->setItems( contatti.toVector() );
