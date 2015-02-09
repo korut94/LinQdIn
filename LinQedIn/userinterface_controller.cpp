@@ -113,7 +113,15 @@ void UserInterface_Controller::removeFriend()
 
 void UserInterface_Controller::reset()
 {
-    setUserPage( model->getActualUser() );
+    Database * db = model->getDatabase();
+
+    smartptr_utente & userReg = model->getRegisterUser();
+    smartptr_utente & userAct = model->getActualUser();
+
+    userReg = db->recoveryUser( userReg );
+    userAct = db->recoveryUser( userAct );
+
+    setUserPage( userAct );
 }
 
 
