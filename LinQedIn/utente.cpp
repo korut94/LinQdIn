@@ -80,12 +80,6 @@ bool Utente::isOnline() const
     return online;
 }
 
-/*
-Utente::Rete & Utente::getContatti()
-{
-    return contacts;
-}
-*/
 
 const Utente::Rete & Utente::getContatti() const
 {
@@ -114,10 +108,4 @@ void Utente::setActivate( bool set )
 void Utente::setOnline( bool set )
 {
     online = set;
-}
-
-
-std::ostream & operator<<( std::ostream & os, const Utente & u )
-{
-    return ( os << u.getInfo().getPersonal().getNome().toStdString() );
 }

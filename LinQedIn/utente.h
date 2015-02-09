@@ -43,15 +43,12 @@ class Utente : public Entity
 
 		virtual LevelAccess::Type typeAccount() const = 0;
 
-        //Rete & getContatti();
         const Rete & getContatti() const;
 
         void addContact( const smartptr_utente & );
         void removeContact( const smartptr_utente & );
         void setActivate( bool );
         void setOnline( bool );
-
-        friend std::ostream & operator<<( std::ostream &, const Utente & );
 };
 
 #endif // UTENTE_H
