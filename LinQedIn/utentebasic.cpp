@@ -16,3 +16,14 @@ LevelAccess::Type UtenteBasic::typeAccount() const
 {
 	return LevelAccess::Basic;
 }
+
+
+void UtenteBasic::writeXmlFormat( QXmlStreamWriter & writer ) const
+{
+    writer.writeStartElement( "Utente" ); //Open Utente
+    writer.writeAttribute( "type", "Basic" );
+
+    writeXmlUserData( writer );
+
+    writer.writeEndElement(); //Close Utente
+}

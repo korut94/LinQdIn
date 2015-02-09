@@ -11,6 +11,8 @@ class UtenteBasic : public Utente
         UtenteBasic( const Utente & );
 
 		LevelAccess::Type typeAccount() const;
+
+        void writeXmlFormat( QXmlStreamWriter & ) const;
 };
 
 #endif // UTENTEBASIC_H

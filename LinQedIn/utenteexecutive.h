@@ -11,6 +11,8 @@ class UtenteExecutive : public UtenteBusiness
         UtenteExecutive( const Utente & );
 
 		LevelAccess::Type typeAccount() const;
+
+        void writeXmlFormat( QXmlStreamWriter & ) const;
 };
 
 #endif // UTENTEEXECUTIVE_H

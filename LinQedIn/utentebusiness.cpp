@@ -18,3 +18,14 @@ LevelAccess::Type UtenteBusiness::typeAccount() const
 {
 	return LevelAccess::Business;
 }
+
+
+void UtenteBusiness::writeXmlFormat( QXmlStreamWriter & writer ) const
+{
+    writer.writeStartElement( "Utente" ); //Open Utente
+    writer.writeAttribute( "type", "Business" );
+
+    writeXmlUserData( writer );
+
+    writer.writeEndElement(); //Close Utente
+}

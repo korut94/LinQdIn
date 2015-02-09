@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <QList>
+#include <QXmlStreamWriter>
 
 #include "info.h"
 #include "entity.h"
@@ -33,6 +34,9 @@ class Utente : public Entity
 
         Rete contacts;
 
+    protected:
+        void writeXmlUserData( QXmlStreamWriter & ) const;
+
     public:
         Utente();
         Utente( const QString &, const Info & );
@@ -50,6 +54,7 @@ class Utente : public Entity
         void removeContact( const smartptr_utente & );
         void setActivate( bool );
         void setOnline( bool );
+        virtual void writeXmlFormat( QXmlStreamWriter & ) const = 0;
 };
 
 #endif // UTENTE_H

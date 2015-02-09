@@ -115,3 +115,86 @@ void Utente::setOnline( bool set )
 {
     online = set;
 }
+
+
+void Utente::writeXmlUserData( QXmlStreamWriter & writer ) const
+{
+    writer.writeTextElement( "username", getUsername() );
+
+    const Info & info = getInfo();
+    writer.writeStartElement( "Info" ); //Open Info
+
+    const Personal & personal = info.getPersonal();
+    writer.writeStartElement( "Personal" ); //Open Personal
+
+    writer.writeTextElement( "nome", personal.getNome() );
+    writer.writeTextElement( "congome", personal.getCognome() );
+    writer.writeTextElement( "birthday",
+                             personal.getDate().toString( "dd MMMM yyyy" ) );
+    writer.writeTextElement( "number", personal.getNumTelefono() );
+
+    writer.writeEndElement(); //Close Personal
+
+    const QVector<Experience> & exp = info.getWorkExperiences();
+    writer.writeStartElement( "Experiences" ); //Open Experiences
+
+    for( QVector<Experience>::const_iterator itr = exp.begin();
+         itr != exp.end();
+         itr++ )
+    {
+        writer.writeStartElement( "Experience" ); //Open Experience
+
+        writer.writeTextElement( "work", itr->getWork() );
+        writer.writeTextElement( "company", itr->getCompany() );
+        writer.writeTextElement( "period", itr->getPeriod() );
+        writer.writeTextElement( "description", itr->getDescription() );
+
+        writer.writeEndElement(); //Close Experience
+    }
+
+    writer.writeEndElement(); //Close Experiences
+
+    const QVector<Skill> & sks = info.getSkills();
+    writer.writeStartElement( "Skills" ); //Open Skills
+
+    for( QVector<Skill>::const_iterator itr = sks.begin();
+         itr != sks.end();
+         itr++ )
+    {
+        writer.writeTextElement( "skill", itr->getSkill() );
+    }
+
+    writer.writeEndElement(); //Close Skills
+
+    const QVector<Experience> & sch = info.getSchoolExperiences();
+    writer.writeStartElement( "Educations" ); //Open Educations
+
+    for( QVector<Experience>::const_iterator itr = sch.begin();
+         itr != sch.end();
+         itr++ )
+    {
+        writer.writeStartElement( "Education" ); //Open Education
+
+        writer.writeTextElement( "school", itr->getWork() );
+        writer.writeTextElement( "title", itr->getCompany() );
+        writer.writeTextElement( "time_period", itr->getPeriod() );
+        writer.writeTextElement( "description", itr->getDescription() );
+
+        writer.writeEndElement(); //Close Education
+    }
+
+    writer.writeEndElement(); //Close Educations
+
+    writer.writeEndElement(); //Close Info
+}
+
+
+
+
+
+
+
+
+
+
+

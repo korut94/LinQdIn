@@ -17,3 +17,14 @@ LevelAccess::Type UtenteExecutive::typeAccount() const
 {
 	return LevelAccess::Executive;
 }
+
+
+void UtenteExecutive::writeXmlFormat( QXmlStreamWriter & writer ) const
+{
+    writer.writeStartElement( "Utente" ); //Open Utente
+    writer.writeAttribute( "type", "Executive" );
+
+    writeXmlUserData( writer );
+
+    writer.writeEndElement(); //Close Utente
+}
