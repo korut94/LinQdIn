@@ -2,7 +2,9 @@
 #define ADMININTERFACE_CONTROLLER_H
 
 #include <iostream>
+#include <QFile>
 #include <QObject>
+#include <QXmlStreamWriter>
 
 #include "admininterface_model.h"
 #include "admininterface_view.h"
@@ -32,15 +34,16 @@ class AdminInterface_Controller : public QObject
 
         void connetti() const;
 
-
 	signals:
 		void updateListUsers( const QVector<smartptr_utente> & );
 
     public slots:
         void addUser( const Info &, LevelAccess::Type );
+        void loadDB();
         void modifyUser( const Info &, LevelAccess::Type );
         void removeUserSelected();
         void reset();
+        void saveDB();
         void setInsertWindow();
         void setModifyWindow();
         void setSearchWindow();

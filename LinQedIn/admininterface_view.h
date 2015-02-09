@@ -24,6 +24,8 @@ class AdminInterface_View : public QWidget
         void requestToViewUser( const QString & ) const;
         void requestToViewUsers() const;
         void requestToRemoveUser() const;
+        void requestToSaveDB() const;
+        void requestToLoadDB() const;
         void updateTable( const QVector<smartptr_utente> & ) const;
 
     public slots:

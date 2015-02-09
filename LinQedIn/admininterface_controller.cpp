@@ -32,6 +32,16 @@ void AdminInterface_Controller::connetti() const
              SIGNAL( requestToRemoveUser() ),
              this,
              SLOT( removeUserSelected() ) );
+
+    connect( view,
+             SIGNAL( requestToSaveDB() ),
+             this,
+             SLOT( saveDB() ) );
+
+    connect( view,
+             SIGNAL( requestToLoadDB() ),
+             this,
+             SLOT( loadDB() ) );
 }
 
 
@@ -112,6 +122,12 @@ void AdminInterface_Controller::addUser( const Info & info,
 }
 
 
+void AdminInterface_Controller::loadDB()
+{
+
+}
+
+
 void AdminInterface_Controller::modifyUser( const Info & info,
                                             LevelAccess::Type level )
 {
@@ -149,6 +165,20 @@ void AdminInterface_Controller::reset()
 {
     viewUsers();
     if( model->actualUser() != nullptr ) setUserWindow( model->actualUser() );
+}
+
+
+void AdminInterface_Controller::saveDB()
+{
+    QFile file( "Test.xml" );
+    file.open( QIODevice::ReadWrite );
+
+    QXmlStreamWriter stream( &file );
+    stream.setAutoFormatting( true );
+
+    stream.writeStartDocument();
+    model->actualUser()->writeXmlFormat( stream );
+    stream.writeEndDocument();
 }
 
 

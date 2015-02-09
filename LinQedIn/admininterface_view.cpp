@@ -57,6 +57,16 @@ AdminInterface_View::AdminInterface_View( QWidget * parent )
              SIGNAL( remove() ),
              this,
              SIGNAL( requestToRemoveUser() ) );
+
+    connect( tools,
+             SIGNAL( save() ),
+             this,
+             SIGNAL( requestToSaveDB() ) );
+
+    connect( tools,
+             SIGNAL( load() ),
+             this,
+             SIGNAL( requestToLoadDB() ) );
 }
 
 

@@ -6,13 +6,20 @@ LabelTools::LabelTools( QWidget * parent ) : QWidget( parent )
     QPushButton * remove = new QPushButton( tr( "Remove" ) );
     QPushButton * search = new QPushButton( tr( "Search User" ) );
     QPushButton * all = new QPushButton( tr( "View Users" ) );
+    QPushButton * btnSave = new QPushButton( tr( "Save DB" ) );
+    QPushButton * btnLoad = new QPushButton( tr( "Load DB" ) );
 
     QHBoxLayout * layoutModify = new QHBoxLayout;
+    QHBoxLayout * layoutDB = new QHBoxLayout;
     QHBoxLayout * layoutSearch = new QHBoxLayout;
 
     layoutSearch->setAlignment( Qt::AlignLeft );
     layoutSearch->addWidget( search );
     layoutSearch->addWidget( all );
+
+    layoutDB->setAlignment( Qt::AlignCenter );
+    layoutDB->addWidget( btnSave );
+    layoutDB->addWidget( btnLoad );
 
     layoutModify->setAlignment( Qt::AlignRight );
     layoutModify->addWidget( add );
@@ -21,6 +28,7 @@ LabelTools::LabelTools( QWidget * parent ) : QWidget( parent )
     QHBoxLayout * layout = new QHBoxLayout;
     layout->setContentsMargins( 0, 0, 0, 0 );
     layout->addLayout( layoutSearch );
+    layout->addLayout( layoutDB );
     layout->addLayout( layoutModify );
 
     setLayout( layout );
@@ -29,6 +37,8 @@ LabelTools::LabelTools( QWidget * parent ) : QWidget( parent )
     connect( search, SIGNAL( clicked() ), this, SIGNAL( search() ) );
     connect( all, SIGNAL( clicked() ), this, SIGNAL( viewAllUsers() ) );
     connect( remove, SIGNAL( clicked() ), this, SIGNAL( remove() ) );
+    connect( btnSave, SIGNAL( clicked() ), this, SIGNAL( save() ) );
+    connect( btnLoad, SIGNAL( clicked() ), this, SIGNAL( load() ) );
 }
 
 

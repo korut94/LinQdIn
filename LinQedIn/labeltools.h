@@ -13,6 +13,8 @@ class LabelTools : public QWidget
         void add() const;
         void remove() const;
         void viewAllUsers() const;
+        void save() const;
+        void load() const;
 
     public:
         LabelTools( QWidget * = NULL );
