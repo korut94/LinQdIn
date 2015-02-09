@@ -2,36 +2,49 @@
 
 void Top::setAddFriend()
 {
-    btnFriend->setText( tr( "Remove co-worker" ) );
-
-    disconnect( btnFriend,
-                SIGNAL( clicked() ),
-                this,
-                SLOT( setAddFriend()) );
-
-    connect( btnFriend,
-             SIGNAL( clicked() ),
-             this,
-             SLOT( setRemoveFriend() ) );
-
+    setFriend( true );
     emit amici();
+}
+
+
+void Top::setFriend( bool state )
+{
+    if( state )
+    {
+        btnFriend->setText( tr( "Remove co-worker" ) );
+
+        disconnect( btnFriend,
+                    SIGNAL( clicked() ),
+                    this,
+                    SLOT( setAddFriend()) );
+
+        connect( btnFriend,
+                 SIGNAL( clicked() ),
+                 this,
+                 SLOT( setRemoveFriend() ) );
+    }
+
+    else
+    {
+        btnFriend->setText( tr( "Add co-worker" ) );
+
+        disconnect( btnFriend,
+                    SIGNAL( clicked() ),
+                    this,
+                    SLOT( setRemoveFriend() ) );
+
+        connect( btnFriend,
+                 SIGNAL( clicked() ),
+                 this,
+                 SLOT( setAddFriend() ) );
+    }
+
 }
 
 
 void Top::setRemoveFriend()
 {
-    btnFriend->setText( tr( "Add co-worker" ) );
-
-    disconnect( btnFriend,
-                SIGNAL( clicked() ),
-                this,
-                SLOT( setRemoveFriend()) );
-
-    connect( btnFriend,
-             SIGNAL( clicked() ),
-             this,
-             SLOT( setAddFriend() ) );
-
+    setFriend( false );
     emit nonAmici();
 }
 
@@ -75,10 +88,7 @@ Top::Top( const smartptr_utente & user,
 
         layout->addWidget( btnFriend );
 
-        connect( btnFriend,
-                 SIGNAL( clicked() ),
-                 this,
-                 SLOT( setAddFriend() ) );
+        setFriend( false );
     }
 
     setLayout( layout );

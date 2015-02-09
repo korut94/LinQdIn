@@ -43,6 +43,7 @@ class UserInterface_View : public QWidget
         void requestRemoveFriend() const;
         void requestSearch() const;
         void requestViewFriend( const QString & ) const;
+        void topSetFriend( bool ) const;
         void viewListFriends( const Utente::Rete & ) const;
 
     public slots:
@@ -50,6 +51,7 @@ class UserInterface_View : public QWidget
         void loadLoginPage();
         void loadMainPage( const smartptr_utente &, LevelAccess::Type );
         void login();
+        void myFriend( bool );
         void setFrameUtility( QWidget * );
 
     public:

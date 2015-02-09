@@ -113,25 +113,7 @@ void UserInterface_Controller::removeFriend()
 
 void UserInterface_Controller::reset()
 {
-    smartptr_utente & user = model->getRegisterUser();
-
-    if( user != nullptr )
-    {
-        Database * db = model->getDatabase();
-
-        QVector<smartptr_utente> risp =
-        db->getUsers( SearchGroupUtente::ByUsername( user->getUsername() ) );
-
-        if( risp.size() > 0 )
-        {
-            user = risp[0];
-
-            LevelAccess::Type level = ( user == model->getRegisterUser() ) ?
-                                      LevelAccess::I : user->typeAccount();
-
-            view->loadMainPage( user, level );
-        }
-    }
+    setUserPage( model->getActualUser() );
 }
 
 
@@ -185,18 +167,22 @@ void UserInterface_Controller::setUserPage( const smartptr_utente & user )
     {
         LevelAccess::Type level;
 
-        if( model->getRegisterUser() == nullptr )
+        smartptr_utente & registerUser = model->getRegisterUser();
+
+        if( registerUser == nullptr )
         {
             level = LevelAccess::I;
-            model->getRegisterUser() = user;
+            registerUser = user;
         }
 
-        else level = ( user == model->getRegisterUser() ) ?
-                        LevelAccess::I : user->typeAccount();
+        else level = ( user == registerUser ) ?
+                            LevelAccess::I : user->typeAccount();
 
         model->getActualUser() = user;
-
         view->loadMainPage( user, level );
+
+        if( registerUser != user )
+            view->myFriend( registerUser->isFriendOf( user ) );
     }
 }
 

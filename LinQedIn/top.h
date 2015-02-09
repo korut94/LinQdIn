@@ -27,6 +27,9 @@ class Top : public QWidget
         void setAddFriend();
         void setRemoveFriend();
 
+    public slots:
+        void setFriend( bool );
+
     public:
         Top( const smartptr_utente &, LevelAccess::Type, QWidget * = nullptr );
         ~Top();

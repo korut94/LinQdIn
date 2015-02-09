@@ -113,6 +113,11 @@ void UserInterface_View::loadMainPage( const smartptr_utente & user,
              SIGNAL( select( const QString & ) ),
              this,
              SIGNAL( requestViewFriend( const QString & ) ) );
+
+    connect( this,
+             SIGNAL( topSetFriend( bool ) ),
+             top,
+             SLOT( setFriend( bool ) ) );
 }
 
 
@@ -127,6 +132,12 @@ void UserInterface_View::login()
     }
 
     else emit error( ErrorState::LoginInvalid );
+}
+
+
+void UserInterface_View::myFriend( bool state )
+{
+    emit topSetFriend( state );
 }
 
 
