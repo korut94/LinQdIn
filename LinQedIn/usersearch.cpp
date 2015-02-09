@@ -16,11 +16,14 @@ void UserSearch::reset()
 {
     editName->clear();
     editSurname->clear();
+    lblError->setVisible( false );
 }
 
 
 void UserSearch::manageLocalError( ErrorState::Type type )
 {
+    lblError->setVisible( true );
+
     switch( type )
     {
         case ErrorState::InvalidValue :
@@ -67,9 +70,17 @@ UserSearch::UserSearch( Database * db, QWidget * parent )
     layoutForm->addRow( tr( "Name" ) + ':', editName );
     layoutForm->addRow( tr( "Surname" ) + ':', editSurname );
 
+    QVBoxLayout * layoutArea = new QVBoxLayout;
+    layoutArea->setAlignment( Qt::AlignTop );
+    layoutArea->addWidget( lblError );
+    layoutArea->addLayout( layoutForm );
+
+    QScrollArea * area = new QScrollArea();
+    area->setFrameShape( QFrame::NoFrame );
+    area->setLayout( layoutArea );
+
     QVBoxLayout * layout = new QVBoxLayout;
-    layout->addWidget( lblError );
-    layout->addLayout( layoutForm );
+    layout->addWidget( area );
     layout->addLayout( layoutBottom );
 
     setLayout( layout );
