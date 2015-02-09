@@ -42,6 +42,7 @@ class UserInterface_View : public QWidget
         void requestModify() const;
         void requestRemoveFriend() const;
         void requestSearch() const;
+        void requestViewFriend( const QString & ) const;
         void viewListFriends( const Utente::Rete & ) const;
 
     public slots:

@@ -48,6 +48,11 @@ void UserInterface_Controller::connetti() const
              SIGNAL( updateListFriends( const Utente::Rete & ) ),
              view,
              SIGNAL( viewListFriends( const Utente::Rete & ) ) );
+
+    connect( view,
+             SIGNAL( requestViewFriend( const QString & ) ),
+             this,
+             SLOT( setUserPage( const QString & ) ) );
 }
 
 

@@ -43,6 +43,11 @@ BoardFriends::BoardFriends( const smartptr_utente & user,
              SIGNAL( clicked() ),
              this,
              SIGNAL( search() ) );
+
+    connect( friends,
+             SIGNAL( selectUser( const QString & ) ),
+             this,
+             SIGNAL( select( const QString & ) ) );
 }
 
 

@@ -26,6 +26,7 @@ class BoardFriends : public QWidget
         void logout() const;
         void modify() const;
         void search() const;
+        void select( const QString & ) const;
 
     public slots:
         void viewFriends( const Utente::Rete & );

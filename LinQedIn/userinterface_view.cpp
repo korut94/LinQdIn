@@ -108,6 +108,11 @@ void UserInterface_View::loadMainPage( const smartptr_utente & user,
              SIGNAL( viewListFriends( const Utente::Rete & ) ),
              boardFriends,
              SLOT( viewFriends( const Utente::Rete & ) ) );
+
+    connect( boardFriends,
+             SIGNAL( select( const QString & ) ),
+             this,
+             SIGNAL( requestViewFriend( const QString & ) ) );
 }
 
 
