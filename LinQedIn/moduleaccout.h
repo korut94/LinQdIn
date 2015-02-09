@@ -17,6 +17,8 @@ class ModuleAccout : public QWidget
     private:
         QComboBox * account;
 
+        int fromLevelToIndex( LevelAccess::Type ) const;
+
     public:
         ModuleAccout( const smartptr_utente & = nullptr, QWidget * = nullptr );
         ~ModuleAccout();

@@ -9,7 +9,8 @@ ModuleAccout::ModuleAccout( const smartptr_utente & user,
     account->addItem( tr( "Executive" ) );
     account->setSizePolicy( QSizePolicy::Maximum, QSizePolicy::Fixed );
 
-    if( user != nullptr ) account->setCurrentIndex( user->typeAccount() - 1 );
+    if( user != nullptr )
+        account->setCurrentIndex( fromLevelToIndex( user->typeAccount() ) );
 
     QFormLayout * layout = new QFormLayout;
     layout->setHorizontalSpacing( 20 );
@@ -22,6 +23,19 @@ ModuleAccout::ModuleAccout( const smartptr_utente & user,
 ModuleAccout::~ModuleAccout()
 {
     delete account;
+}
+
+
+int ModuleAccout::fromLevelToIndex( LevelAccess::Type level ) const
+{
+    switch( level )
+    {
+        case LevelAccess::Basic : return 0;
+        case LevelAccess::Business : return 1;
+        case LevelAccess::Executive : return 2;
+
+        default : return 0;
+    }
 }
 
 
