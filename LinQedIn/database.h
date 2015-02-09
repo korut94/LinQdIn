@@ -39,6 +39,8 @@ class Database
 
         QVector<smartptr_utente> getUsers( const Query & ) const;
 
+        smartptr_utente recoveryUser( const smartptr_utente & ) const;
+
         void insert( const smartptr_utente & );
         void linkUser( const smartptr_utente &, const smartptr_utente & );
         void modify( const smartptr_utente &, const Info & );

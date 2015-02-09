@@ -47,6 +47,21 @@ QVector<smartptr_utente> Database::getUsers( const Query & query ) const
 }
 
 
+smartptr_utente Database::recoveryUser( const smartptr_utente & user ) const
+{
+    if( user != nullptr )
+    {
+        QVector<smartptr_utente> risp =
+            getUsers( SearchGroupUtente::ByUsername( user->getUsername() ) );
+
+        if( risp.size() > 0 ) return risp[0];
+        else return nullptr;
+    }
+
+    else return nullptr;
+}
+
+
 void Database::insert( const smartptr_utente & user )
 {
     entryName.insert( user );
