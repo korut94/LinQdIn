@@ -75,6 +75,12 @@ bool Utente::isActivate() const
 }
 
 
+bool Utente::isFriendOf( const smartptr_utente & user ) const
+{
+    return contacts.isPresent( user );
+}
+
+
 bool Utente::isOnline() const
 {
     return online;
