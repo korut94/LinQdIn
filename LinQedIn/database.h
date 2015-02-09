@@ -34,6 +34,7 @@ class Database
 
     public:
         Database();
+        ~Database();
 
         bool isPresent( const smartptr_utente & ) const;
 

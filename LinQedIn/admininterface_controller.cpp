@@ -233,7 +233,6 @@ void AdminInterface_Controller::setUserWindow( const smartptr_utente & user )
              SLOT( setModifyWindow() ) );
 
     view->setFrameUtility( viewUser );
-
     model->actualUser() = user;
 }
 
