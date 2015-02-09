@@ -9,8 +9,8 @@ MainWindow_Model::MainWindow_Model()
 
 MainWindow_Model::~MainWindow_Model()
 {
-    delete admin;
     delete user;
+    delete admin;
 }
 
 
