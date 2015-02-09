@@ -205,7 +205,7 @@ void AdminInterface_Controller::setSearchWindow()
     connect( search,
              SIGNAL( error( ErrorState::Type ) ),
              search,
-             SIGNAL( manageLocalError( ErrorState::Type ) ) );
+             SLOT( manageLocalError( ErrorState::Type ) ) );
 
     view->setFrameUtility( search );
 }
