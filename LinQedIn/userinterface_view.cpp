@@ -137,6 +137,7 @@ UserInterface_View::UserInterface_View( QWidget * parent )
                                           QWidget( parent )
 {
     userUtility = new QScrollArea;
+    userUtility->setFrameShape( QFrame::NoFrame );
     userUtility->setWidgetResizable( true );
 
     QVBoxLayout * layout = new QVBoxLayout;
