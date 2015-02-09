@@ -4,6 +4,11 @@ void Top::setAddFriend()
 {
     btnFriend->setText( tr( "Remove co-worker" ) );
 
+    disconnect( btnFriend,
+                SIGNAL( clicked() ),
+                this,
+                SLOT( setAddFriend()) );
+
     connect( btnFriend,
              SIGNAL( clicked() ),
              this,
@@ -16,6 +21,11 @@ void Top::setAddFriend()
 void Top::setRemoveFriend()
 {
     btnFriend->setText( tr( "Add co-worker" ) );
+
+    disconnect( btnFriend,
+                SIGNAL( clicked() ),
+                this,
+                SLOT( setRemoveFriend()) );
 
     connect( btnFriend,
              SIGNAL( clicked() ),
