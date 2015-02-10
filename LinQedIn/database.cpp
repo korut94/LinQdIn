@@ -64,11 +64,16 @@ smartptr_utente Database::recoveryUser( const smartptr_utente & user ) const
 
 void Database::insert( const smartptr_utente & user )
 {
-    entryName.insert( user );
-    entrySurname.insert( user );
-    entryUsername.insert( user );
+    if( user != nullptr )
+    {
+        entryName.insert( user );
+        entrySurname.insert( user );
+        entryUsername.insert( user );
 
-    general.push_front( user );
+        general.push_front( user );
+
+        modified = true;
+    }
 }
 
 
@@ -78,6 +83,8 @@ void Database::linkUser( const smartptr_utente & a, const smartptr_utente & b )
     {
         a->addContact( b );
         b->addContact( a );
+
+        modified = true;
     }
 }
 
@@ -92,6 +99,8 @@ void Database::modify( const smartptr_utente & user, const Info & infoMod )
         user->getInfo() = infoMod;
 
         insert( user );
+
+        modified = true;
     }
 }
 
@@ -107,7 +116,15 @@ void Database::remove( const smartptr_utente & user )
         entryUsername.remove( user );
 
         general.removeOne( user );
+
+        modified = true;
     }
+}
+
+
+void Database::setModified( bool state )
+{
+    modified = state;
 }
 
 
@@ -118,5 +135,7 @@ void Database::unlinkUser( const smartptr_utente & a,
     {
         a->removeContact( b );
         b->removeContact( a );
+
+        modified = true;
     }
 }
