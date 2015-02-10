@@ -63,7 +63,8 @@ SOURCES += main.cpp\
     utentebusiness.cpp \
     utenteexecutive.cpp \
     useritem.cpp \
-    login.cpp
+    login.cpp \
+    databasexmlfile.cpp
 
 HEADERS  += \
     utente.h \
@@ -118,7 +119,8 @@ HEADERS  += \
     utentebusiness.h \
     utenteexecutive.h \
     useritem.h \
-    login.h
+    login.h \
+    databasexmlfile.h
 
 FORMS    += mainwindow.ui
 
