@@ -124,7 +124,7 @@ void AdminInterface_Controller::addUser( const Info & info,
 
 void AdminInterface_Controller::loadDB()
 {
-
+    model->getDatabase()->loadDB();
 }
 
 
@@ -153,7 +153,7 @@ void AdminInterface_Controller::modifyUser( const Info & info,
 
 void AdminInterface_Controller::removeUserSelected()
 {
-    model->getDatabase()->remove( model->actualUser() );
+    model->getDatabase()->Database::remove( model->actualUser() );
     model->actualUser() = nullptr;
 
     viewUsers();
@@ -170,15 +170,7 @@ void AdminInterface_Controller::reset()
 
 void AdminInterface_Controller::saveDB()
 {
-    QFile file( "Test.xml" );
-    file.open( QIODevice::ReadWrite );
-
-    QXmlStreamWriter stream( &file );
-    stream.setAutoFormatting( true );
-
-    stream.writeStartDocument();
-    model->actualUser()->writeXmlFormat( stream );
-    stream.writeEndDocument();
+    model->getDatabase()->saveDB();
 }
 
 
@@ -284,7 +276,6 @@ AdminInterface_Controller( UserInterface_Controller * ctrlUser,
                            : model( m ),
                              view( v )
 {
-
     ctrlUser->linkDatatabase( model->getDatabase() );
 
     connetti();
