@@ -18,6 +18,23 @@ LevelAccess::Type UtenteBasic::typeAccount() const
 }
 
 
+void UtenteBasic::readXmlFormat( QXmlStreamReader & reader )
+{
+	QXmlStreamReader::TokenType token = reader.readNext();
+
+	if( token == QXmlStreamReader::StartElement && 
+		reader.name() == "username" ) 
+	{
+		setUsername( reader.text().toString() );
+
+		token = reader.readNext();
+	
+		readXmlUserData( reader );
+	}
+	else reader.raiseError( "Error parsing file, expected 'username' token" );
+}
+
+
 void UtenteBasic::writeXmlFormat( QXmlStreamWriter & writer ) const
 {
     writer.writeStartElement( "Utente" ); //Open Utente

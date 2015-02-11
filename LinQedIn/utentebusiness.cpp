@@ -20,6 +20,11 @@ LevelAccess::Type UtenteBusiness::typeAccount() const
 }
 
 
+void UtenteBusiness::readXmlFormat( QXmlStreamReader & reader )
+{
+}
+
+
 void UtenteBusiness::writeXmlFormat( QXmlStreamWriter & writer ) const
 {
     writer.writeStartElement( "Utente" ); //Open Utente
