@@ -124,7 +124,7 @@ void AdminInterface_Controller::addUser( const Info & info,
 
 void AdminInterface_Controller::loadDB()
 {
-    model->getDatabase()->loadDB();
+    model->getDatabase()->load();
 }
 
 
@@ -170,7 +170,7 @@ void AdminInterface_Controller::reset()
 
 void AdminInterface_Controller::saveDB()
 {
-    model->getDatabase()->saveDB();
+    model->getDatabase()->save();
 }
 
 
