@@ -19,6 +19,12 @@ bool Database::isPresent( const smartptr_utente & user ) const
 }
 
 
+bool Database::isModified() const
+{
+	return modified;
+}
+
+
 QVector<smartptr_utente> Database::getUsers( const Query & query ) const
 {
     Frankenstein frankenstein;
@@ -122,9 +128,9 @@ void Database::remove( const smartptr_utente & user )
 }
 
 
-void Database::setModified( bool state )
+void Database::setFlagModify( bool state )
 {
-    modified = state;
+	modified = state;
 }
 
 

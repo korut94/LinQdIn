@@ -1,42 +1,49 @@
 #include "databasexmlfile.h"
 
-DatabaseXmlFile::DatabaseXmlFile( const QString & name ) : QFile( name ),
-                                                           load( false )
+DatabaseXmlFile::DatabaseXmlFile( const QString & name ) : QFile( name )
+{}
+
+
+DatabaseXmlFile::~DatabaseXmlFile()
+{}
+
+
+void DatabaseXmlFile::load()
 {
+
 }
 
 
-void DatabaseXmlFile::loadDB()
+void DatabaseXmlFile::save()
 {
+	if( !isModified() )
+	{ 
+    	if( !isLoaded() ) QFile::remove( fileName() ); //sovrascrittura
 
-}
+    	open( QIODevice::WriteOnly );
 
+    	QXmlStreamWriter writer( this );
+    	writer.setAutoFormatting( true );
 
-void DatabaseXmlFile::saveDB()
-{
-    if( !load ) QFile::remove( fileName() ); //sovrascrittura
+    	writer.writeStartDocument();
 
-    open( QIODevice::WriteOnly );
+    	writer.writeStartElement( "Database" );
 
-    QXmlStreamWriter writer( this );
-    writer.setAutoFormatting( true );
+    	QVector<smartptr_utente> risp = getUsers( SearchGroupUtente::All() );
 
-    writer.writeStartDocument();
+    	for( QVector<smartptr_utente>::const_iterator itr = risp.begin();
+        	 itr != risp.end();
+         	 itr++ )
+    	{
+        	(*itr)->writeXmlFormat( writer );
+    	}
 
-    writer.writeStartElement( "Database" );
+    	writer.writeEndElement();
 
-    QVector<smartptr_utente> risp = getUsers( SearchGroupUtente::All() );
+    	writer.writeEndDocument();
 
-    for( QVector<smartptr_utente>::const_iterator itr = risp.begin();
-         itr != risp.end();
-         itr++ )
-    {
-        (*itr)->writeXmlFormat( writer );
-    }
-
-    writer.writeEndElement();
-
-    writer.writeEndDocument();
-
-    close();
+		setFlagModify( false );
+	
+    	close();
+	}
 }

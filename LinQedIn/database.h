@@ -22,7 +22,7 @@ class Database
             General
         };
 
-        bool modified;
+		bool modified;
 
         HashListUtente<HashGroupUtente::NameCrescente> entryName;
         HashListUtente<HashGroupUtente::CognomeCrescente> entrySurname;
@@ -32,13 +32,14 @@ class Database
 
         Category getCategory( const Frankenstein & ) const;
 
-    protected:
-        void setModified( bool );
+	protected:
+		void setFlagModify( bool );
 
     public:
         Database();
 
         bool isPresent( const smartptr_utente & ) const;
+		bool isModified() const;
 
         QVector<smartptr_utente> getUsers( const Query & ) const;
 
@@ -46,10 +47,8 @@ class Database
 
         void insert( const smartptr_utente & );
         void linkUser( const smartptr_utente &, const smartptr_utente & );
-        virtual void loadDB() = 0;
         void modify( const smartptr_utente &, const Info & );
         void remove( const smartptr_utente & );
-        virtual void saveDB() = 0;
         void unlinkUser( const smartptr_utente &, const smartptr_utente & );
 };
 

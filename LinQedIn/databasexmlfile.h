@@ -6,19 +6,17 @@
 #include <QXmlStreamReader>
 #include <QXmlStreamWriter>
 
-#include "database.h"
+#include "databaseio.h"
 #include "smartptr_utente.h"
 
-class DatabaseXmlFile : public Database, public QFile
+class DatabaseXmlFile : public DatabaseIO, public QFile
 {
-    private:
-        bool load;
-
     public:
         DatabaseXmlFile( const QString & );
+		~DatabaseXmlFile();
 
-        void loadDB();
-        void saveDB();
+        void load();
+        void save();
 };
 
 #endif // DATABASEFILE_H
