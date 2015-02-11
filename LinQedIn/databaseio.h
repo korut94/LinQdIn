@@ -2,6 +2,7 @@
 #define DATABASEIO_H
 
 #include "database.h"
+#include "utenteexecutive.h"
 
 class DatabaseIO : public Database
 {
