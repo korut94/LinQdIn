@@ -12,6 +12,7 @@ class UtenteBasic : public Utente
 
 		LevelAccess::Type typeAccount() const;
 
+		void readXmlFormat( QXmlStreamReader & );
         void writeXmlFormat( QXmlStreamWriter & ) const;
 };
 

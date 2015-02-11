@@ -12,6 +12,7 @@ class UtenteExecutive : public UtenteBusiness
 
 		LevelAccess::Type typeAccount() const;
 
+		void readXmlFormat( QXmlStreamReader & );
         void writeXmlFormat( QXmlStreamWriter & ) const;
 };
 
