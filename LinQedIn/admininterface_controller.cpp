@@ -125,6 +125,7 @@ void AdminInterface_Controller::addUser( const Info & info,
 void AdminInterface_Controller::loadDB()
 {
     model->getDatabase()->load();
+	viewUsers();
 }
 
 
