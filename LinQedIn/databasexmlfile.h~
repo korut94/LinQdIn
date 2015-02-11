@@ -8,6 +8,8 @@
 #include <QXmlStreamWriter>
 
 #include "databaseio.h"
+#include "smartptr_utente.h"
+#include "utenteexecutive.h"
 
 class DatabaseXmlFile : public DatabaseIO, public QFile
 {

@@ -33,8 +33,6 @@ void UtenteBasic::readXmlFormat( QXmlStreamReader & reader )
 
 				if( token == QXmlStreamReader::Characters ) 
 					setUsername( reader.text().toString() );
-
-				token = reader.readNext();
 			}
 
 			if( reader.name() == "Info" )

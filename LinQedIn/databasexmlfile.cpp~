@@ -40,6 +40,10 @@ void DatabaseXmlFile::load()
 
 				else if( reader.attributes().value( "type" ) == "Executive" )
 					user = new UtenteExecutive();
+	
+				token = reader.readNext();				
+
+				std::cout << reader.name().toString().toStdString() << std::endl;
 
 				user->readXmlFormat( reader );
 				usersLoadFile.push_back( user );
