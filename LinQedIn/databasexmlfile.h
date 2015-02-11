@@ -1,5 +1,5 @@
-#ifndef DATABASEFILE_H
-#define DATABASEFILE_H
+#ifndef DATABASEXMLFILE_H
+#define DATABASEXMLFILE_H
 
 #include <QFile>
 #include <QVector>
@@ -19,4 +19,4 @@ class DatabaseXmlFile : public DatabaseIO, public QFile
         void save();
 };
 
-#endif // DATABASEFILE_H
+#endif // DATABASEXMLFILE_H
