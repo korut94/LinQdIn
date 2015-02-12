@@ -15,8 +15,12 @@ class MainWindow_View : public QWidget
     private:
         QTabWidget * tabInterface;
 
+    protected:
+        void closeEvent( QCloseEvent * );
+
     signals:
         void currentInterface( int ) const;
+        void requestClose( QCloseEvent * ) const;
 
     public:
         MainWindow_View( QWidget * = NULL );

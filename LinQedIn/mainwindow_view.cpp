@@ -39,3 +39,9 @@ void MainWindow_View::addInterface( QWidget * interface,
 {
     tabInterface->addTab( interface, name );
 }
+
+
+void MainWindow_View::closeEvent( QCloseEvent * event )
+{
+    emit requestClose( event );
+}

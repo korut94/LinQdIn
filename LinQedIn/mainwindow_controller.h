@@ -1,6 +1,8 @@
 #ifndef MAINWINDOW_CONTROLLER_H
 #define MAINWINDOW_CONTROLLER_H
 
+#include <QCloseEvent>
+
 #include "mainwindow_model.h"
 #include "mainwindow_view.h"
 
@@ -15,6 +17,7 @@ class MainWindow_Controller : public QObject
         MainWindow_View * view;
 
     public slots:
+        void close( QCloseEvent * );
         void reset( int );
 
     public:
