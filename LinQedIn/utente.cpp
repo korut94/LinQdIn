@@ -245,6 +245,87 @@ void Utente::readXmlUserData( QXmlStreamReader & reader )
                     token = reader.readNext();
                 }
 			}
+
+            if( reader.name() == "Skills" )
+            {
+                while( !( token == QXmlStreamReader::EndElement &&
+                          reader.name() == "Skills" ) )
+                {
+                    if( reader.name() == "skill" )
+                    {
+                        token = reader.readNext();
+
+                        if( token == QXmlStreamReader::Characters )
+                            myInfo.addSkill( reader.text().toString() );
+
+                        token = reader.readNext();
+                    }
+
+                    token = reader.readNext();
+                }
+            }
+
+            if( reader.name() == "Educations" )
+            {
+                while( !( token == QXmlStreamReader::EndElement &&
+                          reader.name() == "Educations" ) )
+                {
+                    if( reader.name() == "Education" )
+                    {
+                        Experience sch;
+
+                        while( !( token == QXmlStreamReader::EndElement &&
+                                  reader.name() == "Education" ) )
+                        {
+                            if( reader.name() == "school" )
+                            {
+                                token = reader.readNext();
+
+                                if( token == QXmlStreamReader::Characters )
+                                    sch.setWork( reader.text().toString() );
+
+                                token = reader.readNext();
+                            }
+
+                            if( reader.name() == "title" )
+                            {
+                                token = reader.readNext();
+
+                                if( token == QXmlStreamReader::Characters )
+                                    sch.setCompany( reader.text().toString() );
+
+                                token = reader.readNext();
+                            }
+
+                            if( reader.name() == "time_period" )
+                            {
+                                token = reader.readNext();
+
+                                if( token == QXmlStreamReader::Characters )
+                                    sch.setPeriod( reader.text().toString() );
+
+                                token = reader.readNext();
+                            }
+
+                            if( reader.name() == "description" )
+                            {
+                                token = reader.readNext();
+
+                                if( token == QXmlStreamReader::Characters )
+                                sch.setDescription( reader.text().toString() );
+
+                                token = reader.readNext();
+                            }
+
+                            token = reader.readNext();
+                        }
+
+                        myInfo.addSchoolExperience( sch );
+                    }
+
+                    token = reader.readNext();
+                }
+            }
 		}
 		
 		token = reader.readNext();
