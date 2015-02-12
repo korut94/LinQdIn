@@ -20,9 +20,22 @@ class Utente : public Entity
         class Rete : private QList<smartptr_utente>
         {
             public:
+                class const_iterator
+                    : public QList<smartptr_utente>::const_iterator
+                {
+                    public:
+                        const_iterator();
+                        const_iterator(
+                            const QList<smartptr_utente>::const_iterator & );
+                };
+
+            public:
                 Rete();
 
                 bool isPresent( const smartptr_utente & t ) const;
+
+                const_iterator begin() const;
+                const_iterator end() const;
 
                 QVector<smartptr_utente> toVector() const;
 

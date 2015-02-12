@@ -1,5 +1,13 @@
 #include "utente.h"
 
+Utente::Rete::const_iterator::const_iterator() {}
+
+
+Utente::Rete::const_iterator::
+    const_iterator( const QList<smartptr_utente>::const_iterator & itr ) :
+        QList<smartptr_utente>::const_iterator( itr ) {}
+
+
 Utente::Rete::Rete()
 {
 }
@@ -19,6 +27,18 @@ bool Utente::Rete::isPresent( const smartptr_utente & t ) const
     }
 
     return found;
+}
+
+
+Utente::Rete::const_iterator Utente::Rete::begin() const
+{
+    return QList<smartptr_utente>::begin();
+}
+
+
+Utente::Rete::const_iterator Utente::Rete::end() const
+{
+    return QList<smartptr_utente>::end();
 }
 
 
@@ -419,7 +439,6 @@ void Utente::writeXmlUserData( QXmlStreamWriter & writer ) const
     }
 
     writer.writeEndElement(); //Close Educations
-
     writer.writeEndElement(); //Close Info
 }
 
