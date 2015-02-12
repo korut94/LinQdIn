@@ -1,5 +1,10 @@
 #include "admininterface_controller.h"
 
+bool AdminInterface_Controller::modified() const
+{
+    return model->getDatabase()->isModified();
+}
+
 
 void AdminInterface_Controller::connetti() const
 {
@@ -124,7 +129,61 @@ void AdminInterface_Controller::addUser( const Info & info,
 
 void AdminInterface_Controller::loadDB()
 {
-    model->getDatabase()->load();
+    DatabaseIO * db = model->getDatabase();
+
+    QMessageBox msgBox;
+
+    if( db->isLoaded() )
+    {
+        msgBox.setText(
+                    "Il database e' gia stato caricato, vuoi ricaricarlo?" );
+        msgBox.setInformativeText( "Tutte le modifiche verranno perse" );
+        msgBox.setStandardButtons( QMessageBox::Open | QMessageBox::Cancel );
+        msgBox.setDefaultButton( QMessageBox::Open );
+
+        int ret = msgBox.exec();
+
+        switch( ret )
+        {
+            case QMessageBox::Open :
+            {
+                QVector<smartptr_utente> risp =
+                    db->getUsers( SearchGroupUtente::All() );
+
+                std::for_each( risp.begin(),
+                               risp.end(),
+                               [ &db ]( const smartptr_utente & user )
+                               {
+                                   db->remove( user );
+                               });
+
+                db->load();
+
+                msgBox.setText( "Caricamento completato" );
+                msgBox.setInformativeText( QString::null );
+                msgBox.setStandardButtons( QMessageBox::Ok );
+                msgBox.setDefaultButton( QMessageBox::Ok );
+                msgBox.exec();
+                break;
+            }
+
+            case QMessageBox::Cancel : break;
+
+            default: break;
+        }
+    }
+
+    else
+    {
+        db->load();
+
+        msgBox.setText( "Caricamento completato" );
+        msgBox.setStandardButtons( QMessageBox::Ok );
+        msgBox.setDefaultButton( QMessageBox::Ok );
+
+        msgBox.exec();
+    }
+
 	viewUsers();
 }
 
@@ -172,6 +231,12 @@ void AdminInterface_Controller::reset()
 void AdminInterface_Controller::saveDB()
 {
     model->getDatabase()->save();
+
+    QMessageBox msgBox;
+    msgBox.setText( "Salvataggio effettuato con successo" );
+    msgBox.setStandardButtons( QMessageBox::Ok );
+    msgBox.setDefaultButton( QMessageBox::Ok );
+    msgBox.exec();
 }
 
 
