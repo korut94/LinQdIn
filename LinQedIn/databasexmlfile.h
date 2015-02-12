@@ -11,6 +11,10 @@
 
 class DatabaseXmlFile : public DatabaseIO, public QFile
 {
+    private:
+        QVector<smartptr_utente>::iterator
+        foundUserBuffer( QVector<smartptr_utente> &, const QString & );
+
     public:
         DatabaseXmlFile( const QString & );
 		~DatabaseXmlFile();
