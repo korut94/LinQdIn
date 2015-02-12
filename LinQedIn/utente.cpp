@@ -101,7 +101,9 @@ void Utente::addContact( const smartptr_utente & user )
 
 void Utente::readXmlUserData( QXmlStreamReader & reader )
 {
-	Personal & myPersonal = getInfo().getPersonal();
+    Info & myInfo = getInfo();
+
+    Personal & myPersonal = myInfo.getPersonal();
 
 	QXmlStreamReader::TokenType token = reader.readNext();
 
@@ -120,9 +122,7 @@ void Utente::readXmlUserData( QXmlStreamReader & reader )
 						token = reader.readNext();
 			
 						if( token == QXmlStreamReader::Characters )
-							myPersonal.setNome( reader.text().toString() );
-	
-						std::cout << reader.text().toString().toStdString() << std::endl;
+                            myPersonal.setNome( reader.text().toString() );
 	
 						token = reader.readNext();
 					}
@@ -132,9 +132,7 @@ void Utente::readXmlUserData( QXmlStreamReader & reader )
 						token = reader.readNext();
 	
 						if( token == QXmlStreamReader::Characters )
-							myPersonal.setCognome( reader.text().toString() );
-	
-						std::cout << reader.text().toString().toStdString() << std::endl;
+                            myPersonal.setCognome( reader.text().toString() );
 	
 						token = reader.readNext();
 					}
@@ -152,7 +150,7 @@ void Utente::readXmlUserData( QXmlStreamReader & reader )
 							int month = partsDate.at( 1 ).toInt();
 							int year = partsDate.at( 2 ).toInt();
 	
-							myPersonal.setDate( QDate( 1, 1, 1994 ) );
+                            myPersonal.setDate( QDate( year, month, day ) );
 						}
 				
 						token = reader.readNext();
@@ -163,17 +161,19 @@ void Utente::readXmlUserData( QXmlStreamReader & reader )
 						token = reader.readNext();
 				
 						if( token == QXmlStreamReader::Characters )
-							myPersonal.setNumTelefono( reader.text().toString() );
+                            myPersonal.setNumTelefono(
+                                        reader.text().toString() );
 	
 						token = reader.readNext();
 					}
 
-					if( reader.name() == "work" )
+                    if( reader.name() == "actualwork" )
 					{	
 						token = reader.readNext();
 	
 						if( token == QXmlStreamReader::Characters )
-							myPersonal.setActualWork( reader.text().toString() );
+                            myPersonal.setActualWork(
+                                        reader.text().toString() );
 	
 						token = reader.readNext();
 					}	
@@ -183,16 +183,68 @@ void Utente::readXmlUserData( QXmlStreamReader & reader )
 			
 				token = reader.readNext();	
 			}
-			/*
-			if( reader.name() == "Experiences" )
+
+            if( reader.name() == "Experiences" )
 			{
-				while( !( token == QXmlStreamReader::EndDocument &&
-						  reader.name() == "Experiences" ) )
-				{
-					
-				}
+                while( !( token == QXmlStreamReader::EndElement &&
+                          reader.name() == "Experiences" ) )
+                {
+                    if( reader.name() == "Experience" )
+                    {
+                        Experience exp;
+
+                        while( !( token == QXmlStreamReader::EndElement &&
+                                  reader.name() == "Experience" ) )
+                        {
+                            if(  reader.name() == "work" )
+                            {
+                                token = reader.readNext();
+
+                                if( token == QXmlStreamReader::Characters )
+                                    exp.setWork( reader.text().toString() );
+
+                                token = reader.readNext();
+                            }
+
+                            if( reader.name() == "company" )
+                            {
+                                token = reader.readNext();
+
+                                if( token == QXmlStreamReader::Characters )
+                                    exp.setCompany( reader.text().toString() );
+
+                                token = reader.readNext();
+                            }
+
+                            if( reader.name() == "period" )
+                            {
+                                token = reader.readNext();
+
+                                if( token == QXmlStreamReader::Characters )
+                                    exp.setPeriod( reader.text().toString() );
+
+                                token = reader.readNext();
+                            }
+
+                            if( reader.name() == "description" )
+                            {
+                                token = reader.readNext();
+
+                                if( token == QXmlStreamReader::Characters )
+                                exp.setDescription( reader.text().toString() );
+
+                                token = reader.readNext();
+                            }
+
+                            token = reader.readNext();
+                        }
+
+                        myInfo.addWorkExperience( exp );
+                    }
+
+                    token = reader.readNext();
+                }
 			}
-			*/
 		}
 		
 		token = reader.readNext();
@@ -233,7 +285,7 @@ void Utente::writeXmlUserData( QXmlStreamWriter & writer ) const
     writer.writeTextElement( "birthday",
                              personal.getDate().toString( "dd.M.yyyy" ) );
     writer.writeTextElement( "number", personal.getNumTelefono() );
-	writer.writeTextElement( "work", personal.getActualWork() );
+    writer.writeTextElement( "actualwork", personal.getActualWork() );
 
     writer.writeEndElement(); //Close Personal
 
