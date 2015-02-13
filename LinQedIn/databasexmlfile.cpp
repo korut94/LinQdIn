@@ -72,8 +72,6 @@ void DatabaseXmlFile::load()
                 QVector<smartptr_utente>::iterator
                     itrUser = foundUserBuffer( usersLoadFile, username );
 
-                //if( !found ) return;
-
                 while( !( token == QXmlStreamReader::EndElement &&
                           reader.name() == "friends" ) )
                 {
@@ -114,6 +112,8 @@ void DatabaseXmlFile::load()
 		}
 		
 		setFlagLoad( true );
+        //Il caricamento del db non costituisce una reale modifica
+        setFlagModify( false );
 	}	
 
 	close();
