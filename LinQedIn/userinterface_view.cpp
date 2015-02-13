@@ -56,33 +56,62 @@ void UserInterface_View::loadMainPage( const smartptr_utente & user,
 {
     Top * top = new Top( user, level );
     ID * id = new ID( user->getInfo().getPersonal() );
-    ViewExperience * experience = new ViewExperience( user->getInfo() );
-    BoardFriends * boardFriends = new BoardFriends( user );
 
     QVBoxLayout * layoutUserData = new QVBoxLayout;
     layoutUserData->setAlignment( Qt::AlignTop );
     layoutUserData->addWidget( top );
     layoutUserData->addWidget( id );
-    layoutUserData->addWidget( experience );
+
+    if( level == LevelAccess::Master ||
+        level == LevelAccess::I ||
+        level == LevelAccess::Business ||
+        level == LevelAccess::Executive )
+    {
+        ViewExperience * experience = new ViewExperience( user->getInfo() );
+        layoutUserData->addWidget( experience );
+    }
 
     QHBoxLayout * layoutInterface = new QHBoxLayout;
     layoutInterface->addLayout( layoutUserData );
-    layoutInterface->addWidget( boardFriends );
+
+    if( level == LevelAccess::Master ||
+        level == LevelAccess::I ||
+        level == LevelAccess::Executive )
+    {
+        BoardFriends * boardFriends = new BoardFriends( user );
+        layoutInterface->addWidget( boardFriends );
+
+        connect( boardFriends,
+                 SIGNAL( modify() ),
+                 this,
+                 SIGNAL( requestModify() ) );
+
+        connect( boardFriends,
+                 SIGNAL( logout() ),
+                 this,
+                 SIGNAL( requestLogout() ) );
+
+        connect( boardFriends,
+                 SIGNAL( search() ),
+                 this,
+                 SIGNAL( requestSearch() ) );
+
+        connect( this,
+                 SIGNAL( viewListFriends( const Utente::Rete & ) ),
+                 boardFriends,
+                 SLOT( viewFriends( const Utente::Rete & ) ) );
+
+        connect( boardFriends,
+                 SIGNAL( select( const QString & ) ),
+                 this,
+                 SIGNAL( requestViewFriend( const QString & ) ) );
+    }
+
 
     QWidget * container = new QWidget();
     container->setLayout( layoutInterface );
 
     setFrameUtility( container );
-
-    connect( boardFriends,
-             SIGNAL( modify() ),
-             this,
-             SIGNAL( requestModify() ) );
-
-    connect( boardFriends,
-             SIGNAL( logout() ),
-             this,
-             SIGNAL( requestLogout() ) );
 
     connect( top,
              SIGNAL( amici() ),
@@ -98,21 +127,6 @@ void UserInterface_View::loadMainPage( const smartptr_utente & user,
              SIGNAL( home() ),
              this,
              SIGNAL( requestHome() ) );
-
-    connect( boardFriends,
-             SIGNAL( search() ),
-             this,
-             SIGNAL( requestSearch() ) );
-
-    connect( this,
-             SIGNAL( viewListFriends( const Utente::Rete & ) ),
-             boardFriends,
-             SLOT( viewFriends( const Utente::Rete & ) ) );
-
-    connect( boardFriends,
-             SIGNAL( select( const QString & ) ),
-             this,
-             SIGNAL( requestViewFriend( const QString & ) ) );
 
     connect( this,
              SIGNAL( topSetFriend( bool ) ),
