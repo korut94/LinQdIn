@@ -18,8 +18,10 @@ class DatabaseIO : public Database
 
 		bool isLoaded() const;
 
-		virtual void load() = 0;
-		virtual void save() = 0;
+		virtual bool load() = 0;
+		virtual bool save() = 0;
+
+		virtual QString error() const = 0;
 };
 
 #endif
