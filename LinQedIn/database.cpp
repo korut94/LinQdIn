@@ -78,6 +78,7 @@ void Database::insert( const smartptr_utente & user )
 
         general.push_front( user );
 
+		user->setActivate( true );
         modified = true;
     }
 }
@@ -115,14 +116,13 @@ void Database::remove( const smartptr_utente & user )
 {
     if( user != nullptr )
     {
-        user->setActivate( false );
-
-        entryName.remove( user );
+		entryName.remove( user );
         entrySurname.remove( user );
         entryUsername.remove( user );
 
         general.removeOne( user );
 
+		user->setActivate( false );
         modified = true;
     }
 }
