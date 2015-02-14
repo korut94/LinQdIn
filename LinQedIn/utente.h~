@@ -59,6 +59,7 @@ class Utente : public Entity
 
         bool isActivate() const;
         bool isFriendOf( const smartptr_utente & ) const;
+        bool isOnline() const;
 
 		virtual LevelAccess::Type typeAccount() const = 0;
 

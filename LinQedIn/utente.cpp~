@@ -79,7 +79,7 @@ Utente::Utente()
 
 Utente::Utente( const QString & user,
                 const Info & info )
-                : activate( false ), Entity( user, info )
+                : online( false ), activate( false ), Entity( user, info )
 {
 }
 
