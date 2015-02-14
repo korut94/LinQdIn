@@ -1,7 +1,10 @@
 #include "databasexmlfile.h"
 
-DatabaseXmlFile::DatabaseXmlFile( const QString & name ) : QFile( name )
-{}
+DatabaseXmlFile::DatabaseXmlFile( const QString & name ) : QFile( name ),
+														   reader( this ),
+														   writer( this )
+{
+}
 
 
 DatabaseXmlFile::~DatabaseXmlFile()
@@ -25,11 +28,11 @@ DatabaseXmlFile::foundUserBuffer( QVector<smartptr_utente> & buffer,
 }
 
 
-void DatabaseXmlFile::load()
+bool DatabaseXmlFile::load()
 {
 	setFlagLoad( false );
 
-	open( QIODevice::ReadOnly );
+	if( !open( QIODevice::ReadOnly ) ) return true;
 
 	/*
 	 * L'uso del vector serve nel caso ci sia un errore nel parsing 
@@ -37,9 +40,7 @@ void DatabaseXmlFile::load()
 	*/
 	QVector<smartptr_utente> usersLoadFile;
 
-	QXmlStreamReader reader( this );
-
-    QXmlStreamReader::TokenType token;
+	QXmlStreamReader::TokenType token;
 
 	while( !reader.atEnd() && !reader.hasError() )
 	{
@@ -117,10 +118,12 @@ void DatabaseXmlFile::load()
 	}	
 
 	close();
+
+	return true;
 }
 
 
-void DatabaseXmlFile::save()
+bool DatabaseXmlFile::save()
 {
 	if( isModified() )
 	{ 
@@ -128,7 +131,6 @@ void DatabaseXmlFile::save()
 
     	open( QIODevice::WriteOnly );
 
-    	QXmlStreamWriter writer( this );
     	writer.setAutoFormatting( true );
 
     	writer.writeStartDocument();
@@ -171,4 +173,13 @@ void DatabaseXmlFile::save()
 	
     	close();
 	}
+
+	return true;
+}
+
+
+QString DatabaseXmlFile::error() const
+{
+	if( reader.hasError() ) return reader.errorString();
+	else return "NoError";
 }

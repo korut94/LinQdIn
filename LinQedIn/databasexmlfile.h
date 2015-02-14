@@ -15,12 +15,17 @@ class DatabaseXmlFile : public DatabaseIO, public QFile
         QVector<smartptr_utente>::iterator
         foundUserBuffer( QVector<smartptr_utente> &, const QString & );
 
+		QXmlStreamReader reader;
+		QXmlStreamWriter writer;
+
     public:
         DatabaseXmlFile( const QString & );
 		~DatabaseXmlFile();
 
-        void load();
-        void save();
+        bool load();
+        bool save();
+
+		QString error() const;
 };
 
 #endif // DATABASEXMLFILE_H
