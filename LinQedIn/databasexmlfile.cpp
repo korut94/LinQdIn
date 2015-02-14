@@ -156,7 +156,9 @@ void DatabaseXmlFile::save()
                  itr != contatti.end();
                  itr++ )
             {
-                writer.writeTextElement( "friend", (*itr)->getUsername() );
+				//Elimina i contatti rimossi da LinQedIn
+                if( (*itr)->isActivate() )
+					writer.writeTextElement( "friend", (*itr)->getUsername() );
             }
 
             writer.writeEndElement();
