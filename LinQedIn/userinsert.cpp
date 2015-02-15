@@ -2,10 +2,9 @@
 
 void UserInsert::checkToSanityInsert() const
 {
-    if( editPage->checkErrorForm() == ErrorState::None )
+    if( checkErrorForm() == ErrorState::None )
     {
-        if( editPage->completeForm() ) emit insert( editPage->recapInfo(),
-                                                    editPage->getTypeUser() );
+        if( completeForm() ) emit insert( recapInfo(), getTypeUser() );
         else emit error( ErrorState::EmptyValue );
     }
 
@@ -18,11 +17,11 @@ void UserInsert::manageLocalError( ErrorState::Type type )
     switch( type )
     {
         case ErrorState::InvalidValue :
-             emit errorMessage( tr( "Incorrect values" ) );
+             displayError( tr( "Incorrect values" ) );
              break;
 
         case ErrorState::EmptyValue :
-             emit errorMessage( tr( "Empty values" ) );
+             displayError( tr( "Empty values" ) );
              break;
     }
 }
@@ -33,13 +32,11 @@ UserInsert::UserInsert()
     QPushButton * btnReset = new QPushButton( tr( "Reset" ) );
     QPushButton * btnInsert = new QPushButton( tr( "Insert" ) );
 
-    editPage = new UserEditPage();
-
-    editPage->loadModuleId();
-    editPage->loadModuleAccount();
-    editPage->loadModuleExperience();
-    editPage->loadModuleSkill();
-    editPage->loadModuleEducation();
+    loadModuleId();
+    loadModuleAccount();
+    loadModuleExperience();
+    loadModuleSkill();
+    loadModuleEducation();
 
     QHBoxLayout * layoutButton = new QHBoxLayout;
     layoutButton->setAlignment( Qt::AlignRight );
@@ -51,41 +48,38 @@ UserInsert::UserInsert()
     layoutBottom->addWidget( new Line() );
     layoutBottom->addLayout( layoutButton );
 
-    QVBoxLayout * layout = new QVBoxLayout;
-    layout->addWidget( editPage );
-    layout->addLayout( layoutBottom );
+    QVBoxLayout * layout =
+            dynamic_cast<QVBoxLayout*>( UserEditPage::layout() );
+    if( layout != nullptr )
+    {
+        layout->addLayout( layoutBottom );
+        setLayout( layout );
+    }
 
-    setLayout( layout );
-
-    connect( editPage,
+    connect( this,
              SIGNAL( requestAddEducation() ),
-             editPage,
+             this,
              SLOT( addEducation() ) );
 
-    connect( editPage,
+    connect( this,
              SIGNAL( requestAddExperience() ),
-             editPage,
+             this,
              SLOT( addExperience() ) );
 
-    connect( editPage,
+    connect( this,
              SIGNAL( requestAddSkill() ),
-             editPage,
+             this,
              SLOT( addSkill() ) );
 
     connect( btnReset,
              SIGNAL( clicked() ),
-             editPage,
+             this,
              SLOT( reset() ) );
 
     connect( btnInsert,
              SIGNAL( clicked() ),
              this,
              SLOT( checkToSanityInsert() ) );
-
-    connect( this,
-             SIGNAL( errorMessage( const QString & ) ),
-             editPage,
-             SLOT( error( const QString & ) ) );
 }
 
 

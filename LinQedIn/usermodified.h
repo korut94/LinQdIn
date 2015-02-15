@@ -10,16 +10,12 @@
 #include "smartptr_utente.h"
 #include "usereditpage.h"
 
-class UserModified : public QWidget
+class UserModified : public UserEditPage
 {
     Q_OBJECT
 
-    private:
-        UserEditPage * editPage;
-
     signals:
         void error( ErrorState::Type ) const;
-        void errorMessage( const QString & ) const;
         void modify( const Info &, LevelAccess::Type ) const;
 
     public slots:

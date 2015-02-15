@@ -2,10 +2,9 @@
 
 void UserModified::checkToSanityInsert() const
 {
-    if( editPage->checkErrorForm() == ErrorState::None )
+    if( checkErrorForm() == ErrorState::None )
     {
-        if( editPage->completeForm() ) emit modify( editPage->recapInfo(),
-                                                    editPage->getTypeUser() );
+        if( completeForm() ) emit modify( recapInfo(), getTypeUser() );
         else emit error( ErrorState::EmptyValue );
     }
 
@@ -18,11 +17,11 @@ void UserModified::manageLocalError( ErrorState::Type type )
     switch( type )
     {
         case ErrorState::InvalidValue :
-             emit errorMessage( tr( "Incorrect values" ) );
+             displayError( tr( "Incorrect values" ) );
              break;
 
         case ErrorState::EmptyValue :
-             emit errorMessage( tr( "Empty values" ) );
+             displayError( tr( "Empty values" ) );
              break;
     }
 }
@@ -30,66 +29,59 @@ void UserModified::manageLocalError( ErrorState::Type type )
 
 UserModified::UserModified( const smartptr_utente & user,
                             LevelAccess::Type level,
-                            QWidget * parent ) : QWidget( parent )
+                            QWidget * parent ) : UserEditPage( parent )
 {
     QPushButton * btnReset = new QPushButton( tr( "Reset" ) );
     QPushButton * btnApply = new QPushButton( tr( "Apply" ) );
 
-    editPage = new UserEditPage();
-
-    editPage->loadModuleId( user );
-    if( level == LevelAccess::Master ) editPage->loadModuleAccount( user );
-    editPage->loadModuleExperience( user );
-    editPage->loadModuleSkill( user );
-    editPage->loadModuleEducation( user );
+    loadModuleId( user );
+    if( level == LevelAccess::Master ) loadModuleAccount( user );
+    loadModuleExperience( user );
+    loadModuleSkill( user );
+    loadModuleEducation( user );
 
     QHBoxLayout * layoutButton = new QHBoxLayout;
     layoutButton->setAlignment( Qt::AlignRight );
     layoutButton->addWidget( btnApply );
     layoutButton->addWidget( btnReset );
 
-
     QVBoxLayout * layoutBottom = new QVBoxLayout;
     layoutBottom->setAlignment( Qt::AlignBottom );
     layoutBottom->addWidget( new Line() );
     layoutBottom->addLayout( layoutButton );
 
+    QVBoxLayout * layout =
+            dynamic_cast<QVBoxLayout*>( UserEditPage::layout() );
+    if( layout != nullptr )
+    {
+        layout->addLayout( layoutBottom );
+        setLayout( layout );
+    }
 
-    QVBoxLayout * layout = new QVBoxLayout;
-    layout->addWidget( editPage );
-    layout->addLayout( layoutBottom );
-
-    setLayout( layout );
-
-    connect( editPage,
+    connect( this,
              SIGNAL( requestAddEducation() ),
-             editPage,
+             this,
              SLOT( addEducation() ) );
 
-    connect( editPage,
+    connect( this,
              SIGNAL( requestAddExperience() ),
-             editPage,
+             this,
              SLOT( addExperience() ) );
 
-    connect( editPage,
+    connect( this,
              SIGNAL( requestAddSkill() ),
-             editPage,
+             this,
              SLOT( addSkill() ) );
 
     connect( btnReset,
              SIGNAL( clicked() ),
-             editPage,
+             this,
              SLOT( reset() ) );
 
     connect( btnApply,
              SIGNAL( clicked() ),
              this,
              SLOT( checkToSanityInsert() ) );
-
-    connect( this,
-             SIGNAL( errorMessage( const QString & ) ),
-             editPage,
-             SLOT( error( const QString & ) ) );
 }
 
 

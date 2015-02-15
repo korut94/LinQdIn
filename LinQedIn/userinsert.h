@@ -10,7 +10,7 @@
 #include "line.h"
 #include "usereditpage.h"
 
-class UserInsert : public QWidget
+class UserInsert : public UserEditPage
 {
     Q_OBJECT
 
@@ -19,7 +19,6 @@ class UserInsert : public QWidget
 
     signals:
         void error( ErrorState::Type ) const ;
-        void errorMessage( const QString & ) const;
         void insert( const Info &, LevelAccess::Type ) const;
 
     public slots:
