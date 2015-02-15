@@ -15,7 +15,7 @@ BoardFriends::BoardFriends( const smartptr_utente & user,
     QPushButton * btnLogout = new QPushButton( tr( "Logout" ) );
 
     QPushButton * btnModify = new QPushButton( tr( "Modified" ) );
-    QPushButton * btnSearch = new QPushButton( tr( "Search co-worker" ) );
+    QPushButton * btnSearch = new QPushButton( tr( "Search colleagues" ) );
     friends = new TableUsers( tr( "My colleagues" ) );
 
     const Utente::Rete & contatti = user->getContatti();

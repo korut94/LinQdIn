@@ -37,7 +37,8 @@ void MainWindow_Controller::close( QCloseEvent * event )
     {
         QMessageBox msgBox;
 
-        msgBox.setText( "Le modifiche non sono state salvate, procedere?" );
+        msgBox.setText(
+                    tr( "The database has not saved your modiications" ) );
         msgBox.setStandardButtons( QMessageBox::Save |
                                    QMessageBox::Discard |
                                    QMessageBox::Cancel );

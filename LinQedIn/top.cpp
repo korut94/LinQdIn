@@ -11,7 +11,7 @@ void Top::setFriend( bool state )
 {
     if( state )
     {
-        btnFriend->setText( tr( "Remove co-worker" ) );
+        btnFriend->setText( tr( "Remove colleague" ) );
 
         disconnect( btnFriend,
                     SIGNAL( clicked() ),
@@ -26,7 +26,7 @@ void Top::setFriend( bool state )
 
     else
     {
-        btnFriend->setText( tr( "Add co-worker" ) );
+        btnFriend->setText( tr( "Add colleague" ) );
 
         disconnect( btnFriend,
                     SIGNAL( clicked() ),

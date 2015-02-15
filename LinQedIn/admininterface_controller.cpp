@@ -133,11 +133,11 @@ void AdminInterface_Controller::loadDB()
 
     QMessageBox msgBox;
 
-    if( db->isLoaded() )
+    if( db->isLoaded() || db->isModified() )
     {
         msgBox.setText(
-                    "Il database e' gia stato caricato, vuoi ricaricarlo?" );
-        msgBox.setInformativeText( "Tutte le modifiche verranno perse" );
+                    "The database has just been uploaded. Reload?" );
+        msgBox.setInformativeText( "All the modifications will be lost" );
         msgBox.setStandardButtons( QMessageBox::Open | QMessageBox::Cancel );
         msgBox.setDefaultButton( QMessageBox::Open );
 
@@ -159,7 +159,7 @@ void AdminInterface_Controller::loadDB()
 
                 db->load();
 
-                msgBox.setText( "Caricamento completato" );
+                msgBox.setText( tr( "Upload completed" ) );
                 msgBox.setInformativeText( QString::null );
                 msgBox.setStandardButtons( QMessageBox::Ok );
                 msgBox.setDefaultButton( QMessageBox::Ok );
@@ -177,7 +177,7 @@ void AdminInterface_Controller::loadDB()
     {
         db->load();
 
-        msgBox.setText( "Caricamento completato" );
+        msgBox.setText( tr( "Upload completed" ) );
         msgBox.setStandardButtons( QMessageBox::Ok );
         msgBox.setDefaultButton( QMessageBox::Ok );
 
@@ -233,7 +233,7 @@ void AdminInterface_Controller::saveDB()
     model->getDatabase()->save();
 
     QMessageBox msgBox;
-    msgBox.setText( "Salvataggio effettuato con successo" );
+    msgBox.setText( tr( "Your modificion have been apported" ) );
     msgBox.setStandardButtons( QMessageBox::Ok );
     msgBox.setDefaultButton( QMessageBox::Ok );
     msgBox.exec();

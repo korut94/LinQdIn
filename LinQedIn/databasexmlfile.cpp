@@ -180,6 +180,5 @@ bool DatabaseXmlFile::save()
 
 QString DatabaseXmlFile::error() const
 {
-	if( reader.hasError() ) return reader.errorString();
-	else return "NoError";
+    return reader.errorString();
 }
