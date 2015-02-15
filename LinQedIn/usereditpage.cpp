@@ -194,7 +194,7 @@ void UserEditPage::loadModuleSkill( const smartptr_utente & user )
 }
 
 
-void UserEditPage::error( const QString & msg )
+void UserEditPage::displayError( const QString & msg )
 {
     msgError->setVisible( true );
     msgError->setText( msg );

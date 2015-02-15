@@ -52,7 +52,7 @@ class UserEditPage : public QWidget
         void addEducation();
         void addExperience();
         void addSkill();
-        void error( const QString & );
+        void displayError( const QString & );
         void reset();
 
     public:
