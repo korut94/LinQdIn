@@ -214,6 +214,7 @@ UserEditPage::UserEditPage( QWidget * parent ) :
     areaForm->setWidgetResizable( true );
 
     msgError = new QLabel();
+    msgError->setStyleSheet( "QLabel{ color: red; }" );
     msgError->setVisible( false );
 
     layoutArea = new QVBoxLayout;
