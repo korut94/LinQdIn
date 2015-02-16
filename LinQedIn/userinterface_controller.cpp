@@ -1,55 +1,40 @@
 #include "userinterface_controller.h"
 
-void UserInterface_Controller::connetti() const
+void UserInterface_Controller::connetti( ViewBase * v ) const
 {
-    connect( view, SIGNAL( requestModify() ), this, SLOT( setUserModify() ) );
+    connect( v, SIGNAL( requestModify() ), this, SLOT( setUserModify() ) );
 
-    connect( this,
-             SIGNAL( display( QWidget * ) ),
-             view,
-             SLOT( setFrameUtility( QWidget * ) ) );
-
-    connect( view,
-             SIGNAL( error( ErrorState::Type ) ),
-             this,
-             SLOT( manageError( ErrorState::Type ) ) );
-
-    connect( view,
-             SIGNAL( requestLogin( const QString &) ),
-             this,
-             SLOT( setUserPage( const QString & ) ) );
-
-    connect( view,
+    connect( v,
              SIGNAL( requestLogout() ),
              this,
              SLOT( logoutUser() ) );
 
-    connect( view,
+    connect( v,
              SIGNAL( requestAddFriend() ),
              this,
              SLOT( addFriend() ) );
 
-    connect( view,
+    connect( v,
              SIGNAL( requestHome() ),
              this,
              SLOT( returnHome() ) );
 
-    connect( view,
+    connect( v,
              SIGNAL( requestSearch() ),
              this,
              SLOT( setUserSearch() ) );
 
-    connect( view,
+    connect( v,
              SIGNAL( requestRemoveFriend() ),
              this,
              SLOT( removeFriend() ) );
 
     connect( this,
              SIGNAL( updateListFriends( const Utente::Rete & ) ),
-             view,
+             v,
              SIGNAL( viewListFriends( const Utente::Rete & ) ) );
 
-    connect( view,
+    connect( v,
              SIGNAL( requestViewFriend( const QString & ) ),
              this,
              SLOT( setUserPage( const QString & ) ) );
@@ -153,7 +138,7 @@ void UserInterface_Controller::setUserModify()
              this,
              SLOT( modifyUser( const Info & ) ) );
 
-    emit display( modified );
+    view->setFrameUtility( modified );
 }
 
 
@@ -186,11 +171,34 @@ void UserInterface_Controller::setUserPage( const smartptr_utente & user )
         else level = ( user == registerUser ) ?
                             LevelAccess::I : user->typeAccount();
 
-        model->getActualUser() = user;
-        view->loadMainPage( user, level );
+        ViewBase * viewUser;
+
+        switch( level )
+        {
+            case LevelAccess::I : viewUser = new ViewI();
+                                  break;
+
+            case LevelAccess::Basic : viewUser = new ViewBasic();
+                                      break;
+
+            case LevelAccess::Business : viewUser = new ViewBusiness;
+                                                    break;
+
+            case LevelAccess::Executive : viewUser = new ViewExecutive();
+                                                     break;
+
+            default: viewUser = new ViewBasic();
+        }
+
+        viewUser->loadMainPage( user );
 
         if( registerUser != user )
-            view->myFriend( registerUser->isFriendOf( user ) );
+            viewUser->myFriend( registerUser->isFriendOf( user ) );
+
+        connetti( viewUser );
+
+        model->getActualUser() = user;
+        view->setFrameUtility( viewUser );
     }
 }
 
@@ -219,7 +227,15 @@ UserInterface_Controller::UserInterface_Controller()
 {
     view->loadLoginPage();
 
-    connetti();
+    connect( view,
+             SIGNAL( error( ErrorState::Type ) ),
+             this,
+             SLOT( manageError( ErrorState::Type ) ) );
+
+    connect( view,
+             SIGNAL( requestLogin( const QString &) ),
+             this,
+             SLOT( setUserPage( const QString & ) ) );
 }
 
 

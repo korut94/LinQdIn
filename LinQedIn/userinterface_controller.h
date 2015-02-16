@@ -7,6 +7,10 @@
 #include "usersearch.h"
 #include "userinterface_model.h"
 #include "userinterface_view.h"
+#include "viewbasic.h"
+#include "viewbusiness.h"
+#include "viewexecutive.h"
+#include "viewi.h"
 
 class UserInterface_Controller : public QObject
 {
@@ -16,10 +20,9 @@ class UserInterface_Controller : public QObject
         UserInterface_Model * model;
         UserInterface_View * view;
 
-        void connetti() const;
+        void connetti( ViewBase * ) const;
 
     signals:
-        void display( QWidget * ) const;
         void updateListFriends( const Utente::Rete & ) const;
 
     public slots:
