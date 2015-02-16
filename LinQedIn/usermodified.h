@@ -20,7 +20,6 @@ class UserModified : public UserEditPage
 
     public slots:
         void checkToSanityInsert() const;
-        void manageLocalError( ErrorState::Type );
 
     public:
         UserModified( const smartptr_utente &,

@@ -14,16 +14,12 @@ class UserInsert : public UserEditPage
 {
     Q_OBJECT
 
-    private:
-        UserEditPage * editPage;
-
     signals:
         void error( ErrorState::Type ) const ;
         void insert( const Info &, LevelAccess::Type ) const;
 
     public slots:
         void checkToSanityInsert() const;
-        void manageLocalError( ErrorState::Type );
 
     public:
         UserInsert();

@@ -2,6 +2,8 @@
 
 void UserSearch::composeInfo() const
 {
+    lblError->setVisible( false );
+
     QVector<smartptr_utente> risp =
             database->getUsers(
                 SearchGroupUtente::ByNameAndSurname( editName->text(),
