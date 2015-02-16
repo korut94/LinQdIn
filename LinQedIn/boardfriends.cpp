@@ -10,8 +10,6 @@ BoardFriends::BoardFriends( const smartptr_utente & user,
                             QWidget * parent )
                             : QWidget( parent )
 {
-    setSizePolicy( QSizePolicy::Maximum, QSizePolicy::Minimum );
-
     friends = new TableUsers( tr( "My colleagues" ) );
 
     const Utente::Rete & contatti = user->getContatti();

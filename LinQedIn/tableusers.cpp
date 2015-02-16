@@ -29,8 +29,6 @@ void TableUsers::setItems( const QVector<smartptr_utente> & users )
 TableUsers::TableUsers( const QString & title, QWidget * parent )
                         : QWidget( parent )
 {
-    setSizePolicy( QSizePolicy::Minimum, QSizePolicy::Minimum );
-
     areaTable = new QScrollArea;
     areaTable->setWidgetResizable( true );
 
