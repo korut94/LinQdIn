@@ -12,6 +12,7 @@ void ViewExecutive::loadMainPage( const smartptr_utente & user )
     business->layout()->setMargin( 0 );
 
     BoardFriends * boardFriends = new BoardFriends( user );
+    boardFriends->setSizePolicy( QSizePolicy::Maximum, QSizePolicy::Minimum );
 
     QHBoxLayout * layout = new QHBoxLayout;
     layout->setAlignment( Qt::AlignTop );
@@ -39,21 +40,6 @@ void ViewExecutive::loadMainPage( const smartptr_utente & user )
              SIGNAL( topSetFriend( bool ) ),
              business,
              SIGNAL( topSetFriend( bool ) ) );
-
-    connect( boardFriends,
-             SIGNAL( modify() ),
-             this,
-             SIGNAL( requestModify() ) );
-
-    connect( boardFriends,
-             SIGNAL( logout() ),
-             this,
-             SIGNAL( requestLogout() ) );
-
-    connect( boardFriends,
-             SIGNAL( search() ),
-             this,
-             SIGNAL( requestSearch() ) );
 
     connect( this,
              SIGNAL( viewListFriends( const Utente::Rete & ) ),
