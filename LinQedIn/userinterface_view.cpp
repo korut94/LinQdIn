@@ -51,90 +51,6 @@ void UserInterface_View::loadLoginPage()
 }
 
 
-void UserInterface_View::loadMainPage( const smartptr_utente & user,
-                                       LevelAccess::Type level )
-{
-    Top * top = new Top( user, level );
-    ID * id = new ID( user->getInfo().getPersonal() );
-
-    QVBoxLayout * layoutUserData = new QVBoxLayout;
-    layoutUserData->setAlignment( Qt::AlignTop );
-    layoutUserData->addWidget( top );
-    layoutUserData->addWidget( id );
-
-    if( level == LevelAccess::Master ||
-        level == LevelAccess::I ||
-        level == LevelAccess::Business ||
-        level == LevelAccess::Executive )
-    {
-        ViewExperience * experience = new ViewExperience( user->getInfo() );
-        layoutUserData->addWidget( experience );
-    }
-
-    QHBoxLayout * layoutInterface = new QHBoxLayout;
-    layoutInterface->addLayout( layoutUserData );
-
-    if( level == LevelAccess::Master ||
-        level == LevelAccess::I ||
-        level == LevelAccess::Executive )
-    {
-        BoardFriends * boardFriends = new BoardFriends( user );
-        layoutInterface->addWidget( boardFriends );
-
-        connect( boardFriends,
-                 SIGNAL( modify() ),
-                 this,
-                 SIGNAL( requestModify() ) );
-
-        connect( boardFriends,
-                 SIGNAL( logout() ),
-                 this,
-                 SIGNAL( requestLogout() ) );
-
-        connect( boardFriends,
-                 SIGNAL( search() ),
-                 this,
-                 SIGNAL( requestSearch() ) );
-
-        connect( this,
-                 SIGNAL( viewListFriends( const Utente::Rete & ) ),
-                 boardFriends,
-                 SLOT( viewFriends( const Utente::Rete & ) ) );
-
-        connect( boardFriends,
-                 SIGNAL( select( const QString & ) ),
-                 this,
-                 SIGNAL( requestViewFriend( const QString & ) ) );
-    }
-
-
-    QWidget * container = new QWidget();
-    container->setLayout( layoutInterface );
-
-    setFrameUtility( container );
-
-    connect( top,
-             SIGNAL( amici() ),
-             this,
-             SIGNAL( requestAddFriend() ) );
-
-    connect( top,
-             SIGNAL( nonAmici() ),
-             this,
-             SIGNAL( requestRemoveFriend() ) );
-
-    connect( top,
-             SIGNAL( home() ),
-             this,
-             SIGNAL( requestHome() ) );
-
-    connect( this,
-             SIGNAL( topSetFriend( bool ) ),
-             top,
-             SLOT( setFriend( bool ) ) );
-}
-
-
 void UserInterface_View::login()
 {
     if( editUsername->check() == QValidator::State::Acceptable )
@@ -146,12 +62,6 @@ void UserInterface_View::login()
     }
 
     else emit error( ErrorState::LoginInvalid );
-}
-
-
-void UserInterface_View::myFriend( bool state )
-{
-    emit topSetFriend( state );
 }
 
 
