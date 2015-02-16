@@ -1,40 +1,117 @@
 #include "userinterface_controller.h"
 
-void UserInterface_Controller::connetti( ViewBase * v ) const
+void UserInterface_Controller::connetti( ViewI * vI ) const
 {
-    connect( v, SIGNAL( requestModify() ), this, SLOT( setUserModify() ) );
+    connect( vI, SIGNAL( requestModify() ), this, SLOT( setUserModify() ) );
 
-    connect( v,
+    connect( vI,
              SIGNAL( requestLogout() ),
              this,
              SLOT( logoutUser() ) );
 
-    connect( v,
-             SIGNAL( requestAddFriend() ),
-             this,
-             SLOT( addFriend() ) );
-
-    connect( v,
+    connect( vI,
              SIGNAL( requestHome() ),
              this,
              SLOT( returnHome() ) );
 
-    connect( v,
+    connect( vI,
              SIGNAL( requestSearch() ),
              this,
              SLOT( setUserSearch() ) );
 
-    connect( v,
+    connect( this,
+             SIGNAL( updateListFriends( const Utente::Rete & ) ),
+             vI,
+             SIGNAL( viewListFriends( const Utente::Rete & ) ) );
+
+    connect( vI,
+             SIGNAL( requestViewFriend( const QString & ) ),
+             this,
+             SLOT( setUserPage( const QString & ) ) );
+}
+
+
+void UserInterface_Controller::connetti( ViewBasic * vBasic ) const
+{
+    connect( vBasic,
+             SIGNAL( requestAddFriend() ),
+             this,
+             SLOT( addFriend() ) );
+
+    connect( vBasic,
+             SIGNAL( requestHome() ),
+             this,
+             SLOT( returnHome() ) );
+
+    connect( vBasic,
              SIGNAL( requestRemoveFriend() ),
              this,
              SLOT( removeFriend() ) );
 
     connect( this,
              SIGNAL( updateListFriends( const Utente::Rete & ) ),
-             v,
+             vBasic,
              SIGNAL( viewListFriends( const Utente::Rete & ) ) );
 
-    connect( v,
+    connect( vBasic,
+             SIGNAL( requestViewFriend( const QString & ) ),
+             this,
+             SLOT( setUserPage( const QString & ) ) );
+}
+
+
+void UserInterface_Controller::connetti( ViewBusiness * vBusiness ) const
+{
+    connect( vBusiness,
+             SIGNAL( requestAddFriend() ),
+             this,
+             SLOT( addFriend() ) );
+
+    connect( vBusiness,
+             SIGNAL( requestHome() ),
+             this,
+             SLOT( returnHome() ) );
+
+    connect( vBusiness,
+             SIGNAL( requestRemoveFriend() ),
+             this,
+             SLOT( removeFriend() ) );
+
+    connect( this,
+             SIGNAL( updateListFriends( const Utente::Rete & ) ),
+             vBusiness,
+             SIGNAL( viewListFriends( const Utente::Rete & ) ) );
+
+    connect( vBusiness,
+             SIGNAL( requestViewFriend( const QString & ) ),
+             this,
+             SLOT( setUserPage( const QString & ) ) );
+}
+
+
+void UserInterface_Controller::connetti( ViewExecutive * vExecutive ) const
+{
+    connect( vExecutive,
+             SIGNAL( requestAddFriend() ),
+             this,
+             SLOT( addFriend() ) );
+
+    connect( vExecutive,
+             SIGNAL( requestHome() ),
+             this,
+             SLOT( returnHome() ) );
+
+    connect( vExecutive,
+             SIGNAL( requestRemoveFriend() ),
+             this,
+             SLOT( removeFriend() ) );
+
+    connect( this,
+             SIGNAL( updateListFriends( const Utente::Rete & ) ),
+             vExecutive,
+             SIGNAL( viewListFriends( const Utente::Rete & ) ) );
+
+    connect( vExecutive,
              SIGNAL( requestViewFriend( const QString & ) ),
              this,
              SLOT( setUserPage( const QString & ) ) );
@@ -176,27 +253,58 @@ void UserInterface_Controller::setUserPage( const smartptr_utente & user )
 
         switch( level )
         {
-            case LevelAccess::I : viewUser = new ViewI();
-                                  break;
+            case LevelAccess::I :
+            {
+                ViewI * viewI = new ViewI();
+                connetti( viewI );
 
-            case LevelAccess::Basic : viewUser = new ViewBasic();
-                                      break;
+                viewUser = viewI;
 
-            case LevelAccess::Business : viewUser = new ViewBusiness;
-                                                    break;
+                break;
+            }
 
-            case LevelAccess::Executive : viewUser = new ViewExecutive();
-                                                     break;
+            case LevelAccess::Basic :
+            {
+                ViewBasic * viewBasic = new ViewBasic();
+                connetti( viewBasic );
 
-            default: viewUser = new ViewBasic();
+                viewBasic->myFriend( registerUser->isFriendOf( user ) );
+
+                viewUser = viewBasic;
+
+                break;
+            }
+
+            case LevelAccess::Business :
+            {
+                ViewBusiness * viewBusiness = new ViewBusiness();
+                connetti( viewBusiness );
+
+                viewBusiness->myFriend( registerUser->isFriendOf( user ) );
+
+                viewUser = viewBusiness;
+
+                break;
+            }
+
+            case LevelAccess::Executive :
+            {
+                ViewExecutive * viewExecutive = new ViewExecutive();
+                connetti( viewExecutive );
+
+                viewExecutive->myFriend( registerUser->isFriendOf( user ) );
+
+                viewUser = viewExecutive;
+
+                break;
+            }
+
+            default: break;
         }
 
         viewUser->loadMainPage( user );
 
-        if( registerUser != user )
-            viewUser->myFriend( registerUser->isFriendOf( user ) );
-
-        connetti( viewUser );
+        //connetti( viewUser );
 
         model->getActualUser() = user;
         view->setFrameUtility( viewUser );

@@ -20,7 +20,10 @@ class UserInterface_Controller : public QObject
         UserInterface_Model * model;
         UserInterface_View * view;
 
-        void connetti( ViewBase * ) const;
+        void connetti( ViewI * ) const;
+        void connetti( ViewBasic * ) const;
+        void connetti( ViewBusiness * ) const;
+        void connetti( ViewExecutive * ) const;
 
     signals:
         void updateListFriends( const Utente::Rete & ) const;
