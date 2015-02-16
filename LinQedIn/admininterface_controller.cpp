@@ -230,13 +230,17 @@ void AdminInterface_Controller::reset()
 
 void AdminInterface_Controller::saveDB()
 {
-    model->getDatabase()->save();
+    if( model->getDatabase()->isModified() )
+    {
+        model->getDatabase()->save();
 
-    QMessageBox msgBox;
-    msgBox.setText( tr( "Your modificion have been apported" ) );
-    msgBox.setStandardButtons( QMessageBox::Ok );
-    msgBox.setDefaultButton( QMessageBox::Ok );
-    msgBox.exec();
+        QMessageBox msgBox;
+        msgBox.setText( tr( "Your modificion have been apported" ) );
+        msgBox.setStandardButtons( QMessageBox::Ok );
+        msgBox.setDefaultButton( QMessageBox::Ok );
+        msgBox.exec();
+    }
+
 }
 
 
