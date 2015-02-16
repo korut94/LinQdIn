@@ -12,7 +12,7 @@ ViewOther::~ViewOther()
 
 void ViewOther::myFriend( bool state )
 {
-    //emit topSetFriend( state );
+    emit topSetFriend( state );
 }
 
 
