@@ -19,4 +19,24 @@ void ViewBusiness::loadMainPage( const smartptr_utente & user )
     layout->addWidget( experience );
 
     setLayout( layout );
+
+    connect( basic,
+             SIGNAL( requestAddFriend() ),
+             this,
+             SIGNAL( requestAddFriend() ) );
+
+    connect( basic,
+             SIGNAL( requestRemoveFriend() ),
+             this,
+             SIGNAL( requestRemoveFriend() ) );
+
+    connect( basic,
+             SIGNAL( requestHome() ),
+             this,
+             SIGNAL( requestHome() ) );
+
+    connect( this,
+             SIGNAL( topSetFriend( bool ) ),
+             basic,
+             SIGNAL( topSetFriend( bool ) ) );
 }
