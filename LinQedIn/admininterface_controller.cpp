@@ -312,8 +312,8 @@ void AdminInterface_Controller::setUserWindow( const QString & username )
 
 void AdminInterface_Controller::setUserWindow( const smartptr_utente & user )
 {
-    UserInterface_View * viewUser = new UserInterface_View();
-    viewUser->loadMainPage( user, LevelAccess::I );
+    ViewI * viewUser = new ViewI();
+    viewUser->loadMainPage( user );
 
     connect( viewUser,
              SIGNAL( requestModify() ),
