@@ -32,7 +32,11 @@ void ViewI::loadMainPage( const smartptr_utente & user )
     layoutRight->addWidget( btnSearch );
     layoutRight->addWidget( boardFriends );
 
-    layoutInterface->addLayout( layoutRight );
+    QWidget * containerRight = new QWidget();
+    containerRight->setLayout( layoutRight );
+    containerRight->setFixedWidth( 240 );
+
+    layoutInterface->addWidget( containerRight );
 
     setLayout( layoutInterface );
 
