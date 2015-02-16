@@ -65,7 +65,12 @@ SOURCES += main.cpp\
     useritem.cpp \
     login.cpp \
 	databaseio.cpp \
-    databasexmlfile.cpp
+    databasexmlfile.cpp \
+    viewbasic.cpp \
+    viewbase.cpp \
+    viewbusiness.cpp \
+    viewi.cpp \
+    viewexecutive.cpp
 
 HEADERS  += \
     utente.h \
@@ -122,7 +127,12 @@ HEADERS  += \
     useritem.h \
     login.h \
 	databaseio.h \
-    databasexmlfile.h 
+    databasexmlfile.h \ 
+    viewbasic.h \
+    viewbase.h \
+    viewbusiness.h \
+    viewi.h \
+    viewexecutive.h
 
 FORMS    += mainwindow.ui
 
