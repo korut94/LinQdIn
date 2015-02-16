@@ -201,6 +201,21 @@ void UserEditPage::displayError( const QString & msg )
 }
 
 
+void UserEditPage::manageLocalError( ErrorState::Type type )
+{
+    switch( type )
+    {
+        case ErrorState::InvalidValue :
+             displayError( tr( "Incorrect values" ) );
+             break;
+
+        case ErrorState::EmptyValue :
+             displayError( tr( "Empty values" ) );
+             break;
+    }
+}
+
+
 UserEditPage::UserEditPage( QWidget * parent ) :
                             account( nullptr ),
                             experience( nullptr ),

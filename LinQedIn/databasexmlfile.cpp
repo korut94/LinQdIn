@@ -30,40 +30,40 @@ DatabaseXmlFile::foundUserBuffer( QVector<smartptr_utente> & buffer,
 
 bool DatabaseXmlFile::load()
 {
-	setFlagLoad( false );
+    setFlagLoad( false );
 
-	if( !open( QIODevice::ReadOnly ) ) return true;
+    if( !open( QIODevice::ReadOnly ) ) return true;
 
-	/*
-	 * L'uso del vector serve nel caso ci sia un errore nel parsing 
-	 * durante il caricamento
-	*/
-	QVector<smartptr_utente> usersLoadFile;
+    /*
+     * L'uso del vector serve nel caso ci sia un errore nel parsing
+     * durante il caricamento
+    */
+    QVector<smartptr_utente> usersLoadFile;
 
-	QXmlStreamReader::TokenType token;
+    QXmlStreamReader::TokenType token;
 
-	while( !reader.atEnd() && !reader.hasError() )
-	{
+    while( !reader.atEnd() && !reader.hasError() )
+    {
         token = reader.readNext();
 
-		if( token == QXmlStreamReader::StartElement )
-		{
-			if( reader.name() == "Utente" )
-			{
-				smartptr_utente user;
+        if( token == QXmlStreamReader::StartElement )
+        {
+            if( reader.name() == "Utente" )
+            {
+                smartptr_utente user;
 
-				if( reader.attributes().value( "type" ) == "Basic" )
-					user = new UtenteBasic();
+                if( reader.attributes().value( "type" ) == "Basic" )
+                    user = new UtenteBasic();
 
-				else if( reader.attributes().value( "type" ) == "Business" )
-					user = new UtenteBusiness();
+                else if( reader.attributes().value( "type" ) == "Business" )
+                    user = new UtenteBusiness();
 
-				else if( reader.attributes().value( "type" ) == "Executive" )
-					user = new UtenteExecutive();
+                else if( reader.attributes().value( "type" ) == "Executive" )
+                    user = new UtenteExecutive();
 
-				user->readXmlFormat( reader );
-				usersLoadFile.push_back( user );
-			}
+                user->readXmlFormat( reader );
+                usersLoadFile.push_back( user );
+            }
 
             if( reader.name() == "friends" )
             {
@@ -98,81 +98,78 @@ bool DatabaseXmlFile::load()
                     token = reader.readNext();
                 }
             }
-		}
-	}
+        }
+    }
 
-	if( reader.hasError() ) std::cout << reader.errorString().toStdString() << std::endl;
-	else
-	{
-		for( QVector<smartptr_utente>::const_iterator 
-									   itr = usersLoadFile.begin();	
-			 itr != usersLoadFile.end();
-			 itr++ )
-		{
-			insert( *itr );
-		}
-		
-		setFlagLoad( true );
+    if( reader.hasError() ) std::cout << reader.errorString().toStdString() << std::endl;
+    else
+    {
+        for( QVector<smartptr_utente>::const_iterator
+                                       itr = usersLoadFile.begin();
+             itr != usersLoadFile.end();
+             itr++ )
+        {
+            insert( *itr );
+        }
+
+        setFlagLoad( true );
         //Il caricamento del db non costituisce una reale modifica
         setFlagModify( false );
-	}	
+    }
 
-	close();
+    close();
 
-	return true;
+    return true;
 }
 
 
 bool DatabaseXmlFile::save()
 {
-	if( isModified() )
-	{ 
-    	if( !isLoaded() ) QFile::remove( fileName() ); //sovrascrittura
+    if( !isLoaded() ) QFile::remove( fileName() ); //sovrascrittura
 
-    	open( QIODevice::WriteOnly );
+    open( QIODevice::WriteOnly );
 
-    	writer.setAutoFormatting( true );
+    writer.setAutoFormatting( true );
 
-    	writer.writeStartDocument();
-    	writer.writeStartElement( "Database" );
+    writer.writeStartDocument();
+    writer.writeStartElement( "Database" );
 
-    	QVector<smartptr_utente> risp = getUsers( SearchGroupUtente::All() );
+    QVector<smartptr_utente> risp = getUsers( SearchGroupUtente::All() );
 
-        QVector<smartptr_utente>::const_iterator itr = risp.begin();
+    QVector<smartptr_utente>::const_iterator itr = risp.begin();
 
-        for( ; itr != risp.end(); itr++ )
-    	{
-        	(*itr)->writeXmlFormat( writer );
-    	}
+    for( ; itr != risp.end(); itr++ )
+    {
+        (*itr)->writeXmlFormat( writer );
+    }
 
-        writer.writeComment( "Lista relazioni tra utenti" );
+    writer.writeComment( "Lista relazioni tra utenti" );
 
-        for( itr = risp.begin(); itr != risp.end(); itr++ )
+    for( itr = risp.begin(); itr != risp.end(); itr++ )
+    {
+        writer.writeStartElement( "friends" );
+        writer.writeAttribute( "user", (*itr)->getUsername() );
+
+        const Utente::Rete & contatti = (*itr)->getContatti();
+
+        for( Utente::Rete::const_iterator itr = contatti.begin();
+             itr != contatti.end();
+             itr++ )
         {
-            writer.writeStartElement( "friends" );
-            writer.writeAttribute( "user", (*itr)->getUsername() );
-
-            const Utente::Rete & contatti = (*itr)->getContatti();
-
-            for( Utente::Rete::const_iterator itr = contatti.begin();
-                 itr != contatti.end();
-                 itr++ )
-            {
-				//Elimina i contatti rimossi da LinQedIn
-                if( (*itr)->isActivate() )
-					writer.writeTextElement( "friend", (*itr)->getUsername() );
-            }
-
-            writer.writeEndElement();
+            //Elimina i contatti rimossi da LinQedIn
+            if( (*itr)->isActivate() )
+                writer.writeTextElement( "friend", (*itr)->getUsername() );
         }
 
-    	writer.writeEndElement();
-    	writer.writeEndDocument();
+        writer.writeEndElement();
+    }
 
-		setFlagModify( false );
-	
-    	close();
-	}
+    writer.writeEndElement();
+    writer.writeEndDocument();
+
+    setFlagModify( false );
+
+    close();
 
 	return true;
 }

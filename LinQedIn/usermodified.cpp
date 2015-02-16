@@ -12,21 +12,6 @@ void UserModified::checkToSanityInsert() const
 }
 
 
-void UserModified::manageLocalError( ErrorState::Type type )
-{
-    switch( type )
-    {
-        case ErrorState::InvalidValue :
-             displayError( tr( "Incorrect values" ) );
-             break;
-
-        case ErrorState::EmptyValue :
-             displayError( tr( "Empty values" ) );
-             break;
-    }
-}
-
-
 UserModified::UserModified( const smartptr_utente & user,
                             LevelAccess::Type level,
                             QWidget * parent ) : UserEditPage( parent )
