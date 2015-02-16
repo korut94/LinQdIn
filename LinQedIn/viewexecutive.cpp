@@ -1,7 +1,13 @@
 #include "viewexecutive.h"
 
-ViewExecutive::ViewExecutive( QWidget * parent ) : ViewBase( parent )
+ViewExecutive::ViewExecutive( QWidget * parent ) : ViewOther( parent )
 {
+}
+
+
+ViewExecutive::~ViewExecutive()
+{
+
 }
 
 

@@ -1,6 +1,11 @@
 #include "viewbasic.h"
 
-ViewBasic::ViewBasic( QWidget * parent ) : ViewBase( parent )
+ViewBasic::ViewBasic( QWidget * parent ) : ViewOther( parent )
+{
+}
+
+
+ViewBasic::~ViewBasic()
 {
 }
 

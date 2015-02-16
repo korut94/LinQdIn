@@ -1,9 +1,14 @@
 #include "viewbusiness.h"
 
-ViewBusiness::ViewBusiness( QWidget * parent ) : ViewBase( parent )
+ViewBusiness::ViewBusiness( QWidget * parent ) : ViewOther( parent )
 {
 }
 
+
+ViewBusiness::~ViewBusiness()
+{
+
+}
 
 void ViewBusiness::loadMainPage( const smartptr_utente & user )
 {
