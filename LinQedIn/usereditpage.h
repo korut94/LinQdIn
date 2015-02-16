@@ -52,7 +52,9 @@ class UserEditPage : public QWidget
         void addEducation();
         void addExperience();
         void addSkill();
+        virtual void checkToSanityInsert() const = 0;
         void displayError( const QString & );
+        void manageLocalError( ErrorState::Type );
         void reset();
 
     public:
