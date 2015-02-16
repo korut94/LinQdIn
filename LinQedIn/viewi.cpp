@@ -66,22 +66,7 @@ void ViewI::loadMainPage( const smartptr_utente & user )
              SIGNAL( requestViewFriend( const QString & ) ) );
 
     connect( top,
-             SIGNAL( amici() ),
-             this,
-             SIGNAL( requestAddFriend() ) );
-
-    connect( top,
-             SIGNAL( nonAmici() ),
-             this,
-             SIGNAL( requestRemoveFriend() ) );
-
-    connect( top,
              SIGNAL( home() ),
              this,
              SIGNAL( requestHome() ) );
-
-    connect( this,
-             SIGNAL( topSetFriend( bool ) ),
-             top,
-             SLOT( setFriend( bool ) ) );
 }

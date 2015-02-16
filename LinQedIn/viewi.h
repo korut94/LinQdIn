@@ -5,6 +5,16 @@
 
 class ViewI : public ViewBase
 {
+    Q_OBJECT
+
+    signals:
+        void requestHome() const;
+        void requestLogout() const;
+        void requestModify() const;
+        void requestSearch() const;
+        void requestViewFriend( const QString & ) const;
+        void viewListFriends( const Utente::Rete & ) const;
+
     public slots:
         void loadMainPage( const smartptr_utente & );
 
