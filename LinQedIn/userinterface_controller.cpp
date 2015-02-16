@@ -162,6 +162,7 @@ void UserInterface_Controller::setUserPage( const smartptr_utente & user )
 
         smartptr_utente & registerUser = model->getRegisterUser();
 
+        //Primo accesso
         if( registerUser == nullptr )
         {
             level = LevelAccess::I;
@@ -169,7 +170,7 @@ void UserInterface_Controller::setUserPage( const smartptr_utente & user )
         }
 
         else level = ( user == registerUser ) ?
-                            LevelAccess::I : user->typeAccount();
+                            LevelAccess::I : registerUser->typeAccount();
 
         ViewBase * viewUser;
 
