@@ -23,9 +23,6 @@ class BoardFriends : public QWidget
         TableUsers * friends;
 
     signals:
-        void logout() const;
-        void modify() const;
-        void search() const;
         void select( const QString & ) const;
 
     public slots:

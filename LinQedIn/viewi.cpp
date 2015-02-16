@@ -22,22 +22,32 @@ void ViewI::loadMainPage( const smartptr_utente & user )
     layoutInterface->addLayout( layoutUserData );
 
     BoardFriends * boardFriends = new BoardFriends( user );
-    layoutInterface->addWidget( boardFriends );
+    QPushButton * btnLogout = new QPushButton( tr( "Logout" ) );
+    QPushButton * btnModify = new QPushButton( tr( "Modified" ) );
+    QPushButton * btnSearch = new QPushButton( tr( "Search colleagues" ) );
+
+    QVBoxLayout * layoutRight = new QVBoxLayout;
+    layoutRight->addWidget( btnLogout );
+    layoutRight->addWidget( btnModify );
+    layoutRight->addWidget( btnSearch );
+    layoutRight->addWidget( boardFriends );
+
+    layoutInterface->addLayout( layoutRight );
 
     setLayout( layoutInterface );
 
-    connect( boardFriends,
-             SIGNAL( modify() ),
+    connect( btnModify,
+             SIGNAL( clicked() ),
              this,
              SIGNAL( requestModify() ) );
 
-    connect( boardFriends,
-             SIGNAL( logout() ),
+    connect( btnLogout,
+             SIGNAL( clicked() ),
              this,
              SIGNAL( requestLogout() ) );
 
-    connect( boardFriends,
-             SIGNAL( search() ),
+    connect( btnSearch,
+             SIGNAL( clicked() ),
              this,
              SIGNAL( requestSearch() ) );
 
