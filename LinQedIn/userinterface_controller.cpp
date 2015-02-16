@@ -47,16 +47,6 @@ void UserInterface_Controller::connetti( ViewBasic * vBasic ) const
              SIGNAL( requestRemoveFriend() ),
              this,
              SLOT( removeFriend() ) );
-
-    connect( this,
-             SIGNAL( updateListFriends( const Utente::Rete & ) ),
-             vBasic,
-             SIGNAL( viewListFriends( const Utente::Rete & ) ) );
-
-    connect( vBasic,
-             SIGNAL( requestViewFriend( const QString & ) ),
-             this,
-             SLOT( setUserPage( const QString & ) ) );
 }
 
 
@@ -76,16 +66,6 @@ void UserInterface_Controller::connetti( ViewBusiness * vBusiness ) const
              SIGNAL( requestRemoveFriend() ),
              this,
              SLOT( removeFriend() ) );
-
-    connect( this,
-             SIGNAL( updateListFriends( const Utente::Rete & ) ),
-             vBusiness,
-             SIGNAL( viewListFriends( const Utente::Rete & ) ) );
-
-    connect( vBusiness,
-             SIGNAL( requestViewFriend( const QString & ) ),
-             this,
-             SLOT( setUserPage( const QString & ) ) );
 }
 
 
