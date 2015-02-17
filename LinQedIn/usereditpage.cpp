@@ -43,8 +43,7 @@ Info UserEditPage::recapInfo() const
 
 LevelAccess::Type UserEditPage::getTypeUser() const
 {
-    if( account != nullptr ) account->getTypeAccount();
-    else return LevelAccess::None;
+    account->getTypeAccount();
 }
 
 
