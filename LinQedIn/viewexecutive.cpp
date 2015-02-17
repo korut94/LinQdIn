@@ -45,7 +45,7 @@ void ViewExecutive::loadMainPage( const smartptr_utente & user )
     connect( this,
              SIGNAL( topSetFriend( bool ) ),
              business,
-             SIGNAL( topSetFriend( bool ) ) );
+             SLOT( myFriend( bool ) ) );
 
     connect( this,
              SIGNAL( viewListFriends( const Utente::Rete & ) ),

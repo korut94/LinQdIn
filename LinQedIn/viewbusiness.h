@@ -7,11 +7,6 @@ class ViewBusiness : public ViewOther
 {    
     Q_OBJECT
 
-    signals:
-        void requestAddFriend() const;
-        void requestHome() const;
-        void requestRemoveFriend() const;
-
     public slots:
         void loadMainPage( const smartptr_utente & );
 

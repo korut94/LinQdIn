@@ -43,5 +43,5 @@ void ViewBusiness::loadMainPage( const smartptr_utente & user )
     connect( this,
              SIGNAL( topSetFriend( bool ) ),
              basic,
-             SIGNAL( topSetFriend( bool ) ) );
+             SLOT( myFriend( bool ) ) );
 }
