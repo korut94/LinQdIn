@@ -133,15 +133,41 @@ void AdminInterface_Controller::loadDB()
 
     QMessageBox msgBox;
 
+    int ret = 0;
+
     if( !db->isLoaded() )
     {
-        db->load();
+        if( db->isModified() )
+        {
+            msgBox.setText( "The database has just been uploaded. Reload?" );
+            msgBox.setInformativeText( "All the modifications will be lost" );
+            msgBox.setStandardButtons( QMessageBox::Ok |
+                                       QMessageBox::Cancel );
+            msgBox.setDefaultButton( QMessageBox::Open );
 
-        msgBox.setText( tr( "Upload completed" ) );
-        msgBox.setStandardButtons( QMessageBox::Ok );
-        msgBox.setDefaultButton( QMessageBox::Ok );
+            ret = msgBox.exec();
+        }
 
-        msgBox.exec();
+        if( ret != QMessageBox::Cancel )
+        {
+            if( ret == QMessageBox::Ok )
+            {
+                QVector<smartptr_utente> risp =
+                        db->getUsers( SearchGroupUtente::All() );
+
+                std::for_each( risp.begin(),
+                               risp.end(),
+                               [ &db ]( const smartptr_utente & user )
+                               {
+                                   db->remove( user );
+                               });
+            }
+
+            db->load();
+            msgBox.setText( tr( "Upload completed" ) );
+            msgBox.setStandardButtons( QMessageBox::Ok );
+            msgBox.setDefaultButton( QMessageBox::Ok );
+        }
     }
 
 	viewUsers();
