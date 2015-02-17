@@ -11,6 +11,7 @@
 #include "viewbusiness.h"
 #include "viewexecutive.h"
 #include "viewi.h"
+#include "myview.h"
 
 class UserInterface_Controller : public QObject
 {
@@ -20,10 +21,7 @@ class UserInterface_Controller : public QObject
         UserInterface_Model * model;
         UserInterface_View * view;
 
-        void connetti( ViewI * ) const;
-        void connetti( ViewBasic * ) const;
-        void connetti( ViewBusiness * ) const;
-        void connetti( ViewExecutive * ) const;
+        void connetti( ViewBase * ) const;
 
     signals:
         void updateListFriends( const Utente::Rete & ) const;
