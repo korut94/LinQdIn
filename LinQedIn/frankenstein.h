@@ -15,8 +15,6 @@ class Frankenstein : public Entity
         bool partialMatch( const Skill &, const Skill & ) const;
 
     public:
-        Utente::Rete contatti;
-
         Frankenstein();
         Frankenstein( const QString &, const Info & );
         Frankenstein( const Utente & );

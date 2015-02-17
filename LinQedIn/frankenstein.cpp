@@ -117,8 +117,7 @@ Frankenstein::Frankenstein( const QString & username,
 
 Frankenstein::Frankenstein( const Utente & utente )
                             : Entity( utente.getUsername(),
-                                      utente.getInfo() ),
-                              contatti( utente.getContatti() ) {}
+                                      utente.getInfo() ) {}
 
 
 bool Frankenstein::operator==( const Frankenstein & f ) const
