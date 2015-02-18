@@ -69,8 +69,6 @@ void UserSearch::checkToSanityInsert() const
         QVector<smartptr_utente> risp =
                 database->getUsers( SearchGroupUtente::ByInfo( recapInfo() ) );
 
-        std::cout << risp.size() << std::endl;
-
         if( risp.isEmpty() ) emit error( ErrorState::NotFoundUser );
         else emit search( risp );
     }
