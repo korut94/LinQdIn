@@ -5,7 +5,6 @@ namespace LevelAccess
 {
     enum Type
     {
-        Master,
         I,
         Basic,
         Business,
