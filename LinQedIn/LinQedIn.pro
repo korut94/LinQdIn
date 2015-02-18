@@ -71,7 +71,8 @@ SOURCES += main.cpp\
     viewbusiness.cpp \
     viewi.cpp \
     viewexecutive.cpp \
-    viewother.cpp
+    viewother.cpp \
+    databasefile.cpp
 
 HEADERS  += \
     utente.h \
@@ -134,7 +135,8 @@ HEADERS  += \
     viewbusiness.h \
     viewi.h \
     viewexecutive.h \
-    viewother.h
+    viewother.h \
+    databasefile.h
 
 FORMS    += mainwindow.ui
 
