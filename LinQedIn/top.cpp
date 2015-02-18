@@ -71,7 +71,7 @@ Top::Top( const smartptr_utente & user,
         default : l = "Basic";
     }
 
-    QLabel * lblAccount = new QLabel( tr( "Account" ) + ": " + l );
+    QLabel * lblAccount = new QLabel( tr( "Account" ) + ": <i>" + l + "</i>" );
 
     QPushButton * btnHome = new QPushButton( tr( "Home" ) );
     btnHome->setSizePolicy( QSizePolicy::Fixed, QSizePolicy::Maximum );

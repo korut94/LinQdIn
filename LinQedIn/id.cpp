@@ -10,6 +10,7 @@ ID::ID( const Personal & personal, QWidget * parent ) : QWidget( parent )
     QLabel * lblFullname = new QLabel( personal.getNome() +
                                        " " +
                                        personal.getCognome() );
+    lblFullname->setStyleSheet( "QLabel{ font-weight: bold; }" );
     QLabel * lblTelephone = new QLabel( tr( "Telephone" ) + ':' );
     QLabel * valTelephone = new QLabel( personal.getNumTelefono() );
     QLabel * lblData = new QLabel( tr( "Data" ) + ':' );

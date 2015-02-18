@@ -6,13 +6,13 @@ ViewExperience::ViewExperience( const Info & info,
 {
     QLabel * lblExperience = new QLabel( tr( "Experience" ) );
     lblExperience->setStyleSheet(
-                "QLabel{ font-weight: bold; font-size: 14pt; }" );
+                "QLabel{ font-weight: bold; font-size: 12pt; }" );
     QLabel * lblSkills = new QLabel( tr( "Skills" ) );
     lblSkills->setStyleSheet(
-                "QLabel{ font-weight: bold; font-size: 14pt; }" );
+                "QLabel{ font-weight: bold; font-size: 12pt; }" );
     QLabel * lblEducation = new QLabel( tr( "Education" ) );
     lblEducation->setStyleSheet(
-                "QLabel{ font-weight: bold; font-size: 14pt; }" );
+                "QLabel{ font-weight: bold; font-size: 12pt; }" );
 
     QVBoxLayout * layout = new QVBoxLayout;
     layout->addWidget( lblExperience );
