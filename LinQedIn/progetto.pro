@@ -72,7 +72,12 @@ SOURCES += main.cpp\
     viewi.cpp \
     viewexecutive.cpp \
     viewother.cpp \
-    databasefile.cpp
+    databasefile.cpp \
+    modulequalifica.cpp \
+    moduleskill.cpp \
+    modulestudio.cpp \
+    usermodified_utente.cpp \
+    usermodified_admin.cpp
 
 HEADERS  += \
     utente.h \
@@ -136,7 +141,12 @@ HEADERS  += \
     viewi.h \
     viewexecutive.h \
     viewother.h \
-    databasefile.h
+    databasefile.h \
+    modulequalifica.h \
+    moduleskill.h \
+    modulestudio.h \
+    usermodified_utente.h \
+    usermodified_admin.h
 
 FORMS    += mainwindow.ui
 
