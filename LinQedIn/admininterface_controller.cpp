@@ -133,9 +133,8 @@ void AdminInterface_Controller::loadDB()
 
     QMessageBox msgBox;
 
-    int ret = 0;
-
-    if( !db->isLoaded() )
+    /*
+    if( !db->isLoaded()  )
     {
         if( db->isModified() )
         {
@@ -163,10 +162,71 @@ void AdminInterface_Controller::loadDB()
                                });
             }
 
-            db->load();
-            msgBox.setText( tr( "Upload completed" ) );
+            if( db->load() ) msgBox.setText( tr( "Upload completed" ) );
+            else msgBox.setText( db->error() );
+
             msgBox.setStandardButtons( QMessageBox::Ok );
             msgBox.setDefaultButton( QMessageBox::Ok );
+        }
+    }
+    */
+
+    if( !db->isLoaded() )
+    {
+        if( db->load() ) msgBox.setText( tr( "Upload completed" ) );
+        else
+        {
+            msgBox.setText( tr( "Error loading file" ) );
+            msgBox.setInformativeText( db->error() );
+        }
+
+        msgBox.setStandardButtons( QMessageBox::Ok | QMessageBox::Cancel );
+        msgBox.setDefaultButton( QMessageBox::Ok );
+
+        msgBox.exec();
+    }
+
+    else if( db->isLoaded() || db->isModified() )
+    {
+        msgBox.setText( "The database has just been uploaded. Reload?" );
+        msgBox.setInformativeText( "All the modifications will be lost" );
+        msgBox.setStandardButtons( QMessageBox::Ok |
+                                   QMessageBox::Cancel );
+        msgBox.setDefaultButton( QMessageBox::Open );
+
+        int ret = msgBox.exec();
+
+        if( ret == QMessageBox::Ok )
+        {
+            QVector<smartptr_utente> risp =
+                    db->getUsers( SearchGroupUtente::All() );
+
+            std::for_each( risp.begin(),
+                           risp.end(),
+                           [ &db ]( const smartptr_utente & user )
+                           {
+                               db->remove( user );
+                           });
+
+            if( db->load() ) msgBox.setText( tr( "Upload completed" ) );
+            else
+            {
+                //reinserisco i puntatori nel database
+                std::for_each( risp.begin(),
+                               risp.end(),
+                               [ &db ]( const smartptr_utente & user )
+                               {
+                                   db->insert( user );
+                               });
+
+                msgBox.setText( tr( "Error loading file" ) );
+                msgBox.setInformativeText( db->error() );
+            }
+
+            msgBox.setStandardButtons( QMessageBox::Ok | QMessageBox::Cancel );
+            msgBox.setDefaultButton( QMessageBox::Ok );
+
+            msgBox.exec();
         }
     }
 
