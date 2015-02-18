@@ -3,10 +3,6 @@
 UserModified_Utente::UserModified_Utente( const smartptr_utente & user )
                                           : UserModified( user )
 {
-    loadModuleId( user );
-    loadModuleExperience( user );
-    loadModuleSkill( user );
-    loadModuleEducation( user );
 }
 
 

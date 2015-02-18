@@ -3,11 +3,7 @@
 UserModified_Admin::UserModified_Admin( const smartptr_utente & user )
                                           : UserModified( user )
 {
-    loadModuleId( user );
     loadModuleAccount( user );
-    loadModuleExperience( user );
-    loadModuleSkill( user );
-    loadModuleEducation( user );
 }
 
 

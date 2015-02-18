@@ -3,6 +3,11 @@
 UserModified::UserModified( const smartptr_utente & user, QWidget * parent )
                             : UserEditPage( parent )
 {
+    loadModuleId( user );
+    loadModuleExperience( user );
+    loadModuleSkill( user );
+    loadModuleEducation( user );
+
     QPushButton * btnReset = new QPushButton( tr( "Reset" ) );
     QPushButton * btnApply = new QPushButton( tr( "Apply" ) );
 
