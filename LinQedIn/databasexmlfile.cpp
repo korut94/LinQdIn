@@ -101,7 +101,9 @@ bool DatabaseXmlFile::load()
         }
     }
 
-    if( reader.hasError() ) std::cout << reader.errorString().toStdString() << std::endl;
+    bool state;
+
+    if( reader.hasError() ) state = false;
     else
     {
         for( QVector<smartptr_utente>::const_iterator
@@ -115,11 +117,13 @@ bool DatabaseXmlFile::load()
         setFlagLoad( true );
         //Il caricamento del db non costituisce una reale modifica
         setFlagModify( false );
+
+        state = true;
     }
 
     close();
 
-    return true;
+    return state;
 }
 
 
