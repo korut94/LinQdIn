@@ -147,4 +147,6 @@ OTHER_FILES += \
     User_48x36.png \
     User_90x80.png \
     User_100x100.png \
-    User_150x114.png
+    User_150x114.png \
+    ../../../Dropbox/UNIPD/Corsi/Informatica/Secondo Anno/Programmazione ad oggetti/relazione.pdf \
+    ../relazione.pdf
