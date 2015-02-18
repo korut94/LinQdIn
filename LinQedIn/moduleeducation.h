@@ -12,35 +12,20 @@
 #include "experience.h"
 #include "info.h"
 #include "lineeditvalidate.h"
+#include "modulestudio.h"
 
 class ModuleEducation : public QWidget
 {
     Q_OBJECT
 
     private:
-        class ModuleStudio : public QWidget
-        {
-            private:
-                LineEditValidate * editSchool;
-                QLineEdit * editTitle;
-                QLineEdit * editDurata;
-                QTextEdit * editDescrizione;
+        QVector<ModuleStudio*> listaStudio;    
 
-            public:
-                ModuleStudio( const Experience & = Experience(),
-                              QWidget * = nullptr );
-                ~ModuleStudio();
+    signals:
+        void requestRemoveStudio( ModuleStudio * ) const;
 
-                bool checkError() const;
-                bool complete() const;
-
-                Experience getEducation() const;
-
-                void reset();
-        };
-
-    private:
-        QVector<ModuleStudio*> listaStudio;
+    public slots:
+        void removeStudio( ModuleStudio * );
 
     public:
         ModuleEducation( QWidget * = nullptr );

@@ -1,69 +1,5 @@
 #include "moduleeducation.h"
 
-ModuleEducation::ModuleStudio::ModuleStudio( const Experience & exp,
-                                             QWidget * parent )
-                                             : QWidget( parent )
-{
-    editSchool = new LineEditValidate( QRegExp( "[A-Za-z]*" ), exp.getWork() );
-    editTitle = new QLineEdit( exp.getCompany() );
-    editDurata = new QLineEdit( exp.getPeriod() );
-    editDescrizione = new QTextEdit( exp.getDescription() );
-
-    QFormLayout * layout = new QFormLayout;
-    layout->setAlignment( Qt::AlignTop );
-    layout->setHorizontalSpacing( 30 );
-    layout->addRow( tr( "School" ) + ':', editSchool );
-    layout->addRow( tr( "Title" ) + ':', editTitle );
-    layout->addRow( tr( "Time Period" ) + ':', editDurata );
-    layout->addRow( tr( "Description" ) + ':', editDescrizione );
-
-    setLayout( layout );
-}
-
-
-bool ModuleEducation::ModuleStudio::checkError() const
-{
-    return ( editSchool->text().isEmpty() ||
-             editSchool->check() == QValidator::Acceptable );
-}
-
-
-bool ModuleEducation::ModuleStudio::complete() const
-{
-    return ( !editDescrizione->toPlainText().isEmpty() &&
-             !editDurata->text().isEmpty() &&
-             !editSchool->text().isEmpty() &&
-             !editTitle->text().isEmpty() );
-}
-
-
-ModuleEducation::ModuleStudio::~ModuleStudio()
-{
-    delete editSchool;
-    delete editTitle;
-    delete editDurata;
-    delete editDescrizione;
-}
-
-
-Experience ModuleEducation::ModuleStudio::getEducation() const
-{
-    return Experience( editSchool->text(),
-                       editTitle->text(),
-                       editDurata->text(),
-                       editDescrizione->toPlainText() );
-}
-
-
-void ModuleEducation::ModuleStudio::reset()
-{
-    editDescrizione->clear();
-    editDurata->clear();
-    editSchool->clear();
-    editTitle->clear();
-}
-
-
 ModuleEducation::ModuleEducation( QWidget * parent ) : QWidget( parent )
 {
     QVBoxLayout * layout = new QVBoxLayout;
@@ -134,8 +70,25 @@ void ModuleEducation::addEducation( const Experience & exp )
 {
     ModuleStudio * studio = new ModuleStudio( exp );
 
+    connect( studio,
+             SIGNAL( sendRemove( ModuleStudio * ) ),
+             this,
+             SIGNAL( requestRemoveStudio( ModuleStudio * ) ) );
+
     listaStudio.push_back( studio );
     layout()->addWidget( studio );
+}
+
+
+void ModuleEducation::removeStudio( ModuleStudio * st )
+{
+    QVector<ModuleStudio*>::iterator itr = listaStudio.begin();
+
+    while( *itr != st ) itr++;
+    listaStudio.erase( itr );
+
+    layout()->removeWidget( st );
+    delete st;
 }
 
 

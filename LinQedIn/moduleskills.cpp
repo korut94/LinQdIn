@@ -18,11 +18,11 @@ QVector<Skill> ModuleSkills::getSkills() const
 {
     QVector<Skill> skills;
 
-    for( QVector<QLineEdit*>::const_iterator itr = listaSkills.begin();
+    for( QVector<ModuleSkill*>::const_iterator itr = listaSkills.begin();
          itr != listaSkills.end();
          itr++ )
     {
-        skills.push_back( (*itr)->text() );
+        skills.push_back( (*itr)->getSkill() );
     }
 
     return skills;
@@ -34,12 +34,12 @@ bool ModuleSkills::complete() const
     if( listaSkills.size() == 0 ) return true;
     else
     {
-        QVector<QLineEdit *>::const_iterator itr = listaSkills.begin();
+        QVector<ModuleSkill *>::const_iterator itr = listaSkills.begin();
         bool complete = true;
 
         while( itr != listaSkills.end() && complete )
         {
-            complete = !( (*itr)->text().isEmpty() );
+            complete = !( (*itr)->complete() );
             itr++;
         }
 
@@ -50,20 +50,37 @@ bool ModuleSkills::complete() const
 
 void ModuleSkills::addSkill( const Skill & skill )
 {
-    QLineEdit * editSkill = new QLineEdit( skill.getSkill() );
+    ModuleSkill * editSkill = new ModuleSkill( skill.getSkill() );
+
+    connect( editSkill,
+             SIGNAL( sendRemove( ModuleSkill * ) ),
+             this,
+             SIGNAL( requestRemoveSkill( ModuleSkill * ) ) );
 
     listaSkills.push_back( editSkill );
     layout()->addWidget( editSkill );
 }
 
 
+void ModuleSkills::removeSkill( ModuleSkill * sk )
+{
+    QVector<ModuleSkill*>::iterator itr = listaSkills.begin();
+
+    while( *itr != sk ) itr++;
+    listaSkills.erase( itr );
+
+    layout()->removeWidget( sk );
+    delete sk;
+}
+
+
 void ModuleSkills::reset()
 {
-    for( QVector<QLineEdit*>::const_iterator itr = listaSkills.begin();
+    for( QVector<ModuleSkill*>::const_iterator itr = listaSkills.begin();
          itr != listaSkills.end();
          itr++ )
     {
-        (*itr)->clear();
+        (*itr)->reset();
     }
 }
 

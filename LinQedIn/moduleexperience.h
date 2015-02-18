@@ -5,6 +5,7 @@
 #include <iostream>
 #include <QFormLayout>
 #include <QLineEdit>
+#include <QPushButton>
 #include <QTextEdit>
 #include <QVBoxLayout>
 #include <QWidget>
@@ -12,34 +13,20 @@
 #include "experience.h"
 #include "info.h"
 #include "lineeditvalidate.h"
+#include "modulequalifica.h"
 
 class ModuleExperience : public QWidget
 {
     Q_OBJECT
 
     private:
-        class ModuleQualifica : public QWidget
-        {
-            private:
-                QLineEdit * editExp;
-                QLineEdit * editCompany;
-                QLineEdit * editDurata;
-                QTextEdit * editDescrizione;
-
-            public:
-                ModuleQualifica( const Experience & = Experience(),
-                                 QWidget * = nullptr );
-                ~ModuleQualifica();
-
-                Experience getExperience() const;
-
-                bool complete() const;
-
-                void reset();
-        };
-
-    private:
         QVector<ModuleQualifica*> listaQualifica;
+
+    signals:
+        void requestRemoveExperience( ModuleQualifica * ) const;
+
+    public slots:
+        void removeExperience( ModuleQualifica * );
 
     public:
         ModuleExperience( QWidget * = nullptr );

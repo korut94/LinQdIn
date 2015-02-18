@@ -8,6 +8,7 @@
 #include <QVBoxLayout>
 
 #include "info.h"
+#include "moduleskill.h"
 #include "skill.h"
 
 class ModuleSkills : public QWidget
@@ -15,7 +16,13 @@ class ModuleSkills : public QWidget
     Q_OBJECT
 
     private:
-        QVector<QLineEdit*> listaSkills;
+        QVector<ModuleSkill*> listaSkills;
+
+    signals:
+        void requestRemoveSkill( ModuleSkill * ) const;
+
+    public slots:
+        void removeSkill( ModuleSkill * );
 
     public:
         ModuleSkills( QWidget * = nullptr );
