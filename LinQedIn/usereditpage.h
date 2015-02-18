@@ -36,6 +36,7 @@ class UserEditPage : public QWidget
         QVBoxLayout * layoutArea;
 
     signals:
+        void error( ErrorState::Type ) const ;
         void requestAddEducation();
         void requestAddExperience();
         void requestAddSkill();

@@ -15,7 +15,6 @@ class UserInsert : public UserEditPage
     Q_OBJECT
 
     signals:
-        void error( ErrorState::Type ) const ;
         void insert( const Info &, LevelAccess::Type ) const;
 
     public slots:

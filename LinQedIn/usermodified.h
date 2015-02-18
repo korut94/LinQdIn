@@ -14,9 +14,6 @@ class UserModified : public UserEditPage
 {
     Q_OBJECT
 
-    signals:
-        void error( ErrorState::Type ) const;
-
     public:
         UserModified( const smartptr_utente &, QWidget * = nullptr );
         ~UserModified();
