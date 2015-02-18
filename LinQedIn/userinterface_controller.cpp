@@ -199,7 +199,7 @@ void UserInterface_Controller::setUserPage( const smartptr_utente & user )
             other->loadMainPage( user );
 
             connetti( other );
-            other->topSetFriend( registerUser->isFriendOf( user ) );
+            other->myFriend( registerUser->isFriendOf( user ) );
 
             view->setFrameUtility( other );
         }
