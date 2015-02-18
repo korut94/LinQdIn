@@ -15,25 +15,20 @@
 #include "info.h"
 #include "levelaccess.h"
 #include "line.h"
+#include "usereditpage.h"
 
-class UserSearch : public QWidget
+class UserSearch : public UserEditPage
 {
     Q_OBJECT
 
     private:
-        QLabel * lblError;
-        QLineEdit * editName;
-        QLineEdit * editSurname;
         Database * database;
 
     signals:
-        void error( ErrorState::Type ) const;
         void search( const QVector<smartptr_utente> & ) const;
 
     public slots:
-        void composeInfo() const;
-        void reset();
-        void manageLocalError( ErrorState::Type );
+        void checkToSanityInsert() const;
 
     public:
         UserSearch( Database *, QWidget * = nullptr );
