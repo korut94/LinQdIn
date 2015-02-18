@@ -5,8 +5,14 @@ ViewExperience::ViewExperience( const Info & info,
                                 : QWidget( parent )
 {
     QLabel * lblExperience = new QLabel( tr( "Experience" ) );
+    lblExperience->setStyleSheet(
+                "QLabel{ font-weight: bold; font-size: 14pt; }" );
     QLabel * lblSkills = new QLabel( tr( "Skills" ) );
+    lblSkills->setStyleSheet(
+                "QLabel{ font-weight: bold; font-size: 14pt; }" );
     QLabel * lblEducation = new QLabel( tr( "Education" ) );
+    lblEducation->setStyleSheet(
+                "QLabel{ font-weight: bold; font-size: 14pt; }" );
 
     QVBoxLayout * layout = new QVBoxLayout;
     layout->addWidget( lblExperience );
@@ -17,9 +23,16 @@ ViewExperience::ViewExperience( const Info & info,
          itr != exp.end();
          itr++ )
     {
-        layout->addWidget( new QLabel( itr->getWork() ) );
+        QLabel * work = new QLabel( itr->getWork() );
+        work->setStyleSheet( "QLabel{ font-weight: bold; }" );
+
+        layout->addWidget( work );
         layout->addWidget( new QLabel( itr->getCompany() ) );
-        layout->addWidget( new QLabel( itr->getPeriod() ) );
+
+        QLabel * period = new QLabel( itr->getPeriod() );
+        period->setStyleSheet( "QLabel{ font-size: 10pt; }" );
+
+        layout->addWidget( period );
         layout->addWidget( new QLabel( itr->getDescription() ) );
         layout->addWidget( new QWidget() );
     }
@@ -46,9 +59,16 @@ ViewExperience::ViewExperience( const Info & info,
          itr != edu.end();
          itr++ )
     {
-        layout->addWidget( new QLabel( itr->getWork() ) );
+        QLabel * work = new QLabel( itr->getWork() );
+        work->setStyleSheet( "QLabel{ font-weight: bold; }" );
+
+        layout->addWidget( work );
         layout->addWidget( new QLabel( itr->getCompany() ) );
-        layout->addWidget( new QLabel( itr->getPeriod() ) );
+
+        QLabel * period = new QLabel( itr->getPeriod() );
+        period->setStyleSheet( "QLabel{ font-size: 10pt; }" );
+
+        layout->addWidget( period );
         layout->addWidget( new QLabel( itr->getDescription() ) );
         layout->addWidget( new QWidget() );
     }
