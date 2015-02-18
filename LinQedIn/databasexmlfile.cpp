@@ -1,8 +1,9 @@
 #include "databasexmlfile.h"
 
-DatabaseXmlFile::DatabaseXmlFile( const QString & name ) : QFile( name ),
-														   reader( this ),
-														   writer( this )
+DatabaseXmlFile::DatabaseXmlFile( const QString & name )
+                                  : DatabaseFile( name ),
+                                    reader( this ),
+                                    writer( this )
 {
 }
 

@@ -7,9 +7,9 @@
 #include <QXmlStreamReader>
 #include <QXmlStreamWriter>
 
-#include "databaseio.h"
+#include "databasefile.h"
 
-class DatabaseXmlFile : public DatabaseIO, public QFile
+class DatabaseXmlFile : public DatabaseFile
 {
     private:
         QVector<smartptr_utente>::iterator
