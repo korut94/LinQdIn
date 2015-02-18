@@ -26,3 +26,12 @@ void SearchGroupUtente::ByNameAndSurname::compose( Frankenstein & path ) const
     path.getInfo().getPersonal().setNome( name );
     path.getInfo().getPersonal().setCognome( surname );
 }
+
+
+SearchGroupUtente::ByInfo::ByInfo( const Info & i ) : info( i ) {}
+
+
+void SearchGroupUtente::ByInfo::compose( Frankenstein & path ) const
+{
+    path = Frankenstein( "", info );
+}

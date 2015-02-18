@@ -35,6 +35,17 @@ namespace SearchGroupUtente
 
             void compose( Frankenstein & ) const;
     };
+
+    class ByInfo : public Query
+    {
+        private:
+            Info info;
+
+        public:
+            ByInfo( const Info & );
+
+            void compose( Frankenstein & ) const;
+    };
 }
 
 #endif // SEARCHGROUPUTENTE_H
