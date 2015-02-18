@@ -11,7 +11,6 @@
 #include "viewbusiness.h"
 #include "viewexecutive.h"
 #include "viewi.h"
-#include "myview.h"
 
 class UserInterface_Controller : public QObject
 {
