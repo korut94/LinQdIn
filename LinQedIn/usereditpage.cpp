@@ -113,6 +113,11 @@ void UserEditPage::loadModuleEducation( const smartptr_utente & user )
                  SIGNAL( clicked() ),
                  this,
                  SIGNAL( requestAddEducation() ) );
+
+        connect( education,
+                 SIGNAL( requestRemoveStudio( ModuleStudio * ) ),
+                 education,
+                 SLOT( removeStudio( ModuleStudio * ) ) );
     }
 }
 
@@ -144,6 +149,11 @@ void UserEditPage::loadModuleExperience( const smartptr_utente & user )
                  SIGNAL( clicked() ),
                  this,
                  SIGNAL( requestAddExperience() ) );
+
+        connect( experience,
+                 SIGNAL( requestRemoveExperience( ModuleQualifica* ) ),
+                 experience,
+                 SLOT( removeExperience( ModuleQualifica* ) ) );
     }
 }
 
@@ -189,6 +199,11 @@ void UserEditPage::loadModuleSkill( const smartptr_utente & user )
                  SIGNAL( clicked() ),
                  this,
                  SIGNAL( requestAddSkill() ) );
+
+        connect( skills,
+                 SIGNAL( requestRemoveSkill( ModuleSkill * ) ),
+                 skills,
+                 SLOT( removeSkill( ModuleSkill * ) ) );
     }
 }
 

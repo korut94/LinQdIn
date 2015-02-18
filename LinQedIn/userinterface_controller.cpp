@@ -125,8 +125,8 @@ void UserInterface_Controller::
 
 void UserInterface_Controller::setUserModify()
 {
-    UserModified * modified = new UserModified( model->getRegisterUser(),
-                                                LevelAccess::I );
+    UserModified_Utente * modified =
+            new UserModified_Utente( model->getRegisterUser() );
 
     connect( modified,
              SIGNAL( error( ErrorState::Type ) ),
@@ -134,7 +134,7 @@ void UserInterface_Controller::setUserModify()
              SLOT( manageLocalError( ErrorState::Type ) ) );
 
     connect( modified,
-             SIGNAL( modify( const Info &, LevelAccess::Type ) ),
+             SIGNAL( modify( const Info & ) ),
              this,
              SLOT( modifyUser( const Info & ) ) );
 

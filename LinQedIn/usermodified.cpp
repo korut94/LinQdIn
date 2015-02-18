@@ -1,29 +1,10 @@
 #include "usermodified.h"
 
-void UserModified::checkToSanityInsert() const
-{
-    if( checkErrorForm() == ErrorState::None )
-    {
-        if( completeForm() ) emit modify( recapInfo(), getTypeUser() );
-        else emit error( ErrorState::EmptyValue );
-    }
-
-    else emit error( ErrorState::InvalidValue );
-}
-
-
-UserModified::UserModified( const smartptr_utente & user,
-                            LevelAccess::Type level,
-                            QWidget * parent ) : UserEditPage( parent )
+UserModified::UserModified( const smartptr_utente & user, QWidget * parent )
+                            : UserEditPage( parent )
 {
     QPushButton * btnReset = new QPushButton( tr( "Reset" ) );
     QPushButton * btnApply = new QPushButton( tr( "Apply" ) );
-
-    loadModuleId( user );
-    if( level == LevelAccess::Master ) loadModuleAccount( user );
-    loadModuleExperience( user );
-    loadModuleSkill( user );
-    loadModuleEducation( user );
 
     QHBoxLayout * layoutButton = new QHBoxLayout;
     layoutButton->setAlignment( Qt::AlignRight );

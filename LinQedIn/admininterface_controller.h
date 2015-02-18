@@ -14,7 +14,7 @@
 #include "searchgrouputente.h"
 #include "userinsert.h"
 #include "userinterface_controller.h"
-#include "usermodified.h"
+#include "usermodified_admin.h"
 #include "usersearch.h"
 #include "utentebasic.h"
 #include "utentebusiness.h"

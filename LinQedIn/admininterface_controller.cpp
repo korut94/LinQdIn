@@ -275,8 +275,8 @@ void AdminInterface_Controller::setInsertWindow()
 
 void AdminInterface_Controller::setModifyWindow()
 {
-    UserModified * modify = new UserModified( model->actualUser(),
-                                              LevelAccess::Master );
+    UserModified_Admin * modify =
+            new UserModified_Admin( model->actualUser() );
 
     connect( modify,
              SIGNAL( modify( const Info &, LevelAccess::Type ) ),

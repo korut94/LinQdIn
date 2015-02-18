@@ -16,15 +16,9 @@ class UserModified : public UserEditPage
 
     signals:
         void error( ErrorState::Type ) const;
-        void modify( const Info &, LevelAccess::Type ) const;
-
-    public slots:
-        void checkToSanityInsert() const;
 
     public:
-        UserModified( const smartptr_utente &,
-                      LevelAccess::Type,
-                      QWidget * = nullptr );
+        UserModified( const smartptr_utente &, QWidget * = nullptr );
         ~UserModified();
 };
 
