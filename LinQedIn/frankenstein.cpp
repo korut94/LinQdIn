@@ -89,7 +89,7 @@ bool Frankenstein::partialMatch( const Personal & my,
     if( !my.getDate().isNull() &&
         my.getDate() != his.getDate() ) return false;
 
-    if( !my.getNumTelefono().isEmpty() &&
+    if( !my.getNumTelefono().mid( 2 ).isEmpty() &&
         my.getNumTelefono() != his.getNumTelefono() ) return false;
 
     if( !my.getActualWork().isEmpty() &&
